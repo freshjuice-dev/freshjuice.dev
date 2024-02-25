@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "mkdir -p _site && echo '/* https://github.com/freshjuice-dev' > _site/_redirects"
+    "build": "mkdir -p _site && echo '/hubspot-theme/ https://143910617.hs-sites-eu1.com/blog' > _site/_redirects && echo '/* https://github.com/freshjuice-dev' >> _site/_redirects"
   },
   "repository": {
     "type": "git",

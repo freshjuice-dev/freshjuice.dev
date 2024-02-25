@@ -1,0 +1,29 @@
+{
+  "name": "freshjuice.dev",
+  "version": "1.0.0",
+  "description": "Official website of FreshJuice",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "mkdir -p _site && echo '/* https://github.com/freshjuice-dev' > _site/_redirects"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/freshjuice-dev/freshjuice.dev.git"
+  },
+  "keywords": [
+    "hubspot",
+    "hubspot-cms",
+    "freshjuice"
+  ],
+  "author": {
+    "name": "Alex Zappa",
+    "email": "alex@zappa.dev",
+    "url": "https://alex.zappa.dev/"
+  },
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/freshjuice-dev/freshjuice.dev/issues"
+  },
+  "homepage": "https://github.com/freshjuice-dev/freshjuice.dev#readme"
+}

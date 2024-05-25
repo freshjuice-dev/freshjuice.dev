@@ -1,0 +1,34 @@
+---
+layout: base.njk
+---
+
+<div class="grid lg:flex lg:grow gap-8 lg:gap-12">
+
+  <main class="prose md:prose-xl max-w-full order-2 grow py-8">
+
+    <h1>{{ title }}</h1>
+
+    {{ content | safe }}
+
+  </main>
+
+
+  <aside class="order-1 lg:w-[19rem] shrink-0 border-b lg:border-b-0 lg:border-r border-gray-900/10 dark:border-gray-100/10 py-8 lg:pr-8">
+
+    {% for section in docsMenu %}
+      <div class="mb-4">
+        <h3 class="text-lg font-semibold">{{ section.name }}</h3>
+        <ul class="list-none m-0 p-0">
+          {% for item in section.items %}
+            <li>
+              <a href="{{ item.url }}"
+                 class="block py-1 text-zinc-600 dark:text-zinc-300 hover:!text-red-500 {{ 'text-3xl' if page.url == item.url }}">{{ item.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endfor %}
+
+  </aside>
+
+</div>

@@ -1,0 +1,14 @@
+/* Base */
+@import "tailwindcss/base";
+@import "base/forms.css";
+
+/* 3rd party styles */
+@import "prism-themes/themes/prism-atom-dark.css";
+
+/* Components */
+@import "tailwindcss/components";
+@import "components/prism.css";
+
+/* Utils */
+@import "tailwindcss/utilities";
+@import "utilities/utils.css";

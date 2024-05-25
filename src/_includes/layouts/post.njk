@@ -1,0 +1,22 @@
+---
+layout: base.njk
+---
+
+
+<nav class="max-w-prose md:text-xl mx-auto w-full min-h-9 leading-none">
+
+  <a class="inline-flex items-center gap-2 group no-underline" href="/blog/">
+    {% phicon "arrow-left", "bold", { class: "size-5 group-hover:-translate-x-2 transition-transform" } %}
+    <span>Back to Blog</span>
+  </a>
+
+</nav>
+
+
+<main class="prose md:prose-xl mx-auto w-full">
+
+  <h1>{{ title }}</h1>
+
+  {{ content | safe }}
+
+</main>

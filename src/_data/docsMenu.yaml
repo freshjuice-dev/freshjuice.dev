@@ -1,0 +1,29 @@
+- name: Getting Started
+  items:
+    - title: "Introduction"
+      url: "/docs/introduction/"
+    - title: "Installation"
+      url: "/docs/installation/"
+    - title: "Configuration"
+      url: "/docs/configuration/"
+    - title: "Deployment"
+      url: "/docs/deployment/"
+    - title: "Customization"
+      url: "/docs/customization/"
+    - title: "Migration"
+      url: "/docs/migration/"
+    - title: "Changelog"
+      url: "/docs/changelog/"
+
+- name: Modules
+  items:
+    - title: "Device Management"
+      url: "/docs/device-management/"
+    - title: "Hello World"
+      url: "/docs/hello-world/"
+    - title: "Compliance"
+      url: "/docs/compliance/"
+    - title: "Integrations"
+      url: "/docs/integrations/"
+    - title: "API"
+      url: "/docs/api/"

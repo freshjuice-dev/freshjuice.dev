@@ -1,0 +1,35 @@
+<footer class="[&_a:hover]:text-red-600" aria-labelledby="footer-heading">
+  <h2 id="footer-heading" class="sr-only">Footer</h2>
+  <div class="mx-auto max-w-7xl px-6 py-8 lg:px-8 text-xs leading-5">
+
+    <div class="flex flex-col md:flex-row md:justify-between md:items-end gap-6 md:gap-12">
+      <div class="">
+        <p class="m-0">
+          Built with
+          <a href="https://www.11ty.dev/?utm_source=freshjuice">Eleventy</a>,
+          <a href="https://tailwindcss.com/?utm_source=freshjuice">Tailwind CSS</a>,
+          <a href="https://alpinejs.dev/?utm_source=freshjuice">Alpine.js</a>,
+          <a href="https://phosphoricons.com/?utm_source=freshjuice">Phosphor Icons</a>, and
+          <a href="https://pages.cloudflare.com/?utm_source=freshjuice">Cloudflare Pages</a>.
+        </p>
+        <p class="m-0">
+          Last built on {{ build.timestamp.formatted }} (<a href="https://www.github.com/{{ build.issues.owner }}/{{ build.issues.repo }}/commit/{{ build.hash.full }}" rel="noreferrer noopener" >{{ build.hash.short }}</a>)
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-8 border-t border-gray-900/10 dark:border-gray-100/10 pt-8 md:flex md:items-center md:justify-between">
+      <div class="flex space-x-6 md:order-2">
+        <a href="/sitemap.xml">Sitemap</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="/license/">License</a>
+        <a href="/about/">About</a>
+      </div>
+      <p class="mt-8 md:order-1 md:mt-0">
+        Released under the <a href="https://www.github.com/{{ build.issues.owner }}/{{ build.issues.repo }}/blob/main/LICENSE">MIT License</a>.<br/>
+        Copyright &copy; <span x-text="(new Date()).getFullYear()">{% year %}</span> <a href="https://alex.zappa.dev/?utm_source=freshjuice">Alex Zappa</a>. <span class="whitespace-nowrap">All rights reserved.</span>
+      </p>
+    </div>
+
+  </div>
+</footer>

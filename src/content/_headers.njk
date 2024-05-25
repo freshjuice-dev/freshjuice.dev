@@ -1,0 +1,20 @@
+---
+permalink: '/_headers'
+eleventyExcludeFromCollections: true
+---
+
+{# Default #}
+/*
+	X-Frame-Options: "SAMEORIGIN"
+	X-Content-Type-Options: "nosniff"
+	X-XSS-Protection: "1; mode=block"
+
+{# API Endpoint #}
+/api/*
+	Cache-Control: "max-age=0, no-cache, no-store, must-revalidate"
+
+{# CloudFlare Custom Domain #}
+https://:freshjuice.pages.dev/*
+  Link: <https://freshjuice.dev/:splat>; rel="canonical"
+  X-Robots-Tag: noindex
+  Refresh: 0; url=https://freshjuice.dev/:splat

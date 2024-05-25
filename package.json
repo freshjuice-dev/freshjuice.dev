@@ -4,8 +4,23 @@
   "description": "Official website of FreshJuice",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "mkdir -p _site && echo '/hubspot-theme/ https://143910617.hs-sites-eu1.com/blog' > _site/_redirects && echo '/* https://github.com/freshjuice-dev' >> _site/_redirects"
+    "clean:site": "rimraf './_site'",
+    "view:twconfig": "npx tailwind-config-viewer -o",
+    "export:twconfig": "npx tailwind-config-viewer export ./_site/tw-config",
+    "debug:11ty": "DEBUG=Eleventy* npx @11ty/eleventy",
+    "watch:11ty": "npx @11ty/eleventy --serve --quiet",
+    "build:11ty": "npx @11ty/eleventy",
+    "build:js": "npx esbuild ./src/assets/js/main.js --outfile=./_site/js/main.$(git rev-parse --short HEAD).js --bundle --minify",
+    "watch:js": "npx esbuild ./src/assets/js/main.js --outfile=./_site/js/main.js --bundle --watch --sourcemap",
+    "watch:tailwind": "npx tailwindcss --postcss -i src/assets/css/main.css -o ./_site/css/main.css --watch",
+    "build:tailwind": "npx tailwindcss --postcss -i src/assets/css/main.css -o ./_site/css/main.css --minify",
+    "start": "ELEVENTY_ENV=development npm-run-all --parallel watch:*",
+    "build": "ELEVENTY_ENV=production npm-run-all --serial build:js build:tailwind build:11ty",
+    "debugstart": "DEBUG=Eleventy* npx @11ty/eleventy --serve --quiet",
+    "benchmark": "DEBUG=Eleventy:Benchmark* npx @11ty/eleventy",
+    "prettier:check": "npx prettier --check './src'",
+    "prettier:fix": "npx prettier --write .",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -14,6 +29,11 @@
   "keywords": [
     "hubspot",
     "hubspot-cms",
+    "11ty",
+    "eleventy",
+    "alpinejs",
+    "tailwindcss",
+    "cloudflare",
     "freshjuice"
   ],
   "author": {
@@ -21,9 +41,55 @@
     "email": "alex@zappa.dev",
     "url": "https://alex.zappa.dev/"
   },
+  "contributors": [
+    {
+      "name": "Alex Zappa",
+      "email": "alex@zappa.dev",
+      "url": "https://alex.zappa.dev/"
+    },
+    {
+      "name": "Aleksandr Zapparov",
+      "email": "alexander@zapparov.dev",
+      "url": "https://zapparov.dev/"
+    }
+  ],
   "license": "GPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/freshjuice-dev/freshjuice.dev/issues"
   },
-  "homepage": "https://github.com/freshjuice-dev/freshjuice.dev#readme"
+  "homepage": "https://github.com/freshjuice-dev/freshjuice.dev#readme",
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1",
+    "@11ty/eleventy-img": "^4.0.2",
+    "@11ty/eleventy-plugin-rss": "^1.2.0",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/typography": "^0.5.13",
+    "alpinejs": "^3.14.0",
+    "autoprefixer": "^10.4.19",
+    "eleventy-plugin-phosphoricons": "^1.1.0",
+    "eleventy-plugin-speculation-rules": "^1.0.1",
+    "eleventy-plugin-svg-contents": "^0.7.0",
+    "esbuild": "^0.21.4",
+    "html-minifier": "^4.0.0",
+    "js-yaml": "^4.1.0",
+    "luxon": "^3.4.4",
+    "markdown-it-anchor": "^9.0.1",
+    "npm-run-all": "^4.1.5",
+    "plausible-tracker": "^0.3.8",
+    "postcss": "^8.4.38",
+    "postcss-cli": "^11.0.0",
+    "postcss-discard-comments": "^7.0.0",
+    "postcss-easy-import": "^4.0.0",
+    "postcss-merge-rules": "^7.0.0",
+    "prettier-plugin-tailwindcss": "^0.5.14",
+    "pretty-quick": "^4.0.0",
+    "prism-themes": "^1.9.0",
+    "prismjs": "^1.29.0",
+    "rimraf": "^5.0.7",
+    "slugify": "^1.6.6",
+    "tailwind-config-viewer": "^2.0.2",
+    "tailwindcss": "^3.4.3"
+  }
 }

@@ -20,10 +20,9 @@
 
     <div class="mt-8 border-t border-gray-900/10 dark:border-gray-100/10 pt-8 md:flex md:items-center md:justify-between">
       <div class="flex space-x-6 md:order-2">
-        <a href="/sitemap.xml">Sitemap</a>
-        <a href="/privacy/">Privacy</a>
-        <a href="/license/">License</a>
-        <a href="/about/">About</a>
+        {% for item in footerMenu %}
+          <a href="{{ item.url }}">{{ item.title }}</a>
+        {% endfor %}
       </div>
       <p class="mt-8 md:order-1 md:mt-0">
         Released under the <a href="https://www.github.com/{{ build.issues.owner }}/{{ build.issues.repo }}/blob/main/LICENSE">MIT License</a>.<br/>

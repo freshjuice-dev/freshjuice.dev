@@ -13,16 +13,16 @@ layout: base.njk
   </main>
 
 
-  <aside class="order-1 lg:w-[19rem] shrink-0 border-b lg:border-b-0 lg:border-r border-gray-900/10 dark:border-gray-100/10 py-8 lg:pr-8">
+  <aside class="order-1 lg:w-[19rem] shrink-0 border-b lg:border-b-0 lg:border-r border-gray-900/10 dark:border-gray-100/10 py-8 lg:pr-8 space-y-12">
 
     {% for section in docsMenu %}
       <div class="mb-4">
-        <h3 class="text-lg font-semibold">{{ section.name }}</h3>
-        <ul class="list-none m-0 p-0">
+        <h3 class="text-lg font-semibold mb-3">{{ section.name }}</h3>
+        <ul class="list-none m-0 p-0 border-l border-gray-900/5 dark:border-gray-100/5 space-y-2">
           {% for item in section.items %}
             <li>
               <a href="{{ item.url }}"
-                 class="block py-1 text-zinc-600 dark:text-zinc-300 hover:!text-red-500 {{ 'text-3xl' if page.url == item.url }}">{{ item.title }}</a>
+                 class="block pl-6 py-1 -ml-px border-l hover:border-current {% if page.url == item.url %}border-current !text-red-600 font-semibold{% else %}border-transparent opacity-75 hover:opacity-100 !text-zinc-600 dark:!text-zinc-300{% endif %}">{{ item.title }}</a>
             </li>
           {% endfor %}
         </ul>

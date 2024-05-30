@@ -10,7 +10,7 @@
         </span>
       </a>
       <div class="hidden sm:flex sm:gap-x-12">
-        {% for item in mainMenu %}
+        {% for item in menu.main %}
           <a href="{{ item.url }}" class="text-sm font-semibold leading-6 hover:text-red-600">{{ item.title }}</a>
         {% endfor %}
       </div>

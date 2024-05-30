@@ -15,9 +15,15 @@
 
 - name: Modules
   items:
-    - title: "Hello World"
-      url: "/docs/hello-world/"
     - title: "Lite YouTube Embed"
       url: "/docs/lite-youtube/"
     - title: "Lite Vimeo Embed"
       url: "/docs/lite-vimeo/"
+    - title: "Statistics"
+      url: "/docs/statistics/"
+    - title: "Pricing Card"
+      url: "/docs/pricing-card/"
+    - title: "Google Maps"
+      url: "/docs/google-maps/"
+    - title: "Codepen"
+      url: "/docs/codepen/"

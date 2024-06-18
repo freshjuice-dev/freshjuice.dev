@@ -11,6 +11,7 @@ You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-pri
 
 ### Settings
 
+For each Price Card, you can set the following settings:
 - **Tier Name**: The subscription or service name.
 - **Price**: The price of the subscription or service.
 - **Price Details**: Any additional information you may want to add for the price (will be in smaller font).
@@ -19,10 +20,10 @@ You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-pri
 - **CTA Link**: The link for the call-to-action button. Includes additional settings such as:
   - **Link to**: (internal, external, email address etc.).
   - **URL**: The URL of the page you want to link to.
-  - **Open in New Tab**: (Toggle Option) Whether the link should open in a new tab.
+  - **Open link in new window**: (Toggle Option) Whether the link should open in a new tab.
   - **Link Type**: At the moment only option is No Follow, which by default is deactivated.
 - **Features Title**: The title of the features section.
-- **Features List Items**: A list of features. For every features item, you can edit the text of the item in Features List Item.
+- **Features List**: A list of features. For each item in features list, you can edit the text of the item.
 
 ### Screenshot
 
@@ -38,10 +39,10 @@ Two Column Group has the following settings:
 - **Title**: The title of the Details Section.
 - **Description**: The description of the Details Section.
 - **Divider Text**: The text that will be displayed in the divider.
-- **Features Item**: The list of features for price card. For every features item, you can edit the text of the item in Features Item.
+- **Features List**: A list of features. For every item in features list, you can edit the text of the item.
 
 One Column Price Card has the following settings:
-- **Slogan**: The slogan of the Price card (Obligatory).
+- **Slogan**: The slogan of the Price card.
 - **Cost**: The price of the subscription or service.
 - **Cost Details**: Any additional information you may want to add for the price (will be in smaller font).
 - **CTA Link**: The link for the call-to-action button. Includes additional settings such as:

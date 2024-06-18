@@ -15,7 +15,7 @@ The module has the following settings:
 
 - **Title**: The title of video for SEO purposes.
 - **Video URL**: The URL of the YouTube video you want to embed.
-- **Thumbnail**: You can upload a custom thumbnail for the video. (Optional)
+- **Thumbnail**: You can upload a custom thumbnail for the video.
 
 ## Screenshot
 

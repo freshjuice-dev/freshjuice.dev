@@ -1,6 +1,6 @@
 ---
 title: Statistics
-desc:
+desc: Statistics are used to display data in a very short form. They are used to display numbers, percentages, and other data in a visually appealing way.
 ---
 
 Statistics are used to display data in a very short form. They are used to display numbers, percentages, and other data in a visually appealing way.
@@ -16,14 +16,18 @@ You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-sta
 
 ### Screenshot
 
+{% image "./statistics-simple.png", "Screenshot of Statistics Simple Module", [800] %}
+
 ## Statistics Simple - Grid
+
+### Settings
 - **Stats List**: A list of statistics with each item having the following settings:
   - **Stats Title**: Title of the statistic.
   - **Stats Details**: Additional information about statistic (option is rich text, so you may use different font family for instance).
 
-### Settings
-
 ### Screenshot
+
+{% image "./statistics-simple-grid.png", "Screenshot of Statistics Simple Module but in Grid form", [800] %}
 
 ## Statistics - Timeline
 
@@ -34,4 +38,6 @@ You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-sta
   - **Description**: More information on the event.
 
 ### Screenshot
+
+{% image "./statistics-timeline.png", "Screenshot of the Statistics Timeline Module", [800] %}
 

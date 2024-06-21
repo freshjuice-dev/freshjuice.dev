@@ -9,6 +9,12 @@ You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-pri
 
 ## Pricing Cards
 
+### Screenshot
+
+{% image "./pricing-cards.png", "Screenshot how Three Grid Pricing Cards looks", [800] %}
+
+---
+
 ### Settings
 
 For each Price Card, you can set the following settings:
@@ -25,11 +31,13 @@ For each Price Card, you can set the following settings:
 - **Features Title**: The title of the features section.
 - **Features List**: A list of features. For each item in features list, you can edit the text of the item.
 
+## Price Card with Details
+
 ### Screenshot
 
-{% image "./pricing-cards.png", "Screenshot how Three Grid Pricing Cards looks", [800] %}
+{% image "./price-card-with-details.png", "Screenshot how a more detailed Pricing Card looks", [800] %}
 
-## Price Card with Details
+---
 
 ### Settings
 
@@ -52,7 +60,3 @@ One Column Price Card has the following settings:
   - **Link Type**: At the moment only option is No Follow, which by default is deactivated.
 - **CTA Text**: The text for the call-to-action button.
 - **Sub Text**: The title of the features section.
-
-### Screenshot
-
-{% image "./price-card-with-details.png", "Screenshot how a more detailed Pricing Card looks", [800] %}

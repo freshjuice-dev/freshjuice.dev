@@ -9,6 +9,12 @@ Please note that the file must be publicly accessible.
 
 You can check demo page [here](https://143910617.hs-sites-eu1.com/module-github).
 
+## Screenshot
+
+{% image "./github-gist.png", "Screenshot how Github Gist in Dark Mode looks", [800] %}
+
+---
+
 ## Settings
 
 - **Gist Embed Code or ID**: Used to display your github project/file. By ID it is meant for GistID to be used.
@@ -20,7 +26,3 @@ You can check demo page [here](https://143910617.hs-sites-eu1.com/module-github)
 - **Show Footer?**:(Toggle) Show footer section if toggled. Default is toggled.
 - **Show Line Numbers?**:(Toggle) Show line numbers section. Default is toggled.
 - **Theme**: Your preference for the module's theme. By default its set to System Default, but you can pick Light or Dark.
-
-## Screenshot
-
-{% image "./github-gist.png", "Screenshot how Github Gist in Dark Mode looks", [800] %}

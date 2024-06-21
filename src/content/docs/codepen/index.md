@@ -8,6 +8,12 @@ The Codepen Embed is used to display projects
 
 You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-codepen-embed)
 
+## Screenshot
+
+{% image "./codepen-embed.jpeg", "Screenshot how Codepen Embed module looks", [800] %}
+
+---
+
 ## Settings
 
 - **Codepen URL**: The url to the project from Codepen. The default url is [https://codepen.io/reatlat/pen/gOyGyMo](https://codepen.io/reatlat/pen/gOyGyMo).
@@ -17,7 +23,3 @@ You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-cod
   - **HTML**: The HTML tab.
   - **CSS**: The CSS tab.
   - **JS**: The JavaScript tab.
-
-## Screenshot
-
-{% image "./codepen-embed.jpeg", "Screenshot how Codepen Embed module looks", [800] %}

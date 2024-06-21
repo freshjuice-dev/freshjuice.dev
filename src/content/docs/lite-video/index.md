@@ -13,6 +13,12 @@ The Lite YouTube Embed is a way to embed YouTube videos without heavy iframes. I
 
 Provide videos with a supercharged focus on visual performance. This custom element renders just like the real thing but approximately 224× faster.
 
+### Screenshot
+
+{% image "./lite-youtube-embed.png", "Screenshot how Lite YouTube Embed module looks", [800] %}
+
+---
+
 ### Settings
 
 The module has the following settings:
@@ -21,20 +27,18 @@ The module has the following settings:
 - **Video URL**: The URL of the YouTube video you want to embed.
 - **Thumbnail**: You can upload a custom thumbnail for the video.
 
-### Screenshot
-
-{% image "./lite-youtube-embed.png", "Screenshot how Lite YouTube Embed module looks", [800] %}
-
 ## Lite Vimeo Embed
 
 The Lite Vimeo Embed is a way to embed Vimeo videos without heavy iframes.
+
+### Screenshot
+
+{% image "./lite-vimeo-embed.png", "Screenshot how Lite Vimeo Embed module looks", [800] %}
+
+---
 
 ### Settings
 
 - **Title**: The title of video for SEO purposes.
 - **Url**: The URL of the YouTube video you want to embed.
 - **Thumbnail**: You can upload a custom thumbnail for the video.
-
-### Screenshot
-
-{% image "./lite-vimeo-embed.png", "Screenshot how Lite Vimeo Embed module looks", [800] %}

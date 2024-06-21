@@ -28,6 +28,8 @@ You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-tes
 
 {% image "./tm-side-by-side.png", "Screenshot of Module Side by Side Testimonial", [800] %}
 
+---
+
 ## Testimonials - Simple Centered
 
 ### Settings

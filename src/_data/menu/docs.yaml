@@ -15,10 +15,8 @@
 
 - name: Modules
   items:
-    - title: "Lite YouTube Embed"
-      url: "/docs/lite-youtube/"
-    - title: "Lite Vimeo Embed"
-      url: "/docs/lite-vimeo/"
+    - title: "Lite Videos Embed"
+      url: "/docs/lite-video/"
     - title: "Statistics"
       url: "/docs/statistics/"
     - title: "Pricing Card"
@@ -27,5 +25,9 @@
       url: "/docs/google-maps/"
     - title: "Codepen"
       url: "/docs/codepen/"
+    - title: "Github Gist"
+      url: "/docs/github/"
     - title: "Testimonials"
       url: "/docs/testimonials/"
+    - title: "Divider"
+      url: "/docs/divider/"

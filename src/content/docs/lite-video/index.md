@@ -36,5 +36,5 @@ The Lite Vimeo Embed is a way to embed Vimeo videos without heavy iframes.
 ### Settings
 
 - **Title**: The title of video for SEO purposes.
-- **Url**: The URL of the YouTube video you want to embed.
+- **Url**: The URL of the Vimeo video you want to embed.
 - **Thumbnail**: You can upload a custom thumbnail for the video.

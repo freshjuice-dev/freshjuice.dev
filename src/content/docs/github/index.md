@@ -3,17 +3,13 @@ title: Github Gist
 desc: The Github Gist module is a powerful tool that allows you to display specific files from any Git repository. This module is particularly useful for sharing code snippets, examples, or even entire files directly from your repositories.
 ---
 
+{% image "./github-gist.png", "Screenshot how Github Gist in Dark Mode looks", [800] %}
+
 The Github Gist module is a powerful tool that allows you to display specific files from any Git repository. This module is particularly useful for sharing code snippets, examples, or even entire files directly from your repositories.
 
 Please note that the file must be publicly accessible.
 
 You can check demo page [here](https://143910617.hs-sites-eu1.com/module-github).
-
-## Screenshot
-
-{% image "./github-gist.png", "Screenshot how Github Gist in Dark Mode looks", [800] %}
-
----
 
 ## Settings
 

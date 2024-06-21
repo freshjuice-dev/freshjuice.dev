@@ -7,13 +7,11 @@ Pricing cards introduce a product or service to potential customers. They are us
 
 You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-pricing-card)
 
+---
+
 ## Pricing Cards
 
-### Screenshot
-
 {% image "./pricing-cards.png", "Screenshot how Three Grid Pricing Cards looks", [800] %}
-
----
 
 ### Settings
 
@@ -31,13 +29,11 @@ For each Price Card, you can set the following settings:
 - **Features Title**: The title of the features section.
 - **Features List**: A list of features. For each item in features list, you can edit the text of the item.
 
+---
+
 ## Price Card with Details
 
-### Screenshot
-
 {% image "./price-card-with-details.png", "Screenshot how a more detailed Pricing Card looks", [800] %}
-
----
 
 ### Settings
 

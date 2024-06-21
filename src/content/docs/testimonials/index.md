@@ -7,13 +7,11 @@ Testimonials are a great way to show reviews made by customers or trusted source
 
 You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-testimonials)
 
+---
+
 ## Testimonials - Side by Side
 
-### Screenshot
-
 {% image "./tm-side-by-side.png", "Screenshot of Module Side by Side Testimonial", [800] %}
-
----
 
 ### Settings
 
@@ -30,13 +28,11 @@ You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-tes
     - **Maximum Size**: Image's original size or Custom. If Image's original size, the image will be able to have a maximum size of its original.
       If custom, you will be able to adjust the max width and max height of the image. Currently, it is set to Custom and 100x20.
 
+---
+
 ## Testimonials - Simple Centered
 
-### Screenshot
-
 {% image "./tm-simple-centered.png", "Screenshot of Module Simple Centered Testimonial", [800] %}
-
----
 
 ### Settings
 
@@ -52,13 +48,11 @@ You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-tes
 - **Author Name**: The name of the customer.
 - **Author Job Title**: The job that the customer is currently working as.
 
+---
+
 ## Testimonials - Large Avatar
 
-### Screenshot
-
 {% image "./tm-large-avatar.png", "Screenshot of Module Large Avatar Testimonial", [800] %}
-
----
 
 ### Settings
 
@@ -69,13 +63,11 @@ You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-tes
 - **Author Name**: The name of the customer.
 - **Author Job Title**: The job that the customer is currently working as.
 
+---
+
 ## Testimonials - Star Rating
 
-### Screenshot
-
 {% image "./tm-star-rating.png", "Screenshot of Module Star Rating Testimonial", [800] %}
-
----
 
 ### Settings
 

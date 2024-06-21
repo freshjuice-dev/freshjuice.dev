@@ -15,7 +15,7 @@
 
 - name: Modules
   items:
-    - title: "Lite Videos Embed"
+    - title: "Video Embed"
       url: "/docs/lite-video/"
     - title: "Statistics"
       url: "/docs/statistics/"

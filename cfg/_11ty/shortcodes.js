@@ -2,9 +2,8 @@
  * Add Eleventy shortcodes here
  * https://www.11ty.dev/docs/shortcodes/
  */
-
-const path = require("path");
-const eleventyImage = require("@11ty/eleventy-img");
+import eleventyImage from "@11ty/eleventy-img";
+import path from 'path';
 
 const relativeToInputPath = (inputPath, relativeFilePath) => {
   let split = inputPath.split("/");
@@ -20,10 +19,8 @@ const relativeToInputPath = (inputPath, relativeFilePath) => {
 };
 
 
-module.exports = {
+export default {
   getRelativePath: (eleventyConfig) => {
-    const {EleventyRenderPlugin} = require("@11ty/eleventy");
-
     eleventyConfig.addShortcode(
       'getRelativePath',
       function getRelativePathShortcode(src) {

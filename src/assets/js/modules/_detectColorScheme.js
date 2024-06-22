@@ -1,4 +1,4 @@
-module.exports = () => {
+export default () => {
   if (
     window.matchMedia &&
     window.matchMedia("(prefers-color-scheme: dark)").matches

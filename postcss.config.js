@@ -1,10 +1,19 @@
-module.exports = {
-	plugins: [
-		require("postcss-easy-import"),
-		require("postcss-discard-comments")({removeAll: true}),
-		require("tailwindcss/nesting"),
-		require("tailwindcss"),
-		require("autoprefixer"),
-		require("postcss-merge-rules")
-	],
+import easyImport from "postcss-easy-import/index.js";
+import discardComments from "postcss-discard-comments";
+import tailwindNesting from "tailwindcss/nesting/index.js";
+import tailwind from "tailwindcss";
+import autoprefixer from "autoprefixer";
+import mergeRules from "postcss-merge-rules";
+
+const comments = discardComments({removeAll: true});
+
+export default {
+  plugins: [
+    easyImport,
+    tailwindNesting,
+    tailwind,
+    comments,
+    autoprefixer,
+    mergeRules
+  ],
 };

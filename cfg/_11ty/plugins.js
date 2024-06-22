@@ -3,33 +3,89 @@
  * https://www.11ty.dev/docs/plugins/
  */
 
-const plugin = require("eleventy-plugin-speculation-rules");
-module.exports = {
+import {EleventyHtmlBasePlugin} from "@11ty/eleventy";
+import pluginSpeculationRules from "eleventy-plugin-speculation-rules";
+import pluginRSS from "@11ty/eleventy-plugin-rss";
+import pluginSyntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
+import pluginSVGContents from "eleventy-plugin-svg-contents";
+import pluginPhosphorIcons from "eleventy-plugin-phosphoricons";
+// import eleventyImageTransformPlugin from "@11ty/eleventy-img";
+
+export default {
+
+  /* TODO find out why this not working
+  eleventyImageTransform: (eleventyConfig) => {
+    // Image optimization: https://www.11ty.dev/docs/plugins/image/#eleventy-transform
+    eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
+      // File extensions to process in _site folder
+      extensions: "html",
+
+      // Output formats for each image.
+      formats: ["avif", "webp", "auto"],
+
+      // widths: ["auto"],
+
+      defaultAttributes: {
+        // e.g. <img loading decoding> assigned on the HTML tag will override these values.
+        loading: "lazy",
+        decoding: "async",
+      }
+    });
+  },
+  */
+
   // Drafts support
   DraftsSupport: (eleventyConfig) => {
-    const plugin = require("./drafts.js");
-    eleventyConfig.addPlugin(plugin);
+    // When `permalink` is false, the file is not written to disk
+    eleventyConfig.addGlobalData("eleventyComputed.permalink", function () {
+      return (data) => {
+        // Always skip during non-watch/serve builds
+        if (data.draft && !process.env.BUILD_DRAFTS) {
+          return false;
+        }
+
+        return data.permalink;
+      };
+    });
+
+    // When `eleventyExcludeFromCollections` is true, the file is not included in any collections
+    eleventyConfig.addGlobalData(
+      "eleventyComputed.eleventyExcludeFromCollections",
+      function () {
+        return (data) => {
+          // Always exclude from non-watch/serve builds
+          if (data.draft && !process.env.BUILD_DRAFTS) {
+            return true;
+          }
+
+          return data.eleventyExcludeFromCollections;
+        };
+      }
+    );
+
+    eleventyConfig.on("eleventy.before", ({runMode}) => {
+      // Set the environment variable
+      if (runMode === "serve" || runMode === "watch") {
+        process.env.BUILD_DRAFTS = true;
+      }
+    });
   },
 
   // Official plugins
   RSS: (eleventyConfig) => {
-    const plugin = require("@11ty/eleventy-plugin-rss");
-    eleventyConfig.addPlugin(plugin);
+    eleventyConfig.addPlugin(pluginRSS);
   },
 
   SyntaxHighlight: (eleventyConfig) => {
-    const plugin = require("@11ty/eleventy-plugin-syntaxhighlight");
-    eleventyConfig.addPlugin(plugin, {preAttributes: {tabindex: 0}});
+    eleventyConfig.addPlugin(pluginSyntaxHighlight, {preAttributes: {tabindex: 0}});
   },
 
   EleventyHtmlBase: (eleventyConfig) => {
-    const {EleventyHtmlBasePlugin} = require("@11ty/eleventy");
     eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
   },
 
   PhosphorIcons: (eleventyConfig) => {
-    const plugin = require('eleventy-plugin-phosphoricons');
-    eleventyConfig.addPlugin(plugin, {
+    eleventyConfig.addPlugin(pluginPhosphorIcons, {
       class: "phicon",
       size: 32,
       fill: "currentColor"
@@ -37,14 +93,13 @@ module.exports = {
   },
 
   SpeculationRules: (eleventyConfig) => {
-    const plugin = require('eleventy-plugin-speculation-rules');
-    eleventyConfig.addPlugin(plugin);
+    eleventyConfig.addPlugin(pluginSpeculationRules);
   },
 
   // Easily grab an svg image and render the raw svg contents with the ability to add classes
   // Ex: {{ '/src/assets/images/logo.svg' | svgContents("h-8 w-8 text-red-500") | safe }}
   svgContents: function (eleventyConfig) {
-    const plugin = require("eleventy-plugin-svg-contents");
-    eleventyConfig.addPlugin(plugin);
+    eleventyConfig.addPlugin(pluginSVGContents);
   }
+
 };

@@ -1,5 +1,9 @@
+import typography from '@tailwindcss/typography'
+import forms from '@tailwindcss/forms'
+import aspectRatio from '@tailwindcss/aspect-ratio'
+
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: [
     "./src/**/*.{html,js,njk,md,vue}",
     "./cfg/_11ty/**/*.js"
@@ -24,9 +28,9 @@ module.exports = {
     },
   },
   plugins: [
-    require("@tailwindcss/typography"),
-    require("@tailwindcss/forms"),
-    require("@tailwindcss/aspect-ratio"),
+    typography,
+    forms,
+    aspectRatio,
     ({ addComponents, theme }) => {
       addComponents({
         ".prose": {

@@ -1,5 +1,5 @@
-const {DateTime} = require("luxon");
-const childProcess = require("child_process");
+import {DateTime} from "luxon";
+import childProcess from "child_process"
 
 let timestamp = childProcess
   .execSync("git log -1 --format=%ct")
@@ -10,7 +10,7 @@ timestamp = parseInt(timestamp, 10);
 
 const gitHash = childProcess.execSync("git rev-parse HEAD").toString().trim();
 
-module.exports = () => {
+export default () => {
   return {
     environment: process.env.ELEVENTY_ENV || "development",
     mode: process.env.MODE,

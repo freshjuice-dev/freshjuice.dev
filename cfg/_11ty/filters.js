@@ -2,10 +2,10 @@
  * Add Eleventy filters here
  * https://www.11ty.dev/docs/filters/
  */
-const {DateTime} = require("luxon");
-const path = require("path");
+import {DateTime} from "luxon";
 
-module.exports = {
+export default {
+
   titleSinPeriod: (value) => {
     return value.replace(/\.$/, "");
   },
@@ -42,7 +42,7 @@ module.exports = {
   },
 
   includes: (haystack, needle) => {
-    if ( typeof haystack === 'undefined' || typeof needle === 'undefined' )
+    if (typeof haystack === 'undefined' || typeof needle === 'undefined')
       return false;
     return haystack.includes(needle);
   },
@@ -91,4 +91,5 @@ module.exports = {
     console.log(dataObject);
     return dataObject;
   }
+
 };

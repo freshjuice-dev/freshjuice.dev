@@ -11,7 +11,7 @@ You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-pri
 
 ## Pricing Cards
 
-{% image "./pricing-cards.png", "Screenshot how Three Grid Pricing Cards looks", [800] %}
+<img src="./pricing-cards.png" alt="Screenshot how Three Grid Pricing Cards looks" />
 
 ### Settings
 
@@ -33,7 +33,7 @@ For each Price Card, you can set the following settings:
 
 ## Price Card with Details
 
-{% image "./price-card-with-details.png", "Screenshot how a more detailed Pricing Card looks", [800] %}
+<img src="./price-card-with-details.png" alt="Screenshot how a more detailed Pricing Card looks" />
 
 ### Settings
 

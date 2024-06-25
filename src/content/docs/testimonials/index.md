@@ -11,7 +11,7 @@ You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-tes
 
 ## Testimonials - Side by Side
 
-{% image "./tm-side-by-side.png", "Screenshot of Module Side by Side Testimonial", [800] %}
+<img src="./tm-side-by-side.png" alt="Screenshot of Module Side by Side Testimonial" />
 
 ### Settings
 
@@ -32,7 +32,7 @@ You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-tes
 
 ## Testimonials - Simple Centered
 
-{% image "./tm-simple-centered.png", "Screenshot of Module Simple Centered Testimonial", [800] %}
+<img src="./tm-simple-centered.png" alt="Screenshot of Module Simple Centered Testimonial" />
 
 ### Settings
 
@@ -52,7 +52,7 @@ You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-tes
 
 ## Testimonials - Large Avatar
 
-{% image "./tm-large-avatar.png", "Screenshot of Module Large Avatar Testimonial", [800] %}
+<img src="./tm-large-avatar.png" alt="Screenshot of Module Large Avatar Testimonial" />
 
 ### Settings
 
@@ -67,7 +67,7 @@ You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-tes
 
 ## Testimonials - Star Rating
 
-{% image "./tm-star-rating.png", "Screenshot of Module Star Rating Testimonial", [800] %}
+<img src="./tm-star-rating.png" alt="Screenshot of Module Star Rating Testimonial" />
 
 ### Settings
 

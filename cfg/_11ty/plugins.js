@@ -9,30 +9,33 @@ import pluginRSS from "@11ty/eleventy-plugin-rss";
 import pluginSyntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 import pluginSVGContents from "eleventy-plugin-svg-contents";
 import pluginPhosphorIcons from "eleventy-plugin-phosphoricons";
-// import eleventyImageTransformPlugin from "@11ty/eleventy-img";
+import { eleventyImageTransformPlugin as pluginImageTransform } from "@11ty/eleventy-img";
 
 export default {
 
-  /* TODO find out why this not working
-  eleventyImageTransform: (eleventyConfig) => {
+  ImageTransform: (eleventyConfig) => {
     // Image optimization: https://www.11ty.dev/docs/plugins/image/#eleventy-transform
-    eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
+    eleventyConfig.addPlugin(pluginImageTransform, {
       // File extensions to process in _site folder
       extensions: "html",
 
       // Output formats for each image.
       formats: ["avif", "webp", "auto"],
 
-      // widths: ["auto"],
+      // outputDir: './_site/img/',
+      // urlPath: '/img/',
+
+      // optional, output image widths
+      widths: ["auto"],
 
       defaultAttributes: {
         // e.g. <img loading decoding> assigned on the HTML tag will override these values.
         loading: "lazy",
         decoding: "async",
+        class: "mx-auto rounded drop-shadow-lg",
       }
     });
   },
-  */
 
   // Drafts support
   DraftsSupport: (eleventyConfig) => {

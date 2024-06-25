@@ -3,7 +3,7 @@ title: Google Maps Embed
 desc: Embed Google Maps to display a location or direction
 ---
 
-{% image "./google-maps-embed.png", "Screenshot how Google Maps Embed module looks", [800] %}
+<img src="./google-maps-embed.png" alt="Screenshot how Google Maps Embed module looks" />
 
 The Google Maps Embed is a way to display a minified version of Google Maps with a custom location predetermined by its user.
 

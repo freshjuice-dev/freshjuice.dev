@@ -11,7 +11,7 @@ You can check demo page [here](https://143910617.hs-sites-eu1.com/modules/lite-v
 
 ## Lite Youtube Embed
 
-{% image "./lite-youtube-embed.png", "Screenshot how Lite YouTube Embed module looks", [800] %}
+<img src="./lite-youtube-embed.png" alt="Screenshot how Lite YouTube Embed module looks" />
 
 The Lite YouTube Embed is a way to embed YouTube videos without heavy iframes. It's based on the [work](https://github.com/paulirish/lite-youtube-embed) by Paul Irish.
 
@@ -29,7 +29,7 @@ The module has the following settings:
 
 ## Lite Vimeo Embed
 
-{% image "./lite-vimeo-embed.png", "Screenshot how Lite Vimeo Embed module looks", [800] %}
+<img src="./lite-vimeo-embed.png" alt="Screenshot how Lite Vimeo Embed module looks" />
 
 The Lite Vimeo Embed is a way to embed Vimeo videos without heavy iframes.
 

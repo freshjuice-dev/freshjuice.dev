@@ -3,7 +3,7 @@ title: Divider
 desc: The Divider module is a simple module that allows you to add a horizontal line to your page. This module is useful for separating different sections of your page or to add a visual break between different elements.
 ---
 
-{% image "./divider.png", "Screenshot of Divider Module", [800] %}
+<img src="./divider.png" alt="Screenshot of Divider Module" />
 
 The Divider module is a simple module that allows you to add a horizontal line to your page. This module is useful for separating different sections of your page or to add a visual break between different elements.
 

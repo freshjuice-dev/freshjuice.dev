@@ -11,7 +11,7 @@ You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-sta
 
 ## Statistics Simple
 
-{% image "./statistics-simple.png", "Screenshot of Statistics Simple Module", [800] %}
+<img src="./statistics-simple.png" alt="Screenshot of Statistics Simple Module" />
 
 ### Settings
 - **Stats List**: A list of statistics with each item having the following settings:
@@ -22,7 +22,7 @@ You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-sta
 
 ## Statistics Simple - Grid
 
-{% image "./statistics-simple-grid.png", "Screenshot of Statistics Simple Module but in Grid form", [800] %}
+<img src="./statistics-simple-grid.png" alt="Screenshot of Statistics Simple Module but in Grid form" />
 
 ### Settings
 - **Stats List**: A list of statistics with each item having the following settings:
@@ -33,7 +33,7 @@ You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-sta
 
 ## Statistics - Timeline
 
-{% image "./statistics-timeline.png", "Screenshot of the Statistics Timeline Module", [800] %}
+<img src="./statistics-timeline.png" alt="Screenshot of the Statistics Timeline Module" />
 
 ### Settings
 - **Timeline List**: A list of statistics within a timeline with each item having the following settings:

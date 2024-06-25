@@ -1,33 +1,47 @@
 - name: Getting Started
   items:
-    - title: "Overview"
-      url: "/docs/"
-    - title: "Installation"
-      url: "/docs/installation/"
-    - title: "Configuration"
-      url: "/docs/configuration/"
-    - title: "Deployment"
-      url: "/docs/deployment/"
-    - title: "Customization"
-      url: "/docs/customization/"
-    - title: "Changelog"
-      url: "/docs/changelog/"
+    - title: Overview
+      url: /docs/
+    - title: Installation
+      url: /docs/installation/
+    - title: Configuration
+      url: /docs/configuration/
+    - title: Deployment
+      url: /docs/deployment/
+    - title: Customization
+      url: /docs/customization/
+    - title: Changelog
+      url: /docs/changelog/
 
 - name: Modules
   items:
-    - title: "Video Embed"
-      url: "/docs/lite-video/"
-    - title: "Statistics"
-      url: "/docs/statistics/"
-    - title: "Pricing Card"
-      url: "/docs/pricing-card/"
-    - title: "Google Maps"
-      url: "/docs/google-maps/"
-    - title: "Codepen"
-      url: "/docs/codepen/"
-    - title: "Github Gist"
-      url: "/docs/github/"
-    - title: "Testimonials"
-      url: "/docs/testimonials/"
-    - title: "Divider"
-      url: "/docs/divider/"
+    - title: Video Embed
+      url: /docs/lite-video/
+    - title: Statistics
+      url: /docs/statistics/
+    - title: Pricing Card
+      url: /docs/pricing-card/
+    - title: Google Maps
+      url: /docs/google-maps/
+    - title: Codepen
+      url: /docs/codepen/
+    - title: Github Gist
+      url: /docs/github/
+    - title: Testimonials
+      url: /docs/testimonials/
+    - title: Divider
+      url: /docs/divider/
+
+- name: Templates
+  items:
+    - title: Homepage
+      url: /docs/template-homepage/
+    - title: Pricing page
+      url: /docs/template-pricing/
+
+- name: Sections
+  items:
+    - title: Pricing
+      url: /docs/section-pricing/
+    - title: Statistics
+      url: /docs/section-statistics/

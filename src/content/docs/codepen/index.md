@@ -3,7 +3,7 @@ title: Codepen Embed
 desc: Embed Codepen is used to display a project from Codepen
 ---
 
-<img src="./codepen-embed.jpeg" alt="Screenshot how Codepen Embed module looks" />
+<img src="./codepen-embed.png" alt="Screenshot how Codepen Embed module looks" />
 
 The Codepen Embed is used to display projects
 (otherwise called pens) from Codepen into your webpages

@@ -44,7 +44,7 @@ export default {
           "--tw-prose-bold": "#d4d4d4",
           "--tw-prose-counters": "#d4d4d4",
           "--tw-prose-bullets": "#d4d4d4",
-          "--tw-prose-hr": "#d4d4d4",
+          "--tw-prose-hr": "#f3f4f61a",
           "--tw-prose-quotes": "#111827",
           "--tw-prose-quote-borders": "#e5e7eb",
           "--tw-prose-captions": "#6b7280",

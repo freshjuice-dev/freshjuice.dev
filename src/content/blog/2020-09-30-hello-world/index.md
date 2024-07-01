@@ -1,7 +1,6 @@
 ---
 title: Hello World
 desc: Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-date: 2020-09-30
 tags: [example]
 draft: true
 ---

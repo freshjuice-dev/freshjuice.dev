@@ -19,7 +19,7 @@ permalink: /blog/
   <div class="relative">
     <h2 id="year-{{ year }}" class="text-xl md:text-3xl inline-block m-0 p-0 sticky top-6 left-0">{{ year }}</h2>
     <ul class="grid gap-4 list-none p-0 ml-16 md:ml-20 -mt-6 md:-mt-10 mb-0">
-      {% for post in postsList | postsByYear(year) %}
+      {% for post in postsList | postsByYear(year) | reverse %}
         <li class="flex flex-col md:flex-row md:gap-2 m-0">
           <time class="font-mono text-xs md:leading-8"
                 datetime="{{ post.date | htmlDateString }}">

@@ -15,7 +15,15 @@ layout: base.njk
 
 <main class="prose md:prose-xl mx-auto w-full">
 
-  <h1>{{ title }}</h1>
+  <header class="grid">
+    <h1 style="margin-bottom: 0">{{ title }}{%- if draft %} <small class="text-base">[draft]</small>{%- endif %}</h1>
+    <p class="post-metadata text-sm md:text-base">
+      <time datetime="{{ page.date | htmlDateString }}">{{ page.date | readableDate("LLLL d, yyyy") }}</time>
+      {%- if updated %}
+        <time datetime="{{ updated | htmlDateString }}"> &bull; updated {{ updated | readableDate("LLL d, yyyy") }}</time>
+      {%- endif %}
+    </p>
+  </header>
 
   {{ content | safe }}
 

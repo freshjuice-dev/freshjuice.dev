@@ -80,7 +80,10 @@ export default {
   },
 
   SyntaxHighlight: (eleventyConfig) => {
-    eleventyConfig.addPlugin(pluginSyntaxHighlight, {preAttributes: {tabindex: 0}});
+    eleventyConfig.addPlugin(pluginSyntaxHighlight, {
+      preAttributes: {tabindex: 0},
+      alwaysWrapLineHighlights: true,
+    });
   },
 
   EleventyHtmlBase: (eleventyConfig) => {

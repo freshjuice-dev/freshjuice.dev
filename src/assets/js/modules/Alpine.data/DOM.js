@@ -1,24 +1,11 @@
 import debugLog from "../_debugLog";
-/* global Prism */
+import loadScript from "../_loadScript";
 
 export default () => {
   return {
     theme: {
       dark: true,
       name: "dark",
-    },
-
-    prismJson(jsonData, elementId = "responseJson") {
-      try {
-        document.getElementById(elementId).innerHTML = Prism.highlight(
-          JSON.stringify(jsonData, null, 2),
-          Prism.languages.json,
-          "JSON"
-        );
-      } catch (error) {
-        console.error(error);
-        document.getElementById(elementId).innerHTML = error;
-      }
     },
 
     getThemeName() {
@@ -45,6 +32,8 @@ export default () => {
         this.theme.name
       );
     },
+
+    loadScript: (src, loading = "defer", callback, callbackForced) => loadScript(src, loading, callback, callbackForced),
 
     init() {
       debugLog("AlpineJS DOM init");

@@ -16,7 +16,7 @@ layout: base.njk
 <main class="prose md:prose-xl mx-auto w-full">
 
   <header class="grid">
-    <h1 style="margin-bottom: 0">{{ title }}{%- if draft %} <small class="text-base">[draft]</small>{%- endif %}</h1>
+    <h1 style="margin-bottom: 0">{{ heading or title }}{%- if draft %} <small class="text-base">[draft]</small>{%- endif %}</h1>
     <p class="post-metadata text-sm md:text-base">
       <time datetime="{{ page.date | htmlDateString }}">{{ page.date | readableDate("LLLL d, yyyy") }}</time>
       {%- if updated %}
@@ -26,5 +26,47 @@ layout: base.njk
   </header>
 
   {{ content | safe }}
+
+  <footer class="not-prose">
+    {%- if tags | filterTagList | length %}
+      <ul class="post-tags list-none flex flex-wrap gap-2 m-0 p-0 italic">
+        {%- for tag in tags | filterTagList | head(4) %}
+          {%- set tagUrl %}/tags/{{ tag | slugify }}/{% endset %}
+{#          <li class="m-0 p-0"><a href="{{ tagUrl }}" class="post-tag text-current">#{{ tag }}</a>{%- if not loop.last %},{% endif %}</li>#}
+          <li class="m-0 p-0">#{{ tag }}{%- if not loop.last %},{% endif %}</li>
+        {%- endfor %}
+      </ul>
+    {%- endif %}
+
+    <div class="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8 mt-16"
+         x-intersect.once="loadScript(`//cdn.jsdelivr.net/npm/share-buttons/dist/share-buttons.js`)">
+
+      <div class="text-lg md:text-xl font-semibold whitespace-nowrap">Share Post</div>
+
+      <div class="share-btn flex flex-wrap gap-4"
+           data-title="{{ title | striptags }}"
+           data-desc="{{ desc | striptags }}"
+           data-url="{{ page.url | htmlBaseUrl(metadata.url) }}">
+
+        {% set shareButtons = [
+          { id: "fb", name: "Facebook", icon: 'facebook-logo' },
+          { id: "tw", name: "X", icon: 'x-logo' },
+          { id: "ln", name: "LinkedIn", icon: 'linkedin-logo' },
+          { id: "re", name: "Reddit", icon: 'reddit-logo' },
+          { id: "print", name: "Print", icon: 'printer' }
+        ] %}
+        {% for item in shareButtons %}
+          <a data-id="{{ item.id }}"
+             href="#" @click="$event.preventDefault()"
+             class="cursor-pointer">
+            {% phicon item.icon, "regular", { class: "size-8 transition-transform hover:scale-125" } %}
+            <span class="sr-only">{{ item.name }}</span>
+          </a>
+        {% endfor %}
+
+      </div>
+    </div>
+
+  </footer>
 
 </main>

@@ -5,28 +5,38 @@
     <div class="flex flex-col md:flex-row md:justify-between md:items-end gap-6 md:gap-12">
       <div class="">
         <p class="m-0">
-          Built with
+          Website built with
           <a href="https://www.11ty.dev/?utm_source=freshjuice">Eleventy</a>,
           <a href="https://tailwindcss.com/?utm_source=freshjuice">Tailwind CSS</a>,
           <a href="https://alpinejs.dev/?utm_source=freshjuice">Alpine.js</a>,
-          <a href="https://phosphoricons.com/?utm_source=freshjuice">Phosphor Icons</a>, and
+          <a href="https://phosphoricons.com/?utm_source=freshjuice">Phosphor Icons</a>, and hosted on the
           <a href="https://pages.cloudflare.com/?utm_source=freshjuice">Cloudflare Pages</a>.
         </p>
         <p class="m-0">
           Last built on {{ build.timestamp.formatted }} (<a href="https://www.github.com/{{ build.issues.owner }}/{{ build.issues.repo }}/commit/{{ build.hash.full }}" rel="noreferrer noopener" >{{ build.hash.short }}</a>)
         </p>
       </div>
+      {#
+      <div class="flex justify-center items-center">
+        <a href="https://github.com/freshjuice-dev/freshjuice-hubspot-theme/network/members">
+          <img src="https://img.shields.io/github/forks/freshjuice-dev/freshjuice-hubspot-theme" alt="GitHub forks" eleventy:ignore>
+        </a>
+        <a href="https://github.com/freshjuice-dev/freshjuice-hubspot-theme/stargazers">
+          <img src="https://img.shields.io/github/stars/freshjuice-dev/freshjuice-hubspot-theme" alt="GitHub Repo stars" eleventy:ignore>
+        </a>
+      </div>
+      #}
     </div>
 
-    <div class="mt-8 border-t border-gray-900/10 dark:border-gray-100/10 pt-8 md:flex md:items-center md:justify-between">
+    <div class="mt-8 border-t border-gray-900/10 dark:border-gray-100/10 pt-8 md:flex md:items-center md:justify-between md:gap-8">
       <div class="flex space-x-6 md:order-2">
         {% for item in menu.footer %}
-          <a href="{{ item.url }}">{{ item.title }}</a>
+          <a href="{{ item.url }}" class="whitespace-nowrap">{{ item.title }}</a>
         {% endfor %}
       </div>
-      <p class="mt-8 md:order-1 md:mt-0">
-        Released under the <a href="https://www.github.com/{{ build.issues.owner }}/{{ build.issues.repo }}/blob/main/LICENSE">MIT License</a>.<br/>
-        Copyright &copy; <span x-text="(new Date()).getFullYear()">{% year %}</span> <a href="https://alex.zappa.dev/?utm_source=freshjuice">Alex Zappa</a>. <span class="whitespace-nowrap">All rights reserved.</span>
+      <p class="mt-8 md:order-1 md:mt-0 text-balance">
+        &copy;&nbsp;<span x-text="(new Date()).getFullYear()">{% year %}</span> <a href="https://alex.zappa.dev/?utm_source=freshjuice">Alex&nbsp;Zappa</a>.
+        All&nbsp;Right&nbsp;Reserved. Except as otherwise noted, the content of this page is licensed under the <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">Creative Commons Attribution 4.0 License</a>, and code samples are licensed under the <a href="https://www.gnu.org/licenses/gpl-3.0.html" rel="noopener">GNU General Public License v3.0</a>.
       </p>
     </div>
 

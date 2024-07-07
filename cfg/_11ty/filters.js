@@ -63,13 +63,13 @@ export default {
 
   filterTagList: (tags) => {
     // all the tags to lowercase
-    tags = tags.map((tag) => tag.toLowerCase());
+    //tags = tags.map((tag) => tag.toLowerCase());
     // remove duplicates
     tags = [...new Set(tags)];
 
     return (tags || []).filter(
       (tag) =>
-        ["all", "nav", "tools", "post", "posts", "doc", "docs", "function", "functions", "featured"].indexOf(
+        ["all", "nav", "tools", "post", "posts", "doc", "docs", "featured"].indexOf(
           tag
         ) === -1
     );

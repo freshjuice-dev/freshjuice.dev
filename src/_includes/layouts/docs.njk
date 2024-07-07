@@ -2,20 +2,9 @@
 layout: base.njk
 ---
 
-<div class="grid lg:flex lg:grow gap-8 lg:gap-12">
+<div class="flex flex-col lg:flex-row lg:grow gap-8 lg:gap-12">
 
-  <main class="prose mx-auto lg:max-w-full order-2 grow py-8">
-
-    <div class="prose md:prose-xl">
-      <h1>{{ title }}</h1>
-    </div>
-
-    {{ content | safe }}
-
-  </main>
-
-
-  <aside class="max-w-prose mx-auto w-full order-1 lg:w-[19rem] shrink-0 border-b lg:border-b-0 lg:border-r border-gray-900/10 dark:border-gray-100/10 lg:py-8 lg:pr-8"
+  <aside class="max-w-prose mx-auto w-full lg:w-[19rem] shrink-0 border-b lg:border-b-0 lg:border-r border-gray-900/10 dark:border-gray-100/10 lg:py-8 lg:pr-8"
          x-data="{
            drawerMenuOpen: false,
             toggleDrawerMenu() {
@@ -25,26 +14,27 @@ layout: base.njk
 
     {# Desktop menu #}
     <div class="hidden lg:block">
-    {% for section in menu.docs %}
-      <div class="mb-4">
-        <h3 class="text-lg font-semibold mb-3">{{ section.name }}</h3>
-        <ul class="list-none m-0 p-0 border-l border-gray-900/5 dark:border-gray-100/5 space-y-2">
-          {% for item in section.items %}
-            <li>
-              <a href="{{ item.url }}"
-                 class="block pl-6 py-1 -ml-px border-l hover:border-current {% if page.url == item.url %}border-current !text-red-600 font-semibold{% else %}border-transparent opacity-75 hover:opacity-100 !text-zinc-600 dark:!text-zinc-300{% endif %}">{{ item.title }}</a>
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
-    {% endfor %}
+      {% for section in menu.docs %}
+        <div class="mb-4">
+          <p class="text-lg font-semibold mb-3">{{ section.name }}</p>
+          <ul class="list-none m-0 p-0 border-l border-gray-900/5 dark:border-gray-100/5 space-y-2">
+            {% for item in section.items %}
+              <li>
+                <a href="{{ item.url }}"
+                   class="block pl-6 py-1 -ml-px border-l hover:border-current {% if page.url == item.url %}border-current !text-red-600 font-semibold{% else %}border-transparent opacity-75 hover:opacity-100 !text-zinc-600 dark:!text-zinc-300{% endif %}">{{ item.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
     </div>
 
     {# Mobile menu #}
     <div class="lg:hidden" x-cloak>
 
-      {% set sectionName = "nada" %}
-      {% set pageName = "nada" %}
+      {# Set the section and page names for breadcrumbs #}
+      {% set sectionName = "" %}
+      {% set pageName = "" %}
 
       <div class="fixed z-20 inset-y-0 left-0 w-80 max-w-[calc(100%-3rem)] bg-zinc-100 dark:bg-zinc-800 p-6 overflow-y-auto space-y-4"
            x-show="drawerMenuOpen"
@@ -63,7 +53,7 @@ layout: base.njk
 
         {% for section in menu.docs %}
           <div class="">
-            <h3 class="text-lg font-semibold mb-3">{{ section.name }}</h3>
+            <p class="text-lg font-semibold mb-3">{{ section.name }}</p>
             <ul class="list-none m-0 p-0 border-l border-gray-900/5 dark:border-gray-100/5 space-y-2">
               {% for item in section.items %}
 
@@ -91,10 +81,10 @@ layout: base.njk
         </button>
         <ol class="ml-4 flex text-sm leading-6 whitespace-nowrap min-w-0">
           <li class="flex items-center">
-            {{ sectionName }}
+            {{ sectionName or "Fruity" }}
             {% phicon "caret-right", "regular", { class: "size-3 mx-3" } %}
           </li>
-          <li class="font-semibold">{{ pageName }}</li>
+          <li class="font-semibold">{{ pageName or "Docs" }}</li>
         </ol>
       </div>
 
@@ -111,5 +101,18 @@ layout: base.njk
     </div>
 
   </aside>
+
+  <main class="prose mx-auto w-full lg:max-w-full grow py-8">
+
+    <header class="prose md:prose-xl">
+      {% if sectionName %}
+        <p class="not-prose text-sm md:text-base font-semibold mb-0 text-red-600 leading-none">{{ sectionName }}</p>
+      {% endif %}
+      <h1>{{ heading or title }}</h1>
+    </header>
+
+    {{ content | safe }}
+
+  </main>
 
 </div>

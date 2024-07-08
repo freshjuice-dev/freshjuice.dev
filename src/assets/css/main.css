@@ -1,5 +1,6 @@
 /* Base */
 @import "tailwindcss/base";
+@import "base/base.css";
 @import "base/forms.css";
 
 /* 3rd party styles */

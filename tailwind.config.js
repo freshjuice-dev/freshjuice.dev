@@ -36,6 +36,7 @@ export default {
       addComponents({
         ".prose": {
           "--tw-prose-links": "#dc2626",
+          "--tw-prose-caption": "#282828",
         },
         ".dark .prose": {
           "--tw-prose-body": "#d4d4d4",
@@ -48,7 +49,7 @@ export default {
           "--tw-prose-hr": "#f3f4f61a",
           "--tw-prose-quotes": "#111827",
           "--tw-prose-quote-borders": "#e5e7eb",
-          "--tw-prose-captions": "#6b7280",
+          "--tw-prose-captions": "#c5c5c5",
           "--tw-prose-kbd": "#111827",
           "--tw-prose-kbd-shadows": "17 24 39",
           "--tw-prose-code": "#d4d4d4",

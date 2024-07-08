@@ -11,17 +11,17 @@ Here are all the different system templates in our Theme
 Includes next templates: `Preferences`, `Confirmation`, `Backup-Unsubscribe`.
 
 <figure>
-  <img src="./403.png" alt="Description of Image">
+  <img src="./403.png" alt="Description of Image" eleventy:widths="500">
   <figcaption>This is a caption for the image.</figcaption>
 </figure>
 
 <figure>
-  <img src="./404.png" alt="Description of Image">
+  <img src="./404.png" alt="Description of Image" eleventy:widths="500">
   <figcaption>This is a caption for the image.</figcaption>
 </figure>
 
 <figure>
-  <img src="./500.png" alt="Description of Image">
+  <img src="./500.png" alt="Description of Image" eleventy:widths="500">
   <figcaption>This is a caption for the image.</figcaption>
 </figure>
 

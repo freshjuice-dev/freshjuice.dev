@@ -1,5 +1,5 @@
 @layer base {
   figcaption {
-    @apply text-sm text-center italic;
+    @apply text-sm text-center italic !mt-1;
   }
 }

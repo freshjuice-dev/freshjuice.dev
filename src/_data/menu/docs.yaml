@@ -26,16 +26,16 @@
     - title: Divider
       url: /docs/divider/
 
+- name: Sections
+  items:
+    - title: Pricing
+      url: /docs/section/pricing/
+    - title: Statistics
+      url: /docs/section/statistics/
+
 - name: Templates
   items:
     - title: Homepage
       url: /docs/template-homepage/
     - title: Pricing page
-      url: /docs/template-pricing/
-
-- name: Sections
-  items:
-    - title: Pricing
-      url: /docs/section-pricing/
-    - title: Statistics
-      url: /docs/section-statistics/
+      url: /docs/template/pricing/

@@ -29,13 +29,13 @@
 - name: Sections
   items:
     - title: Pricing
-      url: /docs/section/pricing/
+      url: /docs/sections/pricing/
     - title: Statistics
-      url: /docs/section/statistics/
+      url: /docs/sections/statistics/
 
 - name: Templates
   items:
     - title: Homepage
-      url: /docs/template-homepage/
-    - title: Pricing page
-      url: /docs/template/pricing/
+      url: /docs/templates/homepage/
+    - title: System pages
+      url: /docs/templates/system/

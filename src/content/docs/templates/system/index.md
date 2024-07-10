@@ -11,17 +11,17 @@ Here are all the different system templates in our Theme
 Includes next templates: `Preferences`, `Confirmation`, `Backup-Unsubscribe`.
 
 <figure>
-  <img src="./system/subscription-preferences.png" alt="Subscriptions Page for Preferences" eleventy:widths="500">
+  <img src="./subscription-preferences.png" alt="Subscriptions Page for Preferences" eleventy:widths="500">
   <figcaption>Page for Subscription Preferences.</figcaption>
 </figure>
 
 <figure>
-  <img src="./system/subscription-confirmation.png" alt="Subscriptions Page for Confirmation" eleventy:widths="500">
+  <img src="./subscription-confirmation.png" alt="Subscriptions Page for Confirmation" eleventy:widths="500">
   <figcaption>Page for Subscription Confirmation.</figcaption>
 </figure>
 
 <figure>
-  <img src="./system/unsubscribe.png" alt="Subscription Page for Email Unsubscribing or problems" eleventy:widths="500">
+  <img src="./unsubscribe.png" alt="Subscription Page for Email Unsubscribing or problems" eleventy:widths="500">
   <figcaption>Page for Subscription Email Unsubscribing or problems.</figcaption>
 </figure>
 
@@ -36,12 +36,12 @@ Includes next template types: `Registration`, `Sign In`, `Password Reset`.
 Includes next templates: `Registration Page`, `Access Denied`.
 
 <figure>
-  <img src="./system/register.png" alt="Sign Up Page" eleventy:widths="500">
+  <img src="./register.png" alt="Sign Up Page" eleventy:widths="500">
   <figcaption>Page for Signing Up.</figcaption>
 </figure>
 
 <figure>
-  <img src="./system/403.png" alt="403 Error - Access Denied Page" eleventy:widths="500">
+  <img src="./403.png" alt="403 Error - Access Denied Page" eleventy:widths="500">
   <figcaption>Page that users will see if access to said content has been denied.</figcaption>
 </figure>
 
@@ -52,12 +52,12 @@ Includes next templates: `Registration Page`, `Access Denied`.
 Includes next templates: `Sign In`, `Sign Out`.
 
 <figure>
-  <img src="./system/login.png" alt="Sign In Page" eleventy:widths="500">
+  <img src="./login.png" alt="Sign In Page" eleventy:widths="500">
   <figcaption>Page for Signing In.</figcaption>
 </figure>
 
 <figure>
-  <img src="./system/logout.png" alt="Sign Out Page" eleventy:widths="500">
+  <img src="./logout.png" alt="Sign Out Page" eleventy:widths="500">
   <figcaption>Page for Signing Out.</figcaption>
 </figure>
 
@@ -68,20 +68,13 @@ Includes next templates: `Sign In`, `Sign Out`.
 Includes next templates: `Request Password Reset`, `Create New Password`.
 
 <figure>
-  <img src="./system/reset-password-request.png" alt="Reset Password Request Page" eleventy:widths="500">
+  <img src="./reset-password-request.png" alt="Reset Password Request Page" eleventy:widths="500">
   <figcaption>Page for Reset Password Requesting.</figcaption>
 </figure>
 
 <figure>
-  <img src="./system/reset-password.png" alt="Page for Creating a new Password" eleventy:widths="500">
+  <img src="./reset-password.png" alt="Page for Creating a new Password" eleventy:widths="500">
   <figcaption>Page Creating a new Password.</figcaption>
-</figure>
-
-### Destinations
-
-<figure>
-  <img src="./system/reset-password-request.png" alt="After user signs out" eleventy:widths="500">
-  <figcaption>Page that displays once user logs out.</figcaption>
 </figure>
 
 ---
@@ -90,15 +83,20 @@ Includes next templates: `Request Password Reset`, `Create New Password`.
 
 ### Errors
 
-Includes the next templates: `404 Error`, `500 Error`.
+Includes the next templates: `403 Error`, `404 Error`, `500 Error`.
 
 <figure>
-  <img src="./system/404.png" alt="404 Error Page" eleventy:widths="500">
+  <img src="./403.png" alt="403 Error - Access Denied Page" eleventy:widths="500">
+  <figcaption>403 Error Page when Access is Denied / Forbidden.</figcaption>
+</figure>
+
+<figure>
+  <img src="./404.png" alt="404 Error Page" eleventy:widths="500">
   <figcaption>404 Error Page when content does not exist.</figcaption>
 </figure>
 
 <figure>
-  <img src="./system/500.png" alt="500 Error Page" eleventy:widths="500">
+  <img src="./500.png" alt="500 Error Page" eleventy:widths="500">
   <figcaption>500 Error Page when internal server error.</figcaption>
 </figure>
 
@@ -107,7 +105,7 @@ Includes the next templates: `404 Error`, `500 Error`.
 ### Password Prompt
 
 <figure>
-  <img src="./system/password-prompt.png" alt="Password Prompt Page" eleventy:widths="500">
+  <img src="./password-prompt.png" alt="Password Prompt Page" eleventy:widths="500">
   <figcaption>Page for Requesting Password</figcaption>
 </figure>
 
@@ -116,6 +114,6 @@ Includes the next templates: `404 Error`, `500 Error`.
 ### Search Results
 
 <figure>
-  <img src="./system/search-results.png" alt="Page with Search Results" eleventy:widths="500">
+  <img src="./search-results.png" alt="Page with Search Results" eleventy:widths="500">
   <figcaption>Page that displays search results</figcaption>
 </figure>

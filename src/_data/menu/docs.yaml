@@ -35,7 +35,15 @@
 
 - name: Templates
   items:
-    - title: Homepage
-      url: /docs/templates/homepage/
+    - title: Home
+      url: /docs/templates/home/
+    - title: About
+      url: /docs/templates/about/
+    - title: Contact
+      url: /docs/templates/contact/
+    - title: Landing Page
+      url: /docs/templates/landing-page/
+    - title: Pricing
+      url: /docs/templates/pricing/
     - title: System pages
       url: /docs/templates/system/

@@ -7,6 +7,25 @@ Pricing cards introduce a product or service to potential customers. They are us
 
 You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-pricing-card)
 
+## Single Pricing Card
+
+<img src="./pricing-card.png" alt="Screenshot how Single Pricing Card Looks" />
+
+The Single Pricing Card has the following settings:
+
+- **Tier Name**: The subscription or service name.
+- **Price**: The price of the subscription or service.
+- **Price Details**: Any additional information you may want to add for the price (will be in smaller font).
+- **Price Subtext**: Additional information on pricing or subscription.
+- **CTA Label**: The text for the call-to-action button.
+- **CTA Link**: The link for the call-to-action button. Includes additional settings such as:
+  - **Link to**: (internal, external, email address etc.).
+  - **URL**: The URL of the page you want to link to.
+  - **Open link in new window**: (Toggle Option) Whether the link should open in a new tab.
+  - **Link Type**: At the moment only option is No Follow, which by default is deactivated.
+- **Features Title**: The title of the features section.
+- **Features List**: A list of features. For each item in features list, you can edit the text of the item.
+
 ---
 
 ## Pricing Cards

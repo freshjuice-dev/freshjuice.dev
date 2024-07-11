@@ -1,7 +1,8 @@
 ---
-title: About Template
+title: About Us Template
 desc: About template is used to create a page to display information about your company or product in a two column layout with an image and rich text.
 permalink: /docs/templates/about/
+heading: About Us
 ---
 
 About template is used to create a page to display information about your company or product in a two column layout with an image and rich text.

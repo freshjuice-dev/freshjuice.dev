@@ -4,7 +4,7 @@
 
     <div class="flex flex-col md:flex-row md:justify-between md:items-end gap-6 md:gap-12">
       <div class="">
-        <p class="m-0">
+        <p class="m-0 text-pretty">
           Website built with
           <a href="https://www.11ty.dev/?utm_source=freshjuice">Eleventy</a>,
           <a href="https://tailwindcss.com/?utm_source=freshjuice">Tailwind CSS</a>,
@@ -12,7 +12,7 @@
           <a href="https://phosphoricons.com/?utm_source=freshjuice">Phosphor Icons</a>, and hosted on the
           <a href="https://pages.cloudflare.com/?utm_source=freshjuice">Cloudflare Pages</a>.
         </p>
-        <p class="m-0">
+        <p class="m-0 text-pretty">
           Last built on {{ build.timestamp.formatted }} (<a href="https://www.github.com/{{ build.issues.owner }}/{{ build.issues.repo }}/commit/{{ build.hash.full }}" rel="noreferrer noopener" >{{ build.hash.short }}</a>)
         </p>
       </div>
@@ -34,7 +34,7 @@
           <a href="{{ item.url }}" class="whitespace-nowrap">{{ item.title }}</a>
         {% endfor %}
       </div>
-      <p class="mt-8 md:order-1 md:mt-0 text-balance">
+      <p class="mt-8 md:order-1 md:mt-0 text-pretty">
         &copy;&nbsp;<span x-text="(new Date()).getFullYear()">{% year %}</span> <a href="https://alex.zappa.dev/?utm_source=freshjuice">Alex&nbsp;Zappa</a>.
         All&nbsp;Right&nbsp;Reserved. Except as otherwise noted, the content of this page is licensed under the <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">Creative Commons Attribution 4.0 License</a>, and code samples are licensed under the <a href="https://www.gnu.org/licenses/gpl-3.0.html" rel="noopener">GNU General Public License v3.0</a>.
       </p>

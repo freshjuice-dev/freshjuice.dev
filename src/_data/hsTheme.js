@@ -17,6 +17,6 @@ export default async () => {
     demo: "https://143910617.hs-sites-eu1.com/blog",
     version: themeVersion,
     releases: "https://github.com/freshjuice-dev/freshjuice-hubspot-theme/releases",
-    download: `https://github.com/freshjuice-dev/freshjuice-hubspot-theme/releases/download/${themeVersion}/freshjuice-hubspot-theme.zip`,
+    download: `https://github.com/freshjuice-dev/freshjuice-hubspot-theme/releases/download/${themeVersion}/freshjuice-hubspot-theme-${themeVersion}.zip`,
   };
 }

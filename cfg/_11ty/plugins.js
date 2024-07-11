@@ -32,7 +32,7 @@ export default {
         // e.g. <img loading decoding> assigned on the HTML tag will override these values.
         loading: "lazy",
         decoding: "async",
-        class: "mx-auto rounded drop-shadow-lg",
+        class: "img",
       }
     });
   },

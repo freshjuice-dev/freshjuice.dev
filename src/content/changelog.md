@@ -6,6 +6,11 @@ permalink: /changelog/
 
 # {{ title }}
 
+***= 1.16.1 - July 11, 2024 =***
+
+- Fixed a bug in the pricing card module
+- Global cleanup
+
 ***= 1.16.0 - May 30, 2024 =***
 
 - Added more modules:

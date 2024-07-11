@@ -2,4 +2,8 @@
   figcaption {
     @apply text-sm text-center italic !mt-1;
   }
+
+  .img {
+    @apply mx-auto rounded shadow-lg dark:shadow-amber-200/25;
+  }
 }

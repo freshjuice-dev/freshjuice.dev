@@ -28,10 +28,18 @@
 
 - name: Sections
   items:
+    - title: Call to Action
+      url: /docs/sections/cta/
+    - title: Cards
+      url: /docs/sections/cards/
+    - title: Hero Banner
+      url: /docs/sections/hero-banner/
+    - title: Multi Column Content
+      url: /docs/sections/multi-column-content/
+    - title: Multi Row Content
+      url: /docs/sections/multi-row-content/
     - title: Pricing
       url: /docs/sections/pricing/
-    - title: Statistics
-      url: /docs/sections/statistics/
 
 - name: Templates
   items:

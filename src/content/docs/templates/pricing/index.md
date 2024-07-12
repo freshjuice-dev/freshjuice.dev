@@ -10,6 +10,6 @@ Pricing Template is used to display a page with three different pricing plans fo
 The module used in the template can be modified to have only 1 or 2 pricing cards
 
 <figure>
-  <img src="./pricing-template.png" alt="Pricing Page composed of title and three pricing options" eleventy:widths="500">
+  <img src="pricing.png" alt="Pricing Page composed of title and three pricing options" eleventy:widths="500">
   <figcaption>Page template: Pricing</figcaption>
 </figure>

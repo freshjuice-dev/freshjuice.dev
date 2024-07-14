@@ -7,7 +7,7 @@ author: reatlat
 
 Hey everyone! We are thrilled to announce the launch of our brand new FreshJuice theme - a vibrant and refreshing HubSpot theme for everyone. 🍹🎉💫
 
-<img src="./fresh-juice.jpeg" alt="Fresh Juice" eleventy:widths="320">
+<img src="./fresh-juice.jpeg" alt="FreshJuice" eleventy:widths="320">
 
 FreshJuice is designed to bring zest and vitality to your [HubSpot](https://www.hubspot.com/) website or blog. Whether you're a juice bar owner, a wellness coach, or just someone who wants to add a burst of color to their online presence, FreshJuice is the perfect choice for you. 🌈🌿
 

@@ -6,6 +6,10 @@
       url: /docs/installation/
     - title: Customization
       url: /docs/customization/
+    - title: Using Tailwind CSS
+      url: /docs/tailwindcss/
+    - title: Using Alpine.js
+      url: /docs/alpinejs/
 
 - name: Modules
   items:

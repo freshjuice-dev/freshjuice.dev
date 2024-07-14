@@ -8,6 +8,6 @@ Multi Column Content Section is composed of three columns, each having an image 
 
 
 <figure>
-  <img src="./multi-column-content.png" alt="Section composed of three columns, each having an image and rich text." eleventy:widths="600">
+  <img src="./multi-column-content.png" alt="Section composed of three columns, each having an image and rich text.">
   <figcaption>Multi Column Content Page Section</figcaption>
 </figure>

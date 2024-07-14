@@ -11,5 +11,5 @@ The module used in the template can be modified to have only 1 or 2 pricing card
 
 <figure>
   <img src="pricing.png" alt="Pricing Page composed of title and three pricing options" eleventy:widths="500">
-  <figcaption>Page template: Pricing</figcaption>
+  <figcaption>Pricing Page template</figcaption>
 </figure>

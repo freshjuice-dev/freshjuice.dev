@@ -9,5 +9,5 @@ Landing Page Template is used to introduce a website or a service. It is compose
 
 <figure>
   <img src="./landing-page.png" alt="Image of the default Landing Page Layout" eleventy:widths="500">
-  <figcaption>Page template: Landing Page</figcaption>
+  <figcaption>Landing Page template</figcaption>
 </figure>

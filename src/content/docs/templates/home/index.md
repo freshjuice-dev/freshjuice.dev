@@ -1,6 +1,6 @@
 ---
 title: Homepage Template
-desc: System templates are used to display information about a system or a service.
+desc: Homepage template is used to create a page to introduce your website or a service.
 permalink: /docs/templates/home/
 heading: Homepage
 ---

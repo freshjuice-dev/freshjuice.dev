@@ -9,5 +9,5 @@ About template is used to create a page to display information about your compan
 
 <figure>
   <img src="./about.png" alt="About Page composed of two column section" eleventy:widths="500">
-  <figcaption>Page template: About Us</figcaption>
+  <figcaption>About Us Page template</figcaption>
 </figure>

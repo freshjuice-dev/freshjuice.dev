@@ -10,7 +10,7 @@
 - name: Modules
   items:
     - title: Video Embed
-      url: /docs/modules/lite-video/
+      url: /docs/modules/video-embed/
     - title: Statistics
       url: /docs/modules/statistics/
     - title: Pricing Card

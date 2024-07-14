@@ -15,6 +15,10 @@ export default {
       name: "freshjuice",
       link: "https://www.linkedin.com/company/freshjuice",
     },
+    github: {
+      name: "freshjuice-dev",
+      link: "https://github.com/freshjuice-dev"
+    }
   },
 	author: {
 		name: "Alex Zappa",

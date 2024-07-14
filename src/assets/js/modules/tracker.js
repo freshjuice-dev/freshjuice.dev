@@ -3,7 +3,7 @@ import colorScheme from "./_detectColorScheme";
 
 const {trackEvent, trackPageview, enableAutoOutboundTracking} = Plausible({
   domain: "freshjuice.dev",
-  apiHost: "https://firebird.beastful.org/api/event",
+  apiHost: "https://firebird.beastful.org",
 });
 
 document.addEventListener("DOMContentLoaded", () => {

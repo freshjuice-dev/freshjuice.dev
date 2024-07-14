@@ -3,6 +3,30 @@
   <div class="mx-auto max-w-7xl px-6 py-8 lg:px-8 text-xs leading-5">
 
     <div class="flex flex-col md:flex-row md:justify-between md:items-end gap-6 md:gap-12">
+      <div class="flex md:justify-center md:items-center md:order-2 gap-4">
+        <a href="{{ metadata.social.linkedin.link }}" title="Follow us on LinkedIn">
+          <span class="sr-only">Follow us on LinkedIn</span>
+          {% phicon "linkedin-logo", "regular", { class: "size-7" } %}
+        </a>
+        <a href="{{ metadata.social.github.link }}" title="Follow us on GitHub">
+          <span class="sr-only">Follow us on GitHub</span>
+          {% phicon "github-logo", "regular", { class: "size-7" } %}
+        </a>
+        <a href="{{ metadata.social.x.link }}" title="Follow us on X">
+          <span class="sr-only">Follow us on X</span>
+          {% phicon "x-logo", "regular", { class: "size-7" } %}
+        </a>
+      </div>
+{#
+      <div class="flex justify-center items-center md:order-2">
+        <a href="https://github.com/freshjuice-dev/freshjuice-hubspot-theme/network/members">
+          <img src="https://img.shields.io/github/forks/freshjuice-dev/freshjuice-hubspot-theme" alt="GitHub forks" eleventy:ignore>
+        </a>
+        <a href="https://github.com/freshjuice-dev/freshjuice-hubspot-theme/stargazers">
+          <img src="https://img.shields.io/github/stars/freshjuice-dev/freshjuice-hubspot-theme" alt="GitHub Repo stars" eleventy:ignore>
+        </a>
+      </div>
+#}
       <div class="">
         <p class="m-0 text-pretty">
           Website built with
@@ -16,16 +40,6 @@
           Last built on {{ build.timestamp.formatted }} (<a href="https://www.github.com/{{ build.issues.owner }}/{{ build.issues.repo }}/commit/{{ build.hash.full }}" rel="noreferrer noopener" >{{ build.hash.short }}</a>)
         </p>
       </div>
-      {#
-      <div class="flex justify-center items-center">
-        <a href="https://github.com/freshjuice-dev/freshjuice-hubspot-theme/network/members">
-          <img src="https://img.shields.io/github/forks/freshjuice-dev/freshjuice-hubspot-theme" alt="GitHub forks" eleventy:ignore>
-        </a>
-        <a href="https://github.com/freshjuice-dev/freshjuice-hubspot-theme/stargazers">
-          <img src="https://img.shields.io/github/stars/freshjuice-dev/freshjuice-hubspot-theme" alt="GitHub Repo stars" eleventy:ignore>
-        </a>
-      </div>
-      #}
     </div>
 
     <div class="mt-8 border-t border-gray-900/10 dark:border-gray-100/10 pt-8 md:flex md:items-center md:justify-between md:gap-8">

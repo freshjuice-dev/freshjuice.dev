@@ -1,0 +1,74 @@
+---
+layout: base.njk
+---
+
+
+<nav class="max-w-prose md:text-xl mx-auto w-full min-h-9 leading-none">
+
+  <a class="inline-flex items-center gap-2 group no-underline" href="/blog/">
+    {% phicon "arrow-left", "bold", { class: "size-5 group-hover:-translate-x-2 transition-transform" } %}
+    <span>Back to Blog</span>
+  </a>
+
+</nav>
+
+
+<main class="prose md:prose-xl mx-auto w-full">
+
+  <header class="grid">
+    <h1 style="margin-bottom: 0">{{ heading or title }}{%- if draft %} <small class="text-base">[draft]</small>{%- endif %}</h1>
+    <p class="post-metadata text-sm md:text-base">
+      <time datetime="{{ page.date | htmlDateString }}">{{ page.date | readableDate("LLLL d, yyyy") }}</time>
+      {%- if updated %}
+        <time datetime="{{ updated | htmlDateString }}"> &bull; updated {{ updated | readableDate("LLL d, yyyy") }}</time>
+      {%- endif %}
+    </p>
+  </header>
+
+  {{ content | safe }}
+
+  {# Authors #}
+  {{ authors[author].signature | safe if author in authors }}
+
+  <footer class="not-prose">
+    {%- if tags | filterTagList | length %}
+      <ul class="post-tags list-none flex flex-wrap gap-2 m-0 p-0 italic">
+        {%- for tag in tags | filterTagList | head(4) %}
+          {%- set tagUrl %}/tags/{{ tag | slugify }}/{% endset %}
+{#          <li class="m-0 p-0"><a href="{{ tagUrl }}" class="post-tag text-current">#{{ tag }}</a>{%- if not loop.last %},{% endif %}</li>#}
+          <li class="m-0 p-0">#{{ tag }}{%- if not loop.last %},{% endif %}</li>
+        {%- endfor %}
+      </ul>
+    {%- endif %}
+
+    <div class="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8 mt-16"
+         x-intersect.once="loadScript(`//cdn.jsdelivr.net/npm/share-buttons/dist/share-buttons.js`)">
+
+      <div class="text-lg md:text-xl font-semibold whitespace-nowrap">Share Post</div>
+
+      <div class="share-btn flex flex-wrap gap-4"
+           data-title="{{ title | striptags }}"
+           data-desc="{{ desc | striptags }}"
+           data-url="{{ page.url | htmlBaseUrl(metadata.url) }}">
+
+        {% set shareButtons = [
+          { id: "tw", name: "X", icon: 'x-logo' },
+          { id: "ln", name: "LinkedIn", icon: 'linkedin-logo' },
+          { id: "re", name: "Reddit", icon: 'reddit-logo' },
+          { id: "print", name: "Print", icon: 'printer' }
+        ] %}
+        {% for item in shareButtons %}
+          <a data-id="{{ item.id }}"
+             href="#" @click="$event.preventDefault()"
+             class="cursor-pointer">
+            {% phicon item.icon, "regular", { class: "size-8 transition-transform hover:scale-125" } %}
+            <span class="sr-only">{{ item.name }}</span>
+          </a>
+        {% endfor %}
+
+      </div>
+    </div>
+
+  </footer>
+
+</main>

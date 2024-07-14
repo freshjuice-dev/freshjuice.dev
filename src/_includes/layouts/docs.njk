@@ -1,0 +1,122 @@
+---
+layout: base.njk
+---
+
+<div class="-mt-8 sm:-mt-12 lg:-mt-16">
+  {# Layout Helper #}
+</div>
+
+<div class="flex flex-col lg:flex-row lg:grow gap-8 lg:gap-12">
+
+  <aside class="max-w-prose mx-auto w-full lg:w-[19rem] shrink-0 border-y lg:border-y-0 lg:border-r border-gray-900/10 dark:border-gray-100/10 lg:py-8 lg:pr-8"
+         x-data="{
+           drawerMenuOpen: false,
+            toggleDrawerMenu() {
+              this.drawerMenuOpen = !this.drawerMenuOpen;
+            }
+         }">
+
+    {# Desktop menu #}
+    <div class="hidden lg:block">
+      {% for section in menu.docs %}
+        <div class="mb-4">
+          <p class="text-lg font-semibold mb-3">{{ section.name }}</p>
+          <ul class="list-none m-0 p-0 border-l border-gray-900/5 dark:border-gray-100/5 space-y-2">
+            {% for item in section.items %}
+              <li>
+                <a href="{{ item.url }}"
+                   class="block pl-6 py-1 -ml-px border-l hover:border-current {% if page.url == item.url %}border-current !text-red-600 font-semibold{% else %}border-transparent opacity-75 hover:opacity-100 !text-zinc-600 dark:!text-zinc-300{% endif %}">{{ item.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
+    </div>
+
+    {# Mobile menu #}
+    <div class="lg:hidden" x-cloak>
+
+      {# Set the section and page names for breadcrumbs #}
+      {% set sectionName = "" %}
+      {% set pageName = "" %}
+
+      <div class="fixed z-20 inset-y-0 left-0 w-80 max-w-[calc(100%-3rem)] bg-zinc-100 dark:bg-zinc-800 p-6 overflow-y-auto space-y-4"
+           x-show="drawerMenuOpen"
+           x-transition:enter="transition ease-out duration-200"
+           x-transition:enter-start="opacity-0 -translate-x-40"
+           x-transition:enter-end="opacity-100 translate-x-0"
+           x-transition:leave="transition ease-in duration-150"
+           x-transition:leave-start="opacity-100 translate-x-0"
+           x-transition:leave-end="opacity-0 -translate-x-40"
+           @click.outside="toggleDrawerMenu()">
+
+        <button type="button" class="absolute right-6 top-6 hover:text-red-600" @click="toggleDrawerMenu()">
+          <span class="sr-only">Close Navigation</span>
+          {% phicon "x", "regular", { class: "size-6"} %}
+        </button>
+
+        {% for section in menu.docs %}
+          <div class="">
+            <p class="text-lg font-semibold mb-3">{{ section.name }}</p>
+            <ul class="list-none m-0 p-0 border-l border-gray-900/5 dark:border-gray-100/5 space-y-2">
+              {% for item in section.items %}
+
+                {# Set the section and page names for breadcrumbs #}
+                {% if page.url == item.url %}
+                  {% set sectionName = section.name %}
+                  {% set pageName = item.title %}
+                {% endif %}
+
+                <li>
+                  <a href="{{ item.url }}"
+                     class="block pl-6 py-1 -ml-px border-l hover:border-current {% if page.url == item.url %}border-current !text-red-600 font-semibold{% else %}border-transparent opacity-75 hover:opacity-100 !text-zinc-600 dark:!text-zinc-300{% endif %}">{{ item.title }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endfor %}
+      </div>
+
+      {# Breadcrumbs #}
+      <div class="flex items-center p-4">
+        <button type="button" class="hover:text-red-600" @click="toggleDrawerMenu()">
+          <span class="sr-only">Open Navigation</span>
+          {% phicon "list", "regular", { class: "size-6"} %}
+        </button>
+        <ol class="ml-4 flex text-sm leading-6 whitespace-nowrap min-w-0">
+          <li class="flex items-center">
+            {{ sectionName or "Fruity" }}
+            {% phicon "caret-right", "regular", { class: "size-3 mx-3" } %}
+          </li>
+          <li class="font-semibold">{{ pageName or "Docs" }}</li>
+        </ol>
+      </div>
+
+      {# Overlay #}
+      <div class="fixed inset-0 bg-black backdrop-blur bg-opacity-50 z-10"
+           x-show="drawerMenuOpen"
+           x-transition:enter="transition ease-out duration-200"
+           x-transition:enter-start="opacity-0"
+           x-transition:enter-end="opacity-100"
+           x-transition:leave="transition ease-in duration-150"
+           x-transition:leave-start="opacity-100"
+           x-transition:leave-end="opacity-0"></div>
+
+    </div>
+
+  </aside>
+
+  <main class="prose mx-auto w-full lg:max-w-full grow py-8">
+
+    <header class="prose md:prose-xl">
+      {% if sectionName %}
+        <p class="not-prose text-sm md:text-base font-semibold mb-0 text-red-600 leading-none">{{ sectionName }}</p>
+      {% endif %}
+      <h1>{{ heading or title }}</h1>
+    </header>
+
+    {{ content | safe }}
+
+  </main>
+
+</div>

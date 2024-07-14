@@ -1,0 +1,16 @@
+@layer base {
+  figcaption {
+    @apply text-sm text-center italic !mt-1;
+  }
+
+  .img {
+    @apply mx-auto rounded shadow-lg dark:shadow-amber-200/25;
+  }
+
+  *:where(:not(pre)) {
+    code:where(:not([class])) {
+      @apply inline-block rounded bg-neutral-100 dark:bg-neutral-800 border border-neutral-900/25 dark:border-neutral-300/25 px-2 py-0.5;
+      word-break: break-all;
+    }
+  }
+}

@@ -1,0 +1,55 @@
+<header class="select-none">
+  <nav class="mx-auto flex gap-x-4 max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+
+    <div class="flex items-center gap-x-12">
+      <a href="/" class="-m-1.5 p-1.5 inline-flex items-center gap-x-3 hover:text-red-600">
+        <span class="text-4xl sm:text-5xl">🍹</span>
+        <span class="text-xl sm:text-2xl leading-none whitespace-nowrap font-medium">
+          <span class="block font-bold leading-none">FreshJuice</span>
+          <span class="block text-xs">a HubSpot Theme</span>
+        </span>
+      </a>
+      <div class="hidden sm:flex sm:gap-x-12">
+        {% for item in menu.main %}
+          <a href="{{ item.url }}" class="text-sm font-semibold leading-6 hover:text-red-600">{{ item.title }}</a>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="flex items-center gap-x-4 text-gray-600 dark:text-gray-300 leading-none">
+      <button type="button"
+              x-cloak
+              @click="toggleTheme"
+              :class="theme.dark? 'bg-zinc-600' : 'bg-gray-200'"
+              class="relative hidden xs:inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent hover:border-red-600 transition-colors duration-200 ease-in-out focus:outline-none"
+              role="switch" aria-checked="false">
+        <span class="sr-only">Toggle dark theme</span>
+        <span :class="theme.dark? 'translate-x-5' : 'translate-x-0'"
+              class="pointer-events-none relative inline-block h-5 w-5 transform rounded-full bg-white dark:bg-zinc-950 shadow ring-0 transition-translate duration-200 ease-in-out">
+          <span :class="theme.dark? 'opacity-100 duration-200 ease-in' : 'opacity-0 duration-100 ease-out'"
+                class="absolute inset-0 flex h-full w-full items-center justify-center transition-opacity" aria-hidden="true">
+            {% phicon "moon", "duotone", {
+              class: "size-4 text-gray-300"
+            } %}
+          </span>
+          <span :class="theme.dark? 'opacity-0 duration-100 ease-out' : 'opacity-100 duration-200 ease-in'"
+                class="absolute inset-0 flex h-full w-full items-center justify-center transition-opacity" aria-hidden="true">
+            {% phicon "sun", "duotone", {
+              class: "size-4 text-gray-600"
+            } %}
+          </span>
+        </span>
+      </button>
+      <span class="opacity-40 text-sm leading-none hidden xs:inline">|</span>
+      <a href="{{ hsTheme.repo }}"
+         class="hover:text-red-600"
+         title="GitHub">
+        <span class="sr-only">GitHub</span>
+        {% phicon "github-logo", "duotone", {
+          class: "h-6 w-6"
+        } %}
+      </a>
+    </div>
+
+  </nav>
+</header>

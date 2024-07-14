@@ -1,7 +1,6 @@
 ---
 title: Cards Section
 desc: Cards section is used to display a collection of cards in a grid layout.
-permalink: /docs/sections/cards/
 heading: Cards
 ---
 

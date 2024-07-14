@@ -1,7 +1,6 @@
 ---
 title: Multi Row Content Section
 desc: Temp desc
-permalink: /docs/sections/multi-row-content/
 heading: Multi Row Content
 ---
 

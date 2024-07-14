@@ -10,26 +10,26 @@
 - name: Modules
   items:
     - title: Video Embed
-      url: /docs/lite-video/
+      url: /docs/modules/lite-video/
     - title: Statistics
-      url: /docs/statistics/
+      url: /docs/modules/statistics/
     - title: Pricing Card
-      url: /docs/pricing-card/
+      url: /docs/modules/pricing-card/
     - title: Google Maps
-      url: /docs/google-maps/
+      url: /docs/modules/google-maps/
     - title: Codepen
-      url: /docs/codepen/
+      url: /docs/modules/codepen/
     - title: Github Gist
-      url: /docs/github/
+      url: /docs/modules/github/
     - title: Testimonials
-      url: /docs/testimonials/
+      url: /docs/modules/testimonials/
     - title: Divider
-      url: /docs/divider/
+      url: /docs/modules/divider/
 
 - name: Sections
   items:
     - title: Call to Action
-      url: /docs/sections/cta/
+      url: /docs/sections/call-to-action/
     - title: Cards
       url: /docs/sections/cards/
     - title: Hero Banner
@@ -43,15 +43,15 @@
 
 - name: Templates
   items:
-    - title: Home
+    - title: Homepage
       url: /docs/templates/home/
-    - title: About
+    - title: About Us
       url: /docs/templates/about/
-    - title: Contact
-      url: /docs/templates/contact/
-    - title: Landing Page
-      url: /docs/templates/landing-page/
     - title: Pricing
       url: /docs/templates/pricing/
+    - title: Contact Us
+      url: /docs/templates/contact/
+    - title: Landing page
+      url: /docs/templates/landing/
     - title: System pages
       url: /docs/templates/system/

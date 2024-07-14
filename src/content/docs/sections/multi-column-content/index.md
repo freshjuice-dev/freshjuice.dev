@@ -1,7 +1,6 @@
 ---
 title: Multi Column Content Section
 desc: Multi Column Content Section is composed of three columns, each having an image along with rich text below the image for easy customisation.
-permalink: /docs/sections/multi-column-content/
 heading: Multi Column Content
 ---
 

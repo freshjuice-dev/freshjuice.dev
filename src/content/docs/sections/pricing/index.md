@@ -8,5 +8,5 @@ Pricing section uses the pricing cards module, which is a three column layout an
 
 <figure>
   <img src="./pricing.png" alt="Pricing Page composed of title and three pricing options" eleventy:widths="600">
-  <figcaption>Page Section: Pricing</figcaption>
+  <figcaption>Pricing Page Section</figcaption>
 </figure>

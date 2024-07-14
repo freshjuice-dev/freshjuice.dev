@@ -30,14 +30,14 @@
   items:
     - title: Call to Action
       url: /docs/sections/call-to-action/
-    - title: Cards
-      url: /docs/sections/cards/
+    - title: Contact Us Cards
+      url: /docs/sections/contact-us-cards/
     - title: Hero Banner
       url: /docs/sections/hero-banner/
     - title: Multi Column Content
       url: /docs/sections/multi-column-content/
-    - title: Multi Row Content
-      url: /docs/sections/multi-row-content/
+    - title: Row Content
+      url: /docs/sections/row-content/
     - title: Pricing
       url: /docs/sections/pricing/
 
@@ -50,7 +50,7 @@
     - title: Pricing
       url: /docs/templates/pricing/
     - title: Contact Us
-      url: /docs/templates/contact/
+      url: /docs/templates/contact-us/
     - title: Landing page
       url: /docs/templates/landing/
     - title: System pages

@@ -7,6 +7,8 @@ Pricing cards introduce a product or service to potential customers. They are us
 
 You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-pricing-card)
 
+---
+
 ## Single Pricing Card
 
 <img src="./pricing-card.png" alt="Screenshot how Single Pricing Card Looks" />

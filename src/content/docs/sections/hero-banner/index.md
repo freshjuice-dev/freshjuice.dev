@@ -9,5 +9,5 @@ Hero banner section is used typically as the first section of your page. It's co
 
 <figure>
   <img src="./hero-banner.png" alt="Section composed of two columns with an image and rich text." eleventy:widths="600">
-  <figcaption>Page Section: Hero Banner</figcaption>
+  <figcaption>Hero Banner Page Section</figcaption>
 </figure>

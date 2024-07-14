@@ -7,7 +7,8 @@ export default {
       x: "reatlat",
       linkedin: "reatlat"
     },
-    website: "https://alex.zappa.dev"
+    website: "https://alex.zappa.dev",
+    signature: "<p>May the 4th be with you,<br/><a href=\"https://alex.zappa.dev\">Alex</a></p>"
   },
   zapalblizh: {
     name: "Aleksandr Zapparov",
@@ -16,13 +17,14 @@ export default {
       github: "zapalblizh",
       linkedin: "aleksandr-zapparov"
     },
-    website: "https://zapparov.dev"
+    website: "https://zapparov.dev",
+    signature: "<p>Stay curious,<br/><a href=\"https://zapparov.dev\">Aleksandr</a></p>"
   },
   andrea: {
     name: "Andrea Tendero Lopez",
     bio: "...",
     social: {
       linkedin: "andrea-tendero-lópez-9b50a611b"
-    },
+    }
   },
 }

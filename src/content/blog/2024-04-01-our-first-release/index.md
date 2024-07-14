@@ -29,6 +29,6 @@ We understand the importance of a fast-loading website, which is why FreshJuice 
 
 We are incredibly excited about the launch of FreshJuice and can't wait to see how it adds some zest to your online journey. 🌟
 
-So, what are you waiting for? Get your hands on our [first release](https://github.com/freshjuice-dev/freshjuice-hubspot-theme/releases) of [FreshJuice theme](/docs/) today and let your website or blog shine with a burst of fruity goodness! 🍊🔥
+So, what are you waiting for? Get your hands on our [first release]({{ hsTheme.releases }}) of [FreshJuice theme](/docs/) today and let your website or blog shine with a burst of fruity goodness! 🍊🔥
 
 Stay fresh, stay juicy, and always remember to embrace vibrant possibilities! 🌈💪

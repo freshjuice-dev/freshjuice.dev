@@ -27,6 +27,9 @@ layout: base.njk
 
   {{ content | safe }}
 
+  {# Authors #}
+  {{ authors[author].signature | safe if author in authors }}
+
   <footer class="not-prose">
     {%- if tags | filterTagList | length %}
       <ul class="post-tags list-none flex flex-wrap gap-2 m-0 p-0 italic">
@@ -49,7 +52,6 @@ layout: base.njk
            data-url="{{ page.url | htmlBaseUrl(metadata.url) }}">
 
         {% set shareButtons = [
-          { id: "fb", name: "Facebook", icon: 'facebook-logo' },
           { id: "tw", name: "X", icon: 'x-logo' },
           { id: "ln", name: "LinkedIn", icon: 'linkedin-logo' },
           { id: "re", name: "Reddit", icon: 'reddit-logo' },

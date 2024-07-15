@@ -9,6 +9,8 @@ Hello World! Welcome to FreshJuice, where we believe in creating vibrant and ref
 
 In my opinion, there is no such thing as an ideal theme until you define it for a specific individual project.
 
+<img src="./swiss-army-knife.jpg" alt="Swiss Army Knife" eleventy:widths="600">
+
 I don't like themes that are like Swiss Army knives, with all-in-one. The theme should be created for a specific project and should not contain anything extra.
 
 Unfortunately, almost all themes in the HubSpot Marketplace are like Swiss Army knives. They can do everything, but they are difficult to learn and use.

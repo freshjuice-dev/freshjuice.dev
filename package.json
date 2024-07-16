@@ -55,6 +55,7 @@
     }
   ],
   "license": "GPL-3.0-or-later",
+  "private": true,
   "bugs": {
     "url": "https://github.com/freshjuice-dev/freshjuice.dev/issues"
   },
@@ -95,6 +96,6 @@
     "sharp": "^0.33.4",
     "slugify": "^1.6.6",
     "tailwind-config-viewer": "^2.0.4",
-    "tailwindcss": "^3.4.4"
+    "tailwindcss": "^3.4.5"
   }
 }

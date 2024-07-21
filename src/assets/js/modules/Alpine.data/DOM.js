@@ -42,6 +42,9 @@ export default () => {
         "data-theme",
         this.getThemeName()
       );
+      window.addEventListener("storage", () => {
+        this.getThemeName();
+      });
     },
   };
 };

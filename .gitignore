@@ -1,4 +1,5 @@
 _site/
+_temp/
 node_modules/
 .netlify/
 .idea/

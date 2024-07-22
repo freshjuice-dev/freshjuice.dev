@@ -6,7 +6,6 @@
   "type": "module",
   "scripts": {
     "clean:site": "rimraf './_site'",
-    "postbuild": "npm run export:twconfig",
     "postbuild:og-images": "node ./generate-og-images.js",
     "view:twconfig": "npx tailwind-config-viewer -o",
     "export:twconfig": "npx tailwind-config-viewer export ./_site/tw-config",

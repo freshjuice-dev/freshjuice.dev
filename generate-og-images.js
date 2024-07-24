@@ -2,6 +2,13 @@ import nodeHtmlToImage from "node-html-to-image";
 import fs from "fs";
 import chalk from "chalk";
 
+// read args
+const mode = process.argv[2] || ""; // all or force
+
+console.log(chalk.blue("Generating OG images..."));
+console.log(chalk.blue("Mode:", mode || "normal"));
+console.log(chalk.blue("Please wait..."));
+
 if (!fs.existsSync("./_temp/titles-for-og-images.json")) {
   console.log(
     chalk.red(
@@ -42,28 +49,28 @@ const htmlTemplate = `
   <style>
     .card,
     .red {
-      background-image: linear-gradient(147deg, #FFE53B 0%, #FF7F50 50%, #FF2525 74%);
+      background-image: linear-gradient(147deg, #ecd32f 0%, #FF7F50 50%, #FF2525 74%);
     }
     .candy {
-      background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+      background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #dca035 100%);
     }
     .mango {
       background-image: linear-gradient(135deg, #F09819 0%, #EDDE5D 50%, #F08080 100%);
     }
     .avocado {
-      background-image: linear-gradient(135deg, #3D7EAA 0%, #FFDEAD 50%, #FFE47A 100%);
+      background-image: linear-gradient(135deg, #3D7EAA 0%, #b0761d 50%, #977aff 100%);
     }
     .raspberry {
-      background-image: linear-gradient(135deg, #B24592 0%, #FFD700 50%, #F15F79 100%);
+      background-image: linear-gradient(135deg, #B24592 0%, #e8ca41 50%, #F15F79 100%);
     }
     .banana {
-      background-image: linear-gradient(135deg, #FFD319 0%, #ff8900 50%, #ff199b 100%);
+      background-image: linear-gradient(135deg, #d7af06 0%, #ff8900 50%, #ff199b 100%);
     }
     .apple {
-      background-image: linear-gradient(135deg, #d45437 0%, #EEE8AA 50%, #D4AF37 100%);
+      background-image: linear-gradient(135deg, #d45437 0%, #4cad38 50%, #D4AF37 100%);
     }
     .pineapple {
-      background-image: linear-gradient(155deg, #FFD700 0%, #FF7F50 45%, #B22222 100%);
+      background-image: linear-gradient(155deg, #bea30d 0%, #FF7F50 45%, #B22222 100%);
     }
     .blueberry {
       background-image: linear-gradient(125deg, #008cff 0%, #e22bb7 45%, #a445ee 100%);
@@ -72,16 +79,16 @@ const htmlTemplate = `
       background-image: linear-gradient(105deg, #8B008B 0%, #e83951 45%, #9370DB 100%);
     }
     .cherry {
-      background-image: linear-gradient(155deg, #f132ed 0%, #f7ff00 45%, #f53030 100%);
+      background-image: linear-gradient(155deg, #f132ed 0%, #ff6200 45%, #f53030 100%);
     }
     .lime {
-      background-image: linear-gradient(145deg, #ffd200 0%, #eaff2f 45%, #fc0061 100%);
+      background-image: linear-gradient(145deg, #e7c00b 0%, #8b04c0 45%, #fc0061 100%);
     }
     .peach {
-      background-image: linear-gradient(140deg, #FFDAB9 0%, #FFB6C1 45%, #FF69B4 100%);
+      background-image: linear-gradient(140deg, #b45c0e 0%, #FFB6C1 45%, #FF69B4 100%);
     }
     .lemon {
-      background-image: linear-gradient(150deg, #FFFACD 0%, #F0E68C 45%, #FFD700 100%);
+      background-image: linear-gradient(150deg, #cb5dc6 0%, #F0E68C 45%, #FFD700 100%);
     }
     h1 {
       overflow: hidden;
@@ -120,6 +127,11 @@ const htmlTemplate = `
 `;
 
 const generateImage = async (post) => {
+  const outputPath = `./src/public/img/og/${post.slug}.png`;
+  if (!['all','force'].includes(mode) && fs.existsSync(outputPath)) {
+    console.log(chalk.yellow(`⚠️ Image for ${post.title} already exists`));
+    return;
+  }
   post.title = post.title.trim().replaceAll(/&amp;/g, "and");
   post.collection = "";
   if (post.slug.startsWith("blog")) {
@@ -128,7 +140,7 @@ const generateImage = async (post) => {
     post.collection = "/ DOCS";
   }
   await nodeHtmlToImage({
-    output: `./src/public/img/og/${post.slug}.png`,
+    output: outputPath,
     content: {
       title: post.title,
       slug: post.slug,
@@ -148,4 +160,5 @@ let posts = [...dataPosts.blogs, ...dataPosts.docs, ...dataPosts.pages];
   for (const post of posts) {
     await generateImage(post);
   }
+  console.log(chalk.blue("All done!"));
 })();

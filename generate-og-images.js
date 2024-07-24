@@ -58,7 +58,7 @@ const htmlTemplate = `
       background-image: linear-gradient(135deg, #F09819 0%, #EDDE5D 50%, #F08080 100%);
     }
     .avocado {
-      background-image: linear-gradient(135deg, #3D7EAA 0%, #b0761d 50%, #977aff 100%);
+      background-image: linear-gradient(135deg, #87a800 0%, #f80037 50%, #deaa00 100%);
     }
     .raspberry {
       background-image: linear-gradient(135deg, #B24592 0%, #e8ca41 50%, #F15F79 100%);
@@ -67,25 +67,25 @@ const htmlTemplate = `
       background-image: linear-gradient(135deg, #d7af06 0%, #ff8900 50%, #ff199b 100%);
     }
     .apple {
-      background-image: linear-gradient(135deg, #d45437 0%, #4cad38 50%, #D4AF37 100%);
+      background-image: linear-gradient(135deg, #ffd52f 0%, #a4ff93 50%, #f32d86 100%);
     }
     .pineapple {
       background-image: linear-gradient(155deg, #bea30d 0%, #FF7F50 45%, #B22222 100%);
     }
     .blueberry {
-      background-image: linear-gradient(125deg, #008cff 0%, #e22bb7 45%, #a445ee 100%);
+      background-image: linear-gradient(125deg, #008cff 0%, #e50db2 45%, #ee7845 100%);
     }
     .grape {
-      background-image: linear-gradient(105deg, #8B008B 0%, #e83951 45%, #9370DB 100%);
+      background-image: linear-gradient(105deg, #ef2cef 0%, #ff4c64 45%, #ffc64a 100%);
     }
     .cherry {
-      background-image: linear-gradient(155deg, #f132ed 0%, #ff6200 45%, #f53030 100%);
+      background-image: linear-gradient(155deg, #ef5aec 0%, #f57d34 45%, #f53030 100%);
     }
     .lime {
-      background-image: linear-gradient(145deg, #e7c00b 0%, #8b04c0 45%, #fc0061 100%);
+      background-image: linear-gradient(145deg, #e7c00b 0%, #d66aff 45%, #fc0061 100%);
     }
     .peach {
-      background-image: linear-gradient(140deg, #b45c0e 0%, #FFB6C1 45%, #FF69B4 100%);
+      background-image: linear-gradient(140deg, #ff9435 0%, #f86b80 45%, #ffd069 100%);
     }
     .lemon {
       background-image: linear-gradient(150deg, #cb5dc6 0%, #F0E68C 45%, #FFD700 100%);

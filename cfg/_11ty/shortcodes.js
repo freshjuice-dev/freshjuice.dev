@@ -16,6 +16,14 @@ export default {
     });
   },
 
+  ogImageSource: (eleventyConfig) => {
+    eleventyConfig.addShortcode("ogImageSource", function ogImageSourceShortcode({url, inputPath}) {
+      url = slugify(url.replace(/\//g, " "), slugifyOptions).trim()
+      console.log(url, inputPath)
+      return `/img/og/${url||"default"}.png`;
+    });
+  },
+
   collectionsToJSON: (eleventyConfig) => {
     eleventyConfig.addShortcode("collectionsToJSON", function collectionJsonShortcode(blogs, docs, pages) {
       let returnJson = {

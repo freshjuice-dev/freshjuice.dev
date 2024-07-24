@@ -3,6 +3,9 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {%- if noindex %}
+      <meta name="robots" content="noindex">
+    {%- endif %}
 
     {# Metadata #}
 		<title>{{ title or metadata.title }}{{ suffix or metadata.suffix }}</title>
@@ -20,6 +23,17 @@
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ffc40d">
     <meta name="msapplication-TileColor" content="#ffc40d">
     <meta name="theme-color" content="#18181b" :content="theme.dark?'#18181b':'#fafafa'">
+
+    {# Social #}
+    <meta property="og:title" content="{{ title or metadata.title }}{{ suffix or metadata.suffix }}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="FreshJuice">
+    <meta property="og:description" content="{{ description or metadata.description }}">
+    <meta property="og:image" content="{% ogImageSource page %}">
+    <meta property="og:url" content="{{ page.url | htmlBaseUrl(metadata.url) }}">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@FreshJuiceDev" />
+    <meta name="twitter:image" content="{% ogImageSource page %}" />
 
     {# color theme toggle #}
     <script>!function(t,e,m){t&&"light"===t&&(e.classList.remove("dark"),e.setAttribute("data-theme","light"),m.setAttribute("content","#fafafa"))}(localStorage.getItem("theme"),document.documentElement,document.querySelector('meta[name="theme-color"]'));</script>

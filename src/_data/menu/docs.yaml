@@ -29,6 +29,8 @@
       url: /docs/modules/testimonials/
     - title: Divider
       url: /docs/modules/divider/
+    - title: Accordion
+      url: /docs/modules/accordion/
 
 - name: Sections
   items:

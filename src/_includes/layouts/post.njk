@@ -2,14 +2,13 @@
 layout: base.njk
 ---
 
+{%- set authorData = author | getAuthorData %}
 
 <nav class="max-w-prose md:text-xl mx-auto w-full min-h-9 leading-none">
-
   <a class="inline-flex items-center gap-2 group no-underline" href="/blog/">
     {% phicon "arrow-left", "bold", { class: "size-5 group-hover:-translate-x-2 transition-transform" } %}
     <span>Back to Blog</span>
   </a>
-
 </nav>
 
 
@@ -22,6 +21,7 @@ layout: base.njk
       {%- if updated %}
         <time datetime="{{ updated | htmlDateString }}"> &bull; updated {{ updated | readableDate("LLL d, yyyy") }}</time>
       {%- endif %}
+      &bull; Written by <a href="{{ authorData.url }}">{{ authorData.name }}</a>
     </p>
   </header>
 
@@ -72,15 +72,15 @@ layout: base.njk
 #}
 
     {# Author #}
-    {%- set authorData = author | getAuthorData %}
     {%- if authorData.name %}
-    <div class="py-8 mt-8 border-y border-gray-900/10 dark:border-gray-100/10 flex gap-4 sm:gap-8">
-      <div class="size-14 sm:size-20 shrink-0">
+    <div class="pt-8 mt-8 border-t border-gray-900/10 dark:border-gray-100/10 flex gap-4 sm:gap-8">
+      <a class="block size-14 sm:size-20 shrink-0" href="{{ authorData.url }}">
+        <span class="sr-only">Visit {{ authorData.name | split(' ') | first }}`s Author Page</span>
         <img src="{{ authorData.image }}" alt="Avatar for {{ authorData.name }}" class="rounded-full size-14 sm:size-20">
-      </div>
+      </a>
       <div class="">
         <div class="text-lg mb-2 font-semibold">
-          <a href="{{ authorData.url }}">{{ authorData.name }}</a>
+          <a class="hover:text-red-600" href="{{ authorData.url }}">{{ authorData.name }}</a>
         </div>
         <div class="text-sm">{{ authorData.content }}</div>
       </div>
@@ -88,7 +88,40 @@ layout: base.njk
     {%- endif %}
 
     {# Posts navigation #}
-
+    {%- if collections.posts %}
+      <div class="pt-8 mt-8 border-t border-gray-900/10 dark:border-gray-100/10">
+        {%- set previousPost = collections.posts | getPreviousCollectionItem %}
+        {%- set nextPost = collections.posts | getNextCollectionItem %}
+        {%- if nextPost or previousPost %}
+          <ul class="list-none p-0 m-0 grid xs:grid-cols-2 gap-8">
+            {%- if previousPost %}
+              <li class="text-left m-0 p-0">
+                <a class="!no-underline group inline-block" href="{{ previousPost.url }}">
+                  <span class="text-sm flex gap-1 items-center justify-start -ml-1">
+                    {% phicon "arrow-up-left", "regular", { "class": "size-5" } %}<span>Previous</span>
+                  </span>
+                  <span class="group-hover:text-red-600 inline-block leading-tight">{{ previousPost.data.title }}</span>
+                </a>
+              </li>
+            {%- else %}
+              <li></li>
+            {%- endif %}
+            {%- if nextPost %}
+              <li class="text-right m-0 p-0">
+                <a class="!no-underline group inline-block" href="{{ nextPost.url }}">
+                  <span class="text-sm flex gap-1 items-center justify-end -mr-1">
+                    <span>Next</span>{% phicon "arrow-up-right", "regular", { "class": "size-5" } %}
+                  </span>
+                  <span class="group-hover:text-red-600 inline-block leading-tight">{{ nextPost.data.title }}</span>
+                </a>
+              </li>
+            {%- else %}
+              <li></li>
+            {%- endif %}
+          </ul>
+        {%- endif %}
+      </div>
+    {%- endif %}
 
   </footer>
 

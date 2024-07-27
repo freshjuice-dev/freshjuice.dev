@@ -85,6 +85,13 @@ export default {
     return Array.from(years);
   },
 
+  getPostsByAuthor: (collection, author) => {
+    if (typeof author === 'undefined') {
+      return [];
+    }
+    return collection.filter((item) => item.data.author === author);
+  },
+
   getAuthorData: async function (author) {
     try {
       const authorsCollection = this.ctx?.collections?.authors;
@@ -94,6 +101,7 @@ export default {
       return {
         name: authorData.title || authorData.name || author,
         email: authorData.email || "",
+        role: authorData.role || "",
         url: `/authors/${slugify(author, { lower: true })}/`,
         signature: authorData.signature || "",
         links: authorData.links || {},
@@ -105,8 +113,16 @@ export default {
     }
   },
 
+  getGravatarImage: async function (email, size) {
+    return await gravatarImage(email || "", {size: size || 200});
+  },
+
   postsByYear: (collection, year) => {
     return collection.filter((item) => item.date.getFullYear() === year);
+  },
+
+  split: (str, separator) => {
+    return str.split(separator);
   },
 
   consoleLog: (dataObject) => {

@@ -16,10 +16,24 @@ export default {
     });
   },
 
+  authorSignature: (eleventyConfig) => {
+    eleventyConfig.addShortcode("authorSignature", function authorSignatureShortcode(author) {
+      try {
+        const authorsCollection = this.ctx?.collections?.authors;
+        const authorData = authorsCollection.find((item) => {
+          return item.fileSlug === author;
+        }).data;
+        return authorData.signature || "";
+      } catch (error) {
+        return "";
+      }
+    })
+  },
+
   ogImageSource: (eleventyConfig) => {
     eleventyConfig.addShortcode("ogImageSource", function ogImageSourceShortcode({url, inputPath}) {
       url = slugify(url.replace(/\//g, " "), slugifyOptions).trim()
-      console.log(url, inputPath)
+      //console.log(url, inputPath)
       return `/img/og/${url||"default"}.png`;
     });
   },

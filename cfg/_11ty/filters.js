@@ -3,6 +3,8 @@
  * https://www.11ty.dev/docs/filters/
  */
 import {DateTime} from "luxon";
+import { image as gravatarImage } from "gravatar-gen";
+import slugify from "slugify";
 
 export default {
 
@@ -81,6 +83,26 @@ export default {
       years.add(item.date.getFullYear());
     }
     return Array.from(years);
+  },
+
+  getAuthorData: async function (author) {
+    try {
+      const authorsCollection = this.ctx?.collections?.authors;
+      const authorData =  authorsCollection.find((item) => {
+        return item.fileSlug === author;
+      }).data;
+      return {
+        name: authorData.title || authorData.name || author,
+        email: authorData.email || "",
+        url: `/authors/${slugify(author, { lower: true })}/`,
+        signature: authorData.signature || "",
+        links: authorData.links || {},
+        image: await gravatarImage(authorData.email || "", {size: 200}),
+        content: authorData.bio || authorData.page.rawInput.trim() || "",
+      };
+    } catch (error) {
+      return {};
+    }
   },
 
   postsByYear: (collection, year) => {

@@ -28,7 +28,7 @@ layout: base.njk
   {{ content | safe }}
 
   {# Authors #}
-  {{ authors[author].signature | safe if author in authors }}
+  {% authorSignature author %}
 
   <footer class="not-prose">
     {%- if tags | filterTagList | length %}
@@ -70,6 +70,25 @@ layout: base.njk
       </div>
     </div>
 #}
+
+    {# Author #}
+    {%- set authorData = author | getAuthorData %}
+    {%- if authorData.name %}
+    <div class="py-8 mt-8 border-y border-gray-900/10 dark:border-gray-100/10 flex gap-4 sm:gap-8">
+      <div class="size-14 sm:size-20 shrink-0">
+        <img src="{{ authorData.image }}" alt="Avatar for {{ authorData.name }}" class="rounded-full size-14 sm:size-20">
+      </div>
+      <div class="">
+        <div class="text-lg mb-2 font-semibold">
+          <a href="{{ authorData.url }}">{{ authorData.name }}</a>
+        </div>
+        <div class="text-sm">{{ authorData.content }}</div>
+      </div>
+    </div>
+    {%- endif %}
+
+    {# Posts navigation #}
+
 
   </footer>
 

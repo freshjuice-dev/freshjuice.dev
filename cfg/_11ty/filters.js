@@ -105,7 +105,7 @@ export default {
         url: `/authors/${slugify(author, { lower: true })}/`,
         signature: authorData.signature || "",
         links: authorData.links || {},
-        image: await gravatarImage(authorData.email || "", {size: 200}),
+        image: await gravatarImage(authorData.email || "", {size: 150}),
         content: authorData.bio || authorData.page.rawInput.trim() || "",
       };
     } catch (error) {
@@ -114,7 +114,7 @@ export default {
   },
 
   getGravatarImage: async function (email, size) {
-    return await gravatarImage(email || "", {size: size || 200});
+    return await gravatarImage(email || "", {size: size || 150});
   },
 
   postsByYear: (collection, year) => {

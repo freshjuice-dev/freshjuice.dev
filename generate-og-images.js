@@ -1,6 +1,7 @@
 import nodeHtmlToImage from "node-html-to-image";
 import fs from "fs";
 import chalk from "chalk";
+import { image as gravatarImage } from "gravatar-gen";
 
 // read args
 const mode = process.argv[2] || ""; // all or force
@@ -114,12 +115,13 @@ const htmlTemplate = `
       border: 4px solid #525252;
       width: 120px;
       height: 120px;
+      overflow: hidden;
     }
   </style>
 </head>
 <body style="width: 1200px; height: 630px; padding: 0; margin: 0; font-family: sans-serif">
   <div class="card {{bgColor}}" style="width: 1200px; height: 630px; box-sizing: border-box; color: #fff; padding: 70px 70px">
-    <div class="logo">🍹</div>
+    <div class="logo">{{{logo}}}</div>
     <h1 class="shadow" style="font-size: 72px; font-weight: 700; margin: 20px 0 10px 40px;">{{title}}</h1>
     <p class="shadow" style="margin: 20px 0 0 40px; font-size: 24px; font-weight: 700;">FRESHJUICE.DEV {{collection}}</p>
   </div>
@@ -128,6 +130,7 @@ const htmlTemplate = `
 
 const generateImage = async (post) => {
   const outputPath = `./src/public/img/og/${post.slug}.png`;
+  let logo = "🍹";
   if (!['all','force'].includes(mode) && fs.existsSync(outputPath)) {
     console.log(chalk.yellow(`⚠️ Image for ${post.title} already exists`));
     return;
@@ -138,10 +141,15 @@ const generateImage = async (post) => {
     post.collection = "/ BLOG";
   } else if (post.slug.startsWith("docs")) {
     post.collection = "/ DOCS";
+  }else if (post.slug.startsWith("authors-")) {
+    post.collection = "/ AUTHORS";
+    logo = await gravatarImage(post.email, { size: 150 });
+    logo = `<img src="${logo}" alt="Author Image" style="width: 100%; height: 100%" />`;
   }
   await nodeHtmlToImage({
     output: outputPath,
     content: {
+      logo: logo,
       title: post.title,
       slug: post.slug,
       collection: post.collection,
@@ -153,7 +161,7 @@ const generateImage = async (post) => {
   });
 };
 
-let posts = [...dataPosts.blogs, ...dataPosts.docs, ...dataPosts.pages];
+let posts = [...dataPosts.blogs, ...dataPosts.docs, ...dataPosts.authors, ...dataPosts.pages];
 
 // start the process
 (async () => {

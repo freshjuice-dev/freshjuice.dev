@@ -64,7 +64,7 @@ export default {
 
       authors.forEach((author) => {
         returnJson.authors.push({
-          title: author.data.name,
+          title: author.data.title,
           collection: "authors",
           role: author.data.role,
           email: author.data.email,

@@ -16,19 +16,33 @@ export default {
     });
   },
 
+  authorSignature: (eleventyConfig) => {
+    eleventyConfig.addShortcode("authorSignature", function authorSignatureShortcode(author) {
+      try {
+        const authorsCollection = this.ctx?.collections?.authors;
+        const authorData = authorsCollection.find((item) => {
+          return item.fileSlug === author;
+        }).data;
+        return authorData.signature || "";
+      } catch (error) {
+        return "";
+      }
+    })
+  },
+
   ogImageSource: (eleventyConfig) => {
-    eleventyConfig.addShortcode("ogImageSource", function ogImageSourceShortcode({url, inputPath}) {
-      url = slugify(url.replace(/\//g, " "), slugifyOptions).trim()
-      console.log(url, inputPath)
+    eleventyConfig.addShortcode("ogImageSource", function ogImageSourceShortcode({url}) {
+      url = url ? slugify(url.replace(/\//g, " "), slugifyOptions).trim() : 'default';
       return `/img/og/${url||"default"}.png`;
     });
   },
 
   collectionsToJSON: (eleventyConfig) => {
-    eleventyConfig.addShortcode("collectionsToJSON", function collectionJsonShortcode(blogs, docs, pages) {
+    eleventyConfig.addShortcode("collectionsToJSON", function collectionJsonShortcode(blogs, docs, authors, pages) {
       let returnJson = {
         docs: [],
         blogs: [],
+        authors: [],
         pages: [],
       };
 
@@ -45,6 +59,16 @@ export default {
           title: doc.data.title,
           collection: "docs",
           slug: slugify(doc.url.replace(/\//g, " "), slugifyOptions)
+        });
+      });
+
+      authors.forEach((author) => {
+        returnJson.authors.push({
+          title: author.data.title,
+          collection: "authors",
+          role: author.data.role,
+          email: author.data.email,
+          slug: slugify(author.url.replace(/\//g, " "), slugifyOptions)
         });
       });
 

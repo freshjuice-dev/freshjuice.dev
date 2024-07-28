@@ -1,3 +1,14 @@
+async function getPackageVersion() {
+  try {
+    const response = await fetch("https://raw.githubusercontent.com/freshjuice-dev/freshjuice-hubspot-theme/main/package.json");
+    const data = await response.json();
+    return data.version;
+  } catch (error) {
+    console.error('Error:', error);
+    return "v1.16.0"; // Default version in case of error
+  }
+}
+
 async function getLatestReleaseVersion() {
   try {
     const response = await fetch("https://api.github.com/repos/freshjuice-dev/freshjuice-hubspot-theme/releases");
@@ -10,7 +21,7 @@ async function getLatestReleaseVersion() {
 }
 
 export default async () => {
-  const themeVersion = await getLatestReleaseVersion();
+  const themeVersion = await getPackageVersion();
   return {
     repo: "https://github.com/freshjuice-dev/freshjuice-hubspot-theme",
     gitRepo: "git@github.com:freshjuice-dev/freshjuice-hubspot-theme.git",

@@ -78,14 +78,14 @@
     "eleventy-plugin-speculation-rules": "^1.1.0",
     "eleventy-plugin-svg-contents": "^0.7.0",
     "esbuild": "^0.23.0",
+    "gravatar-gen": "^1.0.1",
     "html-minifier": "^4.0.0",
     "js-yaml": "^4.1.0",
     "luxon": "^3.4.4",
     "markdown-it-anchor": "^9.0.1",
-    "node-html-to-image": "^4.0.0",
     "npm-run-all": "^4.1.5",
     "plausible-tracker": "^0.3.9",
-    "postcss": "^8.4.39",
+    "postcss": "^8.4.40",
     "postcss-cli": "^11.0.0",
     "postcss-discard-comments": "^7.0.1",
     "postcss-easy-import": "^4.0.0",
@@ -99,6 +99,6 @@
     "sharp": "^0.33.4",
     "slugify": "^1.6.6",
     "tailwind-config-viewer": "^2.0.4",
-    "tailwindcss": "^3.4.6"
+    "tailwindcss": "^3.4.7"
   }
 }

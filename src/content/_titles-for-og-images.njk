@@ -3,11 +3,12 @@ permalink: ../_temp/titles-for-og-images.json
 eleventyExcludeFromCollections: true
 excludeFromSitemap: true
 ---
-{% collectionsToJSON collections.posts, collections.docs, [
+{% collectionsToJSON collections.posts, collections.docs, collections.authors, [
   { "title": "FREE and Open-Source HubSpot multi-purpose theme", "permalink": "default" },
   { "title": "FREE and Open-Source HubSpot multi-purpose theme", "permalink": "homepage" },
   { "title": "Privacy Policy", "permalink": "/privacy/" },
   { "title": "Juicy Blog", "permalink": "/blog/" },
   { "title": "Download", "permalink": "/download/" },
-  { "title": "Changelog", "permalink": "/changelog/" }
+  { "title": "Changelog", "permalink": "/changelog/" },
+  { "title": "Authors", "permalink": "/authors/" }
 ] %}

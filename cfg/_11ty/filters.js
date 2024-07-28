@@ -3,6 +3,8 @@
  * https://www.11ty.dev/docs/filters/
  */
 import {DateTime} from "luxon";
+import { image as gravatarImage } from "gravatar-gen";
+import slugify from "slugify";
 
 export default {
 
@@ -83,8 +85,44 @@ export default {
     return Array.from(years);
   },
 
+  getPostsByAuthor: (collection, author) => {
+    if (typeof author === 'undefined') {
+      return [];
+    }
+    return collection.filter((item) => item.data.author === author);
+  },
+
+  getAuthorData: async function (author) {
+    try {
+      const authorsCollection = this.ctx?.collections?.authors;
+      const authorData =  authorsCollection.find((item) => {
+        return item.fileSlug === author;
+      }).data;
+      return {
+        name: authorData.title || authorData.name || author,
+        email: authorData.email || "",
+        role: authorData.role || "",
+        url: `/authors/${slugify(author, { lower: true })}/`,
+        signature: authorData.signature || "",
+        links: authorData.links || {},
+        image: await gravatarImage(authorData.email || "", {size: 150}),
+        content: authorData.bio || authorData.page.rawInput.trim() || "",
+      };
+    } catch (error) {
+      return {};
+    }
+  },
+
+  getGravatarImage: async function (email, size) {
+    return await gravatarImage(email || "", {size: size || 150});
+  },
+
   postsByYear: (collection, year) => {
     return collection.filter((item) => item.date.getFullYear() === year);
+  },
+
+  split: (str, separator) => {
+    return str.split(separator);
   },
 
   consoleLog: (dataObject) => {

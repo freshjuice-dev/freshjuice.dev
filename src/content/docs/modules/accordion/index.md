@@ -13,4 +13,4 @@ You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-acc
 - **Questions**: A list of questions. For each question, you can set the following settings:
   - **Question**: The full question to be answered.
   - **Answer**: A rich text field for the answer to the question.
-- **Enable FAQ Schema**: Enable this option to allow Markup in the module.
+- **Enable FAQ Schema**: Toggle this option to enable FAQ Schema Markup on the page.

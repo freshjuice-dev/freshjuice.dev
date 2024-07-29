@@ -5,7 +5,7 @@ desc: The Navigation Bar modules provide a simple way to display an interface wi
 
 The Navigation Bar modules provide a simple way to display an interface with navigation for the site's pages or sections.
 
-You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-divider)
+You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-navigation-bar)
 
 ## Navigation Bar
 
@@ -42,4 +42,3 @@ Our recommendation is to use this navigation bar for landing pages or form pages
     - **Primary Button**: The primary button style for call to action; Button with background with mouse over effect on hover.
   - **Title**: Text for the CTA button or link.
   - **Link**: The section for the url of the cta button / link. Link to specifies where exactly the link goes (External, file etc) and the URL field is where you insert your link. There is also an option for the link to open on a new window instead of the current.
-

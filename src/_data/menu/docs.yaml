@@ -33,6 +33,8 @@
       url: /docs/modules/accordion/
     - title: Tabs
       url: /docs/modules/tabs/
+    - title: Navigation Bar
+      url: /docs/modules/navigation-bar/
 
 - name: Sections
   items:

@@ -35,6 +35,8 @@
       url: /docs/modules/tabs/
     - title: Navigation Bar
       url: /docs/modules/navigation-bar/
+    - title: Global Footer
+      url: /docs/modules/global-footer/
 
 - name: Sections
   items:

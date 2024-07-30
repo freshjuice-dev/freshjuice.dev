@@ -39,6 +39,8 @@
       url: /docs/modules/global-footer/
     - title: Related Posts
       url: /docs/modules/related-posts/
+    - title: Blog Listing
+      url: /docs/modules/blog-listing/
 
 - name: Sections
   items:

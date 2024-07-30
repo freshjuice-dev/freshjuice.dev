@@ -3,7 +3,7 @@ title: Related Posts
 desc: Related Posts module is used to display blog posts similar to the post you're at in the blog. Additionally, it can only be used in content type "BLOG_POST".
 ---
 
-<img src="./related-posts.png" alt="Screenshot of Related Posts Module" />
+<img src="./related-posts.png" alt="Screenshot of Related Posts Module" eleventy:widths="700" />
 
 Related Posts module is used to display blog posts similar to the post you're at in the blog. Additionally, it can only be used in content type "BLOG_POST".
 

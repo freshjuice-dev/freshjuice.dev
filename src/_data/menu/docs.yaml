@@ -37,6 +37,8 @@
       url: /docs/modules/navigation-bar/
     - title: Global Footer
       url: /docs/modules/global-footer/
+    - title: Related Posts
+      url: /docs/modules/related-posts/
 
 - name: Sections
   items:

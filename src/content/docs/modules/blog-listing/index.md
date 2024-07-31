@@ -5,7 +5,7 @@ desc: Blog Listing modules are used to display a list of blog posts on the page.
 
 Blog Listing modules are used to display a list of blog posts on the page. These are all the components of Blog Listing.
 
-These Modules can only be used in content type "Blog Listing".
+These Modules can only be used in content type "BLOG_LISTING".
 
 You can check the modules in action [here](https://143910617.hs-sites-eu1.com/blog)
 

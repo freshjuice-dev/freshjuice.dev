@@ -41,6 +41,8 @@
       url: /docs/modules/related-posts/
     - title: Blog Listing
       url: /docs/modules/blog-listing/
+    - title: Global Share Buttons
+      url: /docs/modules/global-share-buttons/
 
 - name: Sections
   items:

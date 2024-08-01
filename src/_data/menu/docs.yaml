@@ -43,6 +43,8 @@
       url: /docs/modules/blog-listing/
     - title: Global Share Buttons
       url: /docs/modules/global-share-buttons/
+    - title: Global Post Author
+      url: /docs/modules/global-post-author/
 
 - name: Sections
   items:

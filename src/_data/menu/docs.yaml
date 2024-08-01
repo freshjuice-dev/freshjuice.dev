@@ -45,6 +45,8 @@
       url: /docs/modules/global-share-buttons/
     - title: Global Post Author
       url: /docs/modules/global-post-author/
+    - title: Global Scroll to Top
+      url: /docs/modules/global-scroll-to-top/
 
 - name: Sections
   items:

@@ -3,7 +3,7 @@ title: Accordion
 desc: The Accordion module is a simple module that allows you to add a collapsable section with couple of questions and answers when clicked on a question. This module is very useful for instances where you might want to setup an FAQ section or page.
 ---
 
-<img src="./accordion.png" alt="Screenshot of Accordion Module" eleventy:widths="700" />
+<img src="./accordion.png" alt="Screenshot of Accordion Module" eleventy:widths="500" />
 
 The Accordion module is a simple module that allows you to add a collapsable section with couple of questions and answers when clicked on a question. This module is very useful for instances where you might want to setup an FAQ section or page.
 

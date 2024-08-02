@@ -13,7 +13,7 @@ You can check the modules in action [here](https://143910617.hs-sites-eu1.com/bl
 
 ## Blog Listing Hero
 
-<img src="./blog-listing-hero.png" alt="Screenshot of Blog Listing Hero Module" eleventy:widths="700" />
+<img src="./blog-listing-hero.png" alt="Screenshot of Blog Listing Hero Module" eleventy:widths="500" />
 
 ### Settings
 - **Blog Name**: The name of your blog. You may also use the variable {{blog.name}} to dynamically display the blog name.
@@ -28,7 +28,7 @@ You can check the modules in action [here](https://143910617.hs-sites-eu1.com/bl
 
 ## Blog Listing
 
-<img src="./blog-listing.png" alt="Screenshot of Blog Listing Module" eleventy:widths="700" />
+<img src="./blog-listing.png" alt="Screenshot of Blog Listing Module" eleventy:widths="500" />
 
 ### Settings
 - **Blog**: The blog you want to display. You can select the blog from the dropdown list from our default blogs, or create your own.
@@ -45,6 +45,6 @@ You can check the modules in action [here](https://143910617.hs-sites-eu1.com/bl
 
 ## Pagination
 
-<img src="./pagination.png" alt="Screenshot of Pagination Module" eleventy:widths="700" />
+<img src="./pagination.png" alt="Screenshot of Pagination Module" eleventy:widths="300" />
 
 Pagination for Blog Listing has no settings to worry about. It will know how many blog posts you have and will automatically create the pagination for Blog Listing.

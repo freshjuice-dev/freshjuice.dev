@@ -21,6 +21,8 @@ You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-glo
 - **Copyrights**: Rich text module where you insert your copyright policy (© 2024 Company Name. All rights Reserved, an example). You may use a dynamic year, by using '{{ year }}'.
 - **Footer Legal Menu**: (Optional) The footer legal menu consists of links or options typically placed at the bottom of a webpage, providing access to legal information such as terms and conditions, privacy policies, and copyright notices.
 
+---
+
 ## Global Footer Lp
 
 This Global Footer Module is specifically designed for landing pages.

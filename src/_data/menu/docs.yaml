@@ -47,6 +47,8 @@
       url: /docs/modules/global-post-author/
     - title: Global Scroll to Top
       url: /docs/modules/global-scroll-to-top/
+    - title: Search Results
+      url: /docs/modules/search-results/
 
 - name: Sections
   items:

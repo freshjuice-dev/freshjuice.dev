@@ -11,7 +11,7 @@ You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-pri
 
 ## Single Pricing Card
 
-<img src="./pricing-card.png" alt="Screenshot how Single Pricing Card Looks" />
+<img src="./pricing-card.png" alt="Screenshot how Single Pricing Card Looks" eleventy:widths="300" />
 
 The Single Pricing Card has the following settings:
 
@@ -32,7 +32,7 @@ The Single Pricing Card has the following settings:
 
 ## Pricing Cards
 
-<img src="./pricing-cards.png" alt="Screenshot how Three Grid Pricing Cards looks" />
+<img src="./pricing-cards.png" alt="Screenshot how Three Grid Pricing Cards looks" eleventy:widths="700" />
 
 ### Settings
 
@@ -54,7 +54,7 @@ For each Price Card, you can set the following settings:
 
 ## Price Card with Details
 
-<img src="./price-card-with-details.png" alt="Screenshot how a more detailed Pricing Card looks" />
+<img src="./price-card-with-details.png" alt="Screenshot how a more detailed Pricing Card looks" eleventy:widths="700" />
 
 ### Settings
 

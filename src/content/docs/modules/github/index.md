@@ -25,8 +25,8 @@ You can check demo page [here](https://143910617.hs-sites-eu1.com/module-github)
 - **File name**: Enter a specific file name to display only one file from Gist.
 - **Caption**: Description that will be shown above code.
 - **Lines**: Show only specific lines of code. Example: "2", "1-5", "1,4", "1,4,6-8".
-- **Lines Expanded**:(Toggle)
+- **Lines Expanded**: (Toggle) Shortens the code snipped in the gist via adding a line of text in between elements, if clicked, it will expand showing the shortened code.
 - **Highlight Lines**: Highlight specific code lines. Example: "2", "1-5", "1,4", "1,4,6-8".
-- **Show Footer?**:(Toggle) Show footer section if toggled. Default is toggled.
-- **Show Line Numbers?**:(Toggle) Show line numbers section. Default is toggled.
+- **Show Footer?**: (Toggle) Show footer section if toggled. Default is toggled.
+- **Show Line Numbers?**: (Toggle) Show line numbers section. Default is toggled.
 - **Theme**: Your preference for the module's theme. By default its set to System Default, but you can pick Light or Dark.

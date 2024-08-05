@@ -11,20 +11,17 @@ You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-sta
 
 ## Statistics Simple
 
-<img src="./statistics-simple.png" alt="Screenshot of Statistics Simple Module" />
+<figure>
+  <img src="./statistics-simple.png" alt="Screenshot of Statistics Simple Module" />
+  <figcaption>Statistics Simple Module</figcaption>
+</figure>
 
-### Settings
-- **Stats List**: A list of statistics with each item having the following settings:
-  - **Stats Title**: Title of the statistic.
-  - **Stats Details**: Additional information about statistic (option is rich text, so you may use different font family for instance).
+<figure>
+  <img src="./statistics-simple-grid.png" alt="Screenshot of Statistics Simple Module but in Grid form" />
+  <figcaption>Statistics Simple - Grid Module</figcaption>
+</figure>
 
----
-
-## Statistics Simple - Grid
-
-<img src="./statistics-simple-grid.png" alt="Screenshot of Statistics Simple Module but in Grid form" />
-
-### Settings
+### Global Statistics Simple Settings
 - **Stats List**: A list of statistics with each item having the following settings:
   - **Stats Title**: Title of the statistic.
   - **Stats Details**: Additional information about statistic (option is rich text, so you may use different font family for instance).

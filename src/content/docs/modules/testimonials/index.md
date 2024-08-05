@@ -71,7 +71,7 @@ You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-tes
 
 ### Settings
 
-- **Rating**:(Slider) The rating of the testimonial, from 0 to 5 stars.
+- **Rating**: (Slider) The rating of the testimonial, from 0 to 5 stars.
 - **Blockquote**: The customer's testimonial or quote.
 - **Author Photo**: The image of the customer, the image has the following settings to consider:
   - **Alt Text**: Alternative Text for the image of the customer.

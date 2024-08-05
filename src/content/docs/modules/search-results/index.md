@@ -9,6 +9,6 @@ Search Results Module displays the results of a search query by searching our bl
 
 These results are displayed dynamically, meaning that the page won't have to reload in order to show the next page of the results.
 
-You can see this module in action by searching something up on our blog listing page [here](https://143910617.hs-sites-eu1.com/blog)
-
 This module has no settings.
+
+You can see this module in action by searching something up on our blog listing page [here](https://143910617.hs-sites-eu1.com/blog)

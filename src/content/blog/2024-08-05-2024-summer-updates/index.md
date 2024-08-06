@@ -21,6 +21,8 @@ We have added several new modules to the theme. This includes:
 Additionally, we have added to our [documentation](/docs/) every new module along with some existing modules that were missing.
 
 The missing modules that were added to our documentation are the following:
+- [Button](/docs/modules/button/)
+- [Card](/docs/modules/card/)
 - [Blog Listing Modules](/docs/modules/blog-listing/)
 - [Global Footer](/docs/modules/global-footer/)
 - [Global Post Author](/docs/modules/global-post-author/)

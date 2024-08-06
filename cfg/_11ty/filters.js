@@ -80,7 +80,7 @@ export default {
   sortCollection: (collection, key, order = "ASC") => {
     // console.log(collection);
     // console.log(key)
-    collection.sort((a, b) => {
+    return collection.sort((a, b) => {
       a = a[key];
       b = b[key];
       if (a < b) return order === "ASC" ? -1 : 1;

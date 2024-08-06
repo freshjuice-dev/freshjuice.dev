@@ -59,7 +59,11 @@ layout: base.njk
           <div class="">
             <p class="text-lg font-semibold mb-3">{{ section.name }}</p>
             <ul class="list-none m-0 p-0 border-l border-gray-900/5 dark:border-gray-100/5 space-y-2">
-              {% for item in section.items %}
+              {% set menuCollection = section.items %}
+              {% if section.name|lower == "modules" or section.name|lower == "sections" %}
+                {% set menuCollection = section.items|sortCollection("title", "ASC") %}
+              {% endif %}
+              {% for item in menuCollections %}
 
                 {# Set the section and page names for breadcrumbs #}
                 {% if page.url == item.url %}

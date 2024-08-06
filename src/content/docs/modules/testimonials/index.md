@@ -32,7 +32,7 @@ You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-tes
 
 ## Testimonials - Simple Centered
 
-<img src="./tm-simple-centered.png" alt="Screenshot of Module Simple Centered Testimonial" />
+<img src="./tm-simple-centered.png" alt="Screenshot of Module Simple Centered Testimonial" eleventy:widths="700" />
 
 ### Settings
 
@@ -52,7 +52,7 @@ You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-tes
 
 ## Testimonials - Large Avatar
 
-<img src="./tm-large-avatar.png" alt="Screenshot of Module Large Avatar Testimonial" />
+<img src="./tm-large-avatar.png" alt="Screenshot of Module Large Avatar Testimonial" eleventy:widths="700" />
 
 ### Settings
 
@@ -67,11 +67,11 @@ You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-tes
 
 ## Testimonials - Star Rating
 
-<img src="./tm-star-rating.png" alt="Screenshot of Module Star Rating Testimonial" />
+<img src="./tm-star-rating.png" alt="Screenshot of Module Star Rating Testimonial" eleventy:widths="700" />
 
 ### Settings
 
-- **Rating**:(Slider) The rating of the testimonial, from 0 to 5 stars.
+- **Rating**: (Slider) The rating of the testimonial, from 0 to 5 stars.
 - **Blockquote**: The customer's testimonial or quote.
 - **Author Photo**: The image of the customer, the image has the following settings to consider:
   - **Alt Text**: Alternative Text for the image of the customer.

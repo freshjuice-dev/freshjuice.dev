@@ -6,6 +6,15 @@ permalink: /changelog/
 
 # {{ title }}
 
+***= 1.17.0 - August 5, 2024 =***
+
+- Update templates and sections
+- update theme image previews
+- update to some modules
+- Fix Bug [#8](https://github.com/freshjuice-dev/freshjuice-hubspot-theme/issues/8)
+- Fix Bug [#10](https://github.com/freshjuice-dev/freshjuice-hubspot-theme/issues/10)
+- New Social Icons Module
+
 ***= 1.16.1 - July 11, 2024 =***
 
 - Fixed a bug in the pricing card module

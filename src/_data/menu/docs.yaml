@@ -33,6 +33,26 @@
       url: /docs/modules/accordion/
     - title: Tabs
       url: /docs/modules/tabs/
+    - title: Navigation Bar
+      url: /docs/modules/navigation-bar/
+    - title: Global Footer
+      url: /docs/modules/global-footer/
+    - title: Related Posts
+      url: /docs/modules/related-posts/
+    - title: Blog Listing
+      url: /docs/modules/blog-listing/
+    - title: Global Share Buttons
+      url: /docs/modules/global-share-buttons/
+    - title: Global Post Author
+      url: /docs/modules/global-post-author/
+    - title: Global Scroll to Top
+      url: /docs/modules/global-scroll-to-top/
+    - title: Search Results
+      url: /docs/modules/search-results/
+    - title: Button
+      url: /docs/modules/button/
+    - title: Card
+      url: /docs/modules/card/
 
 - name: Sections
   items:

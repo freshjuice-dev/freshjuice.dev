@@ -77,6 +77,18 @@ export default {
     );
   },
 
+  sortCollection: (collection, key, order = "ASC") => {
+    // console.log(collection);
+    // console.log(key)
+    collection.sort((a, b) => {
+      a = a[key];
+      b = b[key];
+      if (a < b) return order === "ASC" ? -1 : 1;
+      if (a > b) return order === "ASC" ? 1 : -1;
+      return 0;
+    });
+  },
+
   getPostYears: (collection) => {
     let years = new Set();
     for (let item of collection) {

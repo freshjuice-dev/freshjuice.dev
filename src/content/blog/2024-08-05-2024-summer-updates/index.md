@@ -44,7 +44,7 @@ In addition, we have added all templates into our documentation along with their
 
 ## Documentation
 
-Apart from the additions to our [documentation](/doca/) mentioned prior, we have also fully updated our Get Started Section.
+Apart from the additions to our [documentation](/docs/) mentioned prior, we have also fully updated our Get Started Section.
 
 We recommend for new users to read our [Get Started](/docs/) section.
 

@@ -1,5 +1,6 @@
 ---
 layout: docs.njk
+tags: ["docs"]
 title: Documentation
 heading: Fruity Docs
 permalink: /docs/

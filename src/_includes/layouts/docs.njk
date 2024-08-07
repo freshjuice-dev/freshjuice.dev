@@ -8,7 +8,7 @@ layout: base.njk
 
 <div class="flex flex-col lg:flex-row lg:grow gap-8 lg:gap-12">
 
-  <aside class="max-w-prose mx-auto w-full lg:w-[19rem] shrink-0 border-y lg:border-y-0 lg:border-r border-gray-900/10 dark:border-gray-100/10 lg:py-8 lg:pr-8"
+  <aside class="mx-auto w-full lg:w-[19rem] shrink-0 border-y lg:border-y-0 lg:border-r border-gray-900/10 dark:border-gray-100/10 lg:py-8 lg:pr-8"
          x-data="{
            drawerMenuOpen: false,
             toggleDrawerMenu() {
@@ -22,10 +22,16 @@ layout: base.njk
         <div class="mb-4">
           <p class="text-lg font-semibold mb-3">{{ section.name }}</p>
           <ul class="list-none m-0 p-0 border-l border-gray-900/5 dark:border-gray-100/5 space-y-2">
-            {% for item in section.items %}
+            {% set menuCollection = section.items %}
+            {% if section.name|lower == "modules" or section.name|lower == "sections" %}
+              {% set menuCollection = section.items|sortCollection("title", "ASC") %}
+            {% endif %}
+            {% for item in menuCollection %}
               <li>
                 <a href="{{ item.url }}"
-                   class="block pl-6 py-1 -ml-px border-l hover:border-current {% if page.url == item.url %}border-current !text-red-600 font-semibold{% else %}border-transparent opacity-75 hover:opacity-100 !text-zinc-600 dark:!text-zinc-300{% endif %}">{{ item.title }}</a>
+                   class="block pl-6 py-1 -ml-px border-l hover:border-current {% if page.url == item.url %}border-current !text-red-600 font-semibold{% else %}border-transparent opacity-75 hover:opacity-100 !text-zinc-600 dark:!text-zinc-300{% endif %}">
+                  {{ item.title }}
+                </a>
               </li>
             {% endfor %}
           </ul>
@@ -63,7 +69,7 @@ layout: base.njk
               {% if section.name|lower == "modules" or section.name|lower == "sections" %}
                 {% set menuCollection = section.items|sortCollection("title", "ASC") %}
               {% endif %}
-              {% for item in menuCollections %}
+              {% for item in menuCollection %}
 
                 {# Set the section and page names for breadcrumbs #}
                 {% if page.url == item.url %}

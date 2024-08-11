@@ -6,18 +6,38 @@ layout: base.njk
   {# Layout Helper #}
 </div>
 
+{# Overlay #}
+<div class="fixed inset-0 bg-terminal backdrop-blur bg-opacity-50 z-10"
+     x-show="docs.showOverlay"
+     x-transition:enter="transition ease-out duration-200"
+     x-transition:enter-start="opacity-0"
+     x-transition:enter-end="opacity-100"
+     x-transition:leave="transition ease-in duration-150"
+     x-transition:leave-start="opacity-100"
+     x-transition:leave-end="opacity-0"></div>
+
+{# Search #}
+<div class="fixed inset-0 mx-auto max-w-xl py-20 z-60" x-show="docs.showSearch">
+  <div id="docsSearch" class="">
+    <!-- Silence is golden -->
+  </div>
+</div>
+
 <div class="flex flex-col lg:flex-row lg:grow gap-8 lg:gap-12">
 
-  <aside class="mx-auto w-full lg:w-[19rem] shrink-0 border-y lg:border-y-0 lg:border-r border-gray-900/10 dark:border-gray-100/10 lg:py-8 lg:pr-8"
-         x-data="{
-           drawerMenuOpen: false,
-            toggleDrawerMenu() {
-              this.drawerMenuOpen = !this.drawerMenuOpen;
-            }
-         }">
+  <aside class="mx-auto w-full lg:w-[19rem] shrink-0 border-y lg:border-y-0 lg:border-r border-gray-900/10 dark:border-gray-100/10 lg:py-8 lg:pr-8">
 
     {# Desktop menu #}
     <div class="hidden lg:block">
+      <button type="button"
+              class="flex w-full gap-2 items-center px-3 py-2 border rounded mb-8 text-sm"
+              @click="docs.openSearch()"
+              @mouseover="docs.loadAssets()">
+        {% phicon "magnifying-glass", "regular", { class: "size-6"} %}
+        <span>Quick search...</span>
+        <span class="grow text-right text-xs" x-text="shortcuts.search">⌘K</span>
+      </button>
+
       {% for section in menu.docs %}
         <div class="mb-4">
           <p class="text-lg font-semibold mb-3">{{ section.name }}</p>
@@ -47,16 +67,16 @@ layout: base.njk
       {% set pageName = "" %}
 
       <div class="fixed z-20 inset-y-0 left-0 w-80 max-w-[calc(100%-3rem)] bg-zinc-100 dark:bg-zinc-800 p-6 overflow-y-auto space-y-4"
-           x-show="drawerMenuOpen"
+           x-show="docs.drawerMenuOpen"
            x-transition:enter="transition ease-out duration-200"
            x-transition:enter-start="opacity-0 -translate-x-40"
            x-transition:enter-end="opacity-100 translate-x-0"
            x-transition:leave="transition ease-in duration-150"
            x-transition:leave-start="opacity-100 translate-x-0"
            x-transition:leave-end="opacity-0 -translate-x-40"
-           @click.outside="toggleDrawerMenu()">
+           @click.outside="docs.toggleDrawerMenu()">
 
-        <button type="button" class="absolute right-6 top-6 hover:text-red-600" @click="toggleDrawerMenu()">
+        <button type="button" class="absolute right-6 top-6 hover:text-red-600" @click="docs.toggleDrawerMenu()">
           <span class="sr-only">Close Navigation</span>
           {% phicon "x", "regular", { class: "size-6"} %}
         </button>
@@ -89,34 +109,31 @@ layout: base.njk
 
       {# Breadcrumbs #}
       <div class="flex items-center p-4">
-        <button type="button" class="hover:text-red-600" @click="toggleDrawerMenu()">
+        <button type="button" class="hover:text-red-600" @click="docs.toggleDrawerMenu()">
           <span class="sr-only">Open Navigation</span>
           {% phicon "list", "regular", { class: "size-6"} %}
         </button>
         <ol class="ml-4 flex text-sm leading-6 whitespace-nowrap min-w-0">
           <li class="flex items-center">
             {{ sectionName or "Fruity" }}
-            {% phicon "caret-right", "regular", { class: "size-3 mx-3" } %}
+            {% phicon "caret-right", "regular", { class: "size-3 mx-3 hidden sm:block" } %}
           </li>
-          <li class="font-semibold">{{ pageName or "Docs" }}</li>
+          <li class="font-semibold hidden sm:block">{{ pageName or "Docs" }}</li>
         </ol>
+        <button type="button"
+                class="flex items-center ml-auto"
+                @click="docs.openSearch()"
+                @mouseover="docs.loadAssets()">
+          {% phicon "magnifying-glass", "regular", { class: "size-6"} %}
+          <span class="sr-only">Quick search...</span>
+        </button>
       </div>
-
-      {# Overlay #}
-      <div class="fixed inset-0 bg-black backdrop-blur bg-opacity-50 z-10"
-           x-show="drawerMenuOpen"
-           x-transition:enter="transition ease-out duration-200"
-           x-transition:enter-start="opacity-0"
-           x-transition:enter-end="opacity-100"
-           x-transition:leave="transition ease-in duration-150"
-           x-transition:leave-start="opacity-100"
-           x-transition:leave-end="opacity-0"></div>
 
     </div>
 
   </aside>
 
-  <main class="prose mx-auto w-full lg:max-w-full grow py-8">
+  <main class="prose mx-auto w-full lg:max-w-full grow py-8" data-pagefind-body>
 
     <header class="prose md:prose-xl">
       {% if sectionName %}

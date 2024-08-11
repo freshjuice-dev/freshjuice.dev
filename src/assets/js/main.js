@@ -1,3 +1,4 @@
+/* global domReady loadScript loadStylesheet */
 import "./modules/tracker";
 
 import Alpine from "alpinejs";
@@ -17,6 +18,6 @@ Alpine.plugin(collapse);
 Alpine.data("xDOM", dataDOM);
 
 // Start Alpine when the page is ready.
-window.addEventListener("DOMContentLoaded", () => {
+domReady(() => {
   Alpine.start();
 });

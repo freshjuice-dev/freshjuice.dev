@@ -2,7 +2,7 @@ import typography from '@tailwindcss/typography'
 import forms from '@tailwindcss/forms'
 import aspectRatio from '@tailwindcss/aspect-ratio'
 import plugin from 'tailwindcss/plugin.js'
-import defaultColors from "tailwindcss/colors";
+import defaultColors from "tailwindcss/colors.js";
 
 /** @type {import('tailwindcss').Config} */
 export default {

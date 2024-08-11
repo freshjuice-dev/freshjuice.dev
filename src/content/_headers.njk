@@ -13,7 +13,19 @@ eleventyExcludeFromCollections: true
 /api/*
 	Cache-Control: "max-age=0, no-cache, no-store, must-revalidate"
 
+{# TW Config #}
+/tw-config/*
+  X-Robots-Tag: "noindex, nofollow"
+  Cache-Control: "max-age=0, no-cache, no-store, must-revalidate"
+
+{# TW Config #}
+/docs/pagefind/*
+  X-Robots-Tag: "noindex, nofollow"
+
 {# CloudFlare Custom Domain #}
+https://:project.pages.dev/*
+  X-Robots-Tag: "noindex, nofollow"
+
 https://:freshjuice.pages.dev/*
   Link: <https://freshjuice.dev/:splat>; rel="canonical"
   X-Robots-Tag: noindex

@@ -1,7 +1,8 @@
 import typography from '@tailwindcss/typography'
 import forms from '@tailwindcss/forms'
 import aspectRatio from '@tailwindcss/aspect-ratio'
-import plugin from 'tailwindcss/plugin';
+import plugin from 'tailwindcss/plugin.js'
+import defaultColors from "tailwindcss/colors";
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -26,6 +27,17 @@ export default {
       video: "16/9",
     },
     extend: {
+      colors: {
+        cursor: defaultColors.white,
+        terminal: defaultColors.black,
+      },
+      zIndex: {
+        60: 60,
+        70: 70,
+        80: 80,
+        90: 90,
+        100: 100,
+      }
     },
   },
   plugins: [

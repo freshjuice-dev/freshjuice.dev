@@ -53,6 +53,8 @@
       url: /docs/modules/button/
     - title: Card
       url: /docs/modules/card/
+    - title: Social Icons
+      url: /docs/modules/social-icons/
 
 - name: Sections
   items:

@@ -17,6 +17,7 @@ We have added several new modules to the theme. This includes:
 - [Google Maps Embed](/docs/modules/google-maps/)
 - [Testimonials Modules](/docs/modules/testimonials/)
 - [Divider Module](/docs/modules/divider/)
+- [Social Icons](/docs/modules/social-icons/)
 
 Additionally, we have added to our [documentation](/docs/) every new module along with some existing modules that were missing.
 

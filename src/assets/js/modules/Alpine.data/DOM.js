@@ -29,10 +29,13 @@ export default () => {
         this.loadAssets();
         this.showSearch = true;
         this.showOverlay = true;
-        let elm = document.querySelector(".pagefind-ui__search-input");
-        debugLog("docsSearch: Focus search input", elm);
-        // focus on elm
-        elm.focus();
+        setTimeout(() => {
+          document.querySelector(".pagefind-ui__search-input").focus();
+        }, 200);
+      },
+      closeSearch() {
+        this.showSearch = false;
+        this.showOverlay = false;
       },
       loadAssets() {
         debugLog("docsSearch: Loading search assets");
@@ -44,15 +47,42 @@ export default () => {
             showSubResults: true,
             pageSize: 5,
             showImages: false,
-            excerptLength: 15,
+            excerptLength: 30,
             resetStyles: false,
             bundlePath: "/docs/pagefind/",
             //debounceTimeoutMs: 500,
+            processResult: function (result) {
+              debugLog("docsSearch: Process result", result);
+              if (result.url === location.pathname) {
+                //js open link in same tab
+                result.url = location.pathname;
+                if (result.anchors) {
+                  result.anchors.forEach((anchor) => {
+                    anchor.url = `javascript:postMessage({type: 'closeSearch', anchor: '${anchor.id}'})`;
+                  });
+                }
+                if (result.sub_results) {
+                  result.sub_results.forEach((sub_result) => {
+                    sub_result.url = `javascript:postMessage({type: 'closeSearch', anchor: '${sub_result.url.split("#")[1]}'})`;
+                  });
+                }
+              }
+              return result;
+            }
           });
         });
       },
       searchInit() {
         debugLog("docsSearch: Init");
+        window.addEventListener("message", (e) => {
+          if (e.data.type === "closeSearch") {
+            this.closeSearch();
+            const anchor = document.getElementById(e.data.anchor);
+            if (anchor) {
+              anchor.scrollIntoView();
+            }
+          }
+        });
         window.addEventListener("keydown", (e) => {
           // add event listener for opening search with CMD/CTRL + K
           if (e.key === "k" && (e.metaKey || e.ctrlKey)) {

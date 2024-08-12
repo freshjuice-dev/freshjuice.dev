@@ -26,6 +26,8 @@ export default () => {
         this.showOverlay = !this.showOverlay;
         if (this.showSearch) {
           this.focusSearch();
+        } else {
+          this.blurSearch();
         }
       },
       openSearch() {
@@ -37,6 +39,12 @@ export default () => {
       closeSearch() {
         this.showSearch = false;
         this.showOverlay = false;
+        this.blurSearch();
+      },
+      blurSearch() {
+        let input = document.querySelector(".pagefind-ui__search-input");
+        input.value = "";
+        input.blur();
       },
       focusSearch() {
         setTimeout(() => {

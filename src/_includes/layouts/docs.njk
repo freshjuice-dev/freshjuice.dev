@@ -54,7 +54,7 @@ layout: base.njk
             {% for item in menuCollection %}
               <li>
                 <a href="{{ item.url }}"
-                   class="block pl-6 py-1 -ml-px border-l hover:border-current {% if page.url == item.url %}border-current !text-red-600 font-semibold{% else %}border-transparent opacity-75 hover:opacity-100 !text-zinc-600 dark:!text-zinc-300{% endif %}">
+                   class="block pl-6 py-1 -ml-px border-l hover:border-current {% if page.url == item.url %}border-current !text-red-600 dark:!text-red font-semibold{% else %}border-transparent opacity-75 hover:opacity-100 !text-zinc-600 dark:!text-zinc-300{% endif %}">
                   {{ item.title }}
                 </a>
               </li>
@@ -104,7 +104,7 @@ layout: base.njk
 
                 <li>
                   <a href="{{ item.url }}"
-                     class="block pl-6 py-1 -ml-px border-l hover:border-current {% if page.url == item.url %}border-current !text-red-600 font-semibold{% else %}border-transparent opacity-75 hover:opacity-100 !text-zinc-600 dark:!text-zinc-300{% endif %}">{{ item.title }}</a>
+                     class="block pl-6 py-1 -ml-px border-l hover:border-current {% if page.url == item.url %}border-current !text-red-600 dark:!text-red font-semibold{% else %}border-transparent opacity-75 hover:opacity-100 !text-zinc-600 dark:!text-zinc-300{% endif %}">{{ item.title }}</a>
                 </li>
               {% endfor %}
             </ul>
@@ -142,7 +142,7 @@ layout: base.njk
 
     <header class="prose md:prose-xl">
       {% if sectionName %}
-        <p class="not-prose text-sm md:text-base font-semibold mb-0 text-red-600 leading-none">{{ sectionName }}</p>
+        <p class="not-prose text-sm md:text-base font-semibold mb-0 text-red-600 dark:text-red leading-none">{{ sectionName }}</p>
       {% endif %}
       <h1>{{ heading or title }}</h1>
     </header>

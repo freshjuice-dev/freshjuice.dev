@@ -24,18 +24,24 @@ export default () => {
         this.loadAssets();
         this.showSearch = !this.showSearch;
         this.showOverlay = !this.showOverlay;
+        if (this.showSearch) {
+          this.focusSearch();
+        }
       },
       openSearch() {
         this.loadAssets();
         this.showSearch = true;
         this.showOverlay = true;
-        setTimeout(() => {
-          document.querySelector(".pagefind-ui__search-input").focus();
-        }, 200);
+        this.focusSearch();
       },
       closeSearch() {
         this.showSearch = false;
         this.showOverlay = false;
+      },
+      focusSearch() {
+        setTimeout(() => {
+          document.querySelector(".pagefind-ui__search-input").focus();
+        }, 200);
       },
       loadAssets() {
         debugLog("docsSearch: Loading search assets");

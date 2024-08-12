@@ -1,0 +1,70 @@
+.pagefind-ui__form {
+  @apply relative;
+}
+
+.pagefind-ui__search-input {
+  @apply w-full p-2 pl-8 pr-14 rounded;
+}
+
+.pagefind-ui__search-clear {
+  @apply absolute right-0 top-0 mt-3 mr-4 text-terminal text-sm lowercase;
+}
+
+.pagefind-ui__drawer {
+  @apply overflow-scroll;
+}
+
+.pagefind-ui__results-area {
+
+}
+
+.pagefind-ui__message {
+  @apply text-sm text-cursor dark:opacity-90;
+}
+
+.pagefind-ui__results {
+  @apply my-4 px-6 rounded max-h-[65vh] overflow-y-auto;
+  @apply divide-y divide-gray-900/10 dark:divide-gray-100/10;
+  @apply bg-zinc-100 dark:bg-zinc-800;
+  @apply border border-gray-900/10 dark:border-gray-100/10;
+  &:empty {
+    @apply hidden;
+  }
+}
+
+.pagefind-ui__result {
+  @apply pt-4 mb-4;
+}
+
+.pagefind-ui__result-inner {
+
+}
+
+.pagefind-ui__button {
+  @apply py-1 px-2 mt-4 border rounded text-xs bg-zinc-50 dark:bg-zinc-800 float-right;
+}
+
+.pagefind-ui__result-title {
+
+}
+
+.pagefind-ui__result-link {
+  @apply text-red-500 hover:underline;
+}
+
+.pagefind-ui__result-excerpt {
+  @apply text-sm line-clamp-2
+}
+
+.pagefind-ui__result-nested {
+  @apply pl-6 mt-2 relative;
+  @apply text-sm;
+
+  &:before {
+    content: '→';
+    @apply absolute left-1;
+  }
+
+  .pagefind-ui__result-title{
+  }
+}

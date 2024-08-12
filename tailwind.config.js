@@ -1,13 +1,14 @@
 import typography from '@tailwindcss/typography'
 import forms from '@tailwindcss/forms'
 import aspectRatio from '@tailwindcss/aspect-ratio'
-import plugin from 'tailwindcss/plugin';
+import plugin from 'tailwindcss/plugin.js'
+import defaultColors from "tailwindcss/colors.js";
 
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    "./src/**/*.{html,js,njk,md,vue}",
-    "./cfg/_11ty/**/*.js"
+    "./src/**/*.{html,css,js,njk,md,vue}",
+    "./cfg/_11ty/**/*.js",
   ],
   darkMode: "class",
   theme: {
@@ -26,6 +27,17 @@ export default {
       video: "16/9",
     },
     extend: {
+      colors: {
+        cursor: defaultColors.white,
+        terminal: defaultColors.black,
+      },
+      zIndex: {
+        60: 60,
+        70: 70,
+        80: 80,
+        90: 90,
+        100: 100,
+      }
     },
   },
   plugins: [

@@ -25,7 +25,7 @@
               role="switch" aria-checked="false">
         <span class="sr-only">Toggle dark theme</span>
         <span :class="theme.dark? 'translate-x-5' : 'translate-x-0'"
-              class="pointer-events-none relative inline-block h-5 w-5 transform rounded-full bg-white dark:bg-zinc-950 shadow ring-0 transition-translate duration-200 ease-in-out">
+              class="pointer-events-none relative inline-block h-5 w-5 transform rounded-full bg-cursor dark:bg-zinc-950 shadow ring-0 transition-translate duration-200 ease-in-out">
           <span :class="theme.dark? 'opacity-100 duration-200 ease-in' : 'opacity-0 duration-100 ease-out'"
                 class="absolute inset-0 flex h-full w-full items-center justify-center transition-opacity" aria-hidden="true">
             {% phicon "moon", "duotone", {

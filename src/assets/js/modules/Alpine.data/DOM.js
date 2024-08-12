@@ -48,7 +48,9 @@ export default () => {
       },
       focusSearch() {
         setTimeout(() => {
-          document.querySelector(".pagefind-ui__search-input").focus();
+          let input = document.querySelector(".pagefind-ui__search-input");
+          input.setAttribute("autofocus", true);
+          input.focus();
         }, 200);
       },
       loadAssets() {

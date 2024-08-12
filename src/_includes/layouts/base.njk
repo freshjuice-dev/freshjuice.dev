@@ -48,7 +48,8 @@
     {%- endif -%}
 
 	</head>
-	<body class="bg-zinc-50 text-zinc-900 dark:bg-zinc-900 dark:text-neutral-300 {{ bodyClass }}">
+	<body class="bg-zinc-50 text-zinc-900 dark:bg-zinc-900 dark:text-neutral-300 {{ bodyClass }}"
+        :class="docs.showOverlay?`overflow-hidden`:``">
 		<a href="#skip" class="sr-only">Skip to main content</a>
 
     <div class="flex flex-col w-full justify-between min-h-screen">

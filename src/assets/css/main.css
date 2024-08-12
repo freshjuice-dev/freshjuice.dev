@@ -10,6 +10,7 @@
 @import "tailwindcss/components";
 @import "components/buttons.css";
 @import "components/prism.css";
+@import "components/pagefind.css";
 
 /* Utils */
 @import "tailwindcss/utilities";

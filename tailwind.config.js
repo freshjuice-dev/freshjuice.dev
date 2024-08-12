@@ -7,8 +7,8 @@ import defaultColors from "tailwindcss/colors.js";
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    "./src/**/*.{html,js,njk,md,vue}",
-    "./cfg/_11ty/**/*.js"
+    "./src/**/*.{html,css,js,njk,md,vue}",
+    "./cfg/_11ty/**/*.js",
   ],
   darkMode: "class",
   theme: {

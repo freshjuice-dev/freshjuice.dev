@@ -13,4 +13,8 @@
       word-break: break-all;
     }
   }
+
+  [id] {
+    @apply scroll-mt-10;
+  }
 }

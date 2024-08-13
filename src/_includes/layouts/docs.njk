@@ -8,6 +8,7 @@ layout: base.njk
 
 {# Overlay #}
 <div class="fixed inset-0 bg-terminal backdrop-blur bg-opacity-50 z-10"
+     x-cloak
      x-show="docs.showOverlay"
      x-transition:enter="transition ease-out duration-200"
      x-transition:enter-start="opacity-0"
@@ -17,7 +18,7 @@ layout: base.njk
      x-transition:leave-end="opacity-0"></div>
 
 {# Search #}
-<div class="fixed inset-0 mx-auto max-w-xl z-60 h-full flex items-center px-8" x-show="docs.showSearch">
+<div class="fixed inset-0 mx-auto max-w-xl z-60 h-full flex items-center px-8" x-cloak x-show="docs.showSearch">
   <div id="docsSearch" class="h-4/5 max-h-[80vh] w-full" @click.outside="docs.closeSearch()">
     <div class="text-right">
       <button type="button" class="py-1 px-2 mb-4 border rounded text-xs bg-zinc-200 dark:bg-zinc-700" @click="docs.closeSearch()">
@@ -53,7 +54,7 @@ layout: base.njk
             {% for item in menuCollection %}
               <li>
                 <a href="{{ item.url }}"
-                   class="block pl-6 py-1 -ml-px border-l hover:border-current {% if page.url == item.url %}border-current !text-red-600 font-semibold{% else %}border-transparent opacity-75 hover:opacity-100 !text-zinc-600 dark:!text-zinc-300{% endif %}">
+                   class="block pl-6 py-1 -ml-px border-l hover:border-current {% if page.url == item.url %}border-current !text-red-600 dark:!text-red font-semibold{% else %}border-transparent opacity-75 hover:opacity-100 !text-zinc-600 dark:!text-zinc-300{% endif %}">
                   {{ item.title }}
                 </a>
               </li>
@@ -103,7 +104,7 @@ layout: base.njk
 
                 <li>
                   <a href="{{ item.url }}"
-                     class="block pl-6 py-1 -ml-px border-l hover:border-current {% if page.url == item.url %}border-current !text-red-600 font-semibold{% else %}border-transparent opacity-75 hover:opacity-100 !text-zinc-600 dark:!text-zinc-300{% endif %}">{{ item.title }}</a>
+                     class="block pl-6 py-1 -ml-px border-l hover:border-current {% if page.url == item.url %}border-current !text-red-600 dark:!text-red font-semibold{% else %}border-transparent opacity-75 hover:opacity-100 !text-zinc-600 dark:!text-zinc-300{% endif %}">{{ item.title }}</a>
                 </li>
               {% endfor %}
             </ul>
@@ -141,7 +142,7 @@ layout: base.njk
 
     <header class="prose md:prose-xl">
       {% if sectionName %}
-        <p class="not-prose text-sm md:text-base font-semibold mb-0 text-red-600 leading-none">{{ sectionName }}</p>
+        <p class="not-prose text-sm md:text-base font-semibold mb-0 text-red-600 dark:text-red leading-none">{{ sectionName }}</p>
       {% endif %}
       <h1>{{ heading or title }}</h1>
     </header>

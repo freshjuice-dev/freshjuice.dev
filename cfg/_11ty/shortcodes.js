@@ -3,12 +3,65 @@
  * https://www.11ty.dev/docs/shortcodes/
  */
 import slugify from "slugify";
+import eleventyImage from "@11ty/eleventy-img";
+import path from "path";
 
 const slugifyOptions = {
   lower: true,       // convert to lower case
 };
 
+const relativeToInputPath = (inputPath, relativeFilePath) => {
+  let split = inputPath.split("/");
+  split.pop();
+
+  let relativePath = path.resolve(split.join(path.sep), relativeFilePath);
+
+  if (relativeFilePath.startsWith("/")) {
+    relativePath = path.resolve("./src/assets/images" + relativeFilePath);
+  }
+
+  return relativePath;
+};
+
 export default {
+
+  image: (eleventyConfig) => {
+    eleventyConfig.addAsyncShortcode(
+      "image",
+      async function imageShortcode(src, alt, widths, classes, sizes, loading) {
+        // Full list of formats here: https://www.11ty.dev/docs/plugins/image/#output-formats
+        // Warning: Avif can be resource-intensive so take care!
+        let formats = ["avif", "webp", "auto"];
+        let file = relativeToInputPath(this.page.inputPath, src);
+        let metadata = await eleventyImage(file, {
+          widths: widths || ["auto"],
+          formats,
+          // Advanced usage note: `eleventyConfig.dir` works here because we’re using addPlugin.
+          outputDir: path.join(eleventyConfig.dir.output, "img"),
+        });
+
+        if (!alt || !alt.length) {
+          // extract name form filename
+          alt = path.basename(src, path.extname(src));
+        }
+
+        let imageAttributes = {
+          alt,
+          sizes: sizes || "100vw",
+          "eleventy:ignore": "",
+          class: classes || "",
+          loading: loading || "lazy",
+          decoding: "async",
+        };
+
+        let htmlAttributes = {
+          whitespaceMode: "inline",
+        }
+
+        return eleventyImage.generateHTML(metadata, imageAttributes, htmlAttributes);
+      },
+    );
+  },
 
   year: (eleventyConfig) => {
     eleventyConfig.addShortcode("year", function yearShortcode() {

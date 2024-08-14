@@ -1,10 +1,10 @@
 import markdownItAnchor from "markdown-it-anchor";
-import { minify } from "html-minifier";
 
 import dataExtensions from "./cfg/_11ty/dataExtensions.js";
 import plugins from "./cfg/_11ty/plugins.js";
 import shortcodes from "./cfg/_11ty/shortcodes.js";
 import filters from "./cfg/_11ty/filters.js";
+import transforms from "./cfg/_11ty/transforms.js";
 
 export default async function(eleventyConfig) {
 
@@ -24,6 +24,10 @@ export default async function(eleventyConfig) {
 		eleventyConfig.addFilter(filterName, filters[filterName]);
 	});
 
+  Object.keys(transforms).forEach((transformName) => {
+    eleventyConfig.addTransform(transformName, transforms[transformName]);
+  });
+
 	// Copy the contents of the `public` folder to the output folder
 	// For example, `./public/css/` ends up in `_site/css/`
 	eleventyConfig.addPassthroughCopy({
@@ -42,23 +46,6 @@ export default async function(eleventyConfig) {
 			level: [1, 2, 3, 4],
 			slugify: eleventyConfig.getFilter("slugify"),
 		});
-	});
-
-	// Minify HTML output
-	eleventyConfig.addTransform("htmlmin", function (content) {
-		// Prior to Eleventy 2.0: use this.outputPath instead
-		if (
-			process.env.ELEVENTY_ENV === "production" &&
-			this.page.outputPath &&
-			this.page.outputPath.endsWith(".html")
-		) {
-			return minify(content, {
-				useShortDoctype: true,
-				removeComments: true,
-				collapseWhitespace: true,
-			});
-		}
-		return content;
 	});
 
 	// Features to make your build faster (when you need them)

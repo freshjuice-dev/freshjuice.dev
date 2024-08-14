@@ -9,7 +9,7 @@ The Divider module is a simple module that allows you to add a horizontal line t
 
 Optionally, you may disable the horizontal line and use the module as a spacer.
 
-You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-divider)
+You can check the [demo page here](https://143910617.hs-sites-eu1.com/module-divider)
 
 ## Settings
 - **Show Divider?**: (Toggle) Option to display a horizontal line.

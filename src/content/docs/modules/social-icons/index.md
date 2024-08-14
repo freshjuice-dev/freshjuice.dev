@@ -7,7 +7,7 @@ description: Social Icons module allows you to add social media icons to the pag
 
 Social Icons module allows you to add social media icons to the page for your social media accounts or other external links.
 
-You can check the demo page [here](https://143910617.hs-sites-eu1.com/social-icons-module)
+You can check the [demo page here](https://143910617.hs-sites-eu1.com/social-icons-module)
 
 ## Settings
 - **Enable Global Icon Color**: (Toggle) enable global color of your icons. By default, this is enabled.

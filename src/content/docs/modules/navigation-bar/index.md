@@ -5,7 +5,7 @@ desc: The Navigation Bar modules provide a simple way to display an interface wi
 
 The Navigation Bar modules provide a simple way to display an interface with navigation for the site's pages or sections.
 
-You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-navigation-bar)
+You can check the [demo page here](https://143910617.hs-sites-eu1.com/module-navigation-bar)
 
 <figure>
   <img src="./nav-bar.png" alt="Screenshot of Navigation Bar Module" />

@@ -5,7 +5,7 @@ desc: Embed YouTube videos responsively without extra scripts or heavy iframes.
 
 Lite Video Embed is a module used to display a video on your website. It's a lightweight way to display videos. Currently, as of 21st June 2024, we have two types of video embeds: Lite Youtube Embed and Lite Vimeo Embed.
 
-You can check demo page [here](https://143910617.hs-sites-eu1.com/modules/lite-videos-embed).
+You can check [demo page here](https://143910617.hs-sites-eu1.com/modules/lite-videos-embed).
 
 ---
 

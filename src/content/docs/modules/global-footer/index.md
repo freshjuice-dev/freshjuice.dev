@@ -5,7 +5,7 @@ desc: The Global Footer modules provide footers for pages and landing pages for 
 
 The Global Footer modules provide footers for pages and landing pages for your site.
 
-You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-global-footer)
+You can check the [demo page here](https://143910617.hs-sites-eu1.com/module-global-footer)
 
 ## Global Footer
 

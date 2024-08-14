@@ -7,7 +7,7 @@ description: The Card module is a simple module that allows you to create a thre
 
 The Card module is a simple module that allows you to create a three column grid with text.
 
-You can check the demo page [here](https://143910617.hs-sites-eu1.com/card-module)
+You can check the [demo page here](https://143910617.hs-sites-eu1.com/card-module)
 
 ## Module Settings
 - **Card**: A list of cards, every card has the following settings along with their styles settings

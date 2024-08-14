@@ -5,7 +5,7 @@ desc: Pricing cards introduce a product or service to potential customers. They 
 
 Pricing cards introduce a product or service to potential customers. They are used to display pricing information for a product or service.
 
-You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-pricing-card)
+You can check the [demo page here](https://143910617.hs-sites-eu1.com/module-pricing-card)
 
 ---
 

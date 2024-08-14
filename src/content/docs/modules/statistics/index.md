@@ -5,7 +5,7 @@ desc: Statistics are used to display data in a very short form. They are used to
 
 Statistics are used to display data in a very short form. They are used to display numbers, percentages, and other data in a visually appealing way.
 
-You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-statistics)
+You can check the [demo page here](https://143910617.hs-sites-eu1.com/module-statistics)
 
 ---
 

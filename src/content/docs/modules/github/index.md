@@ -17,7 +17,7 @@ The Github Gist module is a powerful tool that allows you to display specific fi
 
 Please note that the file must be publicly accessible.
 
-You can check demo page [here](https://143910617.hs-sites-eu1.com/module-github).
+You can check [demo page here](https://143910617.hs-sites-eu1.com/module-github).
 
 ## Settings
 

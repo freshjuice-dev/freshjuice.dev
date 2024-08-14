@@ -5,7 +5,7 @@ desc: Testimonials are a great way to show reviews made by customers or trusted 
 
 Testimonials are a great way to show reviews made by customers or trusted sources as a way to build trust with new customers and can increase conversions to your product.
 
-You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-testimonials)
+You can check the [demo page here](https://143910617.hs-sites-eu1.com/module-testimonials)
 
 ---
 

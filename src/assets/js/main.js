@@ -95,7 +95,7 @@ Alpine.data("xDOM", () => {
             pageSize: 100,
             showImages: false,
             excerptLength: 30,
-            resetStyles: false,
+            resetStyles: true,
             bundlePath: "/docs/pagefind/",
             autofocus: true,
             //debounceTimeoutMs: 500,

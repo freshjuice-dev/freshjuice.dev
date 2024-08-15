@@ -4,7 +4,7 @@ title: Authors
 permalink: /authors/
 ---
 
-{% set authors = collections.authors %}
+{% set authors = collections.authors | sortAuthors %}
 
 <main class="prose md:prose-xl mx-auto w-full">
 

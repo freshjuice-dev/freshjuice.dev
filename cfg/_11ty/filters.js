@@ -117,12 +117,24 @@ export default {
         url: `/authors/${slugify(author, { lower: true })}/`,
         signature: authorData.signature || "",
         links: authorData.links || {},
-        image: await gravatarImage(authorData.email || "", {size: 150}),
+        image: await gravatarImage(authorData.email || "", {size: 90}),
         content: authorData.bio || authorData.page.rawInput.trim() || "",
       };
     } catch (error) {
       return {};
     }
+  },
+
+  sortAuthors: (collection) => {
+    return collection.sort((a, b) => {
+      const aSlug = a.data.page.fileSlug;
+      const bSlug = b.data.page.fileSlug;
+      if (aSlug === "reatlat") return -1;
+      if (bSlug === "reatlat") return 1;
+      if (aSlug === "zapalblizh") return -1;
+      if (bSlug === "zapalblizh") return 1;
+      return 0;
+    });
   },
 
   getGravatarImage: async function (email, size) {

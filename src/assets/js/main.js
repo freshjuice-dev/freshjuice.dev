@@ -1,8 +1,7 @@
 /* global domReady loadScript loadStylesheet PagefindUI */
-import Plausible from "plausible-tracker";
-import colorScheme from "./modules/_detectColorScheme";
-
 import debugLog from "./modules/_debugLog";
+import colorScheme from "./modules/_detectColorScheme";
+import Plausible from "plausible-tracker";
 import Alpine from "alpinejs";
 import intersect from "@alpinejs/intersect";
 import collapse from "@alpinejs/collapse";

@@ -36,6 +36,7 @@ Alpine.data("xDOM", () => {
       showOverlay: false,
       showSearch: false,
       drawerMenuOpen: false,
+      searchTerm: "",
       pagefind: null,
       toggleDrawerMenu() {
         debugLog("docsSearch: Toggle drawer menu");
@@ -64,14 +65,23 @@ Alpine.data("xDOM", () => {
         this.blurSearch();
       },
       blurSearch() {
-        let input = document.querySelector(".pagefind-ui__search-input");
-        input.value = "";
-        input.blur();
+        trackEvent("docs_search", {
+          props: {
+            action: "close",
+            search_term: this.searchTerm,
+          }
+        });
+        document.querySelector(".pagefind-ui__search-clear").click();
       },
       focusSearch() {
+        trackEvent("docs_search", {
+          props: {
+            action: "open",
+            search_term: this.searchTerm,
+          }
+        });
         setTimeout(() => {
-          let input = document.querySelector(".pagefind-ui__search-input");
-          input.focus();
+          document.querySelector(".pagefind-ui__search-input").focus();
         }, 200);
       },
       loadAssets() {
@@ -89,7 +99,18 @@ Alpine.data("xDOM", () => {
             bundlePath: "/docs/pagefind/",
             autofocus: true,
             //debounceTimeoutMs: 500,
-            processResult: function (result) {
+            processTerm: (term) => {
+              debugLog("docsSearch: Process term", term);
+              this.searchTerm = term.length > 0 ? term : "nada";
+              trackEvent("docs_search", {
+                props: {
+                  action: "search",
+                  search_term: this.searchTerm,
+                }
+              });
+              return term;
+            },
+            processResult: (result) => {
               debugLog("docsSearch: Process result", result);
               if (result.url === location.pathname) {
                 //js open link in same tab
@@ -131,8 +152,18 @@ Alpine.data("xDOM", () => {
           if (e.key === "Escape") {
             e.preventDefault();
             this.drawerMenuOpen = false;
-            this.showSearch = false;
-            this.showOverlay = false;
+            this.closeSearch();
+          }
+        });
+        document.body.addEventListener("click", (event) => {
+          if (event.target.matches(".pagefind-ui__result-link")) {
+            trackEvent("docs_search", {
+              props: {
+                action: "link_click",
+                search_term: this.searchTerm,
+                result_url: event.target.href,
+              }
+            });
           }
         });
       }

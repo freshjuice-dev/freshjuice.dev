@@ -49,8 +49,6 @@
       {% set styles %}/css/main.{{ build.hash.short }}.css{% endset -%}
       <link rel="preload" href="{{ styles }}" as="style">
       <link rel="stylesheet" href="{{ styles }}">
-{#      <link rel="preload" href="{{ styles }}" as="style" onload="this.onload=null;this.rel='stylesheet'">#}
-{#      <noscript><link rel="stylesheet" href="{{ styles }}"></noscript>#}
     {%- endif -%}
 	</head>
 	<body class="bg-zinc-50 text-zinc-900 dark:bg-zinc-900 dark:text-neutral-300 {{ bodyClass }}"
@@ -67,11 +65,6 @@
       {% include "partials/footer.njk" %}
     </div>
 
-    {%- if tags|includes("functions") %}
-      <script defer src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.0/axios.min.js" integrity="sha512-WrdC3CE9vf1nBf58JHepuWT4x24uTacky9fuzw2g/3L9JkihgwZ6Cfv+JGTtNyosOhEmttMtEZ6H3qJWfI7gIQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-      <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerpolicy="no-referrer" data-manual></script>
-      <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js" integrity="sha512-QXFMVAusM85vUYDaNgcYeU3rzSlc+bTV4JvkfJhjxSHlQEo+ig53BtnGkvFTiNJh8D+wv6uWAQ2vJaVmxe8d3w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    {%- endif %}
     <script defer src="/js/main{%- if eleventy.env.runMode == 'build' -%}.{{ build.hash.short }}{%- endif -%}.js" type="text/javascript"></script>
 
 		<!-- Current page: {{ page.url | htmlBaseUrl }} -->

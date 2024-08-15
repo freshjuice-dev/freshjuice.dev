@@ -117,7 +117,7 @@ export default {
         url: `/authors/${slugify(author, { lower: true })}/`,
         signature: authorData.signature || "",
         links: authorData.links || {},
-        image: await gravatarImage(authorData.email || "", {size: 150}),
+        image: await gravatarImage(authorData.email || "", {size: 90}),
         content: authorData.bio || authorData.page.rawInput.trim() || "",
       };
     } catch (error) {

@@ -2,7 +2,7 @@
 draft: true
 title: Drew Tendero
 name: Andrea Tendero López
-role: Author
+role: Blog Author
 email: atenlotrad@gmail.com
 links:
   linkedin: https://www.linkedin.com/in/andrea-tendero-l%C3%B3pez-9b50a611b/

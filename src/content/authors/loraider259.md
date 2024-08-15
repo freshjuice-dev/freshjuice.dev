@@ -2,7 +2,7 @@
 draft: true
 title: Lorea Moreno
 name: Lorea Moreno Morales
-role: Author
+role: Blog Author
 email: lorea.moreno@outlook.es
 links:
   website: https://loreamoreno.carrd.co/

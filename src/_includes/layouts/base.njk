@@ -47,6 +47,7 @@
       <link rel="stylesheet" href="/css/main.css">
     {%- else -%}
       {% set styles %}/css/main.{{ build.hash.short }}.css{% endset -%}
+      <link rel="preload" href="{{ styles }}" as="style">
       <link rel="stylesheet" href="{{ styles }}">
 {#      <link rel="preload" href="{{ styles }}" as="style" onload="this.onload=null;this.rel='stylesheet'">#}
 {#      <noscript><link rel="stylesheet" href="{{ styles }}"></noscript>#}

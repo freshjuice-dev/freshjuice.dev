@@ -46,9 +46,12 @@
     {%- if eleventy.env.runMode === "serve" -%}
       <link rel="stylesheet" href="/css/main.css">
     {%- else -%}
-      <style>{%- include "../../../_site/css/main.css" -%}</style>
+      {% set styles %}/css/main.{{ build.hash.short }}.css{% endset -%}
+      <link rel="preload" href="{{ styles }}" as="style">
+      <link rel="stylesheet" href="{{ styles }}">
+{#      <link rel="preload" href="{{ styles }}" as="style" onload="this.onload=null;this.rel='stylesheet'">#}
+{#      <noscript><link rel="stylesheet" href="{{ styles }}"></noscript>#}
     {%- endif -%}
-
 	</head>
 	<body class="bg-zinc-50 text-zinc-900 dark:bg-zinc-900 dark:text-neutral-300 {{ bodyClass }}"
         :class="docs.showOverlay?`overflow-hidden`:``">

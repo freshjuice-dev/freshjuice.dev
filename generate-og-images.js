@@ -129,7 +129,7 @@ const htmlTemplate = `
 `;
 
 const generateImage = async (post) => {
-  const outputPath = `./src/public/img/og/${post.slug}.png`;
+  const outputPath = `./_static/img/og/${post.slug}.png`;
   let logo = "🍹";
   if (!['all','force'].includes(mode) && fs.existsSync(outputPath)) {
     console.log(chalk.yellow(`⚠️ Image for ${post.title} already exists`));

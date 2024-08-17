@@ -14,10 +14,10 @@
     "debug:11ty": "DEBUG=Eleventy* npx @11ty/eleventy",
     "watch:11ty": "npx @11ty/eleventy --serve --quiet",
     "build:11ty": "npx @11ty/eleventy",
-    "build:js": "npx esbuild ./src/assets/js/main.js --outfile=./_site/js/main.$(git rev-parse --short HEAD).js --bundle --minify",
-    "watch:js": "npx esbuild ./src/assets/js/main.js --outfile=./_site/js/main.js --bundle --watch --sourcemap",
-    "watch:tailwind": "npx tailwindcss --postcss -i src/assets/css/main.css -o ./_site/css/main.css --watch",
-    "build:tailwind": "npx tailwindcss --postcss -i src/assets/css/main.css -o ./_site/css/main.$(git rev-parse --short HEAD).css --minify",
+    "build:js": "npx esbuild ./_js/main.js --outfile=./_site/js/main.$(git rev-parse --short HEAD).js --bundle --minify",
+    "watch:js": "npx esbuild ./_js/main.js --outfile=./_site/js/main.js --bundle --watch --sourcemap",
+    "watch:tailwind": "npx tailwindcss --postcss -i _css/main.css -o ./_site/css/main.css --watch",
+    "build:tailwind": "npx tailwindcss --postcss -i _css/main.css -o ./_site/css/main.$(git rev-parse --short HEAD).css --minify",
     "start": "ELEVENTY_ENV=development npm-run-all --parallel watch:*",
     "build": "ELEVENTY_ENV=production npm-run-all --serial build:js build:tailwind build:11ty",
     "debugstart": "DEBUG=Eleventy* npx @11ty/eleventy --serve --quiet",
@@ -57,7 +57,7 @@
       "url": "https://zapparov.dev/"
     }
   ],
-  "license": "GPL-3.0-or-later",
+  "license": "MIT",
   "private": true,
   "bugs": {
     "url": "https://github.com/freshjuice-dev/freshjuice.dev/issues"
@@ -80,7 +80,7 @@
     "eleventy-plugin-phosphoricons": "^1.3.0",
     "eleventy-plugin-speculation-rules": "^1.1.0",
     "eleventy-plugin-svg-contents": "^0.7.0",
-    "esbuild": "^0.23.0",
+    "esbuild": "^0.23.1",
     "gravatar-gen": "^1.0.1",
     "html-minifier": "^4.0.0",
     "js-yaml": "^4.1.0",
@@ -100,7 +100,7 @@
     "prism-themes": "^1.9.0",
     "prismjs": "^1.29.0",
     "rimraf": "^6.0.1",
-    "sharp": "^0.33.4",
+    "sharp": "^0.33.5",
     "slugify": "^1.6.6",
     "tailwind-config-viewer": "^2.0.4",
     "tailwindcss": "^3.4.10"

@@ -2,8 +2,8 @@ import slugify from "slugify";
 
 export default {
   tags: ["docs"],
-  layout: "docs.njk",
+  layout: "docs",
   permalink: function({page}) {
-    return `/docs/templates/${ slugify(page.fileSlug, { lower: true }) }/`
+    return `/docs/modules/${ slugify(page.fileSlug, { lower: true }) }/`
   }
 };

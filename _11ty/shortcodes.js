@@ -17,7 +17,7 @@ const relativeToInputPath = (inputPath, relativeFilePath) => {
   let relativePath = path.resolve(split.join(path.sep), relativeFilePath);
 
   if (relativeFilePath.startsWith("/")) {
-    relativePath = path.resolve("./src/assets/images" + relativeFilePath);
+    relativePath = path.resolve("./_static/img" + relativeFilePath);
   }
 
   return relativePath;

@@ -1,5 +1,5 @@
 ---
-layout: docs.njk
+layout: docs
 tags: ["docs"]
 title: Documentation
 heading: Fruity Docs

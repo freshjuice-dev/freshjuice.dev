@@ -17,4 +17,12 @@
   [id] {
     @apply scroll-mt-10;
   }
+
+  .light {
+    color-scheme: light;
+  }
+
+  .dark {
+    color-scheme: dark;
+  }
 }

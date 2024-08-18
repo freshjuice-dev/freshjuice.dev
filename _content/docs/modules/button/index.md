@@ -7,7 +7,7 @@ description: The Button module is a simple module that allows you to create a bu
 
 The Button module is a simple module that allows you to create a button with link.
 
-You can check the demo page [here](https://143910617.hs-sites-eu1.com/button-module)
+You can check the [demo page here](https://143910617.hs-sites-eu1.com/button-module)
 
 ## Module Settings
 - **Button Link**: The link for the call-to-action button. Includes additional settings such as:

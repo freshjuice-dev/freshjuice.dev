@@ -7,7 +7,7 @@ desc: The Codepen Embed is used to display projects (otherwise called pens) from
 
 The Codepen Embed is used to display projects (otherwise called pens) from Codepen into your webpages
 
-You can check the demo page [here](https://143910617.hs-sites-eu1.com/module-codepen-embed)
+You can check the [demo page here](https://143910617.hs-sites-eu1.com/module-codepen-embed)
 
 ## Settings
 

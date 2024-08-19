@@ -25,13 +25,26 @@ Alpine.plugin(collapse);
 
 Alpine.data("xDOM", () => {
   return {
-    drawerOpen: false,
     theme: {
       dark: true,
       name: "dark",
     },
     shortcuts: {
       search: navigator.platform.toUpperCase().indexOf('MAC') >= 0 ? "⌘K" : "Ctrl+K",
+    },
+    drawerOpen: false,
+    showOverlay: false,
+    toggleDrawer() {
+      this.drawerOpen = !this.drawerOpen;
+      this.showOverlay = !this.showOverlay;
+    },
+    closeDrawer() {
+      this.drawerOpen = false;
+      this.showOverlay = false;
+    },
+    openDrawer() {
+      this.drawerOpen = true;
+      this.showOverlay = true;
     },
     docs: {
       showOverlay: false,

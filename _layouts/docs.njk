@@ -6,17 +6,6 @@ layout: base.njk
   {# Layout Helper #}
 </div>
 
-{# Overlay #}
-<div class="fixed inset-0 bg-terminal backdrop-blur bg-opacity-50 z-20"
-     x-cloak
-     x-show="docs.showOverlay"
-     x-transition:enter="transition ease-out duration-200"
-     x-transition:enter-start="opacity-0"
-     x-transition:enter-end="opacity-100"
-     x-transition:leave="transition ease-in duration-150"
-     x-transition:leave-start="opacity-100"
-     x-transition:leave-end="opacity-0"></div>
-
 {# Search #}
 <div class="fixed inset-0 mx-auto max-w-xl z-60 h-full flex items-center px-8" x-cloak x-show="docs.showSearch">
   <div id="docsSearch" class="h-4/5 max-h-[80vh] w-full" @click.outside="docs.closeSearch()">
@@ -84,7 +73,7 @@ layout: base.njk
       {% set sectionName = "" %}
       {% set pageName = "" %}
 
-      <div class="fixed z-20 inset-y-0 left-0 w-80 max-w-[calc(100%-3rem)] bg-zinc-100 dark:bg-zinc-800 p-6 overflow-y-auto space-y-6"
+      <div class="fixed z-40 inset-y-0 left-0 w-80 max-w-[calc(100%-3rem)] bg-zinc-100 dark:bg-zinc-800 p-6 overflow-y-auto space-y-6"
            x-show="docs.drawerMenuOpen"
            x-transition:enter="transition ease-out duration-200"
            x-transition:enter-start="opacity-0 -translate-x-40"

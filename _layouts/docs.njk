@@ -10,7 +10,7 @@ layout: base.njk
 <div class="fixed inset-0 mx-auto max-w-xl z-60 h-full flex items-center px-8" x-cloak x-show="docs.showSearch">
   <div id="docsSearch" class="h-4/5 max-h-[80vh] w-full" @click.outside="docs.closeSearch()">
     <div class="text-right">
-      <button type="button" class="py-1 px-2 mb-4 border rounded text-xs bg-zinc-200 dark:bg-zinc-700" @click="docs.closeSearch()">
+      <button type="button" class="py-1 px-2 mb-4 border rounded-full text-xs bg-zinc-200 dark:bg-zinc-700" @click="docs.closeSearch()">
         <span class="sr-only">Press</span> ESC <span class="sr-only">to close</span>
       </button>
     </div>

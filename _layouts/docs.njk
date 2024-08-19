@@ -6,45 +6,46 @@ layout: base.njk
   {# Layout Helper #}
 </div>
 
-{# Overlay #}
-<div class="fixed inset-0 bg-terminal backdrop-blur bg-opacity-50 z-10"
-     x-cloak
-     x-show="docs.showOverlay"
-     x-transition:enter="transition ease-out duration-200"
-     x-transition:enter-start="opacity-0"
-     x-transition:enter-end="opacity-100"
-     x-transition:leave="transition ease-in duration-150"
-     x-transition:leave-start="opacity-100"
-     x-transition:leave-end="opacity-0"></div>
-
 {# Search #}
 <div class="fixed inset-0 mx-auto max-w-xl z-60 h-full flex items-center px-8" x-cloak x-show="docs.showSearch">
   <div id="docsSearch" class="h-4/5 max-h-[80vh] w-full" @click.outside="docs.closeSearch()">
     <div class="text-right">
-      <button type="button" class="py-1 px-2 mb-4 border rounded text-xs bg-zinc-200 dark:bg-zinc-700" @click="docs.closeSearch()">
+      <button type="button" class="py-1 px-2 mb-4 border rounded-full text-xs bg-zinc-200 dark:bg-zinc-700" @click="docs.closeSearch()">
         <span class="sr-only">Press</span> ESC <span class="sr-only">to close</span>
       </button>
     </div>
   </div>
 </div>
 
-<div class="flex flex-col lg:flex-row lg:grow gap-8 lg:gap-12">
+<div class="flex flex-col lg:flex-row lg:grow gap-8 lg:gap-12 lg:min-h-[80vh]">
 
-  <aside class="mx-auto w-full lg:w-[19rem] shrink-0 border-y lg:border-y-0 lg:border-r border-gray-900/10 dark:border-gray-100/10 lg:py-8 lg:pr-8">
+  <aside class="mx-auto w-full lg:w-[19rem] shrink-0 border-y lg:border-y-0 lg:border-r border-gray-900/10 dark:border-gray-100/10 lg:py-8 relative">
 
     {# Desktop menu #}
-    <div class="hidden lg:block">
-      <button type="button"
-              class="flex w-full gap-2 items-center px-3 py-2 border rounded mb-8 text-sm"
-              @click="docs.openSearch()"
-              @mouseover="docs.loadAssets()">
-        {% phicon "magnifying-glass", "regular", { class: "size-6"} %}
-        <span>Quick search...</span>
-        <span class="grow text-right text-xs" x-text="shortcuts.search">⌘K</span>
-      </button>
+    <div class="hidden lg:block absolute inset-0 overflow-y-auto"
+         x-ref="docsMenuDesktop"
+         x-init="
+          if ($refs.activeMenuItem) {
+            $refs.docsMenuDesktop.scrollTop = $refs.activeMenuItem.offsetTop - 200;
+          }
+         ">
+      <div class="sticky top-0 z-10 lg:pr-8">
+        <div class="h-8 bg-zinc-50 dark:bg-zinc-900"></div>
+        <div class="bg-zinc-50 dark:bg-zinc-900">
+        <button type="button"
+                class="flex w-full gap-2 items-center px-3 py-2 border rounded text-sm bg-zinc-200/80 dark:bg-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-all"
+                @click="docs.openSearch()"
+                @mouseover="docs.loadAssets()">
+          {% phicon "magnifying-glass", "regular", { class: "size-6"} %}
+          <span>Quick search...</span>
+          <span class="grow text-right text-xs" x-text="shortcuts.search">⌘K</span>
+        </button>
+        </div>
+        <div class="bg-gradient-to-b from-zinc-50 dark:from-zinc-900 h-8"></div>
+      </div>
 
       {% for section in menu.docs %}
-        <div class="mb-4">
+        <div class="mb-6 lg:pr-8">
           <p class="text-lg font-semibold mb-3">{{ section.name }}</p>
           <ul class="list-none m-0 p-0 border-l border-gray-900/5 dark:border-gray-100/5 space-y-2">
             {% set menuCollection = section.items %}
@@ -52,7 +53,7 @@ layout: base.njk
               {% set menuCollection = section.items|sortCollection("title", "ASC") %}
             {% endif %}
             {% for item in menuCollection %}
-              <li>
+              <li{% if page.url == item.url %} x-ref="activeMenuItem"{% endif %}>
                 <a href="{{ item.url }}"
                    class="block pl-6 py-1 -ml-px border-l hover:border-current {% if page.url == item.url %}border-current !text-red-600 dark:!text-red font-semibold{% else %}border-transparent opacity-75 hover:opacity-100 !text-zinc-600 dark:!text-zinc-300{% endif %}">
                   {{ item.title }}
@@ -62,6 +63,7 @@ layout: base.njk
           </ul>
         </div>
       {% endfor %}
+
     </div>
 
     {# Mobile menu #}
@@ -71,7 +73,7 @@ layout: base.njk
       {% set sectionName = "" %}
       {% set pageName = "" %}
 
-      <div class="fixed z-20 inset-y-0 left-0 w-80 max-w-[calc(100%-3rem)] bg-zinc-100 dark:bg-zinc-800 p-6 overflow-y-auto space-y-4"
+      <div class="fixed z-40 inset-y-0 left-0 w-80 max-w-[calc(100%-3rem)] bg-zinc-100 dark:bg-zinc-800 p-6 overflow-y-auto space-y-6"
            x-show="docs.drawerMenuOpen"
            x-transition:enter="transition ease-out duration-200"
            x-transition:enter-start="opacity-0 -translate-x-40"
@@ -116,7 +118,7 @@ layout: base.njk
       <div class="flex items-center p-4">
         <button type="button" class="hover:text-red-600" @click="docs.toggleDrawerMenu()">
           <span class="sr-only">Open Navigation</span>
-          {% phicon "list", "regular", { class: "size-6"} %}
+          {% phicon "list", "regular", { class: "size-6" } %}
         </button>
         <ol class="ml-4 flex text-sm leading-6 whitespace-nowrap min-w-0">
           <li class="flex items-center">
@@ -129,7 +131,7 @@ layout: base.njk
                 class="flex items-center ml-auto"
                 @click="docs.openSearch()"
                 @mouseover="docs.loadAssets()">
-          {% phicon "magnifying-glass", "regular", { class: "size-6"} %}
+          {% phicon "magnifying-glass", "regular", { class: "size-6" } %}
           <span class="sr-only">Quick search...</span>
         </button>
       </div>

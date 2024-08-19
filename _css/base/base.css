@@ -1,4 +1,8 @@
 @layer base {
+  html {
+    @apply antialiased font-sans;
+  }
+
   figcaption {
     @apply text-sm text-center italic !mt-1;
   }
@@ -9,12 +13,24 @@
 
   *:where(:not(pre)) {
     code:where(:not([class])) {
-      @apply inline-block rounded bg-neutral-100 dark:bg-neutral-800 border border-neutral-900/25 dark:border-neutral-300/25 px-2 py-0.5;
+      @apply inline-block rounded bg-neutral-100 dark:bg-neutral-800 border border-neutral-900/25 dark:border-neutral-300/25 px-2 py-0;
       word-break: break-all;
     }
   }
 
   [id] {
     @apply scroll-mt-10;
+  }
+
+  .light {
+    color-scheme: light;
+  }
+
+  .dark {
+    color-scheme: dark;
+  }
+
+  .font-sans {
+    font-optical-sizing: auto;
   }
 }

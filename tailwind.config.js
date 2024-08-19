@@ -16,6 +16,11 @@ export default {
   ],
   darkMode: "class",
   theme: {
+    fontFamily: {
+      sans: ["-apple-system", "BlinkMacSystemFont", "Segoe UI", "Noto Sans", "Helvetica", "Arial", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji"],
+      mono: ["PT Mono", "Roboto Mono", "JetBrains Mono", "monospace"],
+      //mono: ["ui-monospace", "SFMono-Regular", "SF Mono", "Menlo", "Consolas", "Liberation Mono", "monospace"],
+    },
     screens: {
       xs: "360px",
       sm: "640px",
@@ -117,6 +122,12 @@ export default {
         },
         "code:where(:not([class]))::before, code:where(:not([class]))::after": {
           "@apply !content-none": {},
+        },
+        '.prose :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *))': {
+          "@apply font-mono": {},
+        },
+        'code[class*="language-"], pre[class*="language-"]': {
+          "@apply font-mono": {},
         }
       });
     },

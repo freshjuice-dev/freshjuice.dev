@@ -1,9 +1,11 @@
 <header class="select-none">
+
+  {# Desktop Menu #}
   <nav class="mx-auto flex gap-x-4 max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
 
     <div class="flex items-center gap-x-12">
-      <a href="/" class="-m-1.5 p-1.5 inline-flex items-center gap-x-3 hover:text-red-600">
-        {% image "/logo-cut.png", "FreshJuice logo", [35,70], "h-10 sm:h-12 w-auto", "100vw", "eager"  %}
+      <a href="/" class="-m-1.5 p-1.5 inline-flex items-center gap-x-3 hover:text-red-600 shrink-0">
+        {% image "/logo-cut.png", "FreshJuice logo", [35,70], "h-10 sm:h-12 w-auto", "100vw", "eager" %}
         <span class="text-xl sm:text-2xl leading-none whitespace-nowrap font-medium">
           <span class="block font-bold leading-none">FreshJuice</span>
           <span class="block text-xs">a HubSpot Theme</span>
@@ -16,7 +18,7 @@
       </div>
     </div>
 
-    <div class="flex items-center gap-x-4 text-gray-600 dark:text-gray-300 leading-none">
+    <div class="hidden sm:flex items-center gap-x-4 text-gray-600 dark:text-gray-300 leading-none">
       <button type="button"
               x-cloak
               @click="toggleTheme"
@@ -27,16 +29,14 @@
         <span :class="theme.dark? 'translate-x-5' : 'translate-x-0'"
               class="pointer-events-none relative inline-block h-5 w-5 transform rounded-full bg-cursor dark:bg-zinc-950 shadow ring-0 transition-translate duration-200 ease-in-out">
           <span :class="theme.dark? 'opacity-100 duration-200 ease-in' : 'opacity-0 duration-100 ease-out'"
-                class="absolute inset-0 flex h-full w-full items-center justify-center transition-opacity" aria-hidden="true">
-            {% phicon "moon", "duotone", {
-              class: "size-4 text-gray-300"
-            } %}
+                class="absolute inset-0 flex h-full w-full items-center justify-center transition-opacity"
+                aria-hidden="true">
+            {% phicon "moon", "duotone", { class: "size-4 text-gray-300" } %}
           </span>
           <span :class="theme.dark? 'opacity-0 duration-100 ease-out' : 'opacity-100 duration-200 ease-in'"
-                class="absolute inset-0 flex h-full w-full items-center justify-center transition-opacity" aria-hidden="true">
-            {% phicon "sun", "duotone", {
-              class: "size-4 text-gray-600"
-            } %}
+                class="absolute inset-0 flex h-full w-full items-center justify-center transition-opacity"
+                aria-hidden="true">
+            {% phicon "sun", "duotone", { class: "size-4 text-gray-600" } %}
           </span>
         </span>
       </button>
@@ -44,12 +44,68 @@
       <a href="{{ hsTheme.repo }}"
          class="hover:text-red-600"
          title="GitHub">
-        <span class="sr-only">GitHub</span>
-        {% phicon "github-logo", "duotone", {
-          class: "h-6 w-6"
-        } %}
+        <span class="sr-only">Source code is available on GitHub</span>
+        {% phicon "github-logo", "duotone", { class: "size-6" } %}
       </a>
     </div>
 
+    <div class="flex sm:hidden items-center gap-x-4 text-gray-600 dark:text-gray-300 leading-none">
+      <button type="button" class="hover:text-red-600" @click="openDrawer()">
+        <span class="sr-only">Open main menu</span>
+        <span class="uppercase flex items-center text-sm"
+              aria-hidden="true">M{% phicon "list", "bold", { class: "size-4", style: "margin: 0 -1px" } %}NU</span>
+      </button>
+    </div>
+
   </nav>
+
+  {# Mobile menu, show/hide based on menu open state. #}
+  <div class="sm:hidden flex justify-end fixed top-0 inset-x-0 p-4 transition transform origin-top-right z-30 "
+       x-cloak
+       x-show="drawerOpen"
+       role="dialog"
+       aria-modal="true"
+       x-transition:enter="transition ease-out duration-200"
+       x-transition:enter-start="opacity-0 translate-y-3 skew-x-6"
+       x-transition:enter-end="opacity-100 translate-y-0 skew-x-0"
+       x-transition:leave="transition ease-in duration-150"
+       x-transition:leave-start="opacity-100 translate-y-0 skew-x-0"
+       x-transition:leave-end="opacity-0 translate-y-3 skew-x-6">
+    <div class="rounded-md bg-zinc-100 dark:bg-zinc-800 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 max-w-fit"
+         @click.outside="closeDrawer()">
+      <div class="absolute right-4 top-4 p-6">
+        <button type="button" class="-m-2.5 rounded-md p-2.5 hover:text-red-600" @click="closeDrawer()">
+          <span class="sr-only">Close menu</span>
+          {% phicon "x", "bold", { class: "size-6" } %}
+        </button>
+      </div>
+      <div class="flow-root">
+        <div class="-my-6 divide-y divide-gray-500/10">
+          <div class="flex flex-col gap-2 py-6">
+            {% for item in menu.main %}
+              <a href="{{ item.url }}"
+                 class="max-w-fit -mx-3 px-3 py-2 text-base font-semibold leading-7 hover:text-red-600">{{ item.title }}</a>
+            {% endfor %}
+            <a href="{{ hsTheme.repo }}"
+               class="max-w-fit -mx-3 px-3 py-2 text-base font-semibold leading-7 hover:text-red-600">GitHub</a>
+          </div>
+          <div class="py-6">
+            <div class="flex items-center justify-center gap-6">
+              <span class="font-semibold text-sm m-0">Switch theme</span>
+              <button class="w-20 transition-color hover:text-red-600 relative flex items-center gap-1.5 ring-1 ring-slate-900/10 rounded-full shadow-sm px-2 py-1 font-semibold bg-zinc-200 dark:bg-zinc-700 text-sm"
+                      x-cloak
+                      @click="toggleTheme"
+                      aria-checked="false">
+                <span class="sr-only">Toggle dark theme</span>
+                {% phicon "moon", "duotone", { class: "size-4 hidden dark:block" } %}
+                {% phicon "sun", "duotone", { class: "size-4 dark:hidden" } %}
+                <span class="grow text-center" x-text="theme.dark? 'Dark' : 'Light'">Light</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </header>

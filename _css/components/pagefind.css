@@ -11,7 +11,7 @@
 }
 
 .pagefind-ui__drawer {
-  @apply overflow-scroll;
+  @apply overflow-y-auto;
 }
 
 .pagefind-ui__results-area {
@@ -41,7 +41,7 @@
 }
 
 .pagefind-ui__button {
-  @apply py-1 px-2 mt-4 border rounded text-xs bg-zinc-50 dark:bg-zinc-800 float-right;
+  @apply py-1 px-2 mt-4 border rounded-full text-xs bg-zinc-50 dark:bg-zinc-800 float-right;
 }
 
 .pagefind-ui__result-title {

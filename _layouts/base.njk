@@ -46,8 +46,10 @@
     {# Google Fonts #}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=PT+Mono&display=swap" rel="preload" as="style">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=PT+Mono&display=swap" rel="stylesheet">
 
+    {# Styles #}
     {%- if eleventy.env.runMode === "serve" -%}
       <link rel="stylesheet" href="/css/main.css">
     {%- else -%}

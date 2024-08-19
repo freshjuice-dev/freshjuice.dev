@@ -43,14 +43,6 @@
     {# Scripts helpers, domReady, loadScript, loadStylesheet #}
     <script>function domReady(t){["interactive","complete"].indexOf(document.readyState)>=0?t():document.addEventListener("DOMContentLoaded",t)}function loadScript(t,r="defer",d,n=!1){if(document.querySelector(`script[src="${t}"]`)){d&&n&&d();return}const e=document.createElement("script");e.src=t,r==="defer"&&(e.defer=!0),r==="async"&&(e.async=!0),e.onload=e.onreadystatechange=()=>{(!e.readyState||e.readyState==="loaded"||e.readyState==="complete")&&(d&&d(),e.onload=e.onreadystatechange=null)},document.body.appendChild(e)}function loadStylesheet(t,r,d){if(document.querySelector(`link[href="${t}"]`))return;const n=document.createElement("link");n.rel="stylesheet",n.type=d||"text/css",n.href=t,r&&(n.media=r),document.head.appendChild(n)}</script>
 
-    {# Google Fonts #}
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=PT+Mono&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=PT+Mono&display=swap">
-    </noscript>
-
     {# Styles #}
     {%- if eleventy.env.runMode === "serve" -%}
       <link rel="stylesheet" href="/css/main.css">

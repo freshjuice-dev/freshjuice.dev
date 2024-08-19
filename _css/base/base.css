@@ -29,4 +29,8 @@
   .dark {
     color-scheme: dark;
   }
+
+  .font-sans {
+    font-optical-sizing: auto;
+  }
 }

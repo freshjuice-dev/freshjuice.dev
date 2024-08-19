@@ -17,8 +17,7 @@ export default {
   darkMode: "class",
   theme: {
     fontFamily: {
-      sans: ["--apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Oxygen-Sans", "Ubuntu", "Cantarell", "Helvetica Neue", "sans-serif"],
-      serif: ["Georgia", "Cambria", "Times New Roman", "Times", "serif"],
+      sans: ["Noto Sans", "--apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Oxygen-Sans", "Ubuntu", "Cantarell", "Helvetica Neue", "sans-serif"],
       mono: ["PT Mono", "Roboto Mono", "JetBrains Mono", "monospace"],
     },
     screens: {

@@ -11,7 +11,7 @@
 }
 
 .pagefind-ui__drawer {
-  @apply overflow-scroll;
+  @apply overflow-y-auto;
 }
 
 .pagefind-ui__results-area {

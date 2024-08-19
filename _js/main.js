@@ -25,6 +25,7 @@ Alpine.plugin(collapse);
 
 Alpine.data("xDOM", () => {
   return {
+    drawerOpen: false,
     theme: {
       dark: true,
       name: "dark",

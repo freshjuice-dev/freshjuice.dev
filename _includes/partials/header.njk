@@ -4,12 +4,9 @@
   <nav class="mx-auto flex gap-x-4 max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
 
     <div class="flex items-center gap-x-12">
-      <a href="/" class="-m-1.5 p-1.5 inline-flex items-center gap-x-3 hover:text-red-600 shrink-0">
-        {% image "/logo-cut.png", "FreshJuice logo", [35,70], "h-10 sm:h-12 w-auto", "100vw", "eager" %}
-        <span class="text-xl sm:text-2xl leading-none whitespace-nowrap font-medium">
-          <span class="block font-bold leading-none">FreshJuice</span>
-          <span class="block text-xs">a HubSpot Theme</span>
-        </span>
+      <a href="/" class="inline-flex items-center gap-x-3 hover:text-red-600 shrink-0 -mt-3 w-40 sm:w-48">
+        {% include "partials/logo.njk" %}
+        <span class="sr-only">FreshJuice a HubSpot Theme</span>
       </a>
       <div class="hidden sm:flex sm:gap-x-12">
         {% for item in menu.main %}

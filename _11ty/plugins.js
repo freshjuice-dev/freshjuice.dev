@@ -26,13 +26,14 @@ export default {
       // urlPath: '/img/',
 
       // optional, output image widths
-      widths: ["auto"],
+      widths: ["320", "640", "960", "1200"], //["auto"],
 
       defaultAttributes: {
         // e.g. <img loading decoding> assigned on the HTML tag will override these values.
         loading: "lazy",
         decoding: "async",
         class: "img",
+        sizes: "100vw",
       }
     });
   },

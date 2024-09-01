@@ -27,13 +27,13 @@ Feeling curious already about what AI writing tools you may discover today in th
 
 ### Jasper
 
-Formerly know as “Jarvis”, this is on top three when it comes to AI writing tools in 2024, specially if we’re talking about a marketing copy environment, blog posts or creative writing. Jasper will provide you with templates for specific writing needs, which can be ad copy, blog posts, product descriptions and so on, but it doesn’t end with that: it also offers a long-form assistant for more extensive content creation.
+Formerly know as “Jarvis”, this is on top three when it comes to AI writing tools in 2024, specially if we’re talking about a marketing copy environment, blog posts or creative writing. [Jasper](https://www.jasper.ai/) will provide you with templates for specific writing needs, which can be ad copy, blog posts, product descriptions and so on, but it doesn’t end with that: it also offers a long-form assistant for more extensive content creation.
 
 As you can imagine, this tool will be as good as the plan you purchase, so you will have to study your needs and decide which of Jasper’s plans fits them better. In any case, make sure you try the demo to get familiar with all its features and be able to make a good choice.
 
 ### Grammarly
 
-If your problem doesn’t have to do with creativity, but proofreading and final touches, what about relying on Grammarly? This AI tool will help you with grammar checking, style improvement and clarity enhancements thanks to its amazing features: advanced checker, tone detection, style suggestions and a plagiarism checker.
+If your problem doesn’t have to do with creativity, but proofreading and final touches, what about relying on [Grammarly](https://www.grammarly.com/)? This AI tool will help you with grammar checking, style improvement and clarity enhancements thanks to its amazing features: advanced checker, tone detection, style suggestions and a plagiarism checker.
 
 Moreover, this tool integrates well with many writing platforms such as Microsoft Word and Google Docs, which means you don’t have to worry about what platforms you can or can’t use; just copypaste it and enjoy the magic!
 
@@ -41,12 +41,12 @@ Moreover, this tool integrates well with many writing platforms such as Microsof
 
 ### Sudowrite
 
-Do you prefer writing fantasy and fiction stories? There had to be a tool that could help those creative and imaginative minds like yours, so they invented Sudowrite. This AI writing tool is the best one when it comes to creative writing and assisting fiction writers as it generates ideas, plot twists, dialogues and descriptions —Tolkien doesn’t like this— in those situations when you need that extra of imagination you may’ve consumed already.
+Do you prefer writing fantasy and fiction stories? There had to be a tool that could help those creative and imaginative minds like yours, so they invented [Sudowrite](https://www.sudowrite.com/). This AI writing tool is the best one when it comes to creative writing and assisting fiction writers as it generates ideas, plot twists, dialogues and descriptions —Tolkien doesn’t like this— in those situations when you need that extra of imagination you may’ve consumed already.
 
 As if that wasn’t enough, Sudowrite can also provide feedback on writing style and story elements, in case you need a questionable opinion of your story (let’s rememeber a human one will always be more reliable).
 
 ## Copysmith
 
-Last, but not least, we also wanted to give our marketers a tool that makes their lives a bit easier. Copysmith is best for e-commerce product descriptions and digital ads, which is why it’s really popular in a marketing environment. As it’s made for business, this AI writing tool will generate product descriptions if you need them, as well as digital ads or any content related to e-commerce.
+Last, but not least, we also wanted to give our marketers a tool that makes their lives a bit easier. [Copysmith](https://copysmith.ai/) is best for e-commerce product descriptions and digital ads, which is why it’s really popular in a marketing environment. As it’s made for business, this AI writing tool will generate product descriptions if you need them, as well as digital ads or any content related to e-commerce.
 
 Regarding which one you should choose, our suggestion is for you to try each one of them and see what they can offer taking into account your writing needs, which can be different from one day to another. You should also try generating the more genuine content as possible and relying on AI writing tools only for that boost that we miss sometimes.

@@ -1,5 +1,6 @@
 // import { generate as criticalGenerate } from 'critical';
-import { minify as minifyHTML } from "html-minifier";
+import { minify as minifyHTML } from "html-minifier-terser";
+import * as cheerio from 'cheerio';
 
 export default {
   //
@@ -34,6 +35,22 @@ export default {
   //   }
   //   return content;
   // },
+
+  externalLinks: function (content, outputPath) {
+    if (outputPath && outputPath.endsWith(".html")) {
+      const $ = cheerio.load(content);
+      // if link starts with http and not contains the domain name kandji.io add target="_blank" ignore if target is set also bypass any other attributes
+      $("a[href^='http']").each((i, el) => {
+        // add to url search param utm_source=freshjuice
+        const href = $(el).attr("href");
+        const url = new URL(href);
+        url.searchParams.set("utm_source", "freshjuice.dev");
+        $(el).attr("href", url.toString());
+      });
+      content = $.html();
+    }
+    return content;
+  },
 
   minifyHTML: function (content, outputPath) {
     if (

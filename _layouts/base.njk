@@ -9,7 +9,8 @@
 
     {# Metadata #}
 		<title>{{ title or metadata.title }}{{ suffix or metadata.suffix }}</title>
-		<meta name="description" content="{{ description or metadata.description }}">
+    <meta name="author" content="{% if author %}{{ (author|getAuthorData).name }}{% else %}Alex Zappa{% endif %}">
+    <meta name="description" content="{{ description or metadata.description }}">
 		<meta name="generator" content="{{ eleventy.generator }}">
 
     {# Canonical #}
@@ -31,11 +32,16 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="FreshJuice">
     <meta property="og:description" content="{{ description or metadata.description }}">
-    <meta property="og:image" content="{% ogImageSource page %}">
+    <meta property="og:image" content="{{ metadata.url }}{% ogImageSource page %}">
+    <meta property="og:image:alt" content="{{ title or metadata.title }}">
     <meta property="og:url" content="{{ page.url | htmlBaseUrl(metadata.url) }}">
+    <meta name="twitter:title" content="{{ title or metadata.title }}{{ suffix or metadata.suffix }}">
+    <meta name="twitter:description" content="{{ description or metadata.description }}">
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@FreshJuiceDev" />
-    <meta name="twitter:image" content="{% ogImageSource page %}" />
+    <meta name="twitter:creator" content="@{{ author or 'FreshJuiceDev' }}">
+    <meta name="twitter:image" content="{{ metadata.url }}{% ogImageSource page %}" />
+    <meta name="twitter:image:alt" content="{{ title or metadata.title }}">
 
     {# color theme toggle #}
     <script>!function(t,e,m){t&&"light"===t&&(e.classList.remove("dark"),e.setAttribute("data-theme","light"),m.setAttribute("content","#fafafa"))}(localStorage.getItem("theme"),document.documentElement,document.querySelector('meta[name="theme-color"]'));</script>

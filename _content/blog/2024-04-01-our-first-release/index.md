@@ -1,7 +1,7 @@
 ---
 title: "Introducing Our First Release of FreshJuice Theme!"
 desc: "Discover the vibrant and refreshing FreshJuice theme in our latest release! With its eye-catching design, customizable options, and seamless performance, FreshJuice brings a burst of color to your website or blog. Embrace the fruit-inspired aesthetic and stand out from the crowd. Get your hands on FreshJuice today and bring some zest to your online presence! 🍊🌈"
-tags: [FreshJuice, ThemeLaunch, VibrantOnlinePresence, StayFresh]
+tags: ["FreshJuice", "Theme Launch", "Vibrant Online Presence", "Stay Fresh"]
 author: reatlat
 ---
 

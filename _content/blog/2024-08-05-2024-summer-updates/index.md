@@ -1,7 +1,7 @@
 ---
 title: Our First Big Update - Summer 2024
 desc: We are excited to announce our first big update to the theme. This update includes a lot of new features and improvements.
-tags: [FreshJuice, ProductUpdate, StayFresh, NewModules]
+tags: ["FreshJuice", "Product Update", "Stay Fresh", "New Modules"]
 author: zapalblizh
 ---
 

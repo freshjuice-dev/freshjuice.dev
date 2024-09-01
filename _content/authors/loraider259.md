@@ -1,5 +1,4 @@
 ---
-draft: true
 title: Lorea Moreno
 name: Lorea Moreno Morales
 role: Blog Author

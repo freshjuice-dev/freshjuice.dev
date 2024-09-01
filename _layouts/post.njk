@@ -36,7 +36,7 @@ layout: base.njk
         {%- for tag in tags | filterTagList | head(4) %}
           {%- set tagUrl %}/tags/{{ tag | slugify }}/{% endset %}
 {#          <li class="m-0 p-0"><a href="{{ tagUrl }}" class="post-tag text-current">#{{ tag }}</a>{%- if not loop.last %},{% endif %}</li>#}
-          <li class="m-0 p-0">#{{ tag }}{%- if not loop.last %},{% endif %}</li>
+          <li class="m-0 p-0">#{{ tag | replace(' ', '') }}{%- if not loop.last %},{% endif %}</li>
         {%- endfor %}
       </ul>
     {%- endif %}

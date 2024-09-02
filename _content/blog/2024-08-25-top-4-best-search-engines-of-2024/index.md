@@ -11,7 +11,7 @@ If you’ve been wondering what’s beyond Google Search and want to explore the
 
 That said, this article will study in detail which are the 4 best search engines of 2024 while talking about their key features, benefits, and the differences between one and another so that you can decide whether they may be useful for you or not. Be ready, for you’re about to expand your horizons!
 
-## 1. Google Search
+## 1️⃣ Google Search
 
 Before dethroning the one and only search engine, Google Search, we should talk about the reasons why it became so popular and which elements took it to the zenith it stands today. Although Google Search wasn’t the first search engine invented in internet’s history, it soon became dominant due to some innovations and factors that we’ll be explaining right away:
 
@@ -23,7 +23,7 @@ However, Google Search has also been criticized for a bunch of reasons, such as 
 
 [Visit Google Search at google.com](https://www.google.com)
 
-## 2. Ecosia
+## 2️⃣ Ecosia
 
 <img src="./planting-trees.jpg" alt="Planting trees">
 
@@ -39,7 +39,7 @@ Ecosia may offer lots of great features and, above all, an incredible sense of r
 
 [Visit Ecosia at ecosia.org](https://www.ecosia.org)
 
-## 3. DuckDuckGo Search
+## 3️⃣ DuckDuckGo Search
 
 Contrary what ducks usually do with their moms — follow them everywhere —, DuckDuckGo Search will do anything for you but tracking your activity on the internet. This makes it the perfect search engine for those who are tired of personalized ads and having their data collected and sold to third parties, but also if you want a clean and simple design for your searches. In fact, there are more than 4.5 billion users making use of DuckDuckGo Search every month, so we had to include in our list of best search engines of 2024.
 
@@ -53,7 +53,7 @@ Despite DuckDuckGo’s excellence in terms of privacy and simplicity, it does ha
 
 [Visit DuckDuckGo Search at duckduckgo.com](https://duckduckgo.com)
 
-## 4. Microsoft Bing
+## 4️⃣ Microsoft Bing
 
 <img src="./searching-browsing-concept.jpg" alt="Searching Browsing concept. Hand click search page internet data information networking.">
 

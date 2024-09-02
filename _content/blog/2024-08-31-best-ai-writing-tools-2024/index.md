@@ -45,7 +45,7 @@ Do you prefer writing fantasy and fiction stories? There had to be a tool that c
 
 As if that wasn’t enough, Sudowrite can also provide feedback on writing style and story elements, in case you need a questionable opinion of your story (let’s rememeber a human one will always be more reliable).
 
-## Copysmith
+### Copysmith
 
 Last, but not least, we also wanted to give our marketers a tool that makes their lives a bit easier. [Copysmith](https://copysmith.ai/) is best for e-commerce product descriptions and digital ads, which is why it’s really popular in a marketing environment. As it’s made for business, this AI writing tool will generate product descriptions if you need them, as well as digital ads or any content related to e-commerce.
 

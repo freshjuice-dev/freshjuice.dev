@@ -120,8 +120,8 @@ layout: base.njk
           <span class="sr-only">Open Navigation</span>
           {% phicon "list", "regular", { class: "size-6" } %}
         </button>
-        <ol class="ml-4 flex text-sm leading-6 whitespace-nowrap min-w-0">
-          <li class="flex items-center">
+        <ol class="mr-4 flex text-sm leading-6 whitespace-nowrap min-w-0" @click="docs.toggleDrawerMenu()">
+          <li class="pl-4 flex items-center cursor-pointer">
             {{ sectionName or "Fruity" }}
             {% phicon "caret-right", "regular", { class: "size-3 mx-3 hidden sm:block" } %}
           </li>

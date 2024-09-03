@@ -1,5 +1,4 @@
 ---
-draft: true
 title: Drew Tendero
 name: Andrea Tendero López
 role: Blog Author
@@ -9,4 +8,4 @@ links:
   x: https://x.com/DrewTendero/
 ---
 
-Once upon a time...
+I've spent over eight years writing across a plethora of online projects, each shaping me into the writer I am today. A passionate storyteller, curious by nature, and always eager to dive into something new. No topic is too obscure—if it's interesting, I'm all in!

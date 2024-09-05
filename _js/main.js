@@ -46,6 +46,40 @@ Alpine.data("xDOM", () => {
       this.drawerOpen = true;
       this.showOverlay = true;
     },
+    previews: {
+      socialPreviewUrl: '',
+      socialPreviewData: {},
+      fetchActivated: false,
+      homeUrl: '',
+      async getSocialPreview(url) {
+        if (url) {
+          try {
+            const response = await fetch(url);
+            const html = await response.text();
+            const doc = new DOMParser().parseFromString(html, 'text/html');
+            const metaTags = doc.querySelectorAll('meta[property^="og:"]');
+            let tempSocialPreviewData = {};
+
+            metaTags.forEach(tag => {
+              const key = tag.getAttribute('property').replace(/og:|_|:/g, '');
+              tempSocialPreviewData[key] = tag.getAttribute('content');
+            });
+
+            console.log(tempSocialPreviewData);
+
+            this.socialPreviewData = tempSocialPreviewData;
+            this.homeUrl = url.split('/')[2];
+            this.fetchActivated = true;
+          }
+          catch (error) {
+            console.error("Error fetching data from url:", error);
+          }
+        }
+        else {
+          console.error("No URL provided");
+        }
+      },
+    },
     docs: {
       showOverlay: false,
       showSearch: false,

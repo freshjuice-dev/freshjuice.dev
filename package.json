@@ -16,6 +16,8 @@
     "build:11ty": "npx @11ty/eleventy",
     "build:js": "npx esbuild ./_js/main.js --outfile=./_site/js/main.$(git rev-parse --short HEAD).js --bundle --minify",
     "watch:js": "npx esbuild ./_js/main.js --outfile=./_site/js/main.js --bundle --watch --sourcemap",
+    "build:js-AlpineData-MetadataChecker": "npx esbuild ./_js/Alpine.data/metadata-checker.js --outfile=./_site/js/metadata-checker.$(git rev-parse --short HEAD).js --bundle --minify",
+    "watch:js-AlpineData-MetadataChecker": "npx esbuild ./_js/Alpine.data/metadata-checker.js --outfile=./_site/js/metadata-checker.js --bundle --watch --sourcemap",
     "watch:tailwind": "npx tailwindcss --postcss -i _css/main.css -o ./_site/css/main.css --watch",
     "build:tailwind": "npx tailwindcss --postcss -i _css/main.css -o ./_site/css/main.$(git rev-parse --short HEAD).css --minify",
     "start": "ELEVENTY_ENV=development npm-run-all --parallel watch:*",

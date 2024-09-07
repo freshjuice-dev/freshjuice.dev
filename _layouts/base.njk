@@ -75,6 +75,12 @@
       {% include "partials/footer.njk" %}
     </div>
 
+    {# Scripts #}
+    {%- if alpineDataScripts %}
+      {% for script in alpineDataScripts %}
+        <script defer src="/js/{{ script }}{%- if eleventy.env.runMode == 'build' -%}.{{ build.hash.short }}{%- endif -%}.js" type="text/javascript"></script>
+      {% endfor %}
+    {%- endif %}
     <script defer src="/js/main{%- if eleventy.env.runMode == 'build' -%}.{{ build.hash.short }}{%- endif -%}.js" type="text/javascript"></script>
 
     {# Overlay #}

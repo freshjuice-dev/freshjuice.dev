@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ metadata.language }}" class="dark {{ htmlClass }}" data-theme="dark" :class="theme.name" x-data="xDOM">
+<html lang="{{ metadata.language }}" class="dark {{ htmlClass }}" data-theme="dark" :class="theme.name" x-data="xDOM" data-layout="{{ layout }}">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +10,7 @@
     {# Metadata #}
 		<title>{{ title or metadata.title }}{{ suffix or metadata.suffix }}</title>
     <meta name="author" content="{% if author %}{{ (author|getAuthorData).name }}{% else %}Alex Zappa{% endif %}">
-    <meta name="description" content="{{ description or metadata.description }}">
+    <meta name="description" content="{{ desc or description or metadata.description }}">
 		<meta name="generator" content="{{ eleventy.generator }}">
 
     {# Canonical #}
@@ -31,12 +31,12 @@
     <meta property="og:title" content="{{ title or metadata.title }}{{ suffix or metadata.suffix }}">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="FreshJuice">
-    <meta property="og:description" content="{{ description or metadata.description }}">
+    <meta property="og:description" content="{{ desc or description or metadata.description }}">
     <meta property="og:image" content="{{ metadata.url }}{% ogImageSource page %}">
     <meta property="og:image:alt" content="{{ title or metadata.title }}">
     <meta property="og:url" content="{{ page.url | htmlBaseUrl(metadata.url) }}">
     <meta name="twitter:title" content="{{ title or metadata.title }}{{ suffix or metadata.suffix }}">
-    <meta name="twitter:description" content="{{ description or metadata.description }}">
+    <meta name="twitter:description" content="{{ desc or description or metadata.description }}">
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@FreshJuiceDev" />
     <meta name="twitter:creator" content="@{{ author or 'FreshJuiceDev' }}">
@@ -57,7 +57,10 @@
       <link rel="preload" href="{{ styles }}" as="style">
       <link rel="stylesheet" href="{{ styles }}">
     {%- endif -%}
-	</head>
+
+    {# Schema markup #}
+    {% include "partials/schema-markup.njk" %}
+  </head>
 	<body class="bg-zinc-50 text-zinc-900 dark:bg-zinc-900 dark:text-neutral-300 {{ bodyClass }}"
         :class="showOverlay||docs.showOverlay?`overflow-hidden`:``">
 		<a href="#skip" class="sr-only">Skip to main content</a>

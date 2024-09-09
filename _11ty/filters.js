@@ -22,7 +22,7 @@ export default {
   // dateObj input: https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
   htmlDateString: (dateObj) => {
     return DateTime.fromJSDate(dateObj, {zone: "utc"}).toFormat(
-      "yyyy-LL-dd"
+      "yyyy-LL-dd'T'HH:mm:ssZZ"
     );
   },
 
@@ -104,13 +104,13 @@ export default {
     return collection.filter((item) => item.data.author === author);
   },
 
-  getAuthorData: async function (author) {
+  getAuthorData: async function (author, property = null) {
     try {
       const authorsCollection = this.ctx?.collections?.authors;
       const authorData =  authorsCollection.find((item) => {
         return item.fileSlug === author;
       }).data;
-      return {
+      const returnData = {
         name: authorData.title || authorData.name || author,
         email: authorData.email || "",
         role: authorData.role || "",
@@ -120,6 +120,10 @@ export default {
         image: await gravatarImage(authorData.email || "", {size: 128}),
         content: authorData.bio || authorData.page.rawInput.trim() || "",
       };
+      if (property) {
+        return returnData[property];
+      }
+      return returnData;
     } catch (error) {
       return {};
     }
@@ -152,6 +156,62 @@ export default {
   consoleLog: (dataObject) => {
     console.log(dataObject);
     return dataObject;
+  },
+
+  objectToArrayOfValues: (object) => {
+    return Object.values(object);
+  },
+
+  getBreadcrumbsList: ({url}, title) => {
+    const returnArray = [
+      {
+        name: "Home",
+        url: "/",
+      }
+    ];
+    if (/^\/authors\/.+/.test(url)) {
+      returnArray.push({
+        name: "Authors",
+        url: "/authors/",
+      });
+    }
+    if (/^\/tags\/.+/.test(url)) {
+      returnArray.push({
+        name: "Tags",
+        url: "/tags/",
+      });
+    }
+    if (/^\/blog\/.+/.test(url)) {
+      returnArray.push({
+        name: "Juicy Blog",
+        url: "/blog/",
+      });
+    }
+    if (/^\/docs\/.+/.test(url)) {
+      returnArray.push({
+        name: "Documentation",
+        url: "/docs/",
+      });
+    }
+    if (/^\/tools\/.+/.test(url)) {
+      returnArray.push({
+        name: "Tools",
+        url: "/tools/",
+      });
+    }
+    returnArray.push({
+      name: title || "Page",
+      url: url,
+    });
+    return returnArray;
+  },
+
+  isSchemaMarkup: (page) => {
+    const DISALLOWED_URLS = [
+      '/404.html'
+    ];
+
+    return !(typeof page.url !== 'string' || DISALLOWED_URLS.includes(page.url));
   }
 
 };

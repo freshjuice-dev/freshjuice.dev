@@ -4,12 +4,13 @@
   {% if page.url == '/' %}
     <script type="application/ld+json">
       {
-        "@context": "http://schema.org",
+        "@context": "https://schema.org",
         "@type": "Organization",
         "name": "FreshJuice",
         "url": "{{ metadata.url }}",
         "logo": "{{ metadata.url }}/img/logo.png",
         "description": "{{ metadata.description }}",
+        "email": "{{ metadata.email }}",
         "founders": [
           {
             "@type": "Person",
@@ -67,7 +68,7 @@
   {% if layout == 'post' %}
     <script type="application/ld+json">
       {
-        "@context": "http://schema.org",
+        "@context": "https://schema.org",
         "@type": "BlogPosting",
         "mainEntityOfPage": {
           "@type": "WebPage",
@@ -100,7 +101,7 @@
   {% if layout == 'docs' %}
     <script type="application/ld+json">
       {
-        "@context": "http://schema.org",
+        "@context": "https://schema.org",
         "@type": "TechArticle",
         "headline": "{{ title }}",
         "image": "{{ metadata.url }}{% ogImageSource page %}",
@@ -123,7 +124,7 @@
   {% if layout == 'author' %}
     <script type="application/ld+json">
       {
-        "@context": "http://schema.org",
+        "@context": "https://schema.org",
         "@type": "ProfilePage",
         "mainEntity": {
           "@type": "Person",

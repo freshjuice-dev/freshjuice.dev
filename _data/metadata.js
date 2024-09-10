@@ -11,6 +11,10 @@ export default {
       name: "FreshJuiceDev",
       link: "https://x.com/FreshJuiceDev",
     },
+    mastodon: {
+      name: "@FreshJuiceDev",
+      link: "https://mastodon.social/@FreshJuiceDev",
+    },
     linkedin: {
       name: "freshjuice",
       link: "https://www.linkedin.com/company/freshjuice",

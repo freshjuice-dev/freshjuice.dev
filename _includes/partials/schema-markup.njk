@@ -1,5 +1,47 @@
 {% if page | isSchemaMarkup %}
 
+  {# Organization schema #}
+  {% if page.url == '/' %}
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "Organization",
+        "name": "FreshJuice",
+        "url": "{{ metadata.url }}",
+        "logo": "{{ metadata.url }}/img/logo.png",
+        "description": "{{ metadata.description }}",
+        "founders": [
+          {
+            "@type": "Person",
+            "name": "{{ 'reatlat' | getAuthorData('name') }}",
+            "url": "{{ metadata.url }}/authors/reatlat/",
+            "sameAs": [
+              {%- for link in "reatlat" | getAuthorData('links') | objectToArrayOfValues %}
+              "{{ link }}"{% if not loop.last %},{% endif %}
+              {%- endfor %}
+            ]
+          },
+          {
+            "@type": "Person",
+            "name": "{{ 'zapalblizh' | getAuthorData('name') }}",
+            "url": "{{ metadata.url }}/authors/zapalblizh/",
+            "sameAs": [
+              {%- for link in "zapalblizh" | getAuthorData('links') | objectToArrayOfValues %}
+              "{{ link }}"{% if not loop.last %},{% endif %}
+              {%- endfor %}
+            ]
+          }
+        ],
+        "sameAs": [
+          "{{ metadata.social.x.link }}",
+          "{{ metadata.social.mastodon.link }}",
+          "{{ metadata.social.linkedin.link }}",
+          "{{ metadata.social.github.link }}"
+        ]
+      }
+    </script>
+  {% endif %}
+
   {# BreadcrumbList schema #}
   {% if page.url != '/' %}
     {% set breadcrumbsList = page | getBreadcrumbsList(title or name) %}
@@ -46,7 +88,30 @@
           "name": "FreshJuice",
           "logo": {
             "@type": "ImageObject",
-            "url": "{{ metadata.url }}/images/logo.png"
+            "url": "{{ metadata.url }}/img/logo.png"
+          }
+        },
+        "description": "{{ desc or description or metadata.description }}"
+      }
+    </script>
+  {% endif %}
+
+  {# TechArticle schema #}
+  {% if layout == 'docs' %}
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "TechArticle",
+        "headline": "{{ title }}",
+        "image": "{{ metadata.url }}{% ogImageSource page %}",
+        "datePublished": "{{ page.date | htmlDateString }}",
+        "dateModified": "{{ (updated or page.date) | htmlDateString }}",
+        "publisher": {
+          "@type": "Organization",
+          "name": "FreshJuice",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "{{ metadata.url }}/img/logo.png"
           }
         },
         "description": "{{ desc or description or metadata.description }}"
@@ -85,5 +150,8 @@
       }
     </script>
   {% endif %}
+
+  {# FAQ schema #}
+  {# TODO: FAQ schema in near future #}
 
 {% endif %}

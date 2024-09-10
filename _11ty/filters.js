@@ -212,6 +212,12 @@ export default {
     ];
 
     return !(typeof page.url !== 'string' || DISALLOWED_URLS.includes(page.url));
-  }
+  },
 
+  getTwitterName: (twitterUrl = "") => {
+    return twitterUrl
+      .replace("https://x.com/", "")
+      .replace("https://twitter.com/", "")
+      .replace(/\/$/, "");
+  },
 };

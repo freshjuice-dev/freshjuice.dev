@@ -39,7 +39,7 @@
     <meta name="twitter:description" content="{{ desc or description or metadata.description }}">
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@FreshJuiceDev" />
-    <meta name="twitter:creator" content="@{{ author or 'FreshJuiceDev' }}">
+    <meta name="twitter:creator" content="@{{ (author or metadata.social.x.link) | getTwitterName }}">
     <meta name="twitter:image" content="{{ metadata.url }}{% ogImageSource page %}" />
     <meta name="twitter:image:alt" content="{{ title or metadata.title }}">
 

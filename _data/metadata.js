@@ -6,6 +6,7 @@ export default {
   motherShip: "https://freshjuice.dev",
 	language: "en",
 	description: "FreshJuice is a HubSpot CMS theme for developers.",
+  email: "contact@freshjuice.dev",
   social: {
     x: {
       name: "FreshJuiceDev",

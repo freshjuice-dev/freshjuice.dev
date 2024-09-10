@@ -1,0 +1,157 @@
+{% if page | isSchemaMarkup %}
+
+  {# Organization schema #}
+  {% if page.url == '/' %}
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "Organization",
+        "name": "FreshJuice",
+        "url": "{{ metadata.url }}",
+        "logo": "{{ metadata.url }}/img/logo.png",
+        "description": "{{ metadata.description }}",
+        "founders": [
+          {
+            "@type": "Person",
+            "name": "{{ 'reatlat' | getAuthorData('name') }}",
+            "url": "{{ metadata.url }}/authors/reatlat/",
+            "sameAs": [
+              {%- for link in "reatlat" | getAuthorData('links') | objectToArrayOfValues %}
+              "{{ link }}"{% if not loop.last %},{% endif %}
+              {%- endfor %}
+            ]
+          },
+          {
+            "@type": "Person",
+            "name": "{{ 'zapalblizh' | getAuthorData('name') }}",
+            "url": "{{ metadata.url }}/authors/zapalblizh/",
+            "sameAs": [
+              {%- for link in "zapalblizh" | getAuthorData('links') | objectToArrayOfValues %}
+              "{{ link }}"{% if not loop.last %},{% endif %}
+              {%- endfor %}
+            ]
+          }
+        ],
+        "sameAs": [
+          "{{ metadata.social.x.link }}",
+          "{{ metadata.social.mastodon.link }}",
+          "{{ metadata.social.linkedin.link }}",
+          "{{ metadata.social.github.link }}"
+        ]
+      }
+    </script>
+  {% endif %}
+
+  {# BreadcrumbList schema #}
+  {% if page.url != '/' %}
+    {% set breadcrumbsList = page | getBreadcrumbsList(title or name) %}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {%- for item in breadcrumbsList %}
+          {
+            "@type": "ListItem",
+            "position": {{ loop.index }},
+            "name": "{{ item.name }}",
+            "item": "{{ item.url | htmlBaseUrl(metadata.url) }}"
+          }{% if not loop.last %},{% endif %}
+          {%- endfor %}
+        ]
+      }
+    </script>
+  {% endif %}
+
+  {# BlogPosting schema #}
+  {% if layout == 'post' %}
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "{{ page.url | htmlBaseUrl(metadata.url) }}"
+        },
+        "headline": "{{ title }}",
+        "image": "{{ metadata.url }}{% ogImageSource page %}",
+        "datePublished": "{{ page.date | htmlDateString }}",
+        "dateModified": "{{ (updated or page.date) | htmlDateString }}",
+        "author": {
+          "@type": "Person",
+          "name": "{{ author | getAuthorData('name') }}",
+          "url": "{{ author | getAuthorData('url') | htmlBaseUrl(metadata.url) }}",
+          "description": "{{ author | getAuthorData('content') | striptags | trim | truncate(160) }}"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "FreshJuice",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "{{ metadata.url }}/img/logo.png"
+          }
+        },
+        "description": "{{ desc or description or metadata.description }}"
+      }
+    </script>
+  {% endif %}
+
+  {# TechArticle schema #}
+  {% if layout == 'docs' %}
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "TechArticle",
+        "headline": "{{ title }}",
+        "image": "{{ metadata.url }}{% ogImageSource page %}",
+        "datePublished": "{{ page.date | htmlDateString }}",
+        "dateModified": "{{ (updated or page.date) | htmlDateString }}",
+        "publisher": {
+          "@type": "Organization",
+          "name": "FreshJuice",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "{{ metadata.url }}/img/logo.png"
+          }
+        },
+        "description": "{{ desc or description or metadata.description }}"
+      }
+    </script>
+  {% endif %}
+
+  {# ProfilePage schema #}
+  {% if layout == 'author' %}
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "ProfilePage",
+        "mainEntity": {
+          "@type": "Person",
+          "name": "{{ title or name }}",
+          "url": "{{ page.url | htmlBaseUrl(metadata.url) }}",
+          "image": "{{ email | getGravatarImage(512) }}",
+          "sameAs": [
+            {%- for link in links | objectToArrayOfValues %}
+            "{{ link }}"{% if not loop.last %},{% endif %}
+            {%- endfor %}
+          ],
+          "description": "{{ page.rawInput | striptags | trim | truncate(160) }}",
+          "jobTitle": "{{ role }}",
+          "worksFor": {
+            "@type": "Organization",
+            "name": "FreshJuice"
+          },
+          "memberOf": {
+            "@type": "Organization",
+            "name": "FreshJuice",
+            "url": "{{ metadata.url }}"
+          }
+        }
+      }
+    </script>
+  {% endif %}
+
+  {# FAQ schema #}
+  {# TODO: FAQ schema in near future #}
+
+{% endif %}

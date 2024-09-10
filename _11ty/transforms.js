@@ -62,6 +62,12 @@ export default {
         useShortDoctype: true,
         removeComments: true,
         collapseWhitespace: true,
+        collapseInlineTagWhitespace: true,
+        conservativeCollapse: true,
+        minifyJS: true,
+        minifyCSS: true,
+        noNewlinesBeforeTagClose: true,
+        processScripts: ["application/ld+json"],
       });
     }
     return content;

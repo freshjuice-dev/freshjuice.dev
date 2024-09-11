@@ -1,1 +1,7 @@
-src/pages/test.njk
+./src/pages/test.njk
+./.github/**/*
+./.git/**/*
+./.cache/**/*
+./node_modules/**/*
+./README.md
+./LICENSE.md

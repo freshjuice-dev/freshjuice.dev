@@ -13,12 +13,17 @@ eleventyExcludeFromCollections: true
 /api/*
 	Cache-Control: "max-age=0, no-cache, no-store, must-revalidate"
 
+{# Helpers #}
+/_helpers/*
+  X-Robots-Tag: "noindex, nofollow"
+  Cache-Control: "max-age=0, no-cache, no-store, must-revalidate"
+
 {# TW Config #}
 /tw-config/*
   X-Robots-Tag: "noindex, nofollow"
   Cache-Control: "max-age=0, no-cache, no-store, must-revalidate"
 
-{# TW Config #}
+{# Pagefind #}
 /docs/pagefind/*
   X-Robots-Tag: "noindex, nofollow"
 

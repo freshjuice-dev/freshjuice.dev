@@ -28,7 +28,7 @@ export default {
   image: (eleventyConfig) => {
     eleventyConfig.addAsyncShortcode(
       "image",
-      async function imageShortcode(src, alt, widths, classes, sizes, loading) {
+      async function(src, alt, widths, classes, sizes, loading) {
         // Full list of formats here: https://www.11ty.dev/docs/plugins/image/#output-formats
         // Warning: Avif can be resource-intensive so take care!
         let formats = ["avif", "webp", "auto"];
@@ -70,7 +70,7 @@ export default {
   },
 
   authorSignature: (eleventyConfig) => {
-    eleventyConfig.addShortcode("authorSignature", function authorSignatureShortcode(author) {
+    eleventyConfig.addShortcode("authorSignature", function(author) {
       try {
         const authorsCollection = this.ctx?.collections?.authors;
         const authorData = authorsCollection.find((item) => {
@@ -84,14 +84,14 @@ export default {
   },
 
   ogImageSource: (eleventyConfig) => {
-    eleventyConfig.addShortcode("ogImageSource", function ogImageSourceShortcode({url}) {
+    eleventyConfig.addShortcode("ogImageSource", function({url}) {
       url = url ? slugify(url.replace(/\//g, " "), slugifyOptions).trim() : 'default';
       return `/img/og/${url||"default"}.png`;
     });
   },
 
-  collectionsToJSON: (eleventyConfig) => {
-    eleventyConfig.addShortcode("collectionsToJSON", function collectionJsonShortcode(blogs, docs, authors, pages) {
+  ogImagesJSON: (eleventyConfig) => {
+    eleventyConfig.addShortcode("ogImagesJSON", function(blogs, docs, authors, pages) {
       let returnJson = {
         docs: [],
         blogs: [],
@@ -136,4 +136,30 @@ export default {
       return JSON.stringify(returnJson);
     });
   },
+
+  speedlifyJSON: (eleventyConfig) => {
+    eleventyConfig.addShortcode("speedlifyJSON", function(collection) {
+      const returnObject = {
+        "core": [],
+        "docs": [],
+        "blogs": []
+      }
+      collection.forEach((item) => {
+        if (item.outputPath && item.outputPath.endsWith(".html")) {
+          const url = `https://freshjuice.dev${item.url}`;
+          if (item.data.tags && item.data.tags.includes("docs")) {
+            returnObject.docs.push(url);
+          } else if (item.data.tags && item.data.tags.includes("posts")) {
+            returnObject.blogs.push(url);
+          } else {
+            returnObject.core.push(url);
+          }
+        }
+      });
+      returnObject.core.sort();
+      returnObject.docs.sort();
+      returnObject.blogs.sort();
+      return JSON.stringify(returnObject);
+    });
+  }
 };

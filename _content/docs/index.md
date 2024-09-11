@@ -1,6 +1,4 @@
 ---
-layout: docs
-tags: ["docs"]
 title: Documentation
 heading: Fruity Docs
 permalink: /docs/

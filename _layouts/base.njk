@@ -9,7 +9,7 @@
 
     {# Metadata #}
 		<title>{{ title or metadata.title }}{{ suffix or metadata.suffix }}</title>
-    <meta name="author" content="{% if author %}{{ (author|getAuthorData).name }}{% else %}Alex Zappa{% endif %}">
+    <meta name="author" content="{% if author %}{{ author | getAuthorData('name') }}{% else %}Alex Zappa{% endif %}">
     <meta name="description" content="{{ desc or description or metadata.description }}">
 		<meta name="generator" content="{{ eleventy.generator }}">
 

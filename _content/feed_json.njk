@@ -9,7 +9,7 @@ permalink: /feed.json
 	"home_page_url": "{{ metadata.url }}",
 	"feed_url": "{{ permalink | htmlBaseUrl(metadata.url) }}",
 	"items": [
-		{%- for post in collections.posts | reverse | head(9) %}
+		{%- for post in collections.posts | reverse | head(10) %}
 		{%- set absolutePostUrl = post.url | htmlBaseUrl(metadata.url) %}
 		{
 			"id": "{{ absolutePostUrl }}",

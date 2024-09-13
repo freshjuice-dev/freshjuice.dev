@@ -10,7 +10,7 @@ permalink: /feed.xml
 	<link href="{{ metadata.url }}/"/>
 	<updated>{{ collections.posts | getNewestCollectionItemDate | dateToRfc3339 }}</updated>
 	<id>{{ metadata.url }}/</id>
-	{%- for post in collections.posts | reverse | head(9) %}
+	{%- for post in collections.posts | reverse | head(10) %}
 	{% set absolutePostUrl %}{{ post.url | htmlBaseUrl(metadata.url) }}{% endset %}
 	<entry>
 		<title>{{ post.data.title }}</title>
@@ -20,7 +20,7 @@ permalink: /feed.xml
     <author>
       <name>{{ post.data.author | getAuthorData('name') }}</name>
     </author>
-		<content type="html">{{ post.templateContent | transformWithHtmlBase(absolutePostUrl, post.url) }}</content>
+		<content type="html">{{ post.templateContent | markdownIt | transformWithHtmlBase(absolutePostUrl, post.url) }}</content>
 	</entry>
 	{%- endfor %}
 </feed>

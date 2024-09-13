@@ -20,7 +20,7 @@ permalink: /feed.xml
     <author>
       <name>{{ post.data.author | getAuthorData('name') }}</name>
     </author>
-		<content type="html">{{ post.templateContent | markdownIt | transformWithHtmlBase(absolutePostUrl, post.url) }}</content>
+		<content type="html">{{ post.templateContent | markdownIt | transformWithHtmlBase(absolutePostUrl, post.url) | dump | safe }}</content>
 	</entry>
 	{%- endfor %}
 </feed>

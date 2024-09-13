@@ -220,4 +220,8 @@ export default {
       .replace("https://twitter.com/", "")
       .replace(/\/$/, "");
   },
+
+  jsonify: (object) => {
+    return JSON.stringify(object);
+  },
 };

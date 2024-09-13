@@ -53,22 +53,23 @@ export default {
   },
 
   minifyHTML: function (content, outputPath) {
-    if (
-      process.env.ELEVENTY_ENV === "production" &&
-      outputPath &&
-      (outputPath.endsWith(".html") || outputPath.endsWith(".xml"))
-    ) {
-      return minifyHTML(content, {
-        useShortDoctype: true,
-        removeComments: true,
-        collapseWhitespace: true,
-        collapseInlineTagWhitespace: true,
-        conservativeCollapse: true,
-        minifyJS: true,
-        minifyCSS: true,
-        noNewlinesBeforeTagClose: true,
-        processScripts: ["application/ld+json"],
-      });
+    if (process.env.ELEVENTY_ENV === "production" && outputPath) {
+      if ( outputPath.endsWith(".json") ) {
+        return JSON.stringify(JSON.parse(content));
+      }
+      if ( outputPath.endsWith(".html") || outputPath.endsWith(".xml") ) {
+        return minifyHTML(content, {
+          useShortDoctype: true,
+          removeComments: true,
+          collapseWhitespace: true,
+          collapseInlineTagWhitespace: true,
+          conservativeCollapse: true,
+          minifyJS: true,
+          minifyCSS: true,
+          noNewlinesBeforeTagClose: true,
+          processScripts: ["application/ld+json"],
+        });
+      }
     }
     return content;
   },

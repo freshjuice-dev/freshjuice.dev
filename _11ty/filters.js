@@ -5,6 +5,7 @@
 import {DateTime} from "luxon";
 import { image as gravatarImage } from "gravatar-gen";
 import slugify from "slugify";
+import markdownIt from "markdown-it";
 
 export default {
 
@@ -224,4 +225,10 @@ export default {
   jsonify: (object) => {
     return JSON.stringify(object);
   },
+
+  markdownIt: (content) => {
+    return markdownIt({
+      html: true
+    }).render(content);
+  }
 };

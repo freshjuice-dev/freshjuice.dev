@@ -1,5 +1,5 @@
 ---
-layout: prose.njk
+layout: prose
 title: Changelog
 permalink: /changelog/
 ---

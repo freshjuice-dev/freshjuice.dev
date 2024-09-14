@@ -32,11 +32,10 @@ layout: base.njk
 
   <footer class="not-prose">
     {%- if tags | filterTagList | length %}
-      <ul class="post-tags list-none flex flex-wrap gap-2 m-0 p-0 italic">
+      <ul class="post-tags list-none flex flex-wrap gap-2 m-0 p-0 italic text-base">
         {%- for tag in tags | filterTagList | head(4) %}
           {%- set tagUrl %}/tags/{{ tag | slugify }}/{% endset %}
-{#          <li class="m-0 p-0"><a href="{{ tagUrl }}" class="post-tag text-current">#{{ tag }}</a>{%- if not loop.last %},{% endif %}</li>#}
-          <li class="m-0 p-0">#{{ tag | replace(' ', '') }}{%- if not loop.last %},{% endif %}</li>
+          <li class="m-0 p-0"><a href="{{ tagUrl }}" rel="nofollow" class="hover:text-red-600">#{{ tag | replace(' ', '') }}</a>{%- if not loop.last %},{% endif %}</li>
         {%- endfor %}
       </ul>
     {%- endif %}
@@ -100,7 +99,7 @@ layout: base.njk
                   <span class="text-sm flex gap-1 items-center justify-start -ml-1">
                     {% phicon "arrow-up-left", "regular", { "class": "size-5" } %}<span>Previous</span>
                   </span>
-                  <span class="group-hover:text-red-600 inline-block leading-tight">{{ previousPost.data.title }}</span>
+                  <span class="group-hover:text-red-600 inline-block leading-tight text-pretty">{{ previousPost.data.title }}</span>
                 </a>
               </li>
             {%- else %}
@@ -112,7 +111,7 @@ layout: base.njk
                   <span class="text-sm flex gap-1 items-center justify-end -mr-1">
                     <span>Next</span>{% phicon "arrow-up-right", "regular", { "class": "size-5" } %}
                   </span>
-                  <span class="group-hover:text-red-600 inline-block leading-tight">{{ nextPost.data.title }}</span>
+                  <span class="group-hover:text-red-600 inline-block leading-tight text-pretty">{{ nextPost.data.title }}</span>
                 </a>
               </li>
             {%- else %}

@@ -8,11 +8,16 @@ document.addEventListener("alpine:init", () => {
     showResults: false,
     loading: false,
     buttonLabel: "Check Website Metadata",
+    socialPreviewData: {},
     results: {
       title: "",
-      description: "",
-      image: "",
+      type: "",
       url: "",
+      homeUrl: "",
+      image: "",
+      imagealt: "",
+      description: "",
+      sitename: "",
     },
     setButtonLabel() {
       switch (this.status) {
@@ -68,33 +73,25 @@ document.addEventListener("alpine:init", () => {
         return;
       }
       try {
-        const response = await fetch(this.targetUrl);
+        const response = await fetch(this.targetUrl); // CORS issue with pages that are external like youtube or any page using www.
         const html = await response.text();
         const doc = new DOMParser().parseFromString(html, 'text/html');
         const metaTags = doc.querySelectorAll('meta[property^="og:"]');
-        let tempSocialPreviewData = {};
+
+        let url = new URL(this.targetUrl);
+        this.results['homeUrl'] = url.hostname;
 
         metaTags.forEach(tag => {
           const key = tag.getAttribute('property').replace(/og:|_|:/g, '');
-          tempSocialPreviewData[key] = tag.getAttribute('content');
+          this.results[key] = tag.getAttribute('content');
         });
 
-        debugLog(tempSocialPreviewData);
-
-        this.socialPreviewData = tempSocialPreviewData;
-        this.homeUrl = this.targetUrl.split('/')[2]; //???
+        debugLog(this.results);
 
         this.initSuccess();
       } catch (error) {
         this.initError(error);
       }
     },
-
-    // refactor below
-    socialPreviewUrl: '',
-    socialPreviewData: {},
-    fetchActivated: false,
-    homeUrl: '',
-
   }));
 });

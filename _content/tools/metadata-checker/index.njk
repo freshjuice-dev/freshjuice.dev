@@ -5,7 +5,7 @@ partialScripts:
   - metadata-checker
 ---
 
-<section class="max-w-2xl mx-auto space-y-12" x-data="MetadataChecker">
+<section class="prose max-w-2xl mx-auto space-y-12" x-data="MetadataChecker">
 
   <div class="">
     <h2>Debug</h2>
@@ -33,33 +33,53 @@ partialScripts:
 
     <button @click="initProcessing" class="text-bold text-xl p-5 bg-red-400" type="submit">
       <span x-text="buttonLabel">Check Website Metadata</span>
-      {# add spinner icon or processing triple dots #}
     </button>
+
+{#    <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><style>.spinner_ajPY{transform-origin:center;animation:spinner_AtaB .75s infinite linear}@keyframes spinner_AtaB{100%{transform:rotate(360deg)}}</style><path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25"/><path d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z" class="spinner_ajPY"/></svg>#}
   </form>
 
   <div class="space-y-12" x-show="showResults">
-    <div class="relative w-full border border-gray-300 rounded overflow-hidden">
-      <img :src="socialPreviewData.image" :alt="socialPreviewData.imagealt" class="object-cover">
+    <div>
+      <h2>Facebook</h2>
 
-      <div class="border-t border-gray-300 p-2 bg-gray-200">
-        <div class="uppercase text-gray-500 text-[10px] truncate" x-text="homeUrl"></div>
-        <div class="font-bold text-terminal text-sm leading-none truncate" x-text="socialPreviewData.title"></div>
-        <div class="text-gray-500 whitespace-nowrap truncate overflow-hidden overflow-ellipsis text-xs leading-normal"
-             x-text="socialPreviewData.description">
+      <div class="relative w-full overflow-hidden">
+        <img :src="results.image" :alt="results.imageAlt" class="object-cover m-0">
+
+        <div class="border-t border-gray-300 p-2 text-gray-500 bg-gray-200">
+          <div class="text-xs leading-3 truncate break-words uppercase" x-text="results.homeUrl"></div>
+          <div class="text-terminal text-md font-semibold leading-xl truncate break-words" x-text="results.title"></div>
+          <div class="text-sm leading-xl truncate whitespace-nowrap overflow-hidden overflow-ellipsis"
+               x-text="results.description">
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="relative w-full">
-      <div class="border border-gray-300 rounded-md overflow-hidden">
-        <img :src="socialPreviewData.image" :alt="socialPreviewData.imagealt" class="object-cover">
+    <div>
+      <h2>LinkedIn</h2>
 
-        <div class="absolute bottom-8 bg-black bg-opacity-75 left-2 text-white rounded-sm overflow-hidden">
-          <div class="px-1 text-bold text-xs xs:text-md leading-snug overflow-ellipsis truncate overflow-hidden" x-text="socialPreviewData.title" ></div>
+      <div class="relative w-full overflow-hidden">
+        <img :src="results.image" :alt="results.imageAlt" class="object-cover m-0">
+
+        <div class="border-t border-gray-300 p-2 text-gray-500 bg-gray-200">
+          <div class="text-terminal text-base font-bold leading-6 truncate" x-text="results.title"></div>
+          <div class="text-xs truncate uppercase" x-text="results.homeUrl"></div>
         </div>
       </div>
+    </div>
 
-      <div class="mt-0.5 truncate text-xs text-gray-500" x-text="'From ' + homeUrl"></div>
+    <div>
+      <h2>X.com (Previously known as Twitter)</h2>
+
+      <div class="relative w-full">
+        <div class="rounded-xl overflow-hidden">
+          <img :src="results.image" :alt="results.imageAlt" class="object-cover m-0">
+
+          <div class="absolute bottom-2.5 left-2 px-1 py-0.5 text-xs text-white bg-black bg-opacity-40 rounded overflow-hidden"
+               x-text="results.homeUrl">
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

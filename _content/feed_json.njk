@@ -1,0 +1,31 @@
+---
+eleventyExcludeFromCollections: true
+permalink: /feed.json
+---
+{
+	"version": "https://jsonfeed.org/version/1.1",
+	"title": "{{ metadata.title }} Blog",
+	"language": "{{ metadata.language }}",
+	"home_page_url": "{{ metadata.url }}",
+	"feed_url": "{{ permalink | htmlBaseUrl(metadata.url) }}",
+	"items": [
+		{%- for post in collections.posts | reverse | head(10) %}
+		{%- set absolutePostUrl = post.url | htmlBaseUrl(metadata.url) %}
+		{
+			"id": "{{ absolutePostUrl }}",
+			"url": "{{ absolutePostUrl }}",
+			"title": "{{ post.data.title }}",
+			"content_html": {% if post.templateContent %}{{ post.templateContent | transformWithHtmlBase(absolutePostUrl, post.url) | dump | safe }}{% else %}""{% endif %},
+      "image": "{{ metadata.url }}{% ogImageSource post %}",
+      "banner_image": "{{ metadata.url }}{% ogImageSource post %}",
+			"date_published": "{{ post.date | dateToRfc3339 }}",
+      "date_modified": "{{ (post.updated or post.date) | dateToRfc3339 }}",
+      "author": {
+        "name": "{{ post.data.author | getAuthorData('name') }}",
+        "url": "{{ post.data.author | getAuthorData('url') | htmlBaseUrl(metadata.url) }}"
+      },
+      "tags": {{ post.data.tags | filterTagList | jsonify | safe }}
+		}{% if not loop.last %},{% endif %}
+		{%- endfor %}
+	]
+}

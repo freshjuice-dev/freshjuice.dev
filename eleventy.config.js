@@ -49,6 +49,44 @@ export default async function(eleventyConfig) {
   eleventyConfig.addLayoutAlias("post", "post.njk");
   eleventyConfig.addLayoutAlias("prose", "prose.njk");
 
+  // Add Custom Collections
+  eleventyConfig.addCollection("authors", (collection) => {
+    return collection.getFilteredByTag("authors");
+  });
+  eleventyConfig.addCollection("docs", (collection) => {
+    return collection.getFilteredByTag("docs");
+  });
+  eleventyConfig.addCollection("tools", (collection) => {
+    return collection.getFilteredByTag("tools");
+  });
+  eleventyConfig.addCollection('categories', collection => {
+    let gatheredTags = [];
+
+    // Go through every piece of content and grab the tags
+    collection.getAll().forEach(item => {
+      if (item.data.tags) {
+        if (typeof item.data.tags === 'string') {
+          gatheredTags.push(item.data.tags);
+        } else {
+          item.data.tags.forEach(tag => gatheredTags.push(tag));
+        }
+      }
+    });
+
+    gatheredTags = (gatheredTags || []).filter(
+      tag =>
+        ["all", "nav", "authors", "tools", "post", "posts", "doc", "docs", "featured"].indexOf(
+          tag
+        ) === -1
+    );
+
+    gatheredTags = [...new Set(gatheredTags.map(item => item.toLowerCase()))].map(item => {
+      return gatheredTags.find(originalItem => originalItem.toLowerCase() === item);
+    });
+
+    return [...new Set(gatheredTags)];
+  });
+
 	// Features to make your build faster (when you need them)
 
 	// If your passthrough copy gets heavy and cumbersome, add this line

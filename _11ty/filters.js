@@ -5,6 +5,7 @@
 import {DateTime} from "luxon";
 import { image as gravatarImage } from "gravatar-gen";
 import slugify from "slugify";
+import markdownIt from "markdown-it";
 
 export default {
 
@@ -49,32 +50,24 @@ export default {
     return haystack.includes(needle);
   },
 
-  // Return all the tags used in a collection
-  getAllTags: (collection) => {
-    let tagSet = new Set();
-    for (let item of collection) {
-      (item.data.tags || []).forEach((tag) => tagSet.add(tag));
-    }
-    // to lowercase
-    tagSet = new Set([...tagSet].map((tag) => tag.toLowerCase()));
-    // remove duplicates
-    tagSet = new Set([...tagSet]);
-
-    return Array.from(tagSet);
-  },
-
   filterTagList: (tags) => {
     // all the tags to lowercase
     //tags = tags.map((tag) => tag.toLowerCase());
     // remove duplicates
     tags = [...new Set(tags)];
 
-    return (tags || []).filter(
+    tags = (tags || []).filter(
       (tag) =>
-        ["all", "nav", "tools", "post", "posts", "doc", "docs", "featured"].indexOf(
+        ["all", "nav", "authors", "tools", "post", "posts", "doc", "docs", "featured"].indexOf(
           tag
         ) === -1
     );
+
+    tags =  [...new Set(tags.map(item => item.toLowerCase()))].map(item => {
+      return tags.find(originalItem => originalItem.toLowerCase() === item);
+    });
+
+    return tags;
   },
 
   sortCollection: (collection, key, order = "ASC") => {
@@ -220,4 +213,14 @@ export default {
       .replace("https://twitter.com/", "")
       .replace(/\/$/, "");
   },
+
+  jsonify: (object) => {
+    return JSON.stringify(object);
+  },
+
+  markdownIt: (content) => {
+    return markdownIt({
+      html: true
+    }).render(content);
+  }
 };

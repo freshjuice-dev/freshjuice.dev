@@ -1,0 +1,66 @@
+---
+pagination:
+  data: collections.categories
+  size: 1
+  alias: tag
+  filter:
+    - all
+    - post
+    - posts
+    - tools
+    - authors
+    - tagList
+    - featured
+  addAllPagesToCollections: true
+layout: page
+eleventyComputed:
+  title: Tagged “{{ tag }}”
+permalink: /tags/{{ tag | slugify }}/
+excludeFromSitemap: true
+noindex: true
+---
+
+{% set postsList = collections[ tag ] %}
+
+{% set postYears = postsList | getPostYears | reverse %}
+
+<nav class="max-w-prose md:text-xl mx-auto w-full min-h-9 leading-none">
+  <a class="inline-flex items-center gap-2 group no-underline" href="/tags/">
+    {% phicon "arrow-left", "bold", { class: "size-5 group-hover:-translate-x-2 transition-transform" } %}
+    <span>Back to Tags</span>
+  </a>
+</nav>
+
+<div class="prose md:prose-xl mx-auto">
+  <h1 style="margin-bottom:0.8571429em">
+    <small>Tagged:</small><br/>
+    {{ tag }}
+  </h1>
+</div>
+
+<div class="prose mx-auto md:text-xl grid gap-8">
+
+  {% for year in postYears %}
+    <div class="relative">
+      <h2 id="year-{{ year }}" class="text-xl md:text-3xl inline-block m-0 p-0 sticky top-6 left-0">{{ year }}</h2>
+      <ul class="grid gap-4 list-none p-0 ml-16 md:ml-20 -mt-6 md:-mt-10 mb-0">
+        {% for post in postsList | postsByYear(year) | reverse %}
+          <li class="flex flex-col md:flex-row md:gap-2 m-0">
+            <time class="font-mono text-xs md:leading-8"
+                  datetime="{{ post.date | htmlDateString }}">
+              {{ post.date | readableDate("LL/dd") }}
+            </time>
+            <div class="">
+              <a href="{{ post.url }}"
+                 class="text-pretty inline-block">
+                {% if post.data.title %}{{ post.data.title }}{% else %}<code>{{ post.url }}</code>{% endif %}
+              </a>
+              <p class="text-sm md:text-base m-0 line-clamp-4 md:line-clamp-2">{{ post.data.desc }}</p>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endfor %}
+
+</div>

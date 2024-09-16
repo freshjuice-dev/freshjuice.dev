@@ -15,7 +15,7 @@ permalink: /feed.json
 			"id": "{{ absolutePostUrl }}",
 			"url": "{{ absolutePostUrl }}",
 			"title": "{{ post.data.title }}",
-			"content_html": {% if post.templateContent %}{{ post.templateContent | transformWithHtmlBase(absolutePostUrl, post.url) | dump | safe }}{% else %}""{% endif %},
+			"summary": "{{ post.data.description }}",
       "image": "{{ metadata.url }}{% ogImageSource post %}",
       "banner_image": "{{ metadata.url }}{% ogImageSource post %}",
 			"date_published": "{{ post.date | dateToRfc3339 }}",

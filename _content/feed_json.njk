@@ -15,7 +15,7 @@ permalink: /feed.json
 			"id": "{{ absolutePostUrl }}",
 			"url": "{{ absolutePostUrl }}",
 			"title": "{{ post.data.title }}",
-			"summary": "{{ post.data.description }}",
+			"summary": "{{ post.data.desc or post.data.description or post.templateContent | striptags | truncate(200) }}",
       "image": "{{ metadata.url }}{% ogImageSource post %}",
       "banner_image": "{{ metadata.url }}{% ogImageSource post %}",
 			"date_published": "{{ post.date | dateToRfc3339 }}",

@@ -20,7 +20,7 @@ permalink: /feed.xml
     <author>
       <name>{{ post.data.author | getAuthorData('name') }}</name>
     </author>
-		<content type="html">{%- if eleventy.env.runMode !== "serve" -%}{{ post.templateContent | markdownIt | transformWithHtmlBase(absolutePostUrl, post.url) }}{% endif %}</content>
+		<summary>{{ post.data.description }}</summary>
 	</entry>
 	{%- endfor %}
 </feed>

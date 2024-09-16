@@ -6,6 +6,7 @@ import {DateTime} from "luxon";
 import { image as gravatarImage } from "gravatar-gen";
 import slugify from "slugify";
 import markdownIt from "markdown-it";
+import * as cheerio from "cheerio";
 
 export default {
 

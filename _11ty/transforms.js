@@ -67,6 +67,7 @@ export default {
           minifyJS: true,
           minifyCSS: true,
           noNewlinesBeforeTagClose: true,
+          keepClosingSlash: true,
           processScripts: ["application/ld+json"],
         });
       }

@@ -20,7 +20,7 @@ permalink: /feed.xml
     <author>
       <name>{{ post.data.author | getAuthorData('name') }}</name>
     </author>
-		<summary>{{ post.data.description }}</summary>
+		<summary>{{ post.data.desc or post.data.description or post.templateContent | striptags | truncate(200) }}</summary>
 	</entry>
 	{%- endfor %}
 </feed>

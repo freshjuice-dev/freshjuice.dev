@@ -27,10 +27,17 @@ permalink: /blog/
           </time>
           <div class="">
             <a href="{{ post.url }}"
-               class="text-pretty inline-block">
+               class="text-pretty inline-block leading-tight">
               {% if post.data.title %}{{ post.data.title }}{% else %}<code>{{ post.url }}</code>{% endif %}
             </a>
             <p class="text-sm md:text-base m-0 line-clamp-4 md:line-clamp-2">{{ post.data.desc }}</p>
+            {% if post.data.tags | length %}
+              <div class="tags text-xs flex flex-wrap gap-1.5 mt-1">
+                {% for tag in post.data.tags | filterTagList | head(3) %}
+                  <span>#{{ tag | replace(' ', '') }}{%- if not loop.last %},{% endif %}</span>
+                {% endfor %}
+              </div>
+            {% endif %}
           </div>
         </li>
       {% endfor %}

@@ -1,7 +1,7 @@
 ---
 title: 5 SEO Optimization Strategies for Search Engines
 desc: Maximize the visibility and ranking of your blog in search engine results with these SEO optimization strategies for your website and boost its performance.
-tags: ["Keywords", "Search Engine Optimization", "SEO", "SEO Strategies"]
+tags: ["Keywords", "SEO", "SEO Strategies", "Search Engine Optimization"]
 author: loraider259
 ---
 

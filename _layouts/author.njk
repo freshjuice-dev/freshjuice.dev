@@ -54,6 +54,13 @@ layout: base.njk
           <h2 class="not-prose">{% if post.data.title %}{{ post.data.title }}{% else %}<code>{{ post.url }}</code>{% endif %}</h2>
         </a>
         <p class="text-sm md:text-base line-clamp-4 md:line-clamp-2 text-pretty" style="margin: 0">{{ post.data.desc }}</p>
+        {% if post.data.tags | length %}
+          <div class="tags text-xs flex flex-wrap gap-1.5 mt-1">
+            {% for tag in post.data.tags | filterTagList | head(3) %}
+              <span>#{{ tag | replace(' ', '') }}{%- if not loop.last %},{% endif %}</span>
+            {% endfor %}
+          </div>
+        {% endif %}
       </article>
     {% endfor %}
   </section>

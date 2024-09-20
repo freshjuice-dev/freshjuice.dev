@@ -1,11 +1,11 @@
 ---
 title: "Autumn Big Release - v2.0.0"
 desc: "We are proud to announce a big update for us this Autumn! The theme is now on its second version, using a fresh new licence. Game-changing news for devs!"
-tags: ["CMS", "HubSpot", "Autumn Update", "v2.0.0"]
+tags: ["FreshJuice", "ProductUpdate", "StayFresh", "NewModules"]
 author: zapalblizh
 ---
 
-We are proud to announce a big update for FreshJuice! The theme is now on its second version, using a fresh new licence. Game-changing news for devs!
+We are proud to announce a big update for FreshJuice! The theme is now on its second version ([v2.0.0](https://github.com/freshjuice-dev/freshjuice-hubspot-theme/releases/tag/v2.0.0)), using a fresh new licence. Game-changing news for devs!
 
 <img src="./cat-drinking.jpg" alt="Cat drinking drink using straw" class="img md:float-right md:ml-14" eleventy:widths="320">
 
@@ -30,11 +30,11 @@ We have updated many of our modules. They are now more simplified and are easier
 - All Testimonials Modules
 - All Statistics Modules
 
-Additionally, we have a new module joining our FreshJuice family; The [Flip Cards Module](/docs/modules/flip-cards/).
+Additionally, we have a new module joining our FreshJuice family; The Flip Cards Module.
 
 This module enables you to add a simple three columns grid made up of maximum three cards. When a card is hovered over, the card will rotate 180°, showing the content behind your card.
 
-More details about this module in the [Flip Cards](/docs/modules/flip-cards) documentation.
+More details about this module in the Flip Cards documentation.
 
 ## Sections
 

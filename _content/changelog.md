@@ -6,6 +6,17 @@ permalink: /changelog/
 
 # {{ title }}
 
+***= 2.0.0 - September 20, 2024 =***
+
+- New Licence: MIT
+- New Flip Cards Module
+- Big Refactor to Card and Button modules
+- Update styling and layout for some modules
+- Fix Bug [#9](https://github.com/freshjuice-dev/freshjuice-hubspot-theme/issues/9)
+- Fix Bug [#22](https://github.com/freshjuice-dev/freshjuice-hubspot-theme/pull/22)
+- Fixed Scroll to top Module incorrect strolling percentage
+- Fixed Navigation Bar Module Dropdowns for mobile devices
+
 ***= 1.17.0 - August 5, 2024 =***
 
 - Update templates and sections

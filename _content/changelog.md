@@ -8,7 +8,7 @@ permalink: /changelog/
 
 ***= 2.0.0 - September 20, 2024 =***
 
-- New Licence: MIT
+- Updated license to MIT
 - New Flip Cards Module
 - Big Refactor to Card and Button modules
 - Update styling and layout for some modules

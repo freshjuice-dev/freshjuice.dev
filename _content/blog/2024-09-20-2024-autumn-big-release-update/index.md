@@ -32,9 +32,9 @@ We have updated many of our modules. They are now more simplified and are easier
 
 Additionally, we have a new module joining our FreshJuice family; The Flip Cards Module.
 
-This module enables you to add a simple three columns grid made up of maximum three cards. When a card is hovered over, the card will rotate 180°, showing the content behind your card.
+This module enables you to add a simple three columns layout made up of maximum three cards. When a card is hovered over, the card will rotate 180°, showing the content behind the card.
 
-More details about this module in the Flip Cards documentation.
+More details about this module in the [Flip Cards documentation](/docs/modules/flip-cards/).
 
 ## Sections
 

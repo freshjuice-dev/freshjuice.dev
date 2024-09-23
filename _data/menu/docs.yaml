@@ -55,6 +55,8 @@
       url: /docs/modules/card/
     - title: Social Icons
       url: /docs/modules/social-icons/
+    - title: Flip Cards
+      url: /docs/modules/flip-cards/
 
 - name: Sections
   items:

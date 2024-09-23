@@ -11,4 +11,4 @@ links:
 signature: '<p>Stay curious,<br/><a href="https://zapparov.dev?utm_source=freshjuice">Aleksandr</a></p>'
 ---
 
-In my free time, I love to play chess, solve puzzles, play video games and gain new knowledge and news about technological news.
+In my free time, I love to play chess, solve puzzles, play video games and gain new skills and knowledge.

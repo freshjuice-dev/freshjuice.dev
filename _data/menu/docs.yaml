@@ -17,8 +17,8 @@
       url: /docs/modules/video-embed/
     - title: Statistics
       url: /docs/modules/statistics/
-    - title: Pricing Card
-      url: /docs/modules/pricing-card/
+    - title: Pricing Cards
+      url: /docs/modules/pricing-cards/
     - title: Google Maps
       url: /docs/modules/google-maps/
     - title: Codepen
@@ -57,6 +57,8 @@
       url: /docs/modules/social-icons/
     - title: Flip Cards
       url: /docs/modules/flip-cards/
+    - title: List
+      url: /docs/modules/list/
 
 - name: Sections
   items:

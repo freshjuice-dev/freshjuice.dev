@@ -64,8 +64,8 @@
   },
   "homepage": "https://github.com/freshjuice-dev/freshjuice.dev#readme",
   "devDependencies": {
-    "@11ty/eleventy": "^3.0.0-beta.1",
-    "@11ty/eleventy-img": "5.0.0-beta.9",
+    "@11ty/eleventy": "^3.0.0",
+    "@11ty/eleventy-img": "5.0.0",
     "@11ty/eleventy-plugin-rss": "^2.0.2",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
     "@alpinejs/collapse": "^3.14.1",
@@ -80,7 +80,7 @@
     "eleventy-plugin-phosphoricons": "^1.3.0",
     "eleventy-plugin-speculation-rules": "^1.1.0",
     "eleventy-plugin-svg-contents": "^0.7.0",
-    "esbuild": "^0.23.1",
+    "esbuild": "^0.24.0",
     "gravatar-gen": "^1.0.2",
     "html-minifier-terser": "^7.2.0",
     "js-yaml": "^4.1.0",
@@ -96,7 +96,7 @@
     "postcss-easy-import": "^4.0.0",
     "postcss-merge-rules": "^7.0.4",
     "postcss-nesting": "^13.0.0",
-    "prettier-plugin-tailwindcss": "^0.6.6",
+    "prettier-plugin-tailwindcss": "^0.6.8",
     "pretty-quick": "^4.0.0",
     "prism-themes": "^1.9.0",
     "prismjs": "^1.29.0",
@@ -104,6 +104,6 @@
     "sharp": "^0.33.5",
     "slugify": "^1.6.6",
     "tailwind-config-viewer": "^2.0.4",
-    "tailwindcss": "^3.4.11"
+    "tailwindcss": "^3.4.13"
   }
 }

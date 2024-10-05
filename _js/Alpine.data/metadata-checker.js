@@ -72,26 +72,27 @@ document.addEventListener("alpine:init", () => {
         this.initError("Invalid URL provided");
         return;
       }
-      try {
-        const response = await fetch(this.targetUrl); // CORS issue with pages that are external like youtube or any page using www.
-        const html = await response.text();
-        const doc = new DOMParser().parseFromString(html, 'text/html');
-        const metaTags = doc.querySelectorAll('meta[property^="og:"]');
-
-        let url = new URL(this.targetUrl);
-        this.results['homeUrl'] = url.hostname;
-
-        metaTags.forEach(tag => {
-          const key = tag.getAttribute('property').replace(/og:|_|:/g, '');
-          this.results[key] = tag.getAttribute('content');
+      await fetch("/api/metadata-checker", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ targetUrl: this.targetUrl }),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          this.results = data;
+          debugLog('Response Data:', data);
+          this.initSuccess();
+        })
+        .catch((error) => {
+          this.initError(error);
         });
-
-        debugLog(this.results);
-
-        this.initSuccess();
-      } catch (error) {
-        this.initError(error);
-      }
-    },
+    }
   }));
 });

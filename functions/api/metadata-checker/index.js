@@ -3,7 +3,7 @@ import * as cheerio from 'cheerio';
 
 export const onRequestGet = async ({ request }) => {
   return new Response(JSON.stringify({
-    message: "Method not allowed"
+    message: "Method Not Allowed. Please visit https://freshjuice.dev/tools/metadata-checker/"
   }), {
     status: 405
   });

@@ -1,0 +1,69 @@
+---
+title: "Metadata Checker"
+description: "Check the metadata of a page"
+partialScripts:
+  - metadata-checker
+---
+
+<section class="prose max-w-2xl mx-auto space-y-12" x-data="MetadataChecker">
+
+  <form @submit.prevent>
+    <label>
+      Enter Full URL:
+      <input type="url" pattern="https?://.+" required
+             x-model="targetUrl"
+             placeholder="Enter your url">
+    </label>
+
+    <button @click="initProcessing" class="text-bold text-xl p-5 bg-red-400" type="submit">
+      <span x-text="buttonLabel">Check Website Metadata</span>
+    </button>
+
+  </form>
+
+  <div class="space-y-12" x-show="showResults">
+    <div>
+      <h2>Facebook</h2>
+
+      <div class="relative w-full overflow-hidden">
+        <img :src="results.image" :alt="results.imageAlt" class="object-cover m-0">
+
+        <div class="border-t border-gray-300 p-2 text-gray-500 bg-gray-200">
+          <div class="text-xs leading-3 truncate break-words uppercase" x-text="results.homeUrl"></div>
+          <div class="text-terminal text-md font-semibold leading-xl truncate break-words" x-text="results.title"></div>
+          <div class="text-sm leading-xl truncate whitespace-nowrap overflow-hidden overflow-ellipsis"
+               x-text="results.description">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h2>LinkedIn</h2>
+
+      <div class="relative w-full overflow-hidden">
+        <img :src="results.image" :alt="results.imageAlt" class="object-cover m-0">
+
+        <div class="border-t border-gray-300 p-2 text-gray-500 bg-gray-200">
+          <div class="text-terminal text-base font-bold leading-6 truncate" x-text="results.title"></div>
+          <div class="text-xs truncate uppercase" x-text="results.homeUrl"></div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h2>X.com (Previously known as Twitter)</h2>
+
+      <div class="relative w-full">
+        <div class="rounded-xl overflow-hidden">
+          <img :src="results.image" :alt="results.imageAlt" class="object-cover m-0">
+
+          <div class="absolute bottom-2.5 left-2 px-1 py-0.5 text-xs text-white bg-black bg-opacity-40 rounded overflow-hidden"
+               x-text="results.homeUrl">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>

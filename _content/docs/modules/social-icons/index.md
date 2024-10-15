@@ -1,5 +1,5 @@
 ---
-title: Social Icons
+title: "Module: Social Icons"
 description: Social Icons module allows you to add social media icons to the page for your social media accounts or other external links.
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: Statistics
+title: "Module: Statistics"
 desc: Statistics are used to display data in a very short form. They are used to display numbers, percentages, and other data in a visually appealing way.
 ---
 

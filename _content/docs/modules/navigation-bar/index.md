@@ -1,5 +1,5 @@
 ---
-title: Navigation Bar
+title: "Module: Navigation Bar"
 desc: The Navigation Bar modules provide a simple way to display an interface with navigation for the site's pages or sections.
 ---
 

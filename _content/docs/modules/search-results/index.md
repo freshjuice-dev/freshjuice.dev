@@ -1,5 +1,5 @@
 ---
-title: Search Results
+title: "Module: Search Results"
 description: Search Results Module displays the results of a search query by searching our blog for similarities with your search query.
 ---
 

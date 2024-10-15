@@ -1,5 +1,5 @@
 ---
-title: Divider
+title: "Module: Divider"
 desc: The Divider module is a simple module that allows you to add a horizontal line to your page.
 ---
 

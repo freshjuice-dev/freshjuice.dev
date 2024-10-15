@@ -1,5 +1,5 @@
 ---
-title: Global Post Author
+title: "Global Module: Post Author"
 description: The Global Post Author module allows you to display a card at the end of the blog post with the author's details and their headshot
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: Github Gist
+title: "Module: Github Gist"
 desc: The Github Gist Module is a powerful tool that allows you to display specific files from any Git repository. This module is particularly useful for sharing code snippets, examples, or even entire files directly from your repositories.
 ---
 

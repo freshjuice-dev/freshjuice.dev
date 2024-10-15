@@ -1,5 +1,5 @@
 ---
-title: Global Footer
+title: "Global Module: Footer"
 desc: The Global Footer modules provide footers for pages and landing pages for your site.
 ---
 
@@ -23,7 +23,7 @@ You can check the [demo page here](https://143910617.hs-sites-eu1.com/module-glo
 
 ---
 
-## Global Footer Lp
+## Global Footer LP
 
 This Global Footer Module is specifically designed for landing pages.
 

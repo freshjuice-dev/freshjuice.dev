@@ -1,5 +1,5 @@
 ---
-title: Card
+title: "Module: Card"
 description: The Card module is a simple module that allows you to create a three column grid with image and text
 ---
 

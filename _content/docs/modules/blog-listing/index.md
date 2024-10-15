@@ -1,5 +1,5 @@
 ---
-title: Blog Listing
+title: "Module: Blog Listing"
 desc: Blog Listing modules are used to display a list of blog posts on the page. These are all the components of Blog Listing.
 ---
 

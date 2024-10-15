@@ -1,5 +1,5 @@
 ---
-title: Global Scroll To Top
+title: "Global Module: Scroll To Top"
 description: Global Scroll To Top Module adds a global scroll to top button to the website for blog posts.
 ---
 

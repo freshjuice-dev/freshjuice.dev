@@ -1,5 +1,5 @@
 ---
-title: Video Embed
+title: "Module: Video Embed"
 desc: Embed YouTube videos responsively without extra scripts or heavy iframes.
 ---
 

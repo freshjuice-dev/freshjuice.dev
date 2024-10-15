@@ -1,5 +1,5 @@
 ---
-title: Button
+title: "Module: Button"
 description: The Button module is a simple module that allows you to create a button with link.
 ---
 

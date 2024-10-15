@@ -1,7 +1,6 @@
 ---
-title: Row Content
+title: "Row Content Section"
 desc: Row content section is used to display content in a two column layout, one of the columns being an image while another is rich text.
-heading: Row Content
 ---
 
 Row content section is used to display content in a two column layout, one of the columns being an image while another is rich text.

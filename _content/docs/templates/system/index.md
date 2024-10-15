@@ -1,7 +1,7 @@
 ---
-title: System Templates
+title: "System Templates"
 desc: System templates are used to display information about a system or a service.
-heading: System pages
+heading: "System pages"
 ---
 
 Here are all the different system templates in our Theme

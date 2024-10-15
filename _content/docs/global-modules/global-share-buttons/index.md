@@ -1,5 +1,5 @@
 ---
-title: Global Share Buttons
+title: "Global Module: Share Buttons"
 description: The Global Share Buttons module allows you to add share buttons to your blog post.
 ---
 

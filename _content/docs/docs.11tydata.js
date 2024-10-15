@@ -1,6 +1,7 @@
 import slugify from "slugify";
 
 export default {
+  suffix: " | FreshJuice Docs",
   tags: ["docs"],
   layout: "docs",
   permalink: function({page}) {

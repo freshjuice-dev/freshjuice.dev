@@ -1,5 +1,5 @@
 ---
-title: Pricing Cards
+title: "Module: Pricing Cards"
 desc: Pricing cards introduce a product or service to potential customers. They are used to display pricing information for a product or service.
 ---
 

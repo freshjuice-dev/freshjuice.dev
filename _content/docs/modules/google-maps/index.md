@@ -1,5 +1,5 @@
 ---
-title: Google Maps Embed
+title: "Module: Google Maps Embed"
 desc: The Google Maps Embed is a way to display a minified version of Google Maps with a custom location predetermined by its user.
 ---
 

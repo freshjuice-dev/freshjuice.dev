@@ -1,5 +1,6 @@
 ---
 title: Documentation
+suffix: " | FreshJuice"
 heading: Fruity Docs
 permalink: /docs/
 ---

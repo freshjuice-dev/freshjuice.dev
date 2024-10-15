@@ -72,8 +72,6 @@ export default {
   },
 
   sortCollection: (collection, key, order = "ASC") => {
-    // console.log(collection);
-    // console.log(key)
     return collection.sort((a, b) => {
       a = a[key];
       b = b[key];
@@ -154,6 +152,85 @@ export default {
 
   objectToArrayOfValues: (object) => {
     return Object.values(object);
+  },
+
+  getDocsMenu: (docsCollection, {url}) => {
+    const docsMenu = [
+      {
+        title: "Getting Started",
+        children: [
+          { title: "Overview", url: "/docs/" },
+          { title: "Installation", url: "/docs/installation/" },
+          { title: "Customization", url: "/docs/customization/" },
+          { title: "Using Tailwind CSS", url: "/docs/tailwindcss/" },
+          { title: "Using Alpine.js", url: "/docs/alpinejs/" }
+        ]
+      }, {
+        title: "Modules",
+        children: []
+      }, {
+        title: "Global Modules",
+        children: []
+      }, {
+        title: "Sections",
+        children: []
+      }, {
+        title: "Templates",
+        children: []
+      }
+    ];
+    docsCollection.forEach((item) => {
+      let title = item.data.title;
+      if (title.startsWith("Module: ")) {
+        title = title.slice(8);
+      }
+      if (title.startsWith("Global Module: ")) {
+        title = title.slice(15);
+      }
+      if (title.endsWith(" Section")) {
+        title = title.slice(0, -8);
+      }
+      if (title.endsWith(" Template")) {
+        title = title.slice(0, -9);
+      }
+      if (item.data.tags.includes("modules")) {
+        docsMenu[1].children.push({ title: item.data.heading || title, url: item.url });
+      }
+      if (item.data.tags.includes("global-modules")) {
+        docsMenu[2].children.push({ title: item.data.heading || title, url: item.url });
+      }
+      if (item.data.tags.includes("sections")) {
+        docsMenu[3].children.push({ title: item.data.heading || title, url: item.url });
+      }
+      if (item.data.tags.includes("templates")) {
+        docsMenu[4].children.push({ title: item.data.heading || title, url: item.url });
+      }
+    });
+    docsMenu.forEach((item) => {
+      item.children.forEach((child) => {
+        if (child.url === url) {
+          item.active = true;
+          child.active = true;
+        }
+      });
+    });
+    return docsMenu;
+  },
+
+  getActiveDocsPage: (docsMenu) => {
+    let activePage = {};
+    docsMenu.forEach((section) => {
+      section.children.forEach((page) => {
+        if (page.active) {
+          activePage = {
+            sectionName: section.title,
+            pageName: page.title,
+            pageUrl: page.url
+          };
+        }
+      });
+    });
+    return activePage;
   },
 
   getBreadcrumbsList: ({url}, title) => {

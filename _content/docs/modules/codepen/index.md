@@ -1,5 +1,5 @@
 ---
-title: Codepen Embed
+title: "Module: Codepen Embed"
 desc: The Codepen Embed is used to display projects (otherwise called pens) from Codepen into your webpages
 ---
 

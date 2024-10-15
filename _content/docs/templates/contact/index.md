@@ -1,7 +1,6 @@
 ---
-title: Contact Us Template
+title: "Contact Us Template"
 desc: Contact Us template is used to display information about how to contact your service or company.
-heading: Contact Us
 ---
 
 Contact Us template is used to display information about how to contact your service or company.

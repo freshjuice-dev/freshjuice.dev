@@ -2,6 +2,10 @@
 layout: base.njk
 ---
 
+{% set docsMenu = collections.docs | getDocsMenu(page)%}
+{% set activeDocsPage = docsMenu | getActiveDocsPage %}
+
+{# Layout Helper #}
 <div class="-mt-8 sm:-mt-12 lg:-mt-16">
   {# Layout Helper #}
 </div>
@@ -22,13 +26,7 @@ layout: base.njk
   <aside class="mx-auto w-full lg:w-[19rem] shrink-0 border-y lg:border-y-0 lg:border-r border-gray-900/10 dark:border-gray-100/10 lg:py-8 relative">
 
     {# Desktop menu #}
-    <div class="hidden lg:block absolute inset-0 overflow-y-auto"
-         x-ref="docsMenuDesktop"
-         x-init="
-          if ($refs.activeMenuItem) {
-            $refs.docsMenuDesktop.scrollTop = $refs.activeMenuItem.offsetTop - 200;
-          }
-         ">
+    <div class="hidden lg:block">
       <div class="sticky top-0 z-10 lg:pr-8">
         <div class="h-8 bg-zinc-50 dark:bg-zinc-900"></div>
         <div class="bg-zinc-50 dark:bg-zinc-900">
@@ -44,19 +42,16 @@ layout: base.njk
         <div class="bg-gradient-to-b from-zinc-50 dark:from-zinc-900 h-8"></div>
       </div>
 
-      {% for section in menu.docs %}
+      {% for section in docsMenu %}
         <div class="mb-6 lg:pr-8">
-          <p class="text-lg font-semibold mb-3">{{ section.name }}</p>
+          <p class="text-lg font-semibold mb-3">{{ section.title }}</p>
           <ul class="list-none m-0 p-0 border-l border-gray-900/5 dark:border-gray-100/5 space-y-2">
-            {% set menuCollection = section.items %}
-            {% if section.name|lower == "modules" or section.name|lower == "sections" %}
-              {% set menuCollection = section.items|sortCollection("title", "ASC") %}
-            {% endif %}
-            {% for item in menuCollection %}
-              <li{% if page.url == item.url %} x-ref="activeMenuItem"{% endif %}>
-                <a href="{{ item.url }}"
-                   class="block pl-6 py-1 -ml-px border-l hover:border-current {% if page.url == item.url %}border-current !text-red-600 dark:!text-red font-semibold{% else %}border-transparent opacity-75 hover:opacity-100 !text-zinc-600 dark:!text-zinc-300{% endif %}">
-                  {{ item.title }}
+            {% set children = section.children | sortCollection("title", "ASC") if loop.index0 else section.children %}
+            {% for child in children %}
+              <li>
+                <a href="{{ child.url }}"
+                   class="block pl-6 py-1 -ml-px border-l hover:border-current {% if child.active %}border-current !text-red-600 dark:!text-red font-semibold{% else %}border-transparent opacity-75 hover:opacity-100 !text-zinc-600 dark:!text-zinc-300{% endif %}">
+                  {{ child.title }}
                 </a>
               </li>
             {% endfor %}
@@ -68,10 +63,6 @@ layout: base.njk
 
     {# Mobile menu #}
     <div class="lg:hidden" x-cloak>
-
-      {# Set the section and page names for breadcrumbs #}
-      {% set sectionName = "" %}
-      {% set pageName = "" %}
 
       <div class="fixed z-40 inset-y-0 left-0 w-80 max-w-[calc(100%-3rem)] bg-zinc-100 dark:bg-zinc-800 p-6 overflow-y-auto space-y-6"
            x-show="docs.drawerMenuOpen"
@@ -88,25 +79,15 @@ layout: base.njk
           {% phicon "x", "regular", { class: "size-6"} %}
         </button>
 
-        {% for section in menu.docs %}
+        {% for section in docsMenu %}
           <div class="">
-            <p class="text-lg font-semibold mb-3">{{ section.name }}</p>
+            <p class="text-lg font-semibold mb-3">{{ section.title }}</p>
             <ul class="list-none m-0 p-0 border-l border-gray-900/5 dark:border-gray-100/5 space-y-2">
-              {% set menuCollection = section.items %}
-              {% if section.name|lower == "modules" or section.name|lower == "sections" %}
-                {% set menuCollection = section.items|sortCollection("title", "ASC") %}
-              {% endif %}
-              {% for item in menuCollection %}
-
-                {# Set the section and page names for breadcrumbs #}
-                {% if page.url == item.url %}
-                  {% set sectionName = section.name %}
-                  {% set pageName = item.title %}
-                {% endif %}
-
+              {% set children = section.children | sortCollection("title", "ASC") if loop.index0 else section.children %}
+              {% for child in children %}
                 <li>
-                  <a href="{{ item.url }}"
-                     class="block pl-6 py-1 -ml-px border-l hover:border-current {% if page.url == item.url %}border-current !text-red-600 dark:!text-red font-semibold{% else %}border-transparent opacity-75 hover:opacity-100 !text-zinc-600 dark:!text-zinc-300{% endif %}">{{ item.title }}</a>
+                  <a href="{{ child.url }}"
+                     class="block pl-6 py-1 -ml-px border-l hover:border-current {% if child.active %}border-current !text-red-600 dark:!text-red font-semibold{% else %}border-transparent opacity-75 hover:opacity-100 !text-zinc-600 dark:!text-zinc-300{% endif %}">{{ child.title }}</a>
                 </li>
               {% endfor %}
             </ul>
@@ -122,10 +103,10 @@ layout: base.njk
         </button>
         <ol class="mr-4 flex text-sm leading-6 whitespace-nowrap min-w-0" @click="docs.toggleDrawerMenu()">
           <li class="pl-4 flex items-center cursor-pointer">
-            {{ sectionName or "Fruity" }}
+            {{ activeDocsPage.sectionName or "Fruity" }}
             {% phicon "caret-right", "regular", { class: "size-3 mx-3 hidden sm:block" } %}
           </li>
-          <li class="font-semibold hidden sm:block">{{ pageName or "Docs" }}</li>
+          <li class="font-semibold hidden sm:block">{{ activeDocsPage.pageName or "Docs" }}</li>
         </ol>
         <button type="button"
                 class="flex items-center ml-auto"
@@ -143,10 +124,10 @@ layout: base.njk
   <main class="prose mx-auto w-full lg:max-w-full grow py-8" data-pagefind-body>
 
     <header class="prose md:prose-xl">
-      {% if sectionName %}
-        <p class="not-prose text-sm md:text-base font-semibold mb-0 text-red-600 dark:text-red leading-none">{{ sectionName }}</p>
+      {% if activeDocsPage.sectionName %}
+        <p class="not-prose text-sm md:text-base font-semibold mb-0 text-red-600 dark:text-red leading-none">{{ activeDocsPage.sectionName }}</p>
       {% endif %}
-      <h1>{{ heading or title }}</h1>
+      <h1>{{ activeDocsPage.pageName }}</h1>
     </header>
 
     {{ content | safe }}

@@ -1,5 +1,5 @@
 ---
-title: Global Footer
+title: "Global Module: Footer"
 desc: The Global Footer modules provide footers for pages and landing pages for your site.
 ---
 

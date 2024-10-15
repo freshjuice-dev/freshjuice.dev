@@ -1,7 +1,6 @@
 ---
-title: Pricing Template
+title: "Pricing Template"
 desc: Pricing templates are used to display information about the pricing of a service or a system.
-heading: Pricing
 ---
 
 Pricing Template is used to display a page with three different pricing plans for a product or service.

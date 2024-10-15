@@ -1,5 +1,5 @@
 ---
-title: Flip Cards
+title: "Module: Flip Cards"
 desc: Flip Cards Module are an incredible way to create a three column layout made up of cards, each card having an animation when hovered on.
 ---
 

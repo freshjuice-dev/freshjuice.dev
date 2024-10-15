@@ -1,7 +1,6 @@
 ---
-title: Call to Action Section
+title: "Call to Action Section"
 desc: Call to Action section is used to create a section where you have a submission or a cta to another site/form etc.
-heading: Call to Action
 ---
 
 Call to Action Section is used to create a section where you have a submission or a cta to another site/form etc.

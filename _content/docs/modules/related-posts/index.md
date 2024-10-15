@@ -1,5 +1,5 @@
 ---
-title: Related Posts
+title: "Module: Related Posts"
 desc: Related Posts module is used to display blog posts similar to the post you're at in the blog. Additionally, it can only be used in content type "BLOG_POST".
 ---
 

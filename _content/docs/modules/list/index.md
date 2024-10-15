@@ -1,5 +1,5 @@
 ---
-title: List
+title: "Module: List"
 description: The List module provides a way to create and manage a list of items. Features include customizable text and its appearance, along with customisable icons.
 ---
 

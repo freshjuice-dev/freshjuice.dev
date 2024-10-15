@@ -50,20 +50,32 @@ export default async function(eleventyConfig) {
   eleventyConfig.addLayoutAlias("prose", "prose.njk");
 
   // Add Custom Collections
-  eleventyConfig.addCollection("authors", (collection) => {
-    return collection.getFilteredByTag("authors");
+  eleventyConfig.addCollection("authors", (collectionsApi) => {
+    return collectionsApi.getFilteredByTag("authors");
   });
-  eleventyConfig.addCollection("docs", (collection) => {
-    return collection.getFilteredByTag("docs");
+  eleventyConfig.addCollection("docs", (collectionsApi) => {
+    return collectionsApi.getFilteredByTag("docs");
   });
-  eleventyConfig.addCollection("tools", (collection) => {
-    return collection.getFilteredByTag("tools");
+  eleventyConfig.addCollection("sections", (collectionsApi) => {
+    return collectionsApi.getFilteredByTag("sections");
   });
-  eleventyConfig.addCollection('categories', collection => {
+  eleventyConfig.addCollection("templates", (collectionsApi) => {
+    return collectionsApi.getFilteredByTag("templates");
+  });
+  eleventyConfig.addCollection("modules", (collectionsApi) => {
+    return collectionsApi.getFilteredByTag("modules");
+  });
+  eleventyConfig.addCollection("globalModules", (collectionsApi) => {
+    return collectionsApi.getFilteredByTag("global-modules");
+  });
+  eleventyConfig.addCollection("tools", (collectionsApi) => {
+    return collectionsApi.getFilteredByTag("tools");
+  });
+  eleventyConfig.addCollection('categories', collectionsApi => {
     let gatheredTags = [];
 
     // Go through every piece of content and grab the tags
-    collection.getAll().forEach(item => {
+    collectionsApi.getAll().forEach(item => {
       if (item.data.tags) {
         if (typeof item.data.tags === 'string') {
           gatheredTags.push(item.data.tags);
@@ -75,7 +87,7 @@ export default async function(eleventyConfig) {
 
     gatheredTags = (gatheredTags || []).filter(
       tag =>
-        ["all", "nav", "authors", "tools", "post", "posts", "doc", "docs", "featured"].indexOf(
+        ["all", "nav", "authors", "tools", "post", "posts", "doc", "docs", "sections", "templates", "modules", "global-modules", "featured"].indexOf(
           tag
         ) === -1
     );

@@ -26,13 +26,13 @@ partialScripts:
       <h2>Facebook</h2>
 
       <div class="relative w-full overflow-hidden">
-        <img :src="results.image" :alt="results.imageAlt" class="object-cover m-0">
+        <img :src="previewData[`og:image`]" :alt="previewData[`og:image:alt`]" class="object-cover m-0">
 
         <div class="border-t border-gray-300 p-2 text-gray-500 bg-gray-200">
-          <div class="text-xs leading-3 truncate break-words uppercase" x-text="results.homeUrl"></div>
-          <div class="text-terminal text-md font-semibold leading-xl truncate break-words" x-text="results.title"></div>
+          <div class="text-xs leading-3 truncate break-words uppercase" x-text="previewData[`og:site_name`]"></div>
+          <div class="text-terminal text-md font-semibold leading-xl truncate break-words" x-text="previewData[`title`]"></div>
           <div class="text-sm leading-xl truncate whitespace-nowrap overflow-hidden overflow-ellipsis"
-               x-text="results.description">
+               x-text="previewData[`description`]">
           </div>
         </div>
       </div>
@@ -42,11 +42,11 @@ partialScripts:
       <h2>LinkedIn</h2>
 
       <div class="relative w-full overflow-hidden">
-        <img :src="results.image" :alt="results.imageAlt" class="object-cover m-0">
+        <img :src="previewData[`og:image`]" :alt="previewData[`og:image:alt`]" class="object-cover m-0">
 
         <div class="border-t border-gray-300 p-2 text-gray-500 bg-gray-200">
-          <div class="text-terminal text-base font-bold leading-6 truncate" x-text="results.title"></div>
-          <div class="text-xs truncate uppercase" x-text="results.homeUrl"></div>
+          <div class="text-terminal text-base font-bold leading-6 truncate" x-text="previewData[`title`]"></div>
+          <div class="text-xs truncate uppercase" x-text="previewData[`og:site_name`]"></div>
         </div>
       </div>
     </div>
@@ -56,10 +56,10 @@ partialScripts:
 
       <div class="relative w-full">
         <div class="rounded-xl overflow-hidden">
-          <img :src="results.image" :alt="results.imageAlt" class="object-cover m-0">
+          <img :src="previewData[`twitter:image`]" :alt="previewData[`twitter:image:alt`]" class="object-cover m-0">
 
           <div class="absolute bottom-2.5 left-2 px-1 py-0.5 text-xs text-white bg-black bg-opacity-40 rounded overflow-hidden"
-               x-text="results.homeUrl">
+               x-text="previewData[`og:site_name`]">
           </div>
         </div>
       </div>

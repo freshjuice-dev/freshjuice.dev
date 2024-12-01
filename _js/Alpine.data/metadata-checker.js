@@ -9,7 +9,6 @@ document.addEventListener("alpine:init", () => {
     loading: false,
     buttonLabel: "Check Website Metadata",
     previewData: {},
-    tableData: {},
     labelDescriptions: {
       "title": "The title of the page",
       "description": "The description of the page",
@@ -137,24 +136,8 @@ document.addEventListener("alpine:init", () => {
       const urlRegex = /^(http|https):\/\/[^ "]+$/;
       return urlRegex.test(url);
     },
-    refactorData(data) {
-      /* Goes through the data object and finds all objKeys
-      *  Finds all the keys in the objects in the data that have their key matching with a label in labelDescriptions
-      *  Adds the key and value from labelDescriptions into tableData for later usage
-      * */
-      for (let objKey of Object.keys(data)) {
-        for (let key of Object.keys(data[objKey])) {
-          for (let label of Object.keys(this.labelDescriptions)) {
-            if (key === label) {
-              this.tableData[key] = this.labelDescriptions[key];
-            }
-          }
-
-          this.previewData[key] = data[objKey][key];
-        }
-      }
-
-      // TODO: Possible filtering of previewData to include only the keys used
+    process(data) {
+      this.previewData = data;
     },
     async fetchPageData() {
       if (!this.isValidUrl(this.targetUrl)) {
@@ -175,10 +158,8 @@ document.addEventListener("alpine:init", () => {
           return response.json();
         })
         .then((data) => {
-          this.refactorData(data);
-          // this.modifyData(data);
+          this.process(data);
           debugLog('Response Data:', data);
-          // debugLog('Table Data:', this.tableData);
           // debugLog('Preview Data:', this.previewData);
           this.initSuccess();
         })

@@ -49,6 +49,8 @@ export const onRequestPost = async ({ request }) => {
   const metadata = {
     title: $("title").text() || "",
     description: $("meta[name='description']").attr("content") || "",
+    homeUrl: (($("meta[property='og:url']").attr("content")).match(/\/\/(.*?)\//))[1] || "",
+    image: $("meta[property='og:image']").attr("content") || "",
     keywords: $("meta[name='keywords']").attr("content") || "",
     author: $("meta[name='author']").attr("content") || "",
     robots: $("meta[name='robots']").attr("content") || "",

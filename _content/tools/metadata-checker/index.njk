@@ -20,50 +20,65 @@ partialScripts:
     </button>
 
   </form>
-
-  <div class="space-y-12" x-show="showResults">
+x
+  <template x-if="showResults" x-for="[obj_key, obj] in Object.entries(previewData)">
     <div>
+      <table>
+        <tbody>
+          <template x-for="[name, prop] in Object.entries(obj)">
+            <tr>
+              <td x-text="name"></td>
+              <td x-text="prop"> Golden Silence </td>
+            </tr>
+          </template>
+        </tbody>
+      </table>
+    </div>
+  </template>
+
+  <template x-if="showResults">
+    <div>
+
+      {# Facebook Preview #}
       <h2>Facebook</h2>
 
       <div class="relative w-full overflow-hidden">
-        <img :src="previewData[`og:image`]" :alt="previewData[`og:image:alt`]" class="object-cover m-0">
+        <img :src="previewData.metadata[`image`]" class="object-cover m-0">
 
         <div class="border-t border-gray-300 p-2 text-gray-500 bg-gray-200">
-          <div class="text-xs leading-3 truncate break-words uppercase" x-text="previewData[`og:site_name`]"></div>
-          <div class="text-terminal text-md font-semibold leading-xl truncate break-words" x-text="previewData[`title`]"></div>
+          <div class="text-xs leading-3 truncate break-words uppercase" x-text="previewData.metadata[`homeUrl`]"></div>
+          <div class="text-terminal text-md font-semibold leading-xl truncate break-words" x-text="previewData.metadata[`title`]"></div>
           <div class="text-sm leading-xl truncate whitespace-nowrap overflow-hidden overflow-ellipsis"
-               x-text="previewData[`description`]">
+               x-text="previewData.metadata[`description`]">
           </div>
         </div>
       </div>
-    </div>
 
-    <div>
+      {# LinkedIn Preview #}
       <h2>LinkedIn</h2>
 
       <div class="relative w-full overflow-hidden">
-        <img :src="previewData[`og:image`]" :alt="previewData[`og:image:alt`]" class="object-cover m-0">
+        <img :src="previewData.metadata[`image`]" class="object-cover m-0">
 
         <div class="border-t border-gray-300 p-2 text-gray-500 bg-gray-200">
-          <div class="text-terminal text-base font-bold leading-6 truncate" x-text="previewData[`title`]"></div>
-          <div class="text-xs truncate uppercase" x-text="previewData[`og:site_name`]"></div>
+          <div class="text-terminal text-base font-bold leading-6 truncate" x-text="previewData.metadata[`title`]"></div>
+          <div class="text-xs truncate uppercase" x-text="previewData.metadata[`homeUrl`]"></div>
         </div>
       </div>
-    </div>
 
-    <div>
+      {# Xcom Preview #}
       <h2>X.com (Previously known as Twitter)</h2>
 
       <div class="relative w-full">
         <div class="rounded-xl overflow-hidden">
-          <img :src="previewData[`twitter:image`]" :alt="previewData[`twitter:image:alt`]" class="object-cover m-0">
+          <img :src="previewData.metadata[`image`]" class="object-cover m-0">
 
           <div class="absolute bottom-2.5 left-2 px-1 py-0.5 text-xs text-white bg-black bg-opacity-40 rounded overflow-hidden"
-               x-text="previewData[`og:site_name`]">
+               x-text="previewData.metadata[`homeUrl`]">
           </div>
         </div>
       </div>
-    </div>
-  </div>
 
+    </div>
+  </template>
 </section>

@@ -5,7 +5,7 @@ import Plausible from "plausible-tracker";
 import Alpine from "alpinejs";
 import intersect from "@alpinejs/intersect";
 import collapse from "@alpinejs/collapse";
-
+import "@zachleat/table-saw";
 
 const {trackEvent, trackPageview, enableAutoOutboundTracking} = Plausible({
   domain: "freshjuice.dev",
@@ -221,7 +221,6 @@ Alpine.data("xDOM", () => {
     },
   };
 });
-
 
 domReady(() => {
 

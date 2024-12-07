@@ -75,6 +75,7 @@
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.9",
     "@tailwindcss/typography": "^0.5.15",
+    "@zachleat/table-saw": "^1.0.6",
     "alpinejs": "^3.14.1",
     "autoprefixer": "^10.4.20",
     "chalk": "^5.3.0",

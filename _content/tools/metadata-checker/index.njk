@@ -1,15 +1,23 @@
 ---
 title: "Metadata Checker"
-description: "Analyze your website’s metadata to boost SEO and social media visibility with optimized meta tags like Open Graph and Twitter Cards."
+desc: "Analyze your website’s metadata to boost SEO and social media visibility with optimized meta tags like Open Graph and Twitter Cards."
+icon: "scan"
 partialScripts:
   - //cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js
   - metadata-checker
 ---
 
-<section class="" x-data="MetadataChecker">
+<nav class="max-w-prose md:text-xl mx-auto w-full min-h-9 leading-none">
+  <a class="inline-flex items-center gap-2 group no-underline" href="/tools/">
+    {% phicon "arrow-left", "bold", { class: "size-5 group-hover:-translate-x-2 transition-transform" } %}
+    <span>Back to Tools</span>
+  </a>
+</nav>
 
-  <div class="prose mx-auto">
-    <h1>Preview your website Metadata</h1>
+<main class="" x-data="MetadataChecker">
+
+  <div class="prose md:prose-xl mx-auto">
+    <h1>Check Website Metadata</h1>
     <form @submit.prevent>
       <label for="targetUrl">Enter Full URL:</label>
       <div class="flex w-full gap-5">
@@ -239,6 +247,6 @@ partialScripts:
     <p>Official documentation: <a href="https://developer.x.com/en/docs/x-for-websites/cards/overview/summary-card-with-large-image" rel="noopener">Twitter Cards</a></p>
 
   </div>
-</section>
+</main>
 
 

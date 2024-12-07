@@ -1,8 +1,28 @@
 ---
-layout: page
-tags: ["tools"]
-title: Tools
+title: FreshJuice Tools
+suffix: " "
 permalink: /tools/
 ---
 
-<h2>Welcome to FreshJuice Tools</h2>
+<div class="prose md:prose-xl mx-auto">
+  <h1>Fresh Tools</h1>
+
+  <div class="not-prose grid md:grid-cols-2 gap-4 lg:gap-8">
+    {% set postslist = collections.tools %}
+    {% for post in postslist | reverse %}
+      {%- if post.fileSlug | slugify != "tools" %}
+        <article class="bg-neutral-200/40 hover:bg-neutral-200 dark:bg-neutral-800/60 dark:hover:bg-neutral-800 transition p-4 md:p-8 rounded-md relative">
+          <h3 class="text-lg md:text-xl font-medium mb-3 w-full flex gap-2">
+            {% phicon post.data.icon, "duotone", { class: "size-7 text-current" } %}
+            <a class="text-current text-pretty inline-block" href="/tools/{{ post.fileSlug | slugify }}/">
+              <span class="absolute inset-0"></span>
+              {{ post.data.title }}
+            </a>
+          </h3>
+          <p class="text-sm line-clamp-4">{{ post.data.desc }}</p>
+        </article>
+      {%- endif %}
+    {% endfor %}
+  </div>
+
+</div>

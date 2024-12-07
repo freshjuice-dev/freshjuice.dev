@@ -49,9 +49,8 @@ export const onRequestPost = async ({ request }) => {
   const metadata = {
     title: $("title").text() || "",
     description: $("meta[name='description']").attr("content") || "",
-    homeUrl: (($("meta[property='og:url']").attr("content")).match(/\/\/(.*?)\//))[1] || "",
-    image: $("meta[property='og:image']").attr("content") || "",
     keywords: $("meta[name='keywords']").attr("content") || "",
+    canonical: $("link[rel='canonical']").attr("href") || "",
     author: $("meta[name='author']").attr("content") || "",
     robots: $("meta[name='robots']").attr("content") || "",
     viewport: $("meta[name='viewport']").attr("content") || "",
@@ -75,5 +74,10 @@ export const onRequestPost = async ({ request }) => {
   });
 
   // return JSON response
-  return new Response(JSON.stringify({ metadata, og, twitter }));
+  return new Response(JSON.stringify({
+    homeUrl: new URL(targetUrl).hostname || "",
+    metadata,
+    og,
+    twitter
+  }));
 };

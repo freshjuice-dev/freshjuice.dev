@@ -54,7 +54,7 @@ partialScripts:
         <div class="w-full max-w-xs shrink-0">
           <div>Facebook</div>
           <div class="relative overflow-hidden">
-            <div class="aspect-opengraph border-gray-200 bg-center bg-cover p-8 flex justify-center items-center"
+            <div class="aspect-opengraph bg-gray-200 dark:bg-gray-800 bg-center bg-cover p-8 flex justify-center items-center"
                  :style="`background-image: url(${previewData.og['og:image']})`">
               <span class="text-xl" x-show="!previewData.og['og:image']">You're missing an image 🙁</span>
             </div>
@@ -68,7 +68,7 @@ partialScripts:
         <div class="w-full max-w-xs shrink-0">
           <div>LinkedIn</div>
           <div class="relative overflow-hidden">
-            <div class="aspect-opengraph border-gray-200 bg-center bg-cover p-8 flex justify-center items-center"
+            <div class="aspect-opengraph bg-gray-200 dark:bg-gray-800 bg-center bg-cover p-8 flex justify-center items-center"
                  :style="`background-image: url(${previewData.og['og:image']})`">
               <span class="text-xl" x-show="!previewData.og['og:image']">You're missing an image 🙁</span>
             </div>
@@ -81,7 +81,7 @@ partialScripts:
         <div class="w-full max-w-xs shrink-0">
           <div>X.com (Previously known as Twitter)</div>
           <div class="relative rounded-xl overflow-hidden">
-            <div class="aspect-opengraph border-gray-200 bg-center bg-cover p-8 flex justify-center items-center"
+            <div class="aspect-opengraph bg-gray-200 dark:bg-gray-800 bg-center bg-cover p-8 flex justify-center items-center"
                  :style="`background-image: url(${(previewData.twitter['twitter:image']||previewData.og['og:image'])})`">
               <span class="text-xl" x-show="!(previewData.twitter['twitter:image']||previewData.og['og:image'])">You're missing an image 🙁</span>
             </div>

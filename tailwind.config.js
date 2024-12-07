@@ -34,6 +34,7 @@ export default {
       landscape: "4/3",
       portrait: "3/4",
       video: "16/9",
+      opengraph: "1200/630",
     },
     extend: {
       colors: {
@@ -96,8 +97,8 @@ export default {
           "--tw-prose-code": "#d4d4d4",
           "--tw-prose-pre-code": "#e5e7eb",
           "--tw-prose-pre-bg": "#1f2937",
-          "--tw-prose-th-borders": "#d1d5db",
-          "--tw-prose-td-borders": "#e5e7eb",
+          "--tw-prose-th-borders": "#f3f4f61a",
+          "--tw-prose-td-borders": "#f3f4f61a",
           "--tw-prose-invert-body": "#d1d5db",
           "--tw-prose-invert-headings": "#fff",
           "--tw-prose-invert-lead": "#9ca3af",
@@ -128,6 +129,15 @@ export default {
         },
         'code[class*="language-"], pre[class*="language-"]': {
           "@apply font-mono": {},
+        },
+        '.prose table:not([class]) th, .prose table:not([class]) td': {
+          "@apply px-4": {},
+        },
+        '.prose table:not([class]) tbody > tr:nth-child(odd), .prose table.striped tbody > tr:nth-child(odd)': {
+          "@apply bg-neutral-100 dark:bg-neutral-800/40": {},
+        },
+        '.prose table-saw table:not([class]) tr': {
+          "@apply mb-0": {},
         }
       });
     },

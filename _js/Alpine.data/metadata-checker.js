@@ -46,6 +46,7 @@ document.addEventListener("alpine:init", () => {
       this.setButtonLabel();
       this.showResults = true;
       this.loading = false;
+      history.pushState({}, "", `?url=${encodeURIComponent(this.targetUrl)}`);
     },
     initError(error) {
       this.status = "error";
@@ -141,6 +142,12 @@ document.addEventListener("alpine:init", () => {
       debugLog("Metadata Checker initialized");
       //loadStylesheet("https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css");
       //loadScript("https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js");
+      const urlParams = new URLSearchParams(window.location.search);
+      const url = urlParams.get("url");
+      if (url) {
+        this.targetUrl = url;
+        this.initProcessing();
+      }
     }
   }));
 });

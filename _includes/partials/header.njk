@@ -8,14 +8,14 @@
         {% include "partials/logo.njk" %}
         <span class="sr-only">FreshJuice a HubSpot Theme</span>
       </a>
-      <div class="hidden sm:flex sm:gap-x-12">
+      <div class="hidden navSwap:flex navSwap:gap-x-12">
         {% for item in menu.main %}
           <a href="{{ item.url }}" class="text-sm font-semibold leading-6 hover:text-red-600">{{ item.title }}</a>
         {% endfor %}
       </div>
     </div>
 
-    <div class="hidden sm:flex items-center gap-x-4 text-gray-600 dark:text-gray-300 leading-none">
+    <div class="hidden navSwap:flex items-center gap-x-4 text-gray-600 dark:text-gray-300 leading-none">
       <button type="button"
               x-cloak
               @click="toggleTheme"
@@ -46,7 +46,7 @@
       </a>
     </div>
 
-    <div class="flex sm:hidden items-center gap-x-4 text-gray-600 dark:text-gray-300 leading-none">
+    <div class="flex navSwap:hidden items-center gap-x-4 text-gray-600 dark:text-gray-300 leading-none">
       <button type="button" class="hover:text-red-600" @click="openDrawer()">
         <span class="sr-only">Open main menu</span>
         <span class="uppercase flex items-center text-sm"
@@ -57,7 +57,7 @@
   </nav>
 
   {# Mobile menu, show/hide based on menu open state. #}
-  <div class="sm:hidden flex justify-end fixed top-0 inset-x-0 p-4 transition transform origin-top-right z-30 "
+  <div class="navSwap:hidden flex justify-end fixed top-0 inset-x-0 p-4 transition transform origin-top-right z-30 "
        x-cloak
        x-show="drawerOpen"
        role="dialog"

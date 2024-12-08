@@ -91,48 +91,43 @@ export default {
   },
 
   ogImagesJSON: (eleventyConfig) => {
-    eleventyConfig.addShortcode("ogImagesJSON", function(blogs, docs, authors, pages) {
-      let returnJson = {
-        docs: [],
-        blogs: [],
-        authors: [],
-        pages: [],
-      };
-
-      blogs.forEach((blog) => {
-        returnJson.blogs.push({
-          title: blog.data.title,
-          collection: "blogs",
-          slug: slugify(blog.url.replace(/\//g, " "), slugifyOptions)
-        });
+    eleventyConfig.addShortcode("ogImagesJSON", function(allCollections) {
+      let returnJson = [];
+      allCollections.forEach((item) => {
+        let title = (item.data || {}).title || "";
+        if (title === "Tags") {
+          title = "Blog tags";
+        }
+        if (title.startsWith("Tagged ")) {
+          title = title.split(" ")
+          title[0] = "Blogs tagged with";
+          title[1] = '<span>' + title[1] + '</span>';
+          title = title.join(" ");
+        }
+        let url = (item.page || {}).url || "";
+        if (title.trim() && url.trim()) {
+          let itemCollectionName = "";
+          if (item.data.tags && item.data.tags.includes("docs")) {
+            itemCollectionName = "docs";
+          } else if (item.data.tags && item.data.tags.includes("posts")) {
+            itemCollectionName = "blogs";
+          } else if (item.data.tags && item.data.tags.includes("authors")) {
+            itemCollectionName = "authors";
+          } else {
+            itemCollectionName = "pages";
+          }
+          if (url === "/") {
+            url = "default";
+          }
+          returnJson.push({
+            title: title,
+            role: item.data.role || "",
+            email: item.data.email || "",
+            collection: itemCollectionName,
+            slug: slugify(url.replace(/\//g, " "), slugifyOptions)
+          });
+        }
       });
-
-      docs.forEach((doc) => {
-        returnJson.docs.push({
-          title: doc.data.title,
-          collection: "docs",
-          slug: slugify(doc.url.replace(/\//g, " "), slugifyOptions)
-        });
-      });
-
-      authors.forEach((author) => {
-        returnJson.authors.push({
-          title: author.data.title,
-          collection: "authors",
-          role: author.data.role,
-          email: author.data.email,
-          slug: slugify(author.url.replace(/\//g, " "), slugifyOptions)
-        });
-      });
-
-      pages.forEach((page) => {
-        returnJson.pages.push({
-          title: page.title,
-          collection: "pages",
-          slug: slugify(page.permalink.replace(/\//g, " "), slugifyOptions),
-        });
-      });
-
       return JSON.stringify(returnJson);
     });
   },

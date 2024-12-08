@@ -92,11 +92,15 @@ const htmlTemplate = `
     .lemon {
       background-image: linear-gradient(150deg, #cb5dc6 0%, #F0E68C 45%, #FFD700 100%);
     }
-    h1 {
+     h1 {
       overflow: hidden;
       display: -webkit-box;
+      text-wrap: pretty;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 3;
+    }
+    h1 span {
+      white-space: nowrap !important;
     }
     .shadow {
       text-shadow: 0 0 10px rgba(0,0,0,0.5);
@@ -127,7 +131,7 @@ const htmlTemplate = `
 <body style="width: 1200px; height: 630px; padding: 0; margin: 0; font-family: sans-serif">
   <div class="card {{bgColor}}" style="width: 1200px; height: 630px; box-sizing: border-box; color: #fff; padding: 70px 70px">
     <div class="logo">{{{logo}}}</div>
-    <h1 class="shadow" style="font-size: 72px; font-weight: 700; margin: 20px 0 10px 40px;">{{title}}</h1>
+    <h1 class="shadow" style="font-size: 72px; font-weight: 700; margin: 20px 0 10px 40px;">{{{title}}}</h1>
     <p class="shadow" style="margin: 20px 0 0 40px; font-size: 24px; font-weight: 700;">FRESHJUICE.DEV {{collection}}</p>
   </div>
 </body>
@@ -143,11 +147,13 @@ const generateImage = async (post) => {
   }
   post.title = post.title.trim().replaceAll(/&amp;/g, "and");
   post.collection = "";
-  if (post.slug.startsWith("blog")) {
+  if (post.slug.startsWith("blog") || post.slug.startsWith("tags")) {
     post.collection = "/ BLOG";
   } else if (post.slug.startsWith("docs")) {
     post.collection = "/ DOCS";
-  }else if (post.slug.startsWith("authors-")) {
+  } else if (post.slug.startsWith("tools")) {
+    post.collection = "/ TOOLS";
+  } else if (post.slug.startsWith("authors-")) {
     post.collection = "/ AUTHORS";
     logo = await gravatarImage(post.email, { size: 150 });
     logo = `<img src="${logo}" alt="Author Image" style="width: 100%; height: 100%" />`;
@@ -167,11 +173,9 @@ const generateImage = async (post) => {
   });
 };
 
-let posts = [...dataPosts.blogs, ...dataPosts.docs, ...dataPosts.authors, ...dataPosts.pages];
-
 // start the process
 (async () => {
-  for (const post of posts) {
+  for (const post of dataPosts) {
     await generateImage(post);
   }
   console.log(chalk.blue("All done!"));

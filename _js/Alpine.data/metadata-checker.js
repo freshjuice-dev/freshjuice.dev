@@ -79,7 +79,13 @@ document.addEventListener("alpine:init", () => {
         returnString = this.escapeHTML(`<!-- HTML Meta Tags -->`);
         for (const [key, value] of Object.entries(data.metadata)) {
           if (value) {
-            returnString += this.escapeHTML(`\n<meta name="${key}" content="${value}">`);
+            if (key === "title") {
+              returnString += this.escapeHTML(`\n<title>${value}</title>`);
+            } else if (key === "canonical") {
+              returnString += this.escapeHTML(`\n<link rel="canonical" href="${value}">`);
+            } else {
+              returnString += this.escapeHTML(`\n<meta name="${key}" content="${value}">`);
+            }
           }
         }
       }

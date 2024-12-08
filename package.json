@@ -70,13 +70,13 @@
     "@11ty/eleventy-img": "5.0.0",
     "@11ty/eleventy-plugin-rss": "^2.0.2",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
-    "@alpinejs/collapse": "^3.14.1",
-    "@alpinejs/intersect": "^3.14.1",
+    "@alpinejs/collapse": "^3.14.7",
+    "@alpinejs/intersect": "^3.14.7",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.9",
     "@tailwindcss/typography": "^0.5.15",
     "@zachleat/table-saw": "^1.0.6",
-    "alpinejs": "^3.14.1",
+    "alpinejs": "^3.14.7",
     "autoprefixer": "^10.4.20",
     "chalk": "^5.3.0",
     "cheerio": "^1.0.0",
@@ -91,15 +91,15 @@
     "markdown-it": "^14.1.0",
     "markdown-it-anchor": "^9.2.0",
     "npm-run-all": "^4.1.5",
-    "pagefind": "^1.1.1",
+    "pagefind": "^1.2.0",
     "plausible-tracker": "^0.3.9",
-    "postcss": "^8.4.47",
+    "postcss": "^8.4.49",
     "postcss-cli": "^11.0.0",
     "postcss-discard-comments": "^7.0.3",
     "postcss-easy-import": "^4.0.0",
     "postcss-merge-rules": "^7.0.4",
-    "postcss-nesting": "^13.0.0",
-    "prettier-plugin-tailwindcss": "^0.6.8",
+    "postcss-nesting": "^13.0.1",
+    "prettier-plugin-tailwindcss": "^0.6.9",
     "pretty-quick": "^4.0.0",
     "prism-themes": "^1.9.0",
     "prismjs": "^1.29.0",
@@ -107,9 +107,9 @@
     "sharp": "^0.33.5",
     "slugify": "^1.6.6",
     "tailwind-config-viewer": "^2.0.4",
-    "tailwindcss": "^3.4.13"
+    "tailwindcss": "^3.4.16"
   },
   "dependencies": {
-    "axios": "^1.7.7"
+    "axios": "^1.7.9"
   }
 }

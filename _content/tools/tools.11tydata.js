@@ -1,7 +1,7 @@
 import slugify from "slugify";
 
 export default {
-  layout: "base",
+  layout: "tools",
   suffix: " | FreshJuice Tools",
   icon: "code",
   tags: ["tools"],

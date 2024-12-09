@@ -1,0 +1,166 @@
+---
+title: "Campaign URL Builder"
+desc: "Use the Campaign URL Builder to easily add campaign parameters to URLs so you can track Custom Campaigns in Google Analytics."
+icon: "link"
+partialScripts:
+  - campaign-url-builder
+---
+
+<main class="" x-data="CampaignURLBuilder">
+
+  <div class="prose md:prose-xl mx-auto">
+    <h1>Campaign URL Builder</h1>
+    <p>Use the Campaign URL Builder to easily add campaign parameters to URLs so you can track Custom Campaigns in Google Analytics.</p>
+
+    <form @submit.prevent>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 gap-x-8">
+        <div class="md:col-span-2">
+          <label for="website-url" class="block">Website URL *</label>
+          <input type="url" id="website-url" class="input" x-model="url" @input.debounce="generateURL()" placeholder="https://www.example.com">
+          <div class="text-sm px-4">The full website URL (e.g. https://example.com).</div>
+        </div>
+        <div>
+          <label for="campaign-id" class="block">Campaign ID</label>
+          <input type="text" id="campaign-source" class="input" @input.debounce="generateURL()" x-model="id" placeholder="">
+          <div class="text-sm px-4">The ads campaign id.</div>
+        </div>
+        <div>
+          <label for="campaign-source" class="block">Campaign Source *</label>
+          <input type="text" id="campaign-source" class="input" @input.debounce="generateURL()" x-model="source" placeholder="newsletter">
+          <div class="text-sm px-4">The referrer (e.g. google, newsletter).</div>
+        </div>
+        <div>
+          <label for="campaign-medium" class="block">Campaign Medium *</label>
+          <input type="text" id="campaign-medium" class="input" @input.debounce="generateURL()" x-model="medium" placeholder="cpc">
+          <div class="text-sm px-4">Marketing medium (e.g. cpc, banner, email)</div>
+        </div>
+        <div>
+          <label for="campaign-name" class="block">Campaign Name *</label>
+          <input type="text" id="campaign-name" class="input" @input.debounce="generateURL()" x-model="name" placeholder="spring_sale">
+          <div class="text-sm px-4">Product, promo code, or slogan (e.g. spring_sale).</div>
+        </div>
+        <div>
+          <label for="campaign-term" class="block">Campaign Term</label>
+          <input type="text" id="campaign-term" class="input" @input.debounce="generateURL()" x-model="term" placeholder="">
+          <div class="text-sm px-4">Identify the paid keywords.</div>
+        </div>
+        <div>
+          <label for="campaign-content" class="block">Campaign Content</label>
+          <input type="text" id="campaign-content" class="input" @input.debounce="generateURL()" x-model="content" placeholder="">
+          <div class="text-sm px-4">Use to differentiate ads.</div>
+        </div>
+      </div>
+
+      <div class="hidden">
+        <button type="button" class="btn" @click="generateURL()">Generate URL</button>
+      </div>
+
+      <hr class="!my-8">
+
+      <div>
+        <label for="generated-url" class="block">Generated URL</label>
+        <div class="relative">
+          <input type="text" id="generated-url" class="input pr-24" x-model="generatedURL" placeholder="" readonly>
+          <div class="cursor-pointer font-mono text-sm absolute right-1 top-1 px-3 py-1.5 rounded-full transition-all bg-gray-100 hover:bg-gray-200 dark:hover:bg-cursor border-2 border-gray-300 dark:border-gray-400 inline-flex gap-2 items-center text-terminal"
+               x-show="generatedURL"
+               x-transition:enter="transition ease-out duration-700"
+               x-transition:enter-start="opacity-0"
+               x-transition:enter-end="opacity-100"
+               x-transition:leave="transition ease-in duration-300"
+               x-transition:leave-start="opacity-100"
+               x-transition:leave-end="opacity-0"
+               @click="copyToClipboard">
+            {% phicon "copy", "duotone", { class: "size-5" } %}
+            <span>Copy</span>
+          </div>
+          <div class="not-prose text-base absolute inset-x-0 -bottom-6 text-center"
+               aria-hidden="true" style="display: none"
+               x-transition:enter="transition ease-out duration-300"
+               x-transition:enter-start="opacity-0 transform -translate-y-4"
+               x-transition:enter-end="opacity-100 transform translate-y-0"
+               x-transition:leave="transition ease-in duration-200"
+               x-transition:leave-start="opacity-100 transform translate-y-0"
+               x-transition:leave-end="opacity-0 transform -translate-y-4"
+               x-show="copySuccess">Link copied to clipboard!</div>
+        </div>
+      </div>
+    </form>
+
+    <hr>
+
+    <h2>More information and examples for each parameter</h2>
+    <p>The following table provides more information about each parameter and examples of how they can be used.</p>
+
+
+    <table-saw>
+      <table>
+        <thead>
+          <tr>
+            <th>Parameter</th>
+            <th>Required</th>
+            <th>Example</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <p class="!mt-0 !mb-1 whitespace-nowrap">Campaign ID</p>
+              <span class="whitespace-nowrap"><code>utm_id</code></span>
+            </td>
+            <td>No</td>
+            <td><span class="whitespace-nowrap"><code>abc.123</code></span></td>
+            <td>Used to identify which ads campaign this referral references. Use utm_id to identify a specific ads campaign.</td>
+          </tr>
+          <tr>
+            <td>
+              <p class="!mt-0 !mb-1 whitespace-nowrap">Campaign Source</p>
+              <span class="whitespace-nowrap"><code>utm_source</code></span>
+            </td>
+            <td>Yes</td>
+            <td><span class="whitespace-nowrap"><code>newsletter</code></span></td>
+            <td>Use utm_source to identify a search engine, newsletter name, or other source.</td>
+          </tr>
+          <tr>
+            <td>
+              <p class="!mt-0 !mb-1 whitespace-nowrap">Campaign Medium</p>
+              <span class="whitespace-nowrap"><code>utm_medium</code></span>
+            </td>
+            <td>Yes</td>
+            <td><span class="whitespace-nowrap"><code>cpc</code></span></td>
+            <td>Use utm_medium to identify a medium such as email or cost-per-click.</td>
+          </tr>
+          <tr>
+            <td>
+              <p class="!mt-0 !mb-1 whitespace-nowrap">Campaign Name</p>
+              <span class="whitespace-nowrap"><code>utm_campaign</code></span>
+            </td>
+            <td>No</td>
+            <td><span class="whitespace-nowrap"><code>spring_sale</code></span></td>
+            <td>Used for keyword analysis. Use utm_campaign to identify a specific product promotion or strategic campaign.</td>
+          </tr>
+          <tr>
+            <td>
+              <p class="!mt-0 !mb-1 whitespace-nowrap">Campaign Term</p>
+              <span class="whitespace-nowrap"><code>utm_term</code></span>
+            </td>
+            <td>No</td>
+            <td><span class="whitespace-nowrap"><code>running+shoes</code></span></td>
+            <td>Used for paid search. Use utm_term to note the keywords for this ad.</td>
+          </tr>
+          <tr>
+            <td>
+              <p class="!mt-0 !mb-1 whitespace-nowrap">Campaign Content</p>
+              <span class="whitespace-nowrap"><code>utm_content</code></span>
+            </td>
+            <td>No</td>
+            <td><span class="whitespace-nowrap"><code>logolink</code></span></td>
+            <td>Used for A/B testing and content-targeted ads. Use utm_content to differentiate ads or links that point to the same URL.</td>
+          </tr>
+        </tbody>
+      </table>
+    </table-saw>
+
+  </div>
+
+</main>

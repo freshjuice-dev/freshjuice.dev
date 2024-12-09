@@ -31,7 +31,7 @@ layout: base.njk
         <div class="h-8 bg-zinc-50 dark:bg-zinc-900"></div>
         <div class="bg-zinc-50 dark:bg-zinc-900">
         <button type="button"
-                class="flex w-full gap-2 items-center px-3 py-2 border rounded text-sm bg-zinc-200/80 dark:bg-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-all"
+                class="select-none flex w-full gap-2 items-center px-3 py-2 border rounded-full text-sm bg-zinc-200/80 dark:bg-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-all"
                 @click="docs.openSearch()"
                 @mouseover="docs.loadAssets()">
           {% phicon "magnifying-glass", "regular", { class: "size-6"} %}

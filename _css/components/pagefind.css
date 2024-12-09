@@ -3,11 +3,11 @@
 }
 
 .pagefind-ui__search-input {
-  @apply w-full p-2 pl-8 pr-14 rounded;
+  @apply w-full p-2 pl-6 pr-16 rounded-full;
 }
 
 .pagefind-ui__search-clear {
-  @apply absolute right-0 top-0 mt-3 mr-4 text-terminal text-sm lowercase;
+  @apply absolute right-0 top-0 py-3 px-5 m-0 rounded-full text-terminal text-sm lowercase;
 }
 
 .pagefind-ui__drawer {
@@ -15,7 +15,7 @@
 }
 
 .pagefind-ui__results-area {
-
+  @apply px-6;
 }
 
 .pagefind-ui__message {

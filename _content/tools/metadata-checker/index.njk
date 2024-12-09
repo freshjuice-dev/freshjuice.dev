@@ -18,16 +18,16 @@ partialScripts:
 
   <div class="prose md:prose-xl mx-auto">
     <h1>Check Website Metadata</h1>
-    <form @submit.prevent>
-      <label for="targetUrl">Enter Full URL:</label>
-      <div class="flex w-full gap-5">
+    <form @submit.prevent class="">
+      <label for="targetUrl" class="sr-only">Enter Full URL:</label>
+      <div class="flex flex-col xs:flex-row w-full gap-5">
         <input id="targetUrl"
                class="w-full"
                type="url"
                pattern="https?://.+"
                required
                x-model="targetUrl"
-               placeholder="https://example.com">
+               placeholder="Enter Full URL: https://example.com">
         <button @click="initProcessing" class="text-bold leading-4" type="submit">
           <span x-text="buttonLabel">Check Website Metadata</span>
         </button>

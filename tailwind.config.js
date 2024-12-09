@@ -22,11 +22,13 @@ export default {
       //mono: ["ui-monospace", "SFMono-Regular", "SF Mono", "Menlo", "Consolas", "Liberation Mono", "monospace"],
     },
     screens: {
-      xs: "360px",
+      xxs: "360px",
+      xs: "490px",
       sm: "640px",
       md: "768px",
       lg: "1024px",
       xl: "1280px",
+      xxl: "1536px",
       navSwap: "768px",
     },
     aspectRatio: {

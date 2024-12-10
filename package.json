@@ -16,6 +16,8 @@
     "build:11ty": "npx @11ty/eleventy",
     "build:js": "npx esbuild ./_js/main.js --outfile=./_site/js/main.$(git rev-parse --short HEAD).js --bundle --minify",
     "watch:js": "npx esbuild ./_js/main.js --outfile=./_site/js/main.js --bundle --watch --sourcemap",
+    "build:js-AlpineData-CampaignURLBuilder": "npx esbuild ./_js/Alpine.data/campaign-url-builder.js --outfile=./_site/js/campaign-url-builder.$(git rev-parse --short HEAD).js --bundle --minify",
+    "watch:js-AlpineData-CampaignURLBuilder": "npx esbuild ./_js/Alpine.data/campaign-url-builder.js --outfile=./_site/js/campaign-url-builder.js --bundle --watch --sourcemap",
     "build:js-AlpineData-MetadataChecker": "npx esbuild ./_js/Alpine.data/metadata-checker.js --outfile=./_site/js/metadata-checker.$(git rev-parse --short HEAD).js --bundle --minify",
     "watch:js-AlpineData-MetadataChecker": "npx esbuild ./_js/Alpine.data/metadata-checker.js --outfile=./_site/js/metadata-checker.js --bundle --watch --sourcemap",
     "watch:tailwind": "npx tailwindcss --postcss -i _css/main.css -o ./_site/css/main.css --watch",

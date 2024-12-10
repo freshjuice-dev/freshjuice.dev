@@ -48,6 +48,7 @@ export default async function(eleventyConfig) {
   eleventyConfig.addLayoutAlias("page", "page.njk");
   eleventyConfig.addLayoutAlias("post", "post.njk");
   eleventyConfig.addLayoutAlias("prose", "prose.njk");
+  eleventyConfig.addLayoutAlias("tools", "tools.njk");
 
   // Add Custom Collections
   eleventyConfig.addCollection("authors", (collectionsApi) => {

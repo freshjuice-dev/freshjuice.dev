@@ -167,6 +167,15 @@ document.addEventListener("alpine:init", () => {
           this.initError(error);
         });
     },
+    reset() {
+      history.pushState({}, "", `/tools/metadata-checker/`);
+      window.scrollTo(0, 0);
+      this.showResults = false;
+      this.targetUrl = "";
+      this.previewData = {};
+      this.metaTags = "";
+      this.$refs.targetUrl.focus();
+    },
     init() {
       debugLog("Metadata Checker initialized");
       //loadStylesheet("https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css");

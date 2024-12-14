@@ -59,6 +59,29 @@ document.addEventListener("alpine:init", () => {
       const urlRegex = /^(http|https):\/\/[^ "]+$/;
       return urlRegex.test(url);
     },
+    getPreviewImage(network) {
+      let returnString = "";
+      switch (network) {
+        case "linkedin":
+        case "facebook":
+          returnString = this.previewData.og["og:image"] || "";
+          break;
+        case "twitter":
+          returnString = this.previewData.twitter["twitter:image"] || this.previewData.og["og:image"] || "";
+          break;
+        default:
+          break;
+      }
+      if (!returnString) {
+        return "/img/nada-og-image.jpg";
+      }
+      if (returnString.startsWith("//")) {
+        return `https:${returnString}`;
+      }
+      return returnString.startsWith("/")
+        ? `https://${this.previewData.homeUrl}${returnString}`
+        : returnString;
+    },
     escapeHTML(htmlString) {
       return htmlString
         .replace(/^[ \t]+/gm, '') // Remove leading spaces

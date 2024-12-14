@@ -12,6 +12,17 @@ export const onRequestGet = async ({ request }) => {
 export const onRequestPost = async ({ request }) => {
   const { targetUrl } = await request.json();
 
+  const originalHeaders = Object.fromEntries(request.headers.entries());
+
+  const userIP =
+    request.headers.get("cf-connecting-ip") || // Cloudflare's header for the client IP
+    request.headers.get("x-forwarded-for") || // Proxies may include this header
+    null;
+
+  if (userIP) {
+    originalHeaders["X-Forwarded-For"] = userIP;
+  }
+
   // Check if the target URL is provided and its URL
   if (!targetUrl || !targetUrl.startsWith("http")) {
     return new Response(JSON.stringify({
@@ -25,9 +36,10 @@ export const onRequestPost = async ({ request }) => {
 
   // Fetch the target URL source code using Axios
   await axios.get(targetUrl, {
-    headers: {
-      "User-Agent": request.headers.get("user-agent") || "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
-      "Accept": "text/html"
+    headers:  {
+      ...originalHeaders,
+      "user-agent": originalHeaders["user-agent"] || "Mozilla/5.0",
+      "accept": "text/html"
     }
   })
     .then((response) => {

@@ -56,8 +56,7 @@ partialScripts:
           <div>Facebook</div>
           <div class="relative overflow-hidden">
             <div class="aspect-opengraph bg-gray-200 dark:bg-gray-800 bg-center bg-cover p-8 flex justify-center items-center"
-                 :style="`background-image: url(${previewData.og['og:image']})`">
-              <span class="text-xl" x-show="!previewData.og['og:image']">You're missing an image 🙁</span>
+                 :style="`background-image: url(${getPreviewImage('facebook')})`">
             </div>
             <div class="border-t border-gray-300 p-2 text-gray-500 bg-gray-200">
               <div class="text-xs leading-3 truncate break-words" x-text="previewData.homeUrl"></div>
@@ -70,8 +69,7 @@ partialScripts:
           <div>LinkedIn</div>
           <div class="relative overflow-hidden">
             <div class="aspect-opengraph bg-gray-200 dark:bg-gray-800 bg-center bg-cover p-8 flex justify-center items-center"
-                 :style="`background-image: url(${previewData.og['og:image']})`">
-              <span class="text-xl" x-show="!previewData.og['og:image']">You're missing an image 🙁</span>
+                 :style="`background-image: url(${getPreviewImage('linkedin')})`">
             </div>
             <div class="border-t border-gray-300 p-2 text-gray-500 bg-gray-200">
               <div class="text-terminal text-base font-bold leading-6 truncate" x-text="previewData.metadata[`title`]"></div>
@@ -83,8 +81,7 @@ partialScripts:
           <div>X.com (Previously known as Twitter)</div>
           <div class="relative rounded-xl overflow-hidden">
             <div class="aspect-opengraph bg-gray-200 dark:bg-gray-800 bg-center bg-cover p-8 flex justify-center items-center"
-                 :style="`background-image: url(${(previewData.twitter['twitter:image']||previewData.og['og:image'])})`">
-              <span class="text-xl" x-show="!(previewData.twitter['twitter:image']||previewData.og['og:image'])">You're missing an image 🙁</span>
+                 :style="`background-image: url(${getPreviewImage('twitter')})`">
             </div>
             <div class="absolute bottom-2.5 left-2 px-1 py-0.5 text-xs text-white bg-black bg-opacity-40 rounded overflow-hidden"
                  x-text="previewData.homeUrl">

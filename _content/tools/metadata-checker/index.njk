@@ -52,6 +52,32 @@ partialScripts:
 
     <template x-if="showResults && metaTags.length > 0">
       <div class="flex flex-wrap justify-center gap-8 md:gap-12 w-full">
+        <div class="w-full max-w-sm shrink-0">
+          <div class="">
+            <div>LinkedIn (Light mode)</div>
+            <div class="relative overflow-hidden flex items-center w-full grow gap-3 p-3 text-slate-900 bg-slate-100">
+              <div class="aspect-opengraph bg-gray-200 bg-center bg-cover p-8 flex rounded-md justify-center items-center"
+                   :style="`background-image: url(${getPreviewImage('linkedin')})`">
+              </div>
+              <div class="w-full">
+                <div class="text-sm font-bold leading-4 line-clamp-2" x-text="previewData.metadata[`title`]"></div>
+                <div class="text-xs truncate mt-1" x-text="previewData.homeUrl.replace('www.','')"></div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-6">
+            <div>LinkedIn (Dark mode)</div>
+            <div class="relative overflow-hidden flex items-center w-full grow gap-3 p-3 text-slate-100 bg-slate-700">
+              <div class="aspect-opengraph bg-gray-800 bg-center bg-cover p-8 flex rounded-md justify-center items-center"
+                   :style="`background-image: url(${getPreviewImage('linkedin')})`">
+              </div>
+              <div class="w-full">
+                <div class="text-sm font-bold leading-4 line-clamp-2" x-text="previewData.metadata[`title`]"></div>
+                <div class="text-xs truncate mt-1" x-text="previewData.homeUrl.replace('www.','')"></div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="w-full max-w-xs shrink-0">
           <div>Facebook</div>
           <div class="relative overflow-hidden">
@@ -62,18 +88,6 @@ partialScripts:
               <div class="text-xs leading-3 truncate break-words" x-text="previewData.homeUrl"></div>
               <div class="text-terminal text-md font-semibold leading-xl truncate break-words" x-text="previewData.metadata[`title`]"></div>
               <div class="text-sm leading-xl truncate whitespace-nowrap overflow-hidden overflow-ellipsis" x-text="previewData.metadata[`description`]"></div>
-            </div>
-          </div>
-        </div>
-        <div class="w-full max-w-xs shrink-0">
-          <div>LinkedIn</div>
-          <div class="relative overflow-hidden">
-            <div class="aspect-opengraph bg-gray-200 dark:bg-gray-800 bg-center bg-cover p-8 flex justify-center items-center"
-                 :style="`background-image: url(${getPreviewImage('linkedin')})`">
-            </div>
-            <div class="border-t border-gray-300 p-2 text-gray-500 bg-gray-200">
-              <div class="text-terminal text-base font-bold leading-6 truncate" x-text="previewData.metadata[`title`]"></div>
-              <div class="text-xs truncate" x-text="previewData.homeUrl"></div>
             </div>
           </div>
         </div>

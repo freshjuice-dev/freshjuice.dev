@@ -115,7 +115,7 @@ document.addEventListener("alpine:init", () => {
 
       // Open Graph data
       if (Object.keys(data.og).length > 0) {
-        returnString += this.escapeHTML(`\n\n<!-- Open Graph / Facebook Meta Tags -->`);
+        returnString += this.escapeHTML(`\n\n<!-- Open Graph Meta Tags -->`);
         for (const [key, value] of Object.entries(data.og)) {
           if (value) {
             returnString += this.escapeHTML(`\n<meta property="${key}" content="${value}">`);
@@ -125,7 +125,7 @@ document.addEventListener("alpine:init", () => {
 
       // Twitter Card data
       if (Object.keys(data.twitter).length > 0) {
-        returnString += this.escapeHTML(`\n\n<!-- X / Twitter Meta Tags -->`);
+        returnString += this.escapeHTML(`\n\n<!-- X.com Meta Tags -->`);
         for (const [key, value] of Object.entries(data.twitter)) {
           if (value) {
             returnString += this.escapeHTML(`\n<meta name="${key}" content="${value}">`);
@@ -167,9 +167,14 @@ document.addEventListener("alpine:init", () => {
           this.initError(error);
         });
     },
+    cleanDomain() {
+      return (this.previewData.homeUrl||"")
+        .toLowerCase()
+        .replace(/^www\./i, '');
+    },
     reset() {
       history.pushState({}, "", `/tools/metadata-checker/`);
-      window.scrollTo(0, 0);
+      //window.scrollTo(0, 0);
       this.showResults = false;
       this.targetUrl = "";
       this.previewData = {};

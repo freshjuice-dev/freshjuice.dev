@@ -99,9 +99,9 @@ export default {
           title = "Blog tags";
         }
         if (title.startsWith("Tagged ")) {
-          title = title.split(" ")
+          title = title.split("Tagged ")
           title[0] = "Blogs tagged with";
-          title[1] = '<span>' + title[1] + '</span>';
+          title[1] = '<span>' + title[1].replace(" ", "&nbsp;") + '</span>';
           title = title.join(" ");
         }
         let url = (item.page || {}).url || "";

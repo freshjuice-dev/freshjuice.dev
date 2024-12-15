@@ -93,13 +93,13 @@ const htmlTemplate = `
       background-image: linear-gradient(150deg, #cb5dc6 0%, #F0E68C 45%, #FFD700 100%);
     }
      h1 {
-      overflow: hidden;
       display: -webkit-box;
       text-wrap: pretty;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 3;
     }
     h1 span {
+      display: block;
       white-space: nowrap !important;
     }
     .shadow {

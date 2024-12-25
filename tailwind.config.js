@@ -92,7 +92,7 @@ export default {
           "--tw-prose-counters": "#d4d4d4",
           "--tw-prose-bullets": "#d4d4d4",
           "--tw-prose-hr": "#f3f4f61a",
-          "--tw-prose-quotes": "#111827",
+          "--tw-prose-quotes": "#d4d4d4",
           "--tw-prose-quote-borders": "#e5e7eb",
           "--tw-prose-captions": "#c5c5c5",
           "--tw-prose-kbd": "#111827",
@@ -141,6 +141,9 @@ export default {
         },
         '.prose table-saw table:not([class]) tr': {
           "@apply mb-0": {},
+        },
+        '.prose :where(blockquote p:first-of-type):not(:where([class~="not-prose"],[class~="not-prose"] *))::before, .prose :where(blockquote p:last-of-type):not(:where([class~="not-prose"],[class~="not-prose"] *))::after': {
+          "@apply content-none": {},
         }
       });
     },

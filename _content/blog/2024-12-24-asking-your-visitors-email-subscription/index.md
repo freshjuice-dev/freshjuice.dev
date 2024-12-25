@@ -68,3 +68,8 @@ Rather than asking people to sign up for newsletters, encourage them to follow y
 ## Conclusion
 
 You are not the only one sending newsletters to clients or readers and it’s quite annoying to have an inbox with hundreds of newsletters you already forget about why you subscribe to them in the first place. Right now, we live in a time of social networks where people actually spend lots of time on them. Focus on creating good content on LinkedIn, Instagram, or even X, you will gain a better community and better performance and, in the end, you will be less annoying for your audience than sending a newsletter once a week.
+
+> **Wishing You Joy and Warmth This Holiday Season**\
+> Thank you for reading, and here's to a bright new year ahead!
+>
+> — **The FreshJuice Team**

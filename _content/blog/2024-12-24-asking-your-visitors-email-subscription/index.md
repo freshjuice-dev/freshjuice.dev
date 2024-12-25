@@ -23,19 +23,19 @@ Asking people to subscribe to your email list can feel really spammy. You probab
 
 ![Email subscription notification, woman hand on the computer laptop, one new inbox e mail message on the screen](email-notification-woman-hand-on-the-computer-laptop-one-new-inbox-e-mail-message-on-the-screen.jpg)
 
-We get why you might feel the pressure. There are so many sites out there offering similar content, and it’s easy to worry about getting lost in the crowd. But here’s the thing: if you create awesome, engaging content, you don’t have to stress. Your audience will come back because they like what you’re putting out there.
+We get why you might feel the pressure. There are so many sites out there offering similar content, and it’s easy to worry about getting lost in the crowd. But here’s the thing: if you create awesome, engaging content, you don’t have to stress. **Your audience will come back** because they like what you’re putting out there.
 
 Instead of annoying people with pop-ups and forms, focus on building trust and giving them value. If they love your stuff, they’ll find ways to follow you, whether that’s on social media or other platforms. No need to be pushy—let your content do the work!
 
 ### None reads them
 
-Let’s be real—most people don’t actually read newsletters. They might sign up for a discount code or because they’re curious, but after that? Your emails are either ignored, sent straight to the spam folder, or deleted without a second glance.
+Let’s be real—**most people don’t actually read newsletters**. They might sign up for a discount code or because they’re curious, but after that? Your emails are either ignored, sent straight to the spam folder, or deleted without a second glance.
 
 Think about your own inbox. How often do you actually open newsletters, let alone read them from start to finish? People are overwhelmed with emails these days, and unless yours stands out in a big way (which is rare), it’s just more noise.
 
 ### At the end, people always unsubscribe to them
 
-No matter how hard you try, the reality is that most people will eventually unsubscribe from your email list or worse, stop reading what you send to them. They might sign up out of curiosity, but over time, they’ll lose interest or get overwhelmed by the constant stream of emails.
+No matter how hard you try, the reality is that most people will eventually unsubscribe from your email list or worse, stop reading what you send to them. They might sign up out of curiosity, but over time, they’ll **lose interest or get overwhelmed** by the constant stream of emails.
 
 ![Closeup image of wooden cube with mail icon inside trash can.](closeup-image-of-wooden-cube-with-mail-icon-inside-trash-can.jpg)
 
@@ -43,17 +43,17 @@ It’s frustrating, but it’s a common pattern. Even if your content is solid, 
 
 ### They will take you lots of time with not-so-good results
 
-Preparing newsletters, setting up your site to collect new contacts, managing unsubscribed users, and paying for the platform to send your emails—email subscriptions require a lot of time and effort. From crafting the content to designing templates and scheduling campaigns, the entire process can feel like a full-time job.
+Preparing newsletters, setting up your site to collect new contacts, managing unsubscribed users, and paying for the platform to send your emails—email subscriptions **require a lot of time and effort**. From crafting the content to designing templates and scheduling campaigns, the entire process can feel like a full-time job.
 
-On top of that, the results often don’t justify the effort. Open rates are typically low, click-through rates even lower, and many of your emails might end up in spam folders or go completely unnoticed. While email marketing can work for some businesses, for most projects, the time, money, and energy spent on this strategy simply aren’t worth it compared to other, more effective methods of audience engagement. Consider redirecting those efforts to platforms or tools that offer better results or even working on your keyword research or improving your page speed instead.
+On top of that, the results often don’t justify the effort. **Open rates are typically low**, click-through rates even lower, and many of your emails might end up in spam folders or go completely unnoticed. While email marketing can work for some businesses, for most projects, the time, money, and energy spent on this strategy simply aren’t worth it compared to other, more effective methods of audience engagement. Consider redirecting those efforts to platforms or tools that offer better results or even working on your [keyword research](/blog/make-the-perfect-keywords-research/) or improving your [page speed instead](/blog/page-speed-and-seo-2024/).
 
 ### There are better alternatives available
 
-There are plenty of better ways to reach your audience than email subscriptions. As we mentioned earlier, open rates continue to drop, and many users perceive email newsletters as spammy. With social media platforms still growing and new ones constantly gaining users, these channels offer a fresh, non-intrusive way to share your project.
+There are plenty of better ways to reach your audience than email subscriptions. As we mentioned earlier, open rates continue to drop, and many users perceive email newsletters as spammy. With [social media platforms still growing](https://explodingtopics.com/blog/future-of-social-media) and new ones constantly gaining users, these channels offer a fresh, non-intrusive way to share your project.
 
 ![Social media](social-media.jpg)
 
-Social media allows you to engage with your audience where they already spend their time. You can create posts, stories, or reels that showcase your content in a way that feels natural and engaging. Platforms like Instagram, Twitter (X), and TikTok even let your audience opt-in for notifications, ensuring they see your updates if they want to. These alternatives not only help you maintain a positive connection with your audience but can also reach a far wider group than traditional email ever could.
+Social media allows you to **engage with your audience where they already spend their time**. You can create posts, stories, or reels that showcase your content in a way that feels natural and engaging. Platforms like Instagram, Twitter (X), and TikTok even let your audience opt-in for notifications, ensuring they see your updates if they want to. These alternatives not only help you maintain a positive connection with your audience but can also reach a far wider group than traditional email ever could.
 
 ## What should you do instead?
 
@@ -61,7 +61,7 @@ As we have already mentioned, instead of focusing on getting email subscriptions
 
 ### Ask your audience to follow you on social media platforms
 
-Rather than asking people to sign up for newsletters, encourage them to follow you on social media. Platforms like Instagram, LinkedIn, TikTok, or X (best known as Twitter) allow you to reach your audience where they already spend their time. Plus, these platforms make it easy for your followers to engage with your content, comment, and share, expanding your reach. You can also use notifications, stories, and other interactive features to keep your audience updated without bombarding their inboxes.
+Rather than asking people to sign up for newsletters, encourage them to follow you on social media. Platforms like Instagram, LinkedIn, TikTok, or X ([best known as Twitter](https://buffer.com/social-media-terms/x-app)) allow you to reach your audience where they already spend their time. Plus, these platforms make it easy for your followers to engage with your content, comment, and share, expanding your reach. You can also use notifications, stories, and other interactive features to keep your audience updated without bombarding their inboxes.
 
 ![Follow me](follow-me.jpg)
 

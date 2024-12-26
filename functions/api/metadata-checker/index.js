@@ -59,18 +59,18 @@ export const onRequestPost = async ({ request }) => {
 
   // Extract the metadata
   const metadata = {
-    title: $("title").text() || "",
-    description: $("meta[name='description']").attr("content") || "",
-    keywords: $("meta[name='keywords']").attr("content") || "",
-    canonical: $("link[rel='canonical']").attr("href") || "",
-    author: $("meta[name='author']").attr("content") || "",
-    robots: $("meta[name='robots']").attr("content") || "",
-    viewport: $("meta[name='viewport']").attr("content") || "",
-    generator: $("meta[name='generator']").attr("content") || "",
+    title: $("head title").text() || "",
+    description: $("head meta[name='description']").attr("content") || "",
+    keywords: $("head meta[name='keywords']").attr("content") || "",
+    canonical: $("head link[rel='canonical']").attr("href") || "",
+    author: $("head meta[name='author']").attr("content") || "",
+    robots: $("head meta[name='robots']").attr("content") || "",
+    viewport: $("head meta[name='viewport']").attr("content") || "",
+    generator: $("head meta[name='generator']").attr("content") || "",
   };
 
   const og = {};
-  $("meta[property^='og:']").each((index, element) => {
+  $("head meta[property^='og:']").each((index, element) => {
     const property = $(element).attr("property");
     if (property) {
       og[property] = $(element).attr("content");
@@ -78,7 +78,7 @@ export const onRequestPost = async ({ request }) => {
   });
 
   const twitter = {};
-  $("meta[name^='twitter:']").each((index, element) => {
+  $("head meta[name^='twitter:']").each((index, element) => {
     const name = $(element).attr("name");
     if (name) {
       twitter[name] = $(element).attr("content");

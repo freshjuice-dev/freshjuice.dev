@@ -136,13 +136,16 @@ export default {
     eleventyConfig.addShortcode("speedlifyJSON", function(collection) {
       const returnObject = {
         "core": [],
+        "tags": [],
         "docs": [],
         "blogs": []
       }
       collection.forEach((item) => {
         if (item.outputPath && item.outputPath.endsWith(".html")) {
           const url = `https://freshjuice.dev${item.url}`;
-          if (item.data.tags && item.data.tags.includes("docs")) {
+          if (item.url.startsWith("/tags/")) {
+            returnObject.tags.push(url);
+          } else if (item.data.tags && item.data.tags.includes("docs")) {
             returnObject.docs.push(url);
           } else if (item.data.tags && item.data.tags.includes("posts")) {
             returnObject.blogs.push(url);

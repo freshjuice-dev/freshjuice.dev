@@ -1,0 +1,5 @@
+#!/bin/sh
+
+npx -p prettier -p pretty-quick pretty-quick --staged
+
+npm run make:og-images

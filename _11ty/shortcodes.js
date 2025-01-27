@@ -7,7 +7,14 @@ import eleventyImage from "@11ty/eleventy-img";
 import path from "path";
 
 const slugifyOptions = {
-  lower: true,       // convert to lower case
+  lower: true, // convert to lower case
+};
+
+const findYouTubeVideoId = (url) => {
+  const regex =
+    /(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+(?=\?)|(?<=v=)[^&\n]+|(?<=youtu.be\/|www.youtube.com\/embed\/)[^&\n]+/;
+  const matches = url.match(regex);
+  return matches ? matches[0] : "";
 };
 
 const relativeToInputPath = (inputPath, relativeFilePath) => {
@@ -24,11 +31,10 @@ const relativeToInputPath = (inputPath, relativeFilePath) => {
 };
 
 export default {
-
   image: (eleventyConfig) => {
     eleventyConfig.addAsyncShortcode(
       "image",
-      async function(src, alt, widths, classes, sizes, loading) {
+      async function (src, alt, widths, classes, sizes, loading) {
         // Full list of formats here: https://www.11ty.dev/docs/plugins/image/#output-formats
         // Warning: Avif can be resource-intensive so take care!
         let formats = ["avif", "webp", "auto"];
@@ -56,9 +62,13 @@ export default {
 
         let htmlAttributes = {
           whitespaceMode: "inline",
-        }
+        };
 
-        return eleventyImage.generateHTML(metadata, imageAttributes, htmlAttributes);
+        return eleventyImage.generateHTML(
+          metadata,
+          imageAttributes,
+          htmlAttributes,
+        );
       },
     );
   },
@@ -70,7 +80,7 @@ export default {
   },
 
   authorSignature: (eleventyConfig) => {
-    eleventyConfig.addShortcode("authorSignature", function(author) {
+    eleventyConfig.addShortcode("authorSignature", function (author) {
       try {
         const authorsCollection = this.ctx?.collections?.authors;
         const authorData = authorsCollection.find((item) => {
@@ -80,18 +90,20 @@ export default {
       } catch (error) {
         return "";
       }
-    })
+    });
   },
 
   ogImageSource: (eleventyConfig) => {
-    eleventyConfig.addShortcode("ogImageSource", function({url}) {
-      url = url ? slugify(url.replace(/\//g, " "), slugifyOptions).trim() : 'default';
-      return `/img/og/${url||"default"}.png`;
+    eleventyConfig.addShortcode("ogImageSource", function ({ url }) {
+      url = url
+        ? slugify(url.replace(/\//g, " "), slugifyOptions).trim()
+        : "default";
+      return `/img/og/${url || "default"}.png`;
     });
   },
 
   ogImagesJSON: (eleventyConfig) => {
-    eleventyConfig.addShortcode("ogImagesJSON", function(allCollections) {
+    eleventyConfig.addShortcode("ogImagesJSON", function (allCollections) {
       let returnJson = [];
       allCollections.forEach((item) => {
         let title = (item.data || {}).title || "";
@@ -99,9 +111,9 @@ export default {
           title = "Blog tags";
         }
         if (title.startsWith("Tagged ")) {
-          title = title.split("Tagged ")
+          title = title.split("Tagged ");
           title[0] = "Blogs tagged with";
-          title[1] = '<span>' + title[1].replace(" ", "&nbsp;") + '</span>';
+          title[1] = "<span>" + title[1].replace(" ", "&nbsp;") + "</span>";
           title = title.join(" ");
         }
         let url = (item.page || {}).url || "";
@@ -124,7 +136,7 @@ export default {
             role: item.data.role || "",
             email: item.data.email || "",
             collection: itemCollectionName,
-            slug: slugify(url.replace(/\//g, " "), slugifyOptions)
+            slug: slugify(url.replace(/\//g, " "), slugifyOptions),
           });
         }
       });
@@ -132,14 +144,26 @@ export default {
     });
   },
 
+  youTube: (eleventyConfig) => {
+    eleventyConfig.addShortcode(
+      "youTube",
+      function (videoId, videoTitle = "YouTube video") {
+        if (videoId.startsWith("https://")) {
+          videoId = findYouTubeVideoId(videoId);
+        }
+        return `<lite-youtube x-on:click.stop videoid="${videoId}" class="img" style="background-image: url('https://i.ytimg.com/vi/${videoId}/hqdefault.jpg');"></lite-youtube>`;
+      },
+    );
+  },
+
   speedlifyJSON: (eleventyConfig) => {
-    eleventyConfig.addShortcode("speedlifyJSON", function(collection) {
+    eleventyConfig.addShortcode("speedlifyJSON", function (collection) {
       const returnObject = {
-        "core": [],
-        "tags": [],
-        "docs": [],
-        "blogs": []
-      }
+        core: [],
+        tags: [],
+        docs: [],
+        blogs: [],
+      };
       collection.forEach((item) => {
         if (item.outputPath && item.outputPath.endsWith(".html")) {
           const url = `https://freshjuice.dev${item.url}`;
@@ -159,5 +183,5 @@ export default {
       returnObject.blogs.sort();
       return JSON.stringify(returnObject);
     });
-  }
+  },
 };

@@ -1,27 +1,25 @@
 /* global domReady loadScript loadStylesheet PagefindUI */
 import debugLog from "./modules/_debugLog";
+import "lite-youtube-embed";
+import "@zachleat/table-saw";
 import colorScheme from "./modules/_detectColorScheme";
 import Plausible from "plausible-tracker";
 import Alpine from "alpinejs";
 import intersect from "@alpinejs/intersect";
 import collapse from "@alpinejs/collapse";
-import "@zachleat/table-saw";
 
-const {trackEvent, trackPageview, enableAutoOutboundTracking} = Plausible({
+const { trackEvent, trackPageview, enableAutoOutboundTracking } = Plausible({
   domain: "freshjuice.dev",
   apiHost: "https://firebird.beastful.org",
 });
-
 
 // The window.Alpine = Alpine bit is optional, but is nice to have for
 // freedom and flexibility. Like when tinkering with Alpine from the devtools for example.
 window.Alpine = Alpine;
 
-
 // Add plugins to Alpine
 Alpine.plugin(intersect);
 Alpine.plugin(collapse);
-
 
 Alpine.data("xDOM", () => {
   return {
@@ -30,7 +28,8 @@ Alpine.data("xDOM", () => {
       name: "dark",
     },
     shortcuts: {
-      search: navigator.platform.toUpperCase().indexOf('MAC') >= 0 ? "⌘K" : "Ctrl+K",
+      search:
+        navigator.platform.toUpperCase().indexOf("MAC") >= 0 ? "⌘K" : "Ctrl+K",
     },
     drawerOpen: false,
     showOverlay: false,
@@ -83,7 +82,7 @@ Alpine.data("xDOM", () => {
           props: {
             action: "close",
             search_term: this.searchTerm,
-          }
+          },
         });
         document.querySelector(".pagefind-ui__search-clear").click();
       },
@@ -92,7 +91,7 @@ Alpine.data("xDOM", () => {
           props: {
             action: "open",
             search_term: this.searchTerm,
-          }
+          },
         });
         setTimeout(() => {
           document.querySelector(".pagefind-ui__search-input").focus();
@@ -120,7 +119,7 @@ Alpine.data("xDOM", () => {
                 props: {
                   action: "search",
                   search_term: this.searchTerm,
-                }
+                },
               });
               return term;
             },
@@ -141,7 +140,7 @@ Alpine.data("xDOM", () => {
                 }
               }
               return result;
-            }
+            },
           });
         });
       },
@@ -176,11 +175,11 @@ Alpine.data("xDOM", () => {
                 action: "link_click",
                 search_term: this.searchTerm,
                 result_url: event.target.href,
-              }
+              },
             });
           }
         });
-      }
+      },
     },
     getThemeName() {
       if (localStorage.getItem("theme")) {
@@ -199,18 +198,12 @@ Alpine.data("xDOM", () => {
       this.theme.dark = !this.theme.dark;
       this.theme.name = this.theme.dark ? "dark" : "light";
       localStorage.setItem("theme", this.theme.name);
-      document.documentElement.setAttribute(
-        "data-theme",
-        this.theme.name
-      );
+      document.documentElement.setAttribute("data-theme", this.theme.name);
     },
     init() {
       debugLog("AlpineJS DOM init");
       document.documentElement.classList.remove("dark");
-      document.documentElement.setAttribute(
-        "data-theme",
-        this.getThemeName()
-      );
+      document.documentElement.setAttribute("data-theme", this.getThemeName());
       window.addEventListener("storage", () => {
         this.getThemeName();
       });
@@ -223,7 +216,6 @@ Alpine.data("xDOM", () => {
 });
 
 domReady(() => {
-
   // track page view
   trackPageview(
     {},
@@ -236,9 +228,9 @@ domReady(() => {
         prefersColorScheme: colorScheme(),
         userAgent: navigator.userAgent,
         deviceWidth: window.innerWidth,
-        project: "freshjuice.dev"
+        project: "freshjuice.dev",
       },
-    }
+    },
   );
 
   enableAutoOutboundTracking();

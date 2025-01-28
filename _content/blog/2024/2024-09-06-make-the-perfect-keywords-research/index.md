@@ -48,4 +48,3 @@ Finally, let’s introduce you to the “Informational Intent”, one in which k
 ## Conclusions
 
 To sum up all that we’ve been exploring in this article, making the perfect keywords research is not always going to be an easy task and it’s one that needs practice and dedication. Nevertheless, there are plenty of tools and guides all over the internet which can help you understand what you need for your specific case; for example, you can also take a look at [this article from HubSpot](https://blog.hubspot.com/marketing/how-to-do-keyword-research-ht) where they offer another guide for beginners when it comes to keywords research.
-

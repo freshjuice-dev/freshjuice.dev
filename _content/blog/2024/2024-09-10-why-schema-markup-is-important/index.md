@@ -23,9 +23,9 @@ The creation of Schema.org by Google, Microsoft, Yahoo, and Yandex aimed to addr
 
 Yes, it does. As mentioned before, schema markup was created by an initiative founded by some of the most important search engine companies like Google and Yandex, because they needed a unified vocabulary to understand better the published content and, therefore, rank the content better. In fact, when looking for the primary goals of this vocabulary, there are three:
 
-1) Help search engines better understand the content of web pages by providing a standardized format for information.
-1) Rank pages more effectively based on relevance and context.
-1) Ensure consistency in how structured data is represented across different search engines, making it easier for webmasters
+1. Help search engines better understand the content of web pages by providing a standardized format for information.
+1. Rank pages more effectively based on relevance and context.
+1. Ensure consistency in how structured data is represented across different search engines, making it easier for webmasters
 
 So, yes, every time you implement schema markup in your content, you are helping search engines understand it better and enhance your SEO efforts.
 
@@ -55,4 +55,3 @@ In fact, Google usually recommends JSON-LD because ([in their own words](https:/
 <img src="./software-developer-working-with-html-script.jpg" alt="Software developer working with html script">
 
 To the question of why schema markup is important, we can assure you that this vocabulary can be a powerful tool for enhancing your site’s performance, visibility, and overall SEO strategy. By implementing schema markup effectively, you can improve how your content is understood and presented by search engines, leading to better user engagement and search rankings.
-

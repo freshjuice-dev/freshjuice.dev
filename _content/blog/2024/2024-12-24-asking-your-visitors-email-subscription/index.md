@@ -1,7 +1,13 @@
 ---
 title: "Why asking your visitors to subscribe to your newsletter is not as great as you think"
 desc: "Tired of low email engagement? Discover why asking for email subscriptions might be outdated and explore better ways to connect with your audience."
-tags: ["Email Marketing", "Newsletters", "Marketing Strategies", "Digital Marketing"]
+tags:
+  [
+    "Email Marketing",
+    "Newsletters",
+    "Marketing Strategies",
+    "Digital Marketing",
+  ]
 author: atenlotrad
 ---
 

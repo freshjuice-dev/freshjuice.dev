@@ -11,7 +11,6 @@ That said, we encourage you to follow the guidelines we’ll be presenting throu
 
 <img src="./seo-or-search-engine-optimization-concept.jpg" alt="SEO or search engine optimization">
 
-
 ## First things first: what is SEO?
 
 If you’re somehow new to this idea, you may be struggling to understand what exactly does SEO mean. Firstly, these are the initials for “Search Engine Optimization”, which includes a long list of strategies which we mentioned before and will study in more detail afterwards. Therefore, SEO involves the optimization of a website’s content, structure and technical aspects in order to improve its visibility in search engine results like Google. When implementing these SEO optimization strategies, you’ll be trying to rank higher for relevant search queries and driving more unpaid traffic to the site.
@@ -23,6 +22,7 @@ A good example of this practice would be the use of keywords; if you have a post
 Now it’s the time for you to pick up notes and then implement the SEO optimization strategies on your website after we have explained some of the more important and effective ones. Although you don’t necessarily need to use all of them, the truth is that we could safely stand by “the more, the merrier” when it comes to SEO strategies. Let’s have a look at some of them!
 
 ### Keyword research
+
 As we were explaining before, one of the main strategies every blog or site should have implemented is the keywords research. You already know what it consists of identify relevant keywords and phrases that potential customers use to search for content related to your business. Okay, but how can you do this keywords research? Some of our suggestions are Google Keyword Planner, Ahrefs or SEMrush, which will help you find high-volume, low-competition keywords.
 
 Once you’re familiar with this keyword research and know how to select the best ones for your content, you’ll start learning one thing or two about how search engines work. This happens because keywords research helps you understand what your target audience is searching for, so that you can start creating content which addresses their needs and having a great SEO optimization of your site.

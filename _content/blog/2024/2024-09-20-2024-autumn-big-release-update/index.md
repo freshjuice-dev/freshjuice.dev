@@ -22,6 +22,7 @@ You may find [more information about it here](https://github.com/freshjuice-dev/
 ## Modules
 
 We have updated many of our modules. They are now more simplified and are easier to modify. Modules updated by this were the following:
+
 - [Social Icons](/docs/modules/social-icons/)
 - [Pricing Cards](/docs/modules/pricing-cards/)
 - [Card](/docs/modules/card/)

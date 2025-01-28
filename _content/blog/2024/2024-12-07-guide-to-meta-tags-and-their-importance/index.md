@@ -16,8 +16,12 @@ In this article, we’ll explore what meta tags are, their types, and why they a
 Meta tags are snippets of HTML placed in the <head> section of your webpage. They provide metadata—information about the data on your page—that helps search engines, browsers, and social media platforms understand and display your content appropriately.
 
 For example:
+
 ```html
-<meta name="description" content="Learn everything about meta tags and how they enhance your website's SEO and performance.">
+<meta
+  name="description"
+  content="Learn everything about meta tags and how they enhance your website's SEO and performance."
+/>
 ```
 
 The meta tag above tells search engines what your page is about and may appear as the description in search results.
@@ -29,6 +33,7 @@ The meta tag above tells search engines what your page is about and may appear a
 Although technically not a meta tag, the title tag is often grouped with them due to its SEO importance. It defines the title of your page and is the clickable headline users see on search engine results pages (SERPs).
 
 Example:
+
 ```html
 <title>Everything You Need to Know About Meta Tags</title>
 ```
@@ -40,11 +45,16 @@ Why It’s Important: The title tag is a major ranking factor for SEO and influe
 The meta description provides a brief summary of the page content. While it doesn’t directly impact rankings, it heavily influences CTR by making your link more enticing.
 
 Example:
+
 ```html
-<meta name="description" content="A comprehensive guide to meta tags, their types, and why they are critical for SEO and web performance.">
+<meta
+  name="description"
+  content="A comprehensive guide to meta tags, their types, and why they are critical for SEO and web performance."
+/>
 ```
 
 Best Practices:
+
 - Keep it under 160 characters.
 - Include target keywords naturally.
 - Write compelling, user-focused descriptions.
@@ -54,8 +64,9 @@ Best Practices:
 This tag ensures your website is responsive and adapts to different screen sizes, making it crucial for mobile-friendly design.
 
 Example:
+
 ```html
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 ```
 
 Why It’s Important: Google prioritizes mobile-first indexing, and a responsive website improves user experience (UX) and SEO rankings.
@@ -65,11 +76,13 @@ Why It’s Important: Google prioritizes mobile-first indexing, and a responsive
 The robots tag instructs search engines on how to crawl or index your page.
 
 Example:
+
 ```html
-<meta name="robots" content="index, follow">
+<meta name="robots" content="index, follow" />
 ```
 
 Common Directives:
+
 - index/noindex: Whether the page should be indexed.
 - follow/nofollow: Whether links on the page should be followed.
 
@@ -78,11 +91,15 @@ Common Directives:
 These meta tags control how your content appears when shared on social media platforms like Facebook, LinkedIn, or Twitter.
 
 Example:
+
 ```html
-<meta property="og:title" content="The Ultimate Guide to Meta Tags">
-<meta property="og:description" content="Learn the importance of meta tags for SEO and social media sharing.">
-<meta property="og:image" content="https://example.com/meta-tags-guide.jpg">
-<meta property="og:url" content="https://example.com/meta-tags">
+<meta property="og:title" content="The Ultimate Guide to Meta Tags" />
+<meta
+  property="og:description"
+  content="Learn the importance of meta tags for SEO and social media sharing."
+/>
+<meta property="og:image" content="https://example.com/meta-tags-guide.jpg" />
+<meta property="og:url" content="https://example.com/meta-tags" />
 ```
 
 Why It’s Important: Open Graph tags enhance social sharing by displaying rich previews, improving engagement and click-through rates.
@@ -92,11 +109,18 @@ Why It’s Important: Open Graph tags enhance social sharing by displaying rich 
 Similar to Open Graph, Twitter Card tags format your webpage for Twitter sharing.
 
 Example:
+
 ```html
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Understanding Meta Tags">
-<meta name="twitter:description" content="Everything you need to know about meta tags and their impact on SEO.">
-<meta name="twitter:image" content="https://example.com/meta-tags-twitter.jpg">
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Understanding Meta Tags" />
+<meta
+  name="twitter:description"
+  content="Everything you need to know about meta tags and their impact on SEO."
+/>
+<meta
+  name="twitter:image"
+  content="https://example.com/meta-tags-twitter.jpg"
+/>
 ```
 
 Why It’s Important: Increases the appeal of your tweets by including images and rich descriptions.

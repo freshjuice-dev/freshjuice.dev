@@ -12,6 +12,7 @@ We are excited to announce our first big update to the theme. This update includ
 ## Modules
 
 We have added several new modules to the theme. This includes:
+
 - [Statistics Modules](/docs/modules/statistics/)
 - [Pricing Card Modules](/docs/modules/pricing-card/)
 - [Google Maps Embed](/docs/modules/google-maps/)
@@ -22,6 +23,7 @@ We have added several new modules to the theme. This includes:
 Additionally, we have added to [our documentation](/docs/) every new module along with some existing modules that were missing.
 
 The missing modules that were added to our documentation are the following:
+
 - [Button](/docs/modules/button/)
 - [Card](/docs/modules/card/)
 - [Blog Listing Modules](/docs/modules/blog-listing/)
@@ -52,6 +54,7 @@ Apart from the additions to [our documentation](/docs/) mentioned prior, we have
 We recommend for new users to read our [Get Started](/docs/) section.
 
 ## Bugfixes
+
 - [#10](https://github.com/freshjuice-dev/freshjuice-hubspot-theme/issues/10) Fixed a bug where if more than one github gist module on a page, only one would render
 
 [Check out the changelog](/changelog/) for more details on this update.

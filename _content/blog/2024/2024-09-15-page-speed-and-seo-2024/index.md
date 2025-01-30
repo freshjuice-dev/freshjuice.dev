@@ -1,7 +1,14 @@
 ---
 title: "Page Speed and SEO in 2024: What You Need To Know"
 desc: "Do you know how page speed and SEO are connected? Take user experience to another level and learn how to improve your website's page speed."
-tags: ["SEO", "Page Speed", "PageSpeed Insights", "LightHouse", "Search Engine Optimization"]
+tags:
+  [
+    "SEO",
+    "Page Speed",
+    "PageSpeed Insights",
+    "LightHouse",
+    "Search Engine Optimization",
+  ]
 author: loraider259
 edited: reatlat
 ---
@@ -33,6 +40,7 @@ Now that you know what elements page speed measurement takes into account, it’
 That said, let’s scout these concepts in order to better understand how important they are for your site’s success and possibilities of ranking on SERPs, which is essential nowadays if you wish to be noticed on the internet.
 
 ### SEO
+
 Now that we know what page speed is and its significance for your site’s presence online, let’s see how SEO can be influenced by it and what does it take into account when ranking your website for — or other search engines — results.
 
 When it comes to positioning your website on the results page, Google takes into account your page speed to see if that’s something the audience is going to like. If your website has long waiting times or doesn’t load images and other content in just a matter of seconds, that’s something it’s going to back out many people, who otherwise may’ve stayed on your site. In the end, both Google and other search engines look for websites which are relevant, appropriate and, above all, fast and well-structured.
@@ -66,4 +74,3 @@ All set for being the #1 result on Google? Before we leave you to it, shall we g
 - **Getting a good host.** It’s no use having a well-optimized and fast website if it’s being hosted by a slow server. For example, if you’re aiming for a certain audience from a certain place, you should be choosing a server which operates in the same country.
 - **Static site generation.** Instead of having a website that generates dynamically on the fly, you should consider having one where all the pages are pre-built into simple and static files, such as HTML ones. This means when a user accesses your website, they’ll be using the static HTML instead of having to load the entire CMS and the code it comes with it.
 - **Reduce elements’ size.** Finally, another thing that really slows down a website is, obviously, elements such as images or videos. If you want to improve your page speed, make sure you reduce the size of the files you’re willing to use on your website, for example, with tools such as [iLoveIMG](https://www.iloveimg.com/), [TinyPNG](https://tinypng.com/), [ShortPixel](https://shortpixel.com/online-image-compression), or [Compressor.io](https://compressor.io/).
-

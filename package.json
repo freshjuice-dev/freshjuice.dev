@@ -106,7 +106,7 @@
     "postcss-easy-import": "^4.0.0",
     "postcss-merge-rules": "^7.0.4",
     "postcss-nesting": "^13.0.1",
-    "prettier-plugin-tailwindcss": "^0.6.10",
+    "prettier-plugin-tailwindcss": "^0.6.11",
     "pretty-quick": "^4.0.0",
     "prism-themes": "^1.9.0",
     "prismjs": "^1.29.0",

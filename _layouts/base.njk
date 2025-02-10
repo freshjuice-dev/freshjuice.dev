@@ -53,11 +53,10 @@
 
     {# Styles #}
     {%- if eleventy.env.runMode === "serve" -%}
-      <link rel="stylesheet" href="/css/main.css">
+      <link rel="stylesheet" href="/css/main.css?v={{ build.hash.short }}">
     {%- else -%}
-      {% set styles %}/css/main.{{ build.hash.short }}.css{% endset -%}
-      <link rel="preload" href="{{ styles }}" as="style">
-      <link rel="stylesheet" href="{{ styles }}">
+      <link rel="preload" href="/css/main.css?v={{ build.hash.short }}" as="style">
+      <link rel="stylesheet" href="/css/main.css?v={{ build.hash.short }}">
     {%- endif -%}
 
     {# Schema markup #}
@@ -83,11 +82,11 @@
         {%- if script.startsWith('http') or script.startsWith('//') %}
         <script defer src="{{ script }}" type="text/javascript"></script>
         {%- else %}
-        <script defer src="/js/{{ script }}{%- if eleventy.env.runMode == 'build' -%}.{{ build.hash.short }}{%- endif -%}.js" type="text/javascript"></script>
+        <script defer src="/js/{{ script }}.js?v={{ build.hash.short }}" type="text/javascript"></script>
         {%- endif %}
       {% endfor %}
     {%- endif %}
-    <script defer src="/js/main{%- if eleventy.env.runMode == 'build' -%}.{{ build.hash.short }}{%- endif -%}.js" type="text/javascript"></script>
+    <script defer src="/js/main.js?v={{ build.hash.short }}" type="text/javascript"></script>
 
     {# Overlay #}
     <div class="fixed inset-0 bg-terminal backdrop-blur bg-opacity-50 z-20"

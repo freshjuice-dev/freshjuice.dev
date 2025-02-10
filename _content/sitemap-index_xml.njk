@@ -1,0 +1,20 @@
+---
+permalink: /sitemap-index.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xsl" href="{{ build.url }}/sitemap.xsl"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>{{ 'sitemap-core.xml' | htmlBaseUrl(build.url) }}</loc>
+    <lastmod>{{ build.timestamp.iso }}</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>{{ 'sitemap-blogs.xml' | htmlBaseUrl(build.url) }}</loc>
+    <lastmod>{{ build.timestamp.iso }}</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>{{ 'sitemap-docs.xml' | htmlBaseUrl(build.url) }}</loc>
+    <lastmod>{{ build.timestamp.iso }}</lastmod>
+  </sitemap>
+</sitemapindex>
+

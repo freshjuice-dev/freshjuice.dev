@@ -2,29 +2,28 @@
  * Add Eleventy filters here
  * https://www.11ty.dev/docs/filters/
  */
-import {DateTime} from "luxon";
+import { DateTime } from "luxon";
 import { image as gravatarImage } from "gravatar-gen";
 import slugify from "slugify";
 import markdownIt from "markdown-it";
 import * as cheerio from "cheerio";
 
 export default {
-
   titleSinPeriod: (value) => {
     return value.replace(/\.$/, "");
   },
 
   // Formatting tokens for Luxon: https://moment.github.io/luxon/#/formatting?id=table-of-tokens
   readableDate: (dateObj, format, zone) => {
-    return DateTime.fromJSDate(dateObj, {zone: zone || "utc"}).toFormat(
-      format || "dd LLLL yyyy"
+    return DateTime.fromJSDate(dateObj, { zone: zone || "utc" }).toFormat(
+      format || "dd LLLL yyyy",
     );
   },
 
   // dateObj input: https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
   htmlDateString: (dateObj) => {
-    return DateTime.fromJSDate(dateObj, {zone: "utc"}).toFormat(
-      "yyyy-LL-dd'T'HH:mm:ssZZ"
+    return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat(
+      "yyyy-LL-dd'T'HH:mm:ssZZ",
     );
   },
 
@@ -46,7 +45,7 @@ export default {
   },
 
   includes: (haystack, needle) => {
-    if (typeof haystack === 'undefined' || typeof needle === 'undefined')
+    if (typeof haystack === "undefined" || typeof needle === "undefined")
       return false;
     return haystack.includes(needle);
   },
@@ -59,19 +58,28 @@ export default {
 
     tags = (tags || []).filter(
       (tag) =>
-        ["all", "nav", "authors", "tools", "post", "posts", "doc", "docs", "featured"].indexOf(
-          tag
-        ) === -1
+        [
+          "all",
+          "nav",
+          "authors",
+          "tools",
+          "post",
+          "posts",
+          "doc",
+          "docs",
+          "featured",
+        ].indexOf(tag) === -1,
     );
 
-    tags =  [...new Set(tags.map(item => item.toLowerCase()))].map(item => {
-      return tags.find(originalItem => originalItem.toLowerCase() === item);
+    tags = [...new Set(tags.map((item) => item.toLowerCase()))].map((item) => {
+      return tags.find((originalItem) => originalItem.toLowerCase() === item);
     });
 
     return tags;
   },
 
   sortCollection: (collection, key, order = "ASC") => {
+    // ASC or DESC
     return collection.sort((a, b) => {
       a = a[key];
       b = b[key];
@@ -90,7 +98,7 @@ export default {
   },
 
   getPostsByAuthor: (collection, author) => {
-    if (typeof author === 'undefined') {
+    if (typeof author === "undefined") {
       return [];
     }
     return collection.filter((item) => item.data.author === author);
@@ -99,7 +107,7 @@ export default {
   getAuthorData: async function (author, property = null) {
     try {
       const authorsCollection = this.ctx?.collections?.authors;
-      const authorData =  authorsCollection.find((item) => {
+      const authorData = authorsCollection.find((item) => {
         return item.fileSlug === author;
       }).data;
       const returnData = {
@@ -109,7 +117,7 @@ export default {
         url: `/authors/${slugify(author, { lower: true })}/`,
         signature: authorData.signature || "",
         links: authorData.links || {},
-        image: await gravatarImage(authorData.email || "", {size: 128}),
+        image: await gravatarImage(authorData.email || "", { size: 128 }),
         content: authorData.bio || authorData.page.rawInput.trim() || "",
       };
       if (property) {
@@ -134,7 +142,7 @@ export default {
   },
 
   getGravatarImage: async function (email, size) {
-    return await gravatarImage(email || "", {size: size || 150});
+    return await gravatarImage(email || "", { size: size || 150 });
   },
 
   postsByYear: (collection, year) => {
@@ -154,7 +162,7 @@ export default {
     return Object.values(object);
   },
 
-  getDocsMenu: (docsCollection, {url}) => {
+  getDocsMenu: (docsCollection, { url }) => {
     const docsMenu = [
       {
         title: "Getting Started",
@@ -163,21 +171,25 @@ export default {
           { title: "Installation", url: "/docs/installation/" },
           { title: "Customization", url: "/docs/customization/" },
           { title: "Using Tailwind CSS", url: "/docs/tailwindcss/" },
-          { title: "Using Alpine.js", url: "/docs/alpinejs/" }
-        ]
-      }, {
+          { title: "Using Alpine.js", url: "/docs/alpinejs/" },
+        ],
+      },
+      {
         title: "Modules",
-        children: []
-      }, {
+        children: [],
+      },
+      {
         title: "Global Modules",
-        children: []
-      }, {
+        children: [],
+      },
+      {
         title: "Sections",
-        children: []
-      }, {
+        children: [],
+      },
+      {
         title: "Templates",
-        children: []
-      }
+        children: [],
+      },
     ];
     docsCollection.forEach((item) => {
       let title = item.data.title;
@@ -194,16 +206,28 @@ export default {
         title = title.slice(0, -9);
       }
       if (item.data.tags.includes("modules")) {
-        docsMenu[1].children.push({ title: item.data.heading || title, url: item.url });
+        docsMenu[1].children.push({
+          title: item.data.heading || title,
+          url: item.url,
+        });
       }
       if (item.data.tags.includes("global-modules")) {
-        docsMenu[2].children.push({ title: item.data.heading || title, url: item.url });
+        docsMenu[2].children.push({
+          title: item.data.heading || title,
+          url: item.url,
+        });
       }
       if (item.data.tags.includes("sections")) {
-        docsMenu[3].children.push({ title: item.data.heading || title, url: item.url });
+        docsMenu[3].children.push({
+          title: item.data.heading || title,
+          url: item.url,
+        });
       }
       if (item.data.tags.includes("templates")) {
-        docsMenu[4].children.push({ title: item.data.heading || title, url: item.url });
+        docsMenu[4].children.push({
+          title: item.data.heading || title,
+          url: item.url,
+        });
       }
     });
     docsMenu.forEach((item) => {
@@ -225,7 +249,7 @@ export default {
           activePage = {
             sectionName: section.title,
             pageName: page.title,
-            pageUrl: page.url
+            pageUrl: page.url,
           };
         }
       });
@@ -233,12 +257,12 @@ export default {
     return activePage;
   },
 
-  getBreadcrumbsList: ({url}, title) => {
+  getBreadcrumbsList: ({ url }, title) => {
     const returnArray = [
       {
         name: "Home",
         url: "/",
-      }
+      },
     ];
     if (/^\/authors\/.+/.test(url)) {
       returnArray.push({
@@ -278,11 +302,11 @@ export default {
   },
 
   isSchemaMarkup: (page) => {
-    const DISALLOWED_URLS = [
-      '/404.html'
-    ];
+    const DISALLOWED_URLS = ["/404.html"];
 
-    return !(typeof page.url !== 'string' || DISALLOWED_URLS.includes(page.url));
+    return !(
+      typeof page.url !== "string" || DISALLOWED_URLS.includes(page.url)
+    );
   },
 
   getTwitterName: (twitterUrl = "") => {
@@ -298,7 +322,13 @@ export default {
 
   markdownIt: (content) => {
     return markdownIt({
-      html: true
+      html: true,
     }).render(content);
-  }
+  },
+
+  excludeFromCollectionsByTag: (collection, tags = []) => {
+    return collection.filter((item) => {
+      return !tags.some((tag) => (item.data.tags || []).includes(tag));
+    });
+  },
 };

@@ -50,7 +50,7 @@ layout: base.njk
             {% for child in children %}
               <li>
                 <a href="{{ child.url }}"
-                   class="block pl-6 py-1 -ml-px border-l hover:border-current {% if child.active %}border-current !text-red-600 dark:!text-red font-semibold{% else %}border-transparent opacity-75 hover:opacity-100 !text-zinc-600 dark:!text-zinc-300{% endif %}">
+                   class="block pl-6 py-1 -ml-px border-l hover:border-current {% if child.active %}border-current !text-red-600 dark:!text-red font-semibold{% else %}border-transparent opacity-85 hover:opacity-100 !text-zinc-600 dark:!text-zinc-300{% endif %}">
                   {{ child.title }}
                 </a>
               </li>
@@ -87,7 +87,7 @@ layout: base.njk
               {% for child in children %}
                 <li>
                   <a href="{{ child.url }}"
-                     class="block pl-6 py-1 -ml-px border-l hover:border-current {% if child.active %}border-current !text-red-600 dark:!text-red font-semibold{% else %}border-transparent opacity-75 hover:opacity-100 !text-zinc-600 dark:!text-zinc-300{% endif %}">{{ child.title }}</a>
+                     class="block pl-6 py-1 -ml-px border-l hover:border-current {% if child.active %}border-current !text-red-600 dark:!text-red font-semibold{% else %}border-transparent opacity-85 hover:opacity-100 !text-zinc-600 dark:!text-zinc-300{% endif %}">{{ child.title }}</a>
                 </li>
               {% endfor %}
             </ul>

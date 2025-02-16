@@ -1,3 +1,5 @@
 [submodule "_content/blog/posts"]
 	path = _content/blog/posts
 	url = git@github.com:freshjuice-dev/blog.freshjuice.dev.git
+  branch = main
+

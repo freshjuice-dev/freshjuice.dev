@@ -10,7 +10,7 @@ Discover the essence of FreshJuice and embrace the possibilities of a vibrant on
 
 ## License
 
-© 2024 [Alex Zappa](https://github.com/reatlat).
+© 2025 [Alex Zappa](https://github.com/reatlat).
 All Right Reserved.
 Except as otherwise noted,
 codebase and code snippets are licensed under

@@ -5,6 +5,7 @@
 import slugify from "slugify";
 import eleventyImage from "@11ty/eleventy-img";
 import path from "path";
+import { existsSync } from "fs";
 
 const slugifyOptions = {
   lower: true, // convert to lower case
@@ -94,10 +95,13 @@ export default {
   },
 
   ogImageSource: (eleventyConfig) => {
-    eleventyConfig.addShortcode("ogImageSource", function ({ url }) {
+    eleventyConfig.addAsyncShortcode("ogImageSource", async function ({ url }) {
       url = url
         ? slugify(url.replace(/\//g, " "), slugifyOptions).trim()
         : "default";
+      if (!existsSync(`./_static/img/og/${url}.png`)) {
+        url = "default";
+      }
       return `/img/og/${url || "default"}.png`;
     });
   },

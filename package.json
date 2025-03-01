@@ -9,6 +9,8 @@
     "postbuild": "npm-run-all --parallel postbuild:*",
     "postbuild:twconfig": "npx tailwind-config-viewer export ./_site/tw-config",
     "postbuild:pagefind-docs": "npx pagefind --site ./_site/docs",
+    "submodules:pull": "git submodule update --init --recursive",
+    "submodules:merge": "git submodule update --remote --merge",
     "make:og-images": "node ./generate-og-images.js",
     "view:twconfig": "npx tailwind-config-viewer -o",
     "debug:11ty": "DEBUG=Eleventy* npx @11ty/eleventy",

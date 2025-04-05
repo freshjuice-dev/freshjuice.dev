@@ -10,7 +10,7 @@ import collapse from "@alpinejs/collapse";
 
 const { trackEvent, trackPageview, enableAutoOutboundTracking } = Plausible({
   domain: "freshjuice.dev",
-  apiHost: "https://firebird.beastful.org",
+  // apiHost: "https://firebird.beastful.org",
 });
 
 // The window.Alpine = Alpine bit is optional, but is nice to have for

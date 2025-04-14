@@ -4,3 +4,4 @@ node_modules/
 .netlify/
 .idea/
 .wrangler/
+.google-service-account.json

@@ -2,16 +2,9 @@
 import debugLog from "./modules/_debugLog";
 import "lite-youtube-embed";
 import "@zachleat/table-saw";
-import colorScheme from "./modules/_detectColorScheme";
-import Plausible from "plausible-tracker";
 import Alpine from "alpinejs";
 import intersect from "@alpinejs/intersect";
 import collapse from "@alpinejs/collapse";
-
-const { trackEvent, trackPageview, enableAutoOutboundTracking } = Plausible({
-  domain: "freshjuice.dev",
-  // apiHost: "https://firebird.beastful.org",
-});
 
 // The window.Alpine = Alpine bit is optional, but is nice to have for
 // freedom and flexibility. Like when tinkering with Alpine from the devtools for example.
@@ -78,21 +71,9 @@ Alpine.data("xDOM", () => {
         this.blurSearch();
       },
       blurSearch() {
-        trackEvent("docs_search", {
-          props: {
-            action: "close",
-            search_term: this.searchTerm,
-          },
-        });
         document.querySelector(".pagefind-ui__search-clear").click();
       },
       focusSearch() {
-        trackEvent("docs_search", {
-          props: {
-            action: "open",
-            search_term: this.searchTerm,
-          },
-        });
         setTimeout(() => {
           document.querySelector(".pagefind-ui__search-input").focus();
         }, 200);
@@ -115,12 +96,6 @@ Alpine.data("xDOM", () => {
             processTerm: (term) => {
               debugLog("docsSearch: Process term", term);
               this.searchTerm = term.length > 0 ? term : "nada";
-              trackEvent("docs_search", {
-                props: {
-                  action: "search",
-                  search_term: this.searchTerm,
-                },
-              });
               return term;
             },
             processResult: (result) => {
@@ -168,17 +143,6 @@ Alpine.data("xDOM", () => {
             this.closeSearch();
           }
         });
-        document.body.addEventListener("click", (event) => {
-          if (event.target.matches(".pagefind-ui__result-link")) {
-            trackEvent("docs_search", {
-              props: {
-                action: "link_click",
-                search_term: this.searchTerm,
-                result_url: event.target.href,
-              },
-            });
-          }
-        });
       },
     },
     getThemeName() {
@@ -216,40 +180,6 @@ Alpine.data("xDOM", () => {
 });
 
 domReady(() => {
-  // track page view
-  trackPageview(
-    {},
-    {
-      props: {
-        title: document.title,
-        url: location.href,
-        path: location.pathname,
-        referrer: document.referrer,
-        prefersColorScheme: colorScheme(),
-        userAgent: navigator.userAgent,
-        deviceWidth: window.innerWidth,
-        project: "freshjuice.dev",
-      },
-    },
-  );
-
-  enableAutoOutboundTracking();
-
-  // track 404 page
-  if (document.body.classList.contains("page-404")) {
-    trackEvent("404", {
-      props: {
-        title: document.title,
-        url: location.href,
-        path: location.pathname,
-        referrer: document.referrer,
-        prefersColorScheme: colorScheme(),
-        userAgent: navigator.userAgent,
-        deviceWidth: window.innerWidth,
-      },
-    });
-  }
-
   // Start Alpine when the page is ready.
   Alpine.start();
 });

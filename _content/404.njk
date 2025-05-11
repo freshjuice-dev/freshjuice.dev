@@ -8,6 +8,8 @@ desc: "Ahhhhhhh! This page does not exist"
 bodyClass: "page-404"
 ---
 
+<script>document.addEventListener('DOMContentLoaded', function () { plausible('404', { props: { path: document.location.pathname } }); });</script>
+
 <div class="grid lg:grid-cols-3 gap-8 md:gap-16">
 
   <div class="">

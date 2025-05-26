@@ -1,0 +1,123 @@
+---
+title: "Am I Responsive?"
+desc: "Preview how your website looks on different devices."
+icon: "devices"
+partialScripts:
+  - am-i-responsive
+---
+
+
+<main class="" x-data="AmIResponsive">
+
+  <div class="aspect-video relative bg-gray-50 rounded overflow-clip w-full max-w-full flex justify-center items-center select-none">
+
+    <div class="relative aspect-video scale-[.30] sm:scale-50 md:scale-[.65] lg:scale-[.85] xl:scale-100" style="width: 1052px; height: 592px">
+
+      {# iMac #}
+      <div class="imac absolute flex justify-center items-center [&_picture]:absolute [&_img]:m-0 drop-shadow-2xl"
+           style="width: 600px; height:516px; left: 19%; top:2%;">
+        <img src="./imac.png" alt="iMac" class="m-0" eleventy:widths="900">
+        <iframe class="absolute m-0 p-0 scale-[0.23] bg-cursor dark:bg-terminal"
+                style="border-radius: 20px; margin-top:-25%" frameborder="0"
+                :src="iframeSrc" width="2560" height="1440"></iframe>
+      </div>
+
+      {# MacBook 14Pro #}
+      <div class="macbook absolute flex justify-center items-center [&_picture]:absolute [&_img]:m-0 drop-shadow-2xl"
+           style="width: 450px; height: 294px; top: 47%; left: 56%;">
+        <div class="absolute z-10 bg-stone-900 w-12 h-2.5 flex justify-center"
+             style="top:1%; border-radius: 0 0 4px 4px">
+          <div class="rounded-full bg-gradient-to-b from-[#0F1693] via-terminal to-[#0F1693] size-1 absolute mx-auto" style="top:3px"></div>
+        </div>
+        <img src="./macbook.png" alt="MacBook Pro" class="m-0" eleventy:widths="450">
+        <iframe class="absolute m-0 p-0 scale-[0.253] bg-cursor dark:bg-terminal"
+                style="border-radius: 28px 28px 0 0; margin-top: -7.24%" frameborder="0"
+                :src="iframeSrc" width="1512" height="987"></iframe>
+      </div>
+
+      {# iPad Pro #}
+      <div class="ipad absolute flex justify-center items-center [&_picture]:absolute [&_img]:m-0 drop-shadow-2xl scale-[0.9]"
+           style="width: 250px; height: 345px; top: 35%; left: 1.5%;">
+        <img src="./ipad.png" alt="iPad Pro" class="m-0" eleventy:widths="600">
+        <iframe class="absolute m-0 mt-1 p-0 scale-[0.243] bg-cursor dark:bg-terminal"
+                style="border-radius: 50px" frameborder="0"
+                :src="iframeSrc" width="954" height="1330"></iframe>
+      </div>
+
+      {# iPhone 16Pro #}
+      <div class="iphone absolute flex justify-center items-center [&_picture]:absolute [&_img]:m-0 drop-shadow-2xl scale-[0.8]"
+           style="width: 130px; height: 266px; top: 52%; left: 20%;">
+        <div class="absolute z-10 bg-terminal w-10 h-2.5 rounded-full top-2">
+          <div class="rounded-full bg-gradient-to-b from-[#0F1693] via-terminal to-[#0F1693] size-1 absolute right-1" style="top:3px"></div>
+        </div>
+        <img src="./iphone.png" alt="iPhone 16Pro" class="m-0" eleventy:widths="450">
+        <iframe class="absolute m-0 p-0 scale-[0.3] bg-cursor dark:bg-terminal"
+                style="border-radius: 52px" frameborder="0"
+                :src="iframeSrc" width="393" height="852"></iframe>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="prose mx-auto mt-6 md:mt-8 lg:mt-12">
+    <form action="#" @submit="$event.preventDefault();setIframeSrc()">
+      <fieldset class="">
+        <label for="targetUrl" class="block">Type a URL to preview:</label>
+        <input class="block w-full text-terminal"
+               type="text" id="targetUrl"
+               @input.debounce.500ms="setIframeSrc()"
+               x-model="targetUrl"
+               placeholder="https://example.com">
+      </fieldset>
+    </form>
+  </div>
+
+
+  <div class="prose mx-auto mt-12">
+
+    <h1>Am I Responsive?</h1>
+
+    <p>I made this tool to easily see how my websites look on different devices.</p>
+    <p>It helps me take screenshots of various device sizes for responsive design without spending a lot of time.</p>
+    <p>I hope it's useful for you too, especially for showing clients who prefer visual explanations what responsive design means when actual products aren't available.</p>
+    <p>Just a heads up – it's not for testing on real devices, so make sure to do that separately. It's meant for quickly getting screenshots and visually explaining things in client meetings.</p>
+
+    <h2>How it works</h2>
+
+    <p>
+      This tool allows you to preview how your website looks on different devices. Just type the URL of the website you want to preview in the input field above and hit enter.
+    </p>
+
+    <h2>Features</h2>
+
+    <p><code>http://localhost/</code> works so it’s great for taking screenshots of local development URLs.</p>
+
+    <p>Send a URL to a friend or colleague by adding <code>?link=https://example.com</code> to the URL. For example, <a href="/tools/am-i-responsive/?link=https://freshjuice.dev">check out our website</a>.</p>
+
+    <p>It’s open source! Check out the <a href="https://www.github.com/{{ build.issues.owner }}/{{ build.issues.repo }}/">source code on GitHub</a>.</p>
+
+    <h2>Viewport sizes</h2>
+
+    <p>Here are the viewport sizes for each device:</p>
+
+    <ul>
+      <li><strong>iMac</strong>: 2560 x 1440 scaled down to scale(0.23)</li>
+      <li><strong>MacBook 14 Pro</strong>: 1512 x 987 scaled down to scale(0.253)</li>
+      <li><strong>iPad Pro</strong>: 954 x 1330 scaled down to scale(0.243)</li>
+      <li><strong>iPhone 16 Pro</strong>: 393 x 852 scaled down to scale(0.3)</li>
+    </ul>
+
+    <h2>Android fan?</h2>
+
+    <p>Good news! I'm Android fan too. And I'm not planning to build a tool for Android devices. But you can use <a href="https://responsiveviewer.org/">Responsive Viewer</a> for that.</p>
+
+  </div>
+
+</main>
+
+{#
+TODO:
+Add bookmarks and probably share buttons
+javascript:void('https://ami.reatlat.net'!==window.location.origin?window.location='https://ami.reatlat.net?url='+window.location.origin+window.location.pathname:console.log('AMI: oops... something wrong'))
+#}

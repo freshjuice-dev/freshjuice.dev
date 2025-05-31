@@ -3,11 +3,11 @@
   pre[class*="language-"] {
     @apply text-orange-400;
   }
-}
 
-.token.comment,
-.token.prolog,
-.token.doctype,
-.token.cdata {
-  @apply text-zinc-400;
+  .token.comment,
+  .token.prolog,
+  .token.doctype,
+  .token.cdata {
+    @apply text-zinc-400;
+  }
 }

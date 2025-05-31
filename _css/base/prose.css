@@ -44,6 +44,7 @@
   }
 
   .prose :where(a):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    color: var(--tw-prose-links);
     text-decoration: none;
   }
 
@@ -57,12 +58,7 @@
     content: none !important;
   }
 
-  .prose
-    :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
-    font-family:
-      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  }
-
+  .prose :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *)),
   code[class*="language-"],
   pre[class*="language-"] {
     font-family:
@@ -78,7 +74,6 @@
   .prose table:not([class]) tbody > tr:nth-child(odd),
   .prose table.striped tbody > tr:nth-child(odd) {
     background-color: #f5f5f5;
-    /* background-color-dark: rgba(31, 41, 55, 0.4); */
   }
 
   .prose table-saw table:not([class]) tr {
@@ -94,5 +89,137 @@
       :where([class~="not-prose"], [class~="not-prose"] *)
     )::after {
     content: none;
+  }
+
+  .prose h1 {
+    font-size: clamp(2.5rem, 3vw + 1rem, 4.5rem);
+  }
+
+  .prose h2 {
+    font-size: clamp(1.75rem, 2.5vw + 1rem, 2.25rem);
+  }
+
+  .prose h3 {
+    font-size: clamp(1.5rem, 2vw + 1rem, 2rem);
+  }
+
+  .prose h4 {
+    font-size: clamp(1.25rem, 1.5vw + 1rem, 1.5rem);
+  }
+
+  .prose h5 {
+    font-size: clamp(1.125rem, 1.2vw + 1rem, 1.25rem);
+  }
+
+  .prose h6 {
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 1.2em 0 0.5em;
+    font-size: clamp(1rem, 1vw + 1rem, 1.125rem);
+  }
+
+  .prose :where(h1):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    @apply font-extrabold leading-none;
+  }
+  .prose :where(h2):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    color: var(--tw-prose-headings);
+    font-weight: 700;
+    font-size: 1.5em;
+    margin-top: 2em;
+    margin-bottom: 1em;
+    line-height: 1.3333333;
+  }
+
+  .prose p,
+  .prose ul,
+  .prose ol,
+  .prose blockquote,
+  .prose pre,
+  .prose picture,
+  .prose img {
+    margin: 1.25em 0;
+  }
+
+  .prose a {
+    @apply no-underline hover:underline;
+  }
+
+  .prose strong {
+    font-weight: 700;
+  }
+
+  .prose em {
+    font-style: italic;
+  }
+
+  .prose blockquote {
+    @apply border-l-4 pl-6 text-current;
+    font-style: italic;
+  }
+
+  .prose ul,
+  .prose ol {
+    padding-left: 1.5em;
+  }
+
+  .prose ul {
+    list-style-type: disc;
+  }
+
+  .prose ol {
+    list-style-type: decimal;
+  }
+
+  .prose ul li::marker,
+  .prose ol li::marker {
+    color: currentColor;
+  }
+
+  .prose li {
+    padding-left: 0.25em;
+  }
+
+  .prose > code,
+  .prose *:not(pre) > code {
+    @apply font-mono bg-neutral-200 text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100;
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-size: 0.8em;
+  }
+
+  .prose pre {
+    @apply font-mono -mx-6 sm:-mx-10 md:mx-0 md:rounded-md bg-neutral-200 text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100;
+    padding: 0.7em 1em;
+    overflow-x: auto;
+    font-size: 0.7em;
+  }
+
+  .prose blockquote > pre {
+    @apply -ml-6 mr-0 md:mx-0;
+  }
+
+  .prose pre code {
+    display: block;
+    padding: 0;
+    background: none;
+    color: inherit;
+  }
+
+  .prose hr {
+    border: none;
+    @apply border-t-2;
+    margin: 2em 0;
+  }
+
+  .prose small {
+    font-size: 0.85em;
+  }
+
+  .prose [data-hs-cos-type*="rich_text"] > *:first-child {
+    margin-top: 0;
+  }
+
+  .prose [data-hs-cos-type*="rich_text"] > *:last-child {
+    margin-bottom: 0;
   }
 }

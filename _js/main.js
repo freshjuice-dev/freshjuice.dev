@@ -160,14 +160,15 @@ Alpine.data("xDOM", () => {
     },
     toggleTheme() {
       this.theme.dark = !this.theme.dark;
-      this.theme.name = this.theme.dark ? "dark" : "light";
-      localStorage.setItem("theme", this.theme.name);
-      document.documentElement.setAttribute("data-theme", this.theme.name);
+      localStorage.setItem("theme", this.theme.dark ? "dark" : "light");
+      document.documentElement.classList.toggle("dark", this.theme.dark);
     },
     init() {
       debugLog("AlpineJS DOM init");
-      document.documentElement.classList.remove("dark");
-      document.documentElement.setAttribute("data-theme", this.getThemeName());
+      this.theme.dark =
+        localStorage.theme === "dark" ||
+        (!("theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches);
       window.addEventListener("storage", () => {
         this.getThemeName();
       });

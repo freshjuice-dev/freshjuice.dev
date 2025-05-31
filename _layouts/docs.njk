@@ -121,9 +121,9 @@ layout: base.njk
 
   </aside>
 
-  <main class="prose mx-auto w-full lg:max-w-full grow py-8" data-pagefind-body>
+  <main class="prose max-w-prose mx-auto w-full lg:max-w-full grow py-8" data-pagefind-body>
 
-    <header class="prose md:prose-xl">
+    <header>
       {% if activeDocsPage.sectionName %}
         <p class="not-prose text-sm md:text-base font-semibold mb-0 text-red-600 dark:text-red leading-none">{{ activeDocsPage.sectionName }}</p>
       {% endif %}

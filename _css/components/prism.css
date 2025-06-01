@@ -1,7 +1,23 @@
 @layer components {
-  code[class*="language-"],
   pre[class*="language-"] {
-    @apply text-orange-400;
+    @apply text-orange-400 font-mono text-sm;
+  }
+
+  pre[class*="language-"] {
+    padding: 1em;
+    margin-top: 1.25em;
+    margin-bottom: 1.25em;
+    overflow: auto;
+  }
+
+  :not(pre) > code[class*="language-"],
+  pre[class*="language-"] {
+    background: #1b1b1d; /* Darker background */
+  }
+
+  :not(pre) > code[class*="language-"] {
+    padding: 0.1em;
+    border-radius: 0.3em;
   }
 
   .token.comment,
@@ -9,5 +25,24 @@
   .token.doctype,
   .token.cdata {
     @apply text-zinc-400;
+  }
+
+  .token.function {
+    color: #dad085;
+  }
+
+  .token.class-name {
+    color: #a8ff60;
+    text-decoration: underline;
+  }
+
+  /* Removes ` for code elements at start and end */
+  code:where(:not([class]))::before,
+  code:where(:not([class]))::after {
+    content: none !important;
+  }
+
+  :where(:not(pre)) code:where(:not([class])) {
+    @apply break-all;
   }
 }

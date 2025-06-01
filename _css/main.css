@@ -1,12 +1,10 @@
 @import "tailwindcss" source(none);
 
 /* Base */
+@import "./base/reset.css";
 @import "./base/base.css";
 @import "./base/prose.css";
 @import "./base/forms.css";
-
-/* 3rd party styles */
-@import "prism-themes/themes/prism-atom-dark.css";
 
 /* Components */
 @import "./components/buttons.css";

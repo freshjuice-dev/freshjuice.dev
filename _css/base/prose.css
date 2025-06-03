@@ -1,13 +1,19 @@
 @layer base {
   .prose {
+    --h1-prose: clamp(2.25rem, 6.25vw + 0.375rem, 3.5rem);
+    --h2-prose: clamp(1.5rem, 3.85vw + 0.625rem, 2.25rem);
+    --h3-prose: clamp(1.25rem, 3.21vw + 0.4375rem, 1.875rem);
+    --h4-prose: clamp(1rem, 2.56vw + 0.35rem, 1.5rem);
     --tw-prose-links: #dc2626;
     --tw-prose-caption: #282828;
     --tw-prose-code: #111827;
     --tw-prose-code-bg: #f5f5f5;
     --tw-prose-pre-bg: #1d1f21;
     --tw-prose-code-border-color: #bdbdbd;
+    --tw-prose-hr: #e6e7eb;
+    --tw-prose-table-stripe: #f5f5f5;
+    --tw-prose-table-border-lines: #d1d5db;
   }
-
   .dark .prose {
     --tw-prose-body: #d4d4d4;
     --tw-prose-headings: #d4d4d4;
@@ -17,21 +23,24 @@
     --tw-prose-bold: #d4d4d4;
     --tw-prose-counters: #d4d4d4;
     --tw-prose-bullets: #d4d4d4;
-    --tw-prose-hr: #f3f4f61a;
     --tw-prose-quotes: #d4d4d4;
     --tw-prose-quote-borders: #e5e7eb;
     --tw-prose-captions: #c5c5c5;
     --tw-prose-kbd: #111827;
     --tw-prose-kbd-shadows: 17 24 39;
     --tw-prose-pre-code: #e5e7eb;
+    --tw-prose-hr: #262626;
     --tw-prose-th-borders: #f3f4f61a;
     --tw-prose-td-borders: #f3f4f61a;
     --tw-prose-code-border-color: #515151;
     --tw-prose-code-bg: #262626;
+    --tw-prose-table-stripe: #1e1e1f;
+    --tw-prose-table-border-lines: #2e2e31;
   }
 
   .prose {
     line-height: 1.75em;
+
     h1,
     h2,
     h3,
@@ -41,18 +50,34 @@
       @apply text-pretty;
     }
 
+    h1:not(.not-prose *) {
+      font-size: var(--h1-prose);
+      @apply text-(--tw-prose-headings) font-extrabold leading-none;
+    }
+    h2:not(.not-prose *) {
+      font-size: var(--h2-prose);
+      @apply text-(--tw-prose-headings) font-bold mt-12 mb-6 md:mt-16 md:mb-8;
+    }
+
+    h2 + *:not(.not-prose *),
+    hr + *:not(.not-prose *) {
+      @apply mt-0;
+    }
+    h3:not(.not-prose *) {
+      font-size: var(--h3-prose);
+      @apply text-(--tw-prose-headings) font-semibold mt-8 mb-3 md:mt-12 md:mb-5;
+    }
+    h4:not(.not-prose *) {
+      font-size: var(--h4-prose);
+      @apply text-(--tw-prose-headings) font-semibold mt-6 mb-2 md:mt-9 md:mb-3;
+    }
+
     p,
     ul,
     ol,
     blockquote,
-    pre,
-    picture,
-    img {
+    pre {
       margin: 20px 0;
-    }
-
-    p.not-prose {
-      margin: 0;
     }
 
     ul,
@@ -63,16 +88,12 @@
     ul {
       list-style-type: disc;
     }
-
     ol {
       list-style-type: decimal;
     }
-
-    ul li::marker,
-    ol li::marker {
+    :is(ul, ol) li::marker {
       color: currentColor;
     }
-
     li {
       padding-left: 0.25em;
     }
@@ -86,10 +107,12 @@
     }
 
     hr {
-      @apply border-t-2;
-      color: var(--tw-prose-hr);
-      border-top-width: 1px;
-      margin: 3em 0;
+      @apply border-t my-12 border-(--tw-prose-hr);
+    }
+
+    /* Targets Paragraph inside prose but with class not-prose */
+    p.not-prose {
+      margin: 0;
     }
 
     blockquote {
@@ -100,91 +123,80 @@
     small {
       font-size: 0.85em;
     }
-  }
 
-  /* Start Prose Links <a> */
-  .prose a:not(.not-prose *) {
-    @apply text-(--tw-prose-links) no-underline hover:underline;
-  }
+    picture,
+    figure {
+      @apply my-8 block;
+    }
 
-  /* End Prose Links <a> */
+    picture > img,
+    figure > picture {
+      @apply my-0;
+    }
 
-  /* Start Code Element */
-  .prose > code,
-  .prose *:not(pre) > code {
-    @apply border-(--tw-prose-code-border-color) text-(--tw-prose-code) inline-block font-semibold border-1 font-mono px-2 text-sm bg-(--tw-prose-code-bg);
-    border-radius: 0.35rem;
-  }
+    a:not(.not-prose *) {
+      @apply text-(--tw-prose-links) no-underline hover:underline;
+    }
 
-  /* End Code Element */
+    :where(:not(pre)) > code {
+      @apply border-(--tw-prose-code-border-color) text-(--tw-prose-code) inline-block font-semibold border-1 font-mono px-2 text-sm bg-(--tw-prose-code-bg);
+      border-radius: 0.35rem;
+    }
 
-  /* Start List Items with ul ol */
-  .prose ol > li:not(.not-prose *),
-  .prose ul > li:not(.not-prose *) {
-    @apply ps-1.5 my-2;
-  }
+    blockquote > pre {
+      @apply -ml-6 mr-0 md:mx-0;
+    }
 
-  .prose blockquote > pre {
-    @apply -ml-6 mr-0 md:mx-0;
-  }
+    :is(ol, ul) > li:not(.not-prose *) {
+      @apply ps-1.5 my-2;
+    }
 
-  /* End List Items with ul ol */
+    li > :is(ul, ol):not(.not-prose *) {
+      @apply mt-0;
+    }
 
-  /* Start Tables */
-  .prose table:not([class]) th,
-  .prose table:not([class]) td {
-    padding: 0 1rem;
-  }
+    blockquote p:first-of-type::before,
+    blockquote p:last-of-type::after {
+      content: none;
+    }
 
-  .prose table:not([class]) tbody > tr:nth-child(odd),
-  .prose table.striped tbody > tr:nth-child(odd) {
-    background-color: #f5f5f5;
-  }
+    /* Start Tables */
+    table:not(.not-prose *) {
+      @apply w-full my-8 table-auto text-sm md:text-[18px];
+    }
 
-  .prose table-saw table:not([class]) tr {
-    margin-bottom: 0;
-  }
+    table:not([class]) {
+      th {
+        @apply font-semibold text-(--tw-prose-headings) align-bottom text-start p-4;
+      }
+      td {
+        @apply align-top text-start p-4;
+      }
+    }
 
-  /* End Tables */
+    table:not([class]) tbody > tr:nth-child(odd),
+    table.striped tbody > tr:nth-child(odd) {
+      background-color: var(--tw-prose-table-stripe);
+    }
 
-  /* Blockquote content markers */
-  .prose blockquote p:first-of-type::before,
-  .prose blockquote p:last-of-type::after {
-    content: none;
-  }
+    tbody tr {
+      @apply !mb-0;
+      border-color: var(--tw-prose-table-border-lines);
+      border-top-width: 1px;
+      border-bottom-width: 1px;
+    }
 
-  /* Start Headings */
-  .prose h1 {
-    /* Scale Down from 56px to 36px from screen size 1080px to 768px */
-    font-size: clamp(2.25rem, 6.25vw + 0.375rem, 3.5rem);
-  }
+    table-saw table:not([class]) tr {
+      @apply mb-0;
+    }
+    /* End Tables */
 
-  .prose :where(h1):not(.not-prose *) {
-    @apply font-extrabold leading-none;
-  }
+    [data-hs-cos-type*="rich_text"] > *:first-child {
+      margin-top: 0;
+    }
 
-  .prose :where(h2):not(.not-prose *) {
-    @apply text-2xl mt-12 mb-6 font-bold text-(--tw-prose-headings);
-  }
-
-  .prose :where(hr + *):not(.not-prose *) {
-    @apply mt-0;
-  }
-
-  .prose h6 {
-    font-weight: 700;
-    line-height: 1.25;
-    margin: 1.2em 0 0.5em;
-    font-size: clamp(1rem, 1vw + 1rem, 1.125rem);
-  }
-
-  /* End Headings */
-
-  .prose [data-hs-cos-type*="rich_text"] > *:first-child {
-    margin-top: 0;
-  }
-
-  .prose [data-hs-cos-type*="rich_text"] > *:last-child {
-    margin-bottom: 0;
+    [data-hs-cos-type*="rich_text"] > *:last-child {
+      margin-bottom: 0;
+    }
   }
 }

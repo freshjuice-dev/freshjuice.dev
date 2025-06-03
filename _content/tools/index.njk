@@ -7,61 +7,62 @@ permalink: /tools/
 
 <div class="prose md:prose-xl mx-auto">
 
-  <h1>Fresh Tools</h1>
+    <h1 class="mb-8" >Fresh Tools</h1>
 
-  <div class="not-prose grid md:grid-cols-2 gap-4 lg:gap-8">
-    {% set toolslist = collections.tools %}
-    {% for item in toolslist | reverse %}
-      {%- if item.fileSlug | slugify != "tools" %}
+    <div class="not-prose grid md:grid-cols-2 gap-4 lg:gap-8">
+      {% set toolslist = collections.tools %}
+      {% for item in toolslist | reverse %}
+        {%- if item.fileSlug | slugify != "tools" %}
+          <article class="bg-neutral-200/40 hover:bg-neutral-200 dark:bg-neutral-800/60 dark:hover:bg-neutral-800 transition p-4 md:p-8 rounded-md relative">
+            <h3 class="text-lg md:text-xl font-medium mb-3 w-full flex gap-2">
+              {% phicon item.data.icon, "duotone", { class: "size-7 text-current" } %}
+              <a class="text-current text-pretty inline-block" href="/tools/{{ item.fileSlug | slugify }}/">
+                <span class="absolute inset-0"></span>
+                {{ item.data.title }}
+              </a>
+            </h3>
+            <p class="text-sm line-clamp-4">{{ item.data.desc }}</p>
+          </article>
+        {%- endif %}
+      {% endfor %}
+    </div>
+
+    <h2>Third Party Tools</h2>
+
+    <div class="not-prose grid md:grid-cols-2 gap-4 lg:gap-8">
+      {% set thirdPartyTools = [
+        {
+          title: "Schema Markup Testing Tool",
+          icon: "code",
+          desc: "For generic schema validation, use the Schema Markup Validator to test all types of schema.org markup, without Google-specific validation. Rich Results Test.",
+          link: "https://developers.google.com/search/docs/appearance/structured-data"
+        }, {
+          title: "Google PageSpeed Insights",
+          icon: "speedometer",
+          desc: "PageSpeed Insights (PSI) reports on the user experience of a page on both mobile and desktop devices, and provides suggestions on how that page may be improved.",
+          link: "https://developers.google.com/speed/pagespeed/insights/"
+        }, {
+          title: "Schema Markup Generator",
+          icon: "brackets-curly",
+          desc: "A Schema.org structured data generator that supports the creation of JSON-LD markups. Including all of the required item properties and more.",
+          link: "https://technicalseo.com/tools/schema-markup-generator/"
+        }
+      ] %}
+      {% for item in thirdPartyTools %}
         <article class="bg-neutral-200/40 hover:bg-neutral-200 dark:bg-neutral-800/60 dark:hover:bg-neutral-800 transition p-4 md:p-8 rounded-md relative">
           <h3 class="text-lg md:text-xl font-medium mb-3 w-full flex gap-2">
-            {% phicon item.data.icon, "duotone", { class: "size-7 text-current" } %}
-            <a class="text-current text-pretty inline-block" href="/tools/{{ item.fileSlug | slugify }}/">
+            {% phicon item.icon, "duotone", { class: "size-7 text-current" } %}
+            <a class="text-current text-pretty inline-block" href="{{ item.link }}">
               <span class="absolute inset-0"></span>
-              {{ item.data.title }}
+              {{ item.title }}
             </a>
           </h3>
-          <p class="text-sm line-clamp-4">{{ item.data.desc }}</p>
+          <p class="text-sm line-clamp-4">{{ item.desc }}</p>
         </article>
-      {%- endif %}
-    {% endfor %}
+      {% endfor %}
+    </div>
+
+    {# TODO: add devs tools #}
+
   </div>
-
-  <h2>Third Party Tools</h2>
-
-  <div class="not-prose grid md:grid-cols-2 gap-4 lg:gap-8">
-    {% set thirdPartyTools = [
-      {
-        title: "Schema Markup Testing Tool",
-        icon: "code",
-        desc: "For generic schema validation, use the Schema Markup Validator to test all types of schema.org markup, without Google-specific validation. Rich Results Test.",
-        link: "https://developers.google.com/search/docs/appearance/structured-data"
-      }, {
-        title: "Google PageSpeed Insights",
-        icon: "speedometer",
-        desc: "PageSpeed Insights (PSI) reports on the user experience of a page on both mobile and desktop devices, and provides suggestions on how that page may be improved.",
-        link: "https://developers.google.com/speed/pagespeed/insights/"
-      }, {
-        title: "Schema Markup Generator",
-        icon: "brackets-curly",
-        desc: "A Schema.org structured data generator that supports the creation of JSON-LD markups. Including all of the required item properties and more.",
-        link: "https://technicalseo.com/tools/schema-markup-generator/"
-      }
-    ] %}
-    {% for item in thirdPartyTools %}
-    <article class="bg-neutral-200/40 hover:bg-neutral-200 dark:bg-neutral-800/60 dark:hover:bg-neutral-800 transition p-4 md:p-8 rounded-md relative">
-      <h3 class="text-lg md:text-xl font-medium mb-3 w-full flex gap-2">
-        {% phicon item.icon, "duotone", { class: "size-7 text-current" } %}
-        <a class="text-current text-pretty inline-block" href="{{ item.link }}">
-          <span class="absolute inset-0"></span>
-          {{ item.title }}
-        </a>
-      </h3>
-      <p class="text-sm line-clamp-4">{{ item.desc }}</p>
-    </article>
-    {% endfor %}
-  </div>
-
-  {# TODO: add devs tools #}
-
 </div>

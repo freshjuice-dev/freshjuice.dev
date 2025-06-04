@@ -11,17 +11,6 @@
     @apply mx-auto rounded shadow-lg dark:shadow-amber-200/25;
   }
 
-  .prose {
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      @apply text-pretty;
-    }
-  }
-
   [id] {
     @apply scroll-mt-10;
   }
@@ -36,9 +25,5 @@
 
   .font-sans {
     font-optical-sizing: auto;
-  }
-
-  .prose picture + em {
-    @apply block text-center text-sm italic -mt-8;
   }
 }

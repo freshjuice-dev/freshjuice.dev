@@ -1,180 +1,115 @@
 @layer base {
   .prose {
-    --h1-prose: clamp(2.25rem, 6.25vw + 0.375rem, 3.5rem);
-    --h2-prose: clamp(1.5rem, 3.85vw + 0.625rem, 2.25rem);
-    --h3-prose: clamp(1.25rem, 3.21vw + 0.4375rem, 1.875rem);
-    --h4-prose: clamp(1rem, 2.56vw + 0.35rem, 1.5rem);
-  }
-
-  .prose {
+    @apply md:text-base;
     line-height: 1.75em;
+  }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      @apply text-pretty;
-    }
+  .prose picture + em {
+    @apply block text-center text-sm italic -mt-8;
+  }
 
-    h1:not(.not-prose *) {
-      font-size: var(--h1-prose);
-      @apply dark:text-neutral-300 font-extrabold leading-none;
-    }
-    h2:not(.not-prose *) {
-      font-size: var(--h2-prose);
-      @apply dark:text-neutral-300 font-bold mt-12 mb-6 md:mt-16 md:mb-8;
-    }
+  .prose :is(p, ul, ol, blockquote, pre) {
+    margin: 20px 0;
+  }
 
-    h2 + *:not(.not-prose *),
-    hr + *:not(.not-prose *) {
-      @apply mt-0;
-    }
-    h3:not(.not-prose *) {
-      font-size: var(--h3-prose);
-      @apply dark:text-neutral-300 font-semibold mt-8 mb-3 md:mt-12 md:mb-5;
-    }
-    h4:not(.not-prose *) {
-      font-size: var(--h4-prose);
-      @apply dark:text-neutral-300 font-semibold mt-6 mb-2 md:mt-9 md:mb-3;
-    }
+  .prose :is(ul, ol) {
+    padding-left: 1.5em;
+  }
 
-    p,
-    ul,
-    ol,
-    blockquote,
-    pre {
-      margin: 20px 0;
-    }
+  .prose ul {
+    list-style-type: disc;
+  }
 
-    ul,
-    ol {
-      padding-left: 1.5em;
-    }
+  .prose ol {
+    list-style-type: decimal;
+  }
 
-    ul {
-      list-style-type: disc;
-    }
-    ol {
-      list-style-type: decimal;
-    }
-    :is(ul, ol) li::marker {
-      color: currentColor;
-    }
-    li {
-      padding-left: 0.25em;
-    }
+  .prose :is(ul, ol) li::marker {
+    color: currentColor;
+  }
 
-    strong {
-      font-weight: 700;
-    }
+  .prose li {
+    padding-left: 0.25em;
+  }
 
-    em {
-      font-style: italic;
-    }
+  .prose strong {
+    font-weight: 700;
+  }
 
-    hr {
-      @apply border-t my-12 border-gray-200 dark:border-neutral-800;
-    }
+  .prose em {
+    font-style: italic;
+  }
 
-    /* Targets Paragraph inside prose but with class not-prose */
-    p.not-prose {
-      margin: 0;
-    }
+  .prose hr {
+    @apply border-t my-12 border-gray-200 dark:border-neutral-800;
+  }
 
-    blockquote {
-      @apply border-l-4 pl-6 text-current;
-      font-style: italic;
-    }
+  .prose blockquote {
+    @apply border-l-4 pl-6 text-current italic;
+  }
 
-    small {
-      font-size: 0.85em;
-    }
+  .prose img {
+    @apply my-8 block;
+  }
 
-    picture,
-    figure {
-      @apply my-8 block;
-    }
+  .prose :is(picture, figure) {
+    @apply my-0;
+  }
 
-    picture > img,
-    figure > picture {
-      @apply my-0;
-    }
+  .prose a {
+    @apply text-red-600 dark:text-red no-underline hover:underline;
+  }
 
-    a:not(.not-prose *) {
-      @apply text-red-600 dark:text-red-500 no-underline hover:underline;
-    }
+  .prose :where(:not(pre)) > code {
+    @apply border-neutral-400 dark:border-neutral-600 text-gray-900 dark:text-neutral-300 inline-block
+    font-semibold border-1 font-mono px-2 text-sm bg-neutral-100 dark:bg-neutral-800;
+    border-radius: 0.35rem;
+  }
 
-    :where(:not(pre)) > code {
-      /*Possibly neutral-300 for light */
-      @apply border-neutral-400 dark:border-neutral-600 text-gray-900 dark:text-neutral-300 inline-block
-      font-semibold border-1 font-mono px-2 text-sm bg-neutral-100 dark:bg-neutral-800;
-      border-radius: 0.35rem;
-    }
+  .prose blockquote > pre {
+    @apply -ml-6 mr-0 md:mx-0;
+  }
 
-    blockquote > pre {
-      @apply -ml-6 mr-0 md:mx-0;
-    }
+  .prose :is(ol, ul) > li:not(.not-prose *) {
+    @apply ps-1.5 my-2;
+  }
 
-    :is(ol, ul) > li:not(.not-prose *) {
-      @apply ps-1.5 my-2;
-    }
+  .prose li > :is(ul, ol):not(.not-prose *) {
+    @apply mt-0;
+  }
 
-    li > :is(ul, ol):not(.not-prose *) {
-      @apply mt-0;
-    }
+  .prose blockquote p:first-of-type::before,
+  .prose blockquote p:last-of-type::after {
+    content: none;
+  }
 
-    blockquote p:first-of-type::before,
-    blockquote p:last-of-type::after {
-      content: none;
-    }
+  /* Start Tables */
+  .prose table {
+    @apply w-full my-8 table-auto text-sm;
+  }
 
-    /* Start Tables */
-    table:not(.not-prose *) {
-      @apply w-full my-8 table-auto text-sm;
+  .prose table:not([class]) {
+    th {
+      @apply font-semibold dark:text-neutral-300 align-bottom text-start p-4;
     }
-
-    table:not([class]) {
-      th {
-        @apply font-semibold dark:text-neutral-300 align-bottom text-start p-4;
-      }
-      td {
-        @apply align-top text-start p-4;
-      }
-    }
-
-    table:not([class]) tbody > tr:nth-child(odd),
-    table.striped tbody > tr:nth-child(odd) {
-      @apply bg-neutral-100 dark:bg-stone-800/35;
-    }
-
-    tbody tr {
-      @apply !mb-0 border-neutral-400/30 dark:border-neutral-600/30;
-      border-top-width: 1px;
-      border-bottom-width: 1px;
-    }
-
-    table-saw table:not([class]) tr {
-      @apply mb-0;
-    }
-    /* End Tables */
-
-    [data-hs-cos-type*="rich_text"] > *:first-child {
-      margin-top: 0;
-    }
-
-    [data-hs-cos-type*="rich_text"] > *:last-child {
-      margin-bottom: 0;
+    td {
+      @apply align-top text-start p-4;
     }
   }
 
-  .prose-headings-c {
-    h2 {
-      @apply !text-2xl;
-    }
-    h3 {
-      @apply !text-xl;
-    }
+  .prose table:not([class]) tbody > tr:nth-child(odd),
+  .prose table.striped tbody > tr:nth-child(odd) {
+    @apply bg-neutral-100 dark:bg-stone-800/35;
   }
+
+  .prose tbody tr {
+    @apply !mb-0 border-neutral-400/30 dark:border-neutral-600/30;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+  }
+
+  .prose table-saw table:not([class]) tr {
+    @apply mb-0;
+  }
+  /* End Tables */
 }

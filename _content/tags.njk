@@ -24,21 +24,21 @@ noindex: true
 
 {% set postYears = postsList | getPostYears | reverse %}
 
-<nav class="max-w-prose md:text-xl mx-auto w-full min-h-9 leading-none">
+<nav class="max-w-4xl mx-auto w-full min-h-9 leading-none">
   <a class="inline-flex items-center gap-2 group no-underline" href="/tags/">
     {% phicon "arrow-left", "bold", { class: "size-5 group-hover:-translate-x-2 transition-transform" } %}
     <span>Back to Tags</span>
   </a>
 </nav>
 
-<div class="prose md:prose-xl mx-auto">
-  <h1 style="margin-bottom:0.8571429em">
+<div class="prose mx-auto">
+  <h1>
     <small>Tagged:</small><br/>
     {{ tag }}
   </h1>
 </div>
 
-<div class="prose mx-auto md:text-xl grid gap-8">
+<div class="prose mx-auto grid gap-8">
 
   {% for year in postYears %}
     <div class="relative">

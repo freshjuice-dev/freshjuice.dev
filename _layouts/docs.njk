@@ -121,11 +121,11 @@ layout: base.njk
 
   </aside>
 
-  <main class="prose prose-headings-c max-w-prose mx-auto w-full lg:max-w-full grow py-8" data-pagefind-body>
+  <main class="prose max-w-4xl mx-auto w-full lg:max-w-full grow py-8" data-pagefind-body>
 
     <header>
       {% if activeDocsPage.sectionName %}
-        <p class="not-prose text-sm md:text-base font-semibold mb-0 text-red-600 dark:text-red leading-none">{{ activeDocsPage.sectionName }}</p>
+        <p class="text-sm md:text-base font-semibold mb-0 text-red-600 dark:text-red-500 leading-none">{{ activeDocsPage.sectionName }}</p>
       {% endif %}
       <h1>{{ activeDocsPage.pageName }}</h1>
     </header>

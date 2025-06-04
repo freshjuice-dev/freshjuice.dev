@@ -1,0 +1,31 @@
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-pretty dark:text-neutral-300;
+  }
+
+  h1 {
+    font-size: var(--h1);
+    @apply font-extrabold leading-none mb-8;
+  }
+  h2 {
+    font-size: var(--h2);
+    @apply font-bold mt-12 mb-6 md:mt-16 md:mb-8;
+  }
+  h2 + *,
+  hr + * {
+    @apply mt-0;
+  }
+  h3 {
+    font-size: var(--h3);
+    @apply font-semibold mt-8 mb-3 md:mt-12 md:mb-5;
+  }
+  h4 {
+    font-size: var(--h4);
+    @apply font-semibold mt-6 mb-2 md:mt-9 md:mb-3;
+  }
+}

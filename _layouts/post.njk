@@ -4,7 +4,7 @@ layout: base.njk
 
 {%- set authorData = author | getAuthorData %}
 
-<nav class="max-w-prose md:text-xl mx-auto w-full min-h-9 leading-none">
+<nav class="max-w-4xl md:text-xl mx-auto w-full min-h-9 leading-none">
   <a class="inline-flex items-center gap-2 group no-underline" href="/blog/">
     {% phicon "arrow-left", "bold", { class: "size-5 group-hover:-translate-x-2 transition-transform" } %}
     <span>Back to Blog</span>
@@ -12,25 +12,27 @@ layout: base.njk
 </nav>
 
 
-<main class="max-w-prose prose md:text-xl/8 mx-auto w-full">
+<main class="max-w-4xl mx-auto w-full">
 
-  <header class="grid">
-    <h1 style="margin-bottom: 0">{{ heading or title }}{%- if draft %} <small class="text-base">[draft]</small>{%- endif %}</h1>
-    <p class="post-metadata text-sm md:text-base">
-      <time datetime="{{ page.date | htmlDateString }}">{{ page.date | readableDate("LLLL d, yyyy") }}</time>
-      {%- if updated %}
-        <time datetime="{{ updated | htmlDateString }}"> &bull; updated {{ updated | readableDate("LLL d, yyyy") }}</time>
-      {%- endif %}
-      &bull; Written by <a href="{{ authorData.url }}">{{ authorData.name }}</a>
-    </p>
-  </header>
+  <div class="prose">
+    <header class="grid">
+      <h1 class="mb-0">{{ heading or title }}{%- if draft %} <small class="text-base">[draft]</small>{%- endif %}</h1>
+      <p class="post-metadata text-sm md:text-base">
+        <time datetime="{{ page.date | htmlDateString }}">{{ page.date | readableDate("LLLL d, yyyy") }}</time>
+        {%- if updated %}
+          <time datetime="{{ updated | htmlDateString }}"> &bull; updated {{ updated | readableDate("LLL d, yyyy") }}</time>
+        {%- endif %}
+        &bull; Written by <a href="{{ authorData.url }}">{{ authorData.name }}</a>
+      </p>
+    </header>
 
-  {{ content | safe }}
+    {{ content | safe }}
+  </div>
 
   {# Authors #}
   {% authorSignature author %}
 
-  <footer class="not-prose">
+  <footer>
     {%- if tags | filterTagList | length %}
       <ul class="post-tags list-none flex flex-wrap gap-2 m-0 p-0 italic text-base">
         {%- for tag in tags | filterTagList | head(4) %}
@@ -40,35 +42,35 @@ layout: base.njk
       </ul>
     {%- endif %}
 
-{# Sharing buttons???
-    <div class="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8 mt-16"
-         x-intersect.once="loadScript(`//cdn.jsdelivr.net/npm/share-buttons/dist/share-buttons.js`)">
+    {# Sharing buttons???
+        <div class="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8 mt-16"
+             x-intersect.once="loadScript(`//cdn.jsdelivr.net/npm/share-buttons/dist/share-buttons.js`)">
 
-      <div class="text-lg md:text-xl font-semibold whitespace-nowrap">Share Post</div>
+          <div class="text-lg md:text-xl font-semibold whitespace-nowrap">Share Post</div>
 
-      <div class="share-btn flex flex-wrap gap-4"
-           data-title="{{ title | striptags }}"
-           data-desc="{{ desc | striptags }}"
-           data-url="{{ page.url | htmlBaseUrl(metadata.url) }}">
+          <div class="share-btn flex flex-wrap gap-4"
+               data-title="{{ title | striptags }}"
+               data-desc="{{ desc | striptags }}"
+               data-url="{{ page.url | htmlBaseUrl(metadata.url) }}">
 
-        {% set shareButtons = [
-          { id: "tw", name: "X", icon: 'x-logo' },
-          { id: "ln", name: "LinkedIn", icon: 'linkedin-logo' },
-          { id: "re", name: "Reddit", icon: 'reddit-logo' },
-          { id: "print", name: "Print", icon: 'printer' }
-        ] %}
-        {% for item in shareButtons %}
-          <a data-id="{{ item.id }}"
-             href="#" @click="$event.preventDefault()"
-             class="cursor-pointer">
-            {% phicon item.icon, "regular", { class: "size-8 transition-transform hover:scale-125" } %}
-            <span class="sr-only">{{ item.name }}</span>
-          </a>
-        {% endfor %}
+            {% set shareButtons = [
+              { id: "tw", name: "X", icon: 'x-logo' },
+              { id: "ln", name: "LinkedIn", icon: 'linkedin-logo' },
+              { id: "re", name: "Reddit", icon: 'reddit-logo' },
+              { id: "print", name: "Print", icon: 'printer' }
+            ] %}
+            {% for item in shareButtons %}
+              <a data-id="{{ item.id }}"
+                 href="#" @click="$event.preventDefault()"
+                 class="cursor-pointer">
+                {% phicon item.icon, "regular", { class: "size-8 transition-transform hover:scale-125" } %}
+                <span class="sr-only">{{ item.name }}</span>
+              </a>
+            {% endfor %}
 
-      </div>
-    </div>
-#}
+          </div>
+        </div>
+    #}
 
     {# Author #}
     {%- if authorData.name %}
@@ -121,7 +123,5 @@ layout: base.njk
         {%- endif %}
       </div>
     {%- endif %}
-
   </footer>
-
 </main>

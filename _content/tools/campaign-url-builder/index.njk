@@ -6,10 +6,10 @@ partialScripts:
   - campaign-url-builder
 ---
 
-<main class="prose md:text-xl/8 max-w-prose mx-auto" x-data="CampaignURLBuilder">
+<main class="prose max-w-4xl mx-auto" x-data="CampaignURLBuilder">
 
   <div>
-    <h1 class="mb-12">Campaign URL Builder</h1>
+    <h1>Campaign URL Builder</h1>
     <p>Use the Campaign URL Builder to easily add campaign parameters to URLs so you can track Custom Campaigns in Google Analytics.</p>
 
     <form @submit.prevent>
@@ -73,7 +73,7 @@ partialScripts:
             {% phicon "copy", "duotone", { class: "size-5" } %}
             <span>Copy</span>
           </div>
-          <div class="not-prose text-base absolute inset-x-0 -bottom-6 text-center"
+          <div class="text-base absolute inset-x-0 -bottom-6 text-center"
                aria-hidden="true" style="display: none"
                x-transition:enter="transition ease-out duration-300"
                x-transition:enter-start="opacity-0 transform -translate-y-4"
@@ -162,5 +162,4 @@ partialScripts:
     </table-saw>
 
   </div>
-
-</div>
+</main>

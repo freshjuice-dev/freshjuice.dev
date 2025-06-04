@@ -3,6 +3,7 @@
 /* Base */
 @import "./base/reset.css";
 @import "./base/base.css";
+@import "./base/typography.css";
 @import "./base/prose.css";
 @import "./base/forms.css";
 
@@ -25,6 +26,11 @@
     -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica,
     Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
   --font-mono: "PT Mono", "Roboto Mono", "JetBrains Mono", monospace;
+
+  --h1: clamp(2.25rem, 6.25vw + 0.375rem, 3.5rem);
+  --h2: clamp(1.5rem, 3.85vw + 0.625rem, 2.25rem);
+  --h3: clamp(1.25rem, 3.21vw + 0.4375rem, 1.875rem);
+  --h4: clamp(1rem, 2.56vw + 0.35rem, 1.5rem);
 
   /* Breakpoints */
   --breakpoint-xxs: 360px;

@@ -1,31 +1,116 @@
 @layer base {
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply text-pretty dark:text-neutral-300;
+  .prose {
+    @apply md:text-base;
+    line-height: 1.75em;
   }
 
-  h1 {
-    font-size: var(--h1);
-    @apply font-extrabold leading-none mb-8;
+  .prose picture + em {
+    @apply block text-center text-sm italic -mt-8;
   }
-  h2 {
-    font-size: var(--h2);
-    @apply font-bold mt-12 mb-6 md:mt-16 md:mb-8;
+
+  .prose :is(p, ul, ol, blockquote, pre) {
+    @apply text-base md:text-xl;
+    margin: 1.5em 0;
   }
-  h2 + *,
-  hr + * {
+
+  .prose :is(ul, ol) {
+    padding-left: 1.5em;
+  }
+
+  .prose ul {
+    list-style-type: disc;
+  }
+
+  .prose ol {
+    list-style-type: decimal;
+  }
+
+  .prose :is(ul, ol) li::marker {
+    color: currentColor;
+  }
+
+  .prose li {
+    padding-left: 0.25em;
+  }
+
+  .prose strong {
+    font-weight: 700;
+  }
+
+  .prose em {
+    font-style: italic;
+  }
+
+  .prose hr {
+    @apply border-t my-12 border-gray-200 dark:border-neutral-800;
+  }
+
+  .prose blockquote {
+    @apply border-l-4 pl-6 text-current italic;
+  }
+
+  .prose img {
+    @apply my-8 block;
+  }
+
+  .prose :is(picture, figure) {
+    @apply my-0;
+  }
+
+  .prose a {
+    @apply text-red-600 dark:text-red-500 font-medium no-underline hover:underline;
+  }
+
+  .prose :where(:not(pre)) > code {
+    @apply border-neutral-400 dark:border-neutral-600 text-gray-900 dark:text-neutral-300 inline-block
+    font-semibold border-1 font-mono px-2 text-sm bg-neutral-100 dark:bg-neutral-800;
+    border-radius: 0.35rem;
+  }
+
+  .prose blockquote > pre {
+    @apply -ml-6 mr-0 md:mx-0;
+  }
+
+  .prose :is(ol, ul) > li:not(.not-prose *) {
+    @apply ps-1.5 my-2;
+  }
+
+  .prose li > :is(ul, ol):not(.not-prose *) {
     @apply mt-0;
   }
-  h3 {
-    font-size: var(--h3);
-    @apply font-semibold mt-8 mb-3 md:mt-12 md:mb-5;
+
+  .prose blockquote p:first-of-type::before,
+  .prose blockquote p:last-of-type::after {
+    content: none;
   }
-  h4 {
-    font-size: var(--h4);
-    @apply font-semibold mt-6 mb-2 md:mt-9 md:mb-3;
+
+  /* Start Tables */
+  .prose table {
+    @apply w-full my-8 table-auto text-sm;
   }
+
+  .prose table:not([class]) {
+    th {
+      @apply font-semibold dark:text-neutral-300 align-bottom text-start p-4;
+    }
+    td {
+      @apply align-top text-start p-4;
+    }
+  }
+
+  .prose table:not([class]) tbody > tr:nth-child(odd),
+  .prose table.striped tbody > tr:nth-child(odd) {
+    @apply bg-neutral-100 dark:bg-stone-800/35;
+  }
+
+  .prose tbody tr {
+    @apply !mb-0 border-neutral-400/30 dark:border-neutral-600/30;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+  }
+
+  .prose table-saw table:not([class]) tr {
+    @apply mb-0;
+  }
+  /* End Tables */
 }

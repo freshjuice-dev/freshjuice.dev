@@ -9,11 +9,11 @@ permalink: /blog/
 {% set postYears = postsList | getPostYears | reverse %}
 
 
-<div class="prose mx-auto">
+<div class="max-w-3xl prose mx-auto">
   <h1>{{ title }}</h1>
 </div>
 
-<div class="prose mx-auto grid gap-8">
+<div class="max-w-3xl prose mx-auto grid gap-8">
 
   {% for year in postYears %}
   <div class="relative">

@@ -2,7 +2,7 @@
 layout: base.njk
 ---
 
-<nav class="max-w-4xl md:text-xl mx-auto w-full min-h-9 leading-none mb-6 sm:mb-8">
+<nav class="max-w-3xl md:text-xl mx-auto w-full min-h-9 leading-none mb-6 sm:mb-8">
   <a class="inline-flex items-center gap-2 group no-underline" href="/authors/">
     {% phicon "arrow-left", "bold", { class: "size-5 group-hover:-translate-x-2 transition-transform" } %}
     <span>Back to Authors</span>
@@ -10,7 +10,7 @@ layout: base.njk
 </nav>
 
 
-<main class="prose max-w-4xl mx-auto w-full">
+<main class="prose max-w-3xl mx-auto w-full">
 
   <header class="sm:flex sm:gap-8 md:gap-12">
     <div class="shrink-0 size-32 md:size-44">
@@ -46,7 +46,7 @@ layout: base.njk
 {# Posts by author #}
 {% set posts_by_author = collections.posts | getPostsByAuthor(page.fileSlug) %}
 {% if posts_by_author | length %}
-<section class="prose max-w-4xl mx-auto pt-8 mt-8 border-t border-gray-900/10 dark:border-gray-100/10 !space-y-8">
+<section class="prose max-w-3xl mx-auto pt-8 mt-8 border-t border-gray-900/10 dark:border-gray-100/10 !space-y-8">
   {% for post in posts_by_author | reverse %}
     <article>
       <time class="block font-mono text-xs" datetime="{{ post.date | htmlDateString }}">

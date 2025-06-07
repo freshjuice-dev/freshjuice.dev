@@ -6,18 +6,18 @@ excludeFromSitemap: true
 noindex: true
 ---
 
-<nav class="max-w-prose md:text-xl mx-auto w-full min-h-9 leading-none">
+<nav class="max-w-3xl mx-auto w-full min-h-9 leading-none">
   <a class="inline-flex items-center gap-2 group no-underline" href="/blog/">
     {% phicon "arrow-left", "bold", { class: "size-5 group-hover:-translate-x-2 transition-transform" } %}
     <span>Back to Blog</span>
   </a>
 </nav>
 
-<div class="prose md:prose-xl mx-auto">
-  <h1 style="margin-bottom:0.8571429em">{{ title }}</h1>
+<div class="prose mx-auto">
+  <h1>{{ title }}</h1>
 </div>
 
-<div class="prose mx-auto md:text-xl flex flex-wrap gap-2">
+<div class="prose mx-auto flex flex-wrap gap-2">
   {% for tag in collections.categories %}
     {% set tagUrl %}/tags/{{ tag | slugify }}/{% endset %}
     <span><a href="{{ tagUrl }}" class="post-tag">{{ tag }}</a>{%- if not loop.last %},{% endif -%}</span>

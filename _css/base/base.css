@@ -1,6 +1,7 @@
 @layer base {
   html {
     @apply antialiased font-sans;
+    line-height: 1.5;
   }
 
   figcaption {
@@ -9,24 +10,6 @@
 
   .img {
     @apply mx-auto rounded shadow-lg dark:shadow-amber-200/25;
-  }
-
-  *:where(:not(pre)) {
-    code:where(:not([class])) {
-      @apply inline-block rounded bg-neutral-100 dark:bg-neutral-800 border border-neutral-900/25 dark:border-neutral-300/25 px-2 py-0;
-      word-break: break-all;
-    }
-  }
-
-  .prose {
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      @apply text-pretty;
-    }
   }
 
   [id] {
@@ -45,7 +28,31 @@
     font-optical-sizing: auto;
   }
 
-  .prose picture + em {
-    @apply block text-center text-sm italic -mt-8;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-pretty dark:text-neutral-300;
+  }
+  h1 {
+    font-size: clamp(2.25rem, 6.25vw + 0.375rem, 3.5rem);
+    @apply font-extrabold leading-none mb-8;
+  }
+  h2 {
+    font-size: clamp(1.5rem, 3.85vw + 0.625rem, 2.25rem);
+    @apply font-bold mt-12 mb-6 md:mt-16 md:mb-8;
+    line-height: 1.15;
+  }
+  h3 {
+    font-size: clamp(1.25rem, 3.21vw + 0.4375rem, 1.875rem);
+    @apply font-semibold mt-8 mb-3 md:mt-12 md:mb-5;
+    line-height: 1.15;
+  }
+  h4 {
+    font-size: clamp(1rem, 2.56vw + 0.35rem, 1.5rem);
+    @apply font-semibold mt-6 mb-2 md:mt-9 md:mb-3;
+    line-height: 1.15;
   }
 }

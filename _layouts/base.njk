@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ metadata.language }}" class="dark {{ htmlClass }}" data-theme="dark" :class="theme.name" x-data="xDOM" data-layout="{{ layout }}">
+<html lang="{{ metadata.language }}" class="dark {{ htmlClass }}" x-data="xDOM" data-layout="{{ layout }}">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,8 +24,7 @@
     <link rel="manifest" href="/site.webmanifest" media="(prefers-color-scheme: light)">
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ffc40d">
     <meta name="msapplication-TileColor" content="#ffc40d">
-    <meta name="theme-color" content="#18181b" media="(prefers-color-scheme: dark)" :content="theme.dark?'#18181b':'#fafafa'">
-    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" :content="theme.dark?'#18181b':'#fafafa'">
+    <meta name="theme-color" content="#18181b" :content="theme.dark?'#18181b':'#fafafa'">
 
     {# Social #}
     <meta property="og:title" content="{{ title or metadata.title }}{{ suffix or metadata.suffix }}">
@@ -50,18 +49,14 @@
     <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
 
     {# color theme toggle #}
-    <script>!function(t,e,m){t&&"light"===t&&(e.classList.remove("dark"),e.setAttribute("data-theme","light"),m.setAttribute("content","#fafafa"))}(localStorage.getItem("theme"),document.documentElement,document.querySelector('meta[name="theme-color"]'));</script>
+    <script>document.documentElement.classList.toggle("dark", localStorage.theme === "dark" || (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches));document.querySelector('meta[name="theme-color"]').setAttribute("content", localStorage.theme === "dark" ? "#292526" : "#fafafa");</script>
 
     {# Scripts helpers, domReady, loadScript, loadStylesheet #}
     <script>function domReady(t){["interactive","complete"].indexOf(document.readyState)>=0?t():document.addEventListener("DOMContentLoaded",t)}function loadScript(t,r="defer",d,n=!1){if(document.querySelector(`script[src="${t}"]`)){d&&n&&d();return}const e=document.createElement("script");e.src=t,r==="defer"&&(e.defer=!0),r==="async"&&(e.async=!0),e.onload=e.onreadystatechange=()=>{(!e.readyState||e.readyState==="loaded"||e.readyState==="complete")&&(d&&d(),e.onload=e.onreadystatechange=null)},document.body.appendChild(e)}function loadStylesheet(t,r,d){if(document.querySelector(`link[href="${t}"]`))return;const n=document.createElement("link");n.rel="stylesheet",n.type=d||"text/css",n.href=t,r&&(n.media=r),document.head.appendChild(n)}</script>
 
     {# Styles #}
-    {%- if eleventy.env.runMode === "serve" -%}
-      <link rel="stylesheet" href="/css/main.css?v={{ build.hash.short }}">
-    {%- else -%}
-      <link rel="preload" href="/css/main.css?v={{ build.hash.short }}" as="style">
-      <link rel="stylesheet" href="/css/main.css?v={{ build.hash.short }}">
-    {%- endif -%}
+    <link rel="preload" href="/css/main.css?v={{ build.hash.short }}" as="style">
+    <link rel="stylesheet" href="/css/main.css?v={{ build.hash.short }}">
 
     {# Schema markup #}
     {% include "partials/schema-markup.njk" %}
@@ -93,7 +88,7 @@
     <script defer src="/js/main.js?v={{ build.hash.short }}" type="text/javascript"></script>
 
     {# Overlay #}
-    <div class="fixed inset-0 bg-terminal backdrop-blur bg-opacity-50 z-20"
+    <div class="fixed inset-0 bg-terminal/50 backdrop-blur-sm z-20"
          x-cloak
          style="display: none"
          x-show="showOverlay||docs.showOverlay"

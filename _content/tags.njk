@@ -24,21 +24,21 @@ noindex: true
 
 {% set postYears = postsList | getPostYears | reverse %}
 
-<nav class="max-w-prose md:text-xl mx-auto w-full min-h-9 leading-none">
+<nav class="max-w-3xl md:text-xl mx-auto w-full min-h-9 leading-none">
   <a class="inline-flex items-center gap-2 group no-underline" href="/tags/">
     {% phicon "arrow-left", "bold", { class: "size-5 group-hover:-translate-x-2 transition-transform" } %}
     <span>Back to Tags</span>
   </a>
 </nav>
 
-<div class="prose md:prose-xl mx-auto">
-  <h1 style="margin-bottom:0.8571429em">
+<div class="prose max-w-3xl mx-auto">
+  <h1>
     <small>Tagged:</small><br/>
     {{ tag }}
   </h1>
 </div>
 
-<div class="prose mx-auto md:text-xl grid gap-8">
+<div class="prose max-w-3xl mx-auto grid gap-8">
 
   {% for year in postYears %}
     <div class="relative">
@@ -52,7 +52,7 @@ noindex: true
             </time>
             <div class="">
               <a href="{{ post.url }}"
-                 class="text-pretty inline-block leading-tight">
+                 class="md:text-xl text-pretty inline-block leading-tight">
                 {% if post.data.title %}{{ post.data.title }}{% else %}<code>{{ post.url }}</code>{% endif %}
               </a>
               <p class="text-sm md:text-base m-0 line-clamp-4 md:line-clamp-2">{{ post.data.desc }}</p>

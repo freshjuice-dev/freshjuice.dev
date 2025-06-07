@@ -1,18 +1,61 @@
-/* Base */
-@import "tailwindcss/base";
-@import "base/base.css";
-@import "base/forms.css";
+@import "tailwindcss" source(none);
 
-/* 3rd party styles */
-@import "prism-themes/themes/prism-atom-dark.css";
+/* Base */
+@import "./base/reset.css";
+@import "./base/base.css";
+@import "./base/typography.css";
+@import "./base/forms.css";
 
 /* Components */
-@import "tailwindcss/components";
-@import "components/buttons.css";
-@import "components/prism.css";
-@import "components/pagefind.css";
-@import "components/yt-lite.css";
+@import "./components/buttons.css";
+@import "./components/prism.css";
+@import "./components/pagefind.css";
+@import "./components/yt-lite.css";
 
 /* Utils */
-@import "tailwindcss/utilities";
-@import "utilities/utils.css";
+@import "./utilities/utils.css";
+
+/* Config */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Font families */
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  --font-mono: "PT Mono", "Roboto Mono", "JetBrains Mono", monospace;
+
+  /* Breakpoints */
+  --breakpoint-xxs: 360px;
+  --breakpoint-xs: 490px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-xxl: 1536px;
+
+  /* Aspect ratios (if you want these as variables too) */
+  --aspect-box: 1;
+  --aspect-landscape: 4 / 3;
+  --aspect-portrait: 3 / 4;
+  --aspect-video: 16 / 9;
+  --aspect-opengraph: 1200 / 630;
+
+  /* Z-index levels */
+  --z-60: 60;
+  --z-70: 70;
+  --z-80: 80;
+  --z-90: 90;
+  --z-100: 100;
+
+  /* Colors from Tailwind’s default palette */
+  --color-cursor: white;
+  --color-terminal: black;
+}
+
+@source "../_content/**/*.{md,njk}";
+@source "../_js/**/*.js";
+@source "../_css/**/*.css";
+@source "../_includes/**/*.njk";
+@source "../_layouts/*.njk";
+@source "../_11ty/**/*.js";

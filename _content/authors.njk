@@ -6,13 +6,13 @@ permalink: /authors/
 
 {% set authors = collections.authors | sortAuthors %}
 
-<main class="prose md:prose-xl mx-auto w-full">
+<main class="mx-auto w-full">
 
-  <header class="grid">
-    <h1 style="margin-bottom: 0">{{ heading or title }}{%- if draft %} <small class="text-base">[draft]</small>{%- endif %}</h1>
+  <header class="prose grid">
+    <h1 class="mb-0">{{ heading or title }}{%- if draft %} <small class="text-base">[draft]</small>{%- endif %}</h1>
   </header>
 
-  <section class="grid md:grid-cols-2 gap-8 mt-8 md:mt-12 not-prose">
+  <section class="grid md:grid-cols-2 gap-8 mt-8 md:mt-12">
     {% for author in authors %}
       <div class="bg-zinc-200/40 dark:bg-zinc-800/40 p-4 pb-10 md:px-8 md:pt-6 md:pb-12 relative group">
         {%- set authorData = author.fileSlug | getAuthorData %}

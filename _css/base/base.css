@@ -43,13 +43,16 @@
   h2 {
     font-size: clamp(1.5rem, 3.85vw + 0.625rem, 2.25rem);
     @apply font-bold mt-12 mb-6 md:mt-16 md:mb-8;
+    line-height: 1.15;
   }
   h3 {
     font-size: clamp(1.25rem, 3.21vw + 0.4375rem, 1.875rem);
     @apply font-semibold mt-8 mb-3 md:mt-12 md:mb-5;
+    line-height: 1.15;
   }
   h4 {
     font-size: clamp(1rem, 2.56vw + 0.35rem, 1.5rem);
     @apply font-semibold mt-6 mb-2 md:mt-9 md:mb-3;
+    line-height: 1.15;
   }
 }

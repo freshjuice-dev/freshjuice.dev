@@ -16,7 +16,6 @@
 @import "./utilities/utils.css";
 
 /* Config */
-/*@config "../tailwind.config.js";*/
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {

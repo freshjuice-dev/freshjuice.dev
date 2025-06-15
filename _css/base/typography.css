@@ -46,7 +46,15 @@
   }
 
   .prose blockquote {
-    @apply border-l-4 pl-6 text-current italic;
+    @apply border-l-4 p-4 pl-6 border-current/30;
+    @apply text-current bg-cursor dark:bg-zinc-800 italic;
+
+    & > *:first-child {
+      @apply mt-0;
+    }
+    & > *:last-child {
+      @apply mb-0;
+    }
   }
 
   .prose img {

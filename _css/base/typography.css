@@ -42,12 +42,12 @@
   }
 
   .prose hr {
-    @apply border-t my-12 border-gray-200 dark:border-neutral-800;
+    @apply border-t my-12 border-gray-200;
   }
 
   .prose blockquote {
     @apply border-l-4 p-4 pl-6 border-current/30;
-    @apply text-current bg-cursor dark:bg-zinc-800 italic;
+    @apply text-current bg-cursor italic;
 
     & > *:first-child {
       @apply mt-0;
@@ -66,12 +66,12 @@
   }
 
   .prose a {
-    @apply text-red-600 dark:text-red-500 font-medium no-underline hover:underline;
+    @apply text-red-600 font-medium no-underline hover:underline;
   }
 
   .prose :where(:not(pre)) > code {
-    @apply border-neutral-400 dark:border-neutral-600 text-gray-900 dark:text-neutral-300 inline-block
-    font-semibold border-1 font-mono px-2 text-sm bg-neutral-100 dark:bg-neutral-800;
+    @apply border-neutral-400 text-gray-900 inline-block
+    font-semibold border-1 font-mono px-2 text-sm bg-neutral-100;
     border-radius: 0.35rem;
   }
 
@@ -99,7 +99,7 @@
 
   .prose table:not([class]) {
     th {
-      @apply font-semibold dark:text-neutral-300 align-bottom text-start p-4;
+      @apply font-semibold align-bottom text-start p-4;
     }
     td {
       @apply align-top text-start p-4;
@@ -108,11 +108,11 @@
 
   .prose table:not([class]) tbody > tr:nth-child(odd),
   .prose table.striped tbody > tr:nth-child(odd) {
-    @apply bg-neutral-100 dark:bg-stone-800/35;
+    @apply bg-neutral-100;
   }
 
   .prose tbody tr {
-    @apply !mb-0 border-neutral-400/30 dark:border-neutral-600/30;
+    @apply !mb-0 border-neutral-400/30;
     border-top-width: 1px;
     border-bottom-width: 1px;
   }

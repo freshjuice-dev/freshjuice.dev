@@ -13,7 +13,7 @@ permalink: /tools/
       {% set toolslist = collections.tools %}
       {% for item in toolslist | reverse %}
         {%- if item.fileSlug | slugify != "tools" %}
-          <article class="bg-neutral-200/40 hover:bg-neutral-200 dark:bg-neutral-800/60 dark:hover:bg-neutral-800 transition p-4 md:p-8 rounded-md relative">
+          <article class="bg-neutral-200/40 hover:bg-neutral-200 transition p-4 md:p-8 rounded-md relative">
             <h3 class="text-lg font-medium mt-0 mb-3 w-full flex gap-2">
               {% phicon item.data.icon, "duotone", { class: "size-7 text-current" } %}
               <a class="text-current text-pretty inline-block" href="/tools/{{ item.fileSlug | slugify }}/">
@@ -49,7 +49,7 @@ permalink: /tools/
         }
       ] %}
       {% for item in thirdPartyTools %}
-        <article class="bg-neutral-200/40 hover:bg-neutral-200 dark:bg-neutral-800/60 dark:hover:bg-neutral-800 transition p-4 md:p-8 rounded-md relative">
+        <article class="bg-neutral-200/40 hover:bg-neutral-200 transition p-4 md:p-8 rounded-md relative">
           <h3 class="text-lg md:text-xl font-medium mt-0 mb-3 w-full flex gap-2">
             {% phicon item.icon, "duotone", { class: "size-7 text-current" } %}
             <a class="text-current text-pretty inline-block" href="{{ item.link }}">

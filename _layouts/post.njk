@@ -74,7 +74,7 @@ layout: base.njk
 
     {# Author #}
     {%- if authorData.name %}
-    <div class="pt-8 mt-8 border-t border-gray-900/10 dark:border-gray-100/10 flex gap-4 sm:gap-8">
+    <div class="pt-8 mt-8 border-t border-gray-900/10 flex gap-4 sm:gap-8">
       <a class="block size-14 sm:size-20 shrink-0" href="{{ authorData.url }}">
         <span class="sr-only">Visit {{ authorData.name | split(' ') | first }}`s Author Page</span>
         <img src="{{ authorData.image }}" alt="Avatar for {{ authorData.name }}" class="rounded-full size-14 sm:size-20">
@@ -90,7 +90,7 @@ layout: base.njk
 
     {# Posts navigation #}
     {%- if collections.posts %}
-      <div class="pt-8 mt-8 border-t border-gray-900/10 dark:border-gray-100/10">
+      <div class="pt-8 mt-8 border-t border-gray-900/10">
         {%- set previousPost = collections.posts | getPreviousCollectionItem %}
         {%- set nextPost = collections.posts | getNextCollectionItem %}
         {%- if nextPost or previousPost %}

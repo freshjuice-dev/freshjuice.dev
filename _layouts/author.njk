@@ -25,16 +25,16 @@ layout: base.njk
       {% if links %}
       <div class="flex gap-6 ">
         {%- if links.website %}
-          <a class="text-zinc-900 dark:text-neutral-300 hover:text-red-600" href="{{ links.website }}"><span class="sr-only">Visit {{ name | split(' ') | first }}`s Website</span>{% phicon "link", "regular", { class: "size-6" } %}</a>
+          <a class="text-zinc-900 hover:text-red-600" href="{{ links.website }}"><span class="sr-only">Visit {{ name | split(' ') | first }}`s Website</span>{% phicon "link", "regular", { class: "size-6" } %}</a>
         {%- endif %}
         {%- if links.linkedin %}
-          <a class="text-zinc-900 dark:text-neutral-300 hover:text-red-600" href="{{ links.linkedin }}"><span class="sr-only">Fallow {{ name | split(' ') | first }} on LinkedIn</span>{% phicon "linkedin-logo", "regular", { class: "size-6" } %}</a>
+          <a class="text-zinc-900 hover:text-red-600" href="{{ links.linkedin }}"><span class="sr-only">Fallow {{ name | split(' ') | first }} on LinkedIn</span>{% phicon "linkedin-logo", "regular", { class: "size-6" } %}</a>
         {%- endif %}
         {%- if links.github %}
-          <a class="text-zinc-900 dark:text-neutral-300 hover:text-red-600" href="{{ links.github }}"><span class="sr-only">Fallow {{ name | split(' ') | first }} on GitHub</span>{% phicon "github-logo", "regular", { class: "size-6" } %}</a>
+          <a class="text-zinc-900 hover:text-red-600" href="{{ links.github }}"><span class="sr-only">Fallow {{ name | split(' ') | first }} on GitHub</span>{% phicon "github-logo", "regular", { class: "size-6" } %}</a>
         {%- endif %}
         {%- if links.x %}
-          <a class="text-zinc-900 dark:text-neutral-300 hover:text-red-600" href="{{ links.x }}"><span class="sr-only">Fallow {{ name | split(' ') | first }} on X</span>{% phicon "x-logo", "regular", { class: "size-6" } %}</a>
+          <a class="text-zinc-900 hover:text-red-600" href="{{ links.x }}"><span class="sr-only">Fallow {{ name | split(' ') | first }} on X</span>{% phicon "x-logo", "regular", { class: "size-6" } %}</a>
         {%- endif %}
       </div>
       {% endif %}
@@ -46,14 +46,14 @@ layout: base.njk
 {# Posts by author #}
 {% set posts_by_author = collections.posts | getPostsByAuthor(page.fileSlug) %}
 {% if posts_by_author | length %}
-<section class="prose max-w-3xl mx-auto pt-8 mt-8 border-t border-gray-900/10 dark:border-gray-100/10 !space-y-8">
+<section class="prose max-w-3xl mx-auto pt-8 mt-8 border-t border-gray-900/10 !space-y-8">
   {% for post in posts_by_author | reverse %}
     <article>
       <time class="block font-mono text-xs" datetime="{{ post.date | htmlDateString }}">
         {{ post.date | readableDate("yyyy/LL/dd") }}
       </time>
       <a href="{{ post.url }}" class="text-pretty inline-block leading-tight">
-        <h2 class="text-red-600 dark:text-red-500 text-base md:text-xl m-0 font-medium">{% if post.data.title %}{{ post.data.title }}{% else %}<code>{{ post.url }}</code>{% endif %}</h2>
+        <h2 class="text-red-600 text-base md:text-xl m-0 font-medium">{% if post.data.title %}{{ post.data.title }}{% else %}<code>{{ post.url }}</code>{% endif %}</h2>
       </a>
       <p class="text-sm md:text-base line-clamp-4 md:line-clamp-2 text-pretty m-0">{{ post.data.desc }}</p>
       {% if post.data.tags | length %}

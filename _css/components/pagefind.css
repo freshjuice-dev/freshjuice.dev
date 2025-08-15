@@ -20,14 +20,14 @@
   }
 
   .pagefind-ui__message {
-    @apply text-sm text-cursor dark:opacity-90;
+    @apply text-sm text-cursor;
   }
 
   .pagefind-ui__results {
     @apply my-4 px-6 rounded max-h-[65vh] overflow-y-auto;
-    @apply divide-y divide-gray-900/10 dark:divide-gray-100/10;
-    @apply bg-zinc-100 dark:bg-zinc-800;
-    @apply border border-gray-900/10 dark:border-gray-100/10;
+    @apply divide-y divide-gray-900/10;
+    @apply bg-zinc-100;
+    @apply border border-gray-900/10;
 
     &:empty {
       @apply hidden;
@@ -42,7 +42,7 @@
   }
 
   .pagefind-ui__button {
-    @apply py-1 px-2 mt-4 border rounded-full text-xs bg-zinc-50 dark:bg-zinc-800 float-right;
+    @apply py-1 px-2 mt-4 border rounded-full text-xs bg-zinc-50 float-right;
   }
 
   .pagefind-ui__result-title {

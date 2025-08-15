@@ -9,19 +9,11 @@
   }
 
   .img {
-    @apply mx-auto rounded shadow-lg dark:shadow-amber-200/25;
+    @apply mx-auto rounded shadow-lg;
   }
 
   [id] {
     @apply scroll-mt-10;
-  }
-
-  .light {
-    color-scheme: light;
-  }
-
-  .dark {
-    color-scheme: dark;
   }
 
   .font-sans {
@@ -34,7 +26,7 @@
   h4,
   h5,
   h6 {
-    @apply text-pretty dark:text-neutral-300;
+    @apply text-pretty;
   }
   h1 {
     font-size: clamp(2.25rem, 6.25vw + 0.375rem, 3.5rem);

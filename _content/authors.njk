@@ -14,7 +14,7 @@ permalink: /authors/
 
   <section class="grid md:grid-cols-2 gap-8 mt-8 md:mt-12">
     {% for author in authors %}
-      <div class="bg-zinc-200/40 dark:bg-zinc-800/40 p-4 pb-10 md:px-8 md:pt-6 md:pb-12 relative group">
+      <div class="bg-zinc-200/40 p-4 pb-10 md:px-8 md:pt-6 md:pb-12 relative group">
         {%- set authorData = author.fileSlug | getAuthorData %}
         <div class="xxs:flex gap-4 items-center">
           <div class="shrink-0 size-12 sm:size-16">

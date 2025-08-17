@@ -7,8 +7,7 @@ import watchTargets from "./_11ty/watchTargets.js";
 import amendLibraries from "./_11ty/amendLibraries.js";
 import transforms from "./_11ty/transforms.js";
 
-export default async function(eleventyConfig) {
-
+export default async function (eleventyConfig) {
   Object.keys(plugins).forEach((pluginName) => {
     plugins[pluginName](eleventyConfig);
   });
@@ -43,7 +42,7 @@ export default async function(eleventyConfig) {
 
   // Add Layouts
   eleventyConfig.addLayoutAlias("base", "base.njk");
-  eleventyConfig.addLayoutAlias("docs", "docs.njk");
+  eleventyConfig.addLayoutAlias("dev-docs", "dev-docs.njk");
   eleventyConfig.addLayoutAlias("author", "author.njk");
   eleventyConfig.addLayoutAlias("page", "page.njk");
   eleventyConfig.addLayoutAlias("post", "post.njk");
@@ -56,6 +55,9 @@ export default async function(eleventyConfig) {
   });
   eleventyConfig.addCollection("docs", (collectionsApi) => {
     return collectionsApi.getFilteredByTag("docs");
+  });
+  eleventyConfig.addCollection("devDocs", (collectionsApi) => {
+    return collectionsApi.getFilteredByTag("dev-docs");
   });
   eleventyConfig.addCollection("sections", (collectionsApi) => {
     return collectionsApi.getFilteredByTag("sections");
@@ -72,72 +74,90 @@ export default async function(eleventyConfig) {
   eleventyConfig.addCollection("tools", (collectionsApi) => {
     return collectionsApi.getFilteredByTag("tools");
   });
-  eleventyConfig.addCollection('categories', collectionsApi => {
+  eleventyConfig.addCollection("categories", (collectionsApi) => {
     let gatheredTags = [];
 
     // Go through every piece of content and grab the tags
-    collectionsApi.getAll().forEach(item => {
+    collectionsApi.getAll().forEach((item) => {
       if (item.data.tags) {
-        if (typeof item.data.tags === 'string') {
+        if (typeof item.data.tags === "string") {
           gatheredTags.push(item.data.tags);
         } else {
-          item.data.tags.forEach(tag => gatheredTags.push(tag));
+          item.data.tags.forEach((tag) => gatheredTags.push(tag));
         }
       }
     });
 
     gatheredTags = (gatheredTags || []).filter(
-      tag =>
-        ["all", "nav", "authors", "tools", "post", "posts", "doc", "docs", "sections", "templates", "modules", "global-modules", "featured"].indexOf(
-          tag
-        ) === -1
+      (tag) =>
+        [
+          "all",
+          "nav",
+          "authors",
+          "tools",
+          "post",
+          "posts",
+          "doc",
+          "dev-doc",
+          "docs",
+          "dev-docs",
+          "sections",
+          "templates",
+          "modules",
+          "global-modules",
+          "featured",
+        ].indexOf(tag) === -1,
     );
 
-    gatheredTags = [...new Set(gatheredTags.map(item => item.toLowerCase()))].map(item => {
-      return gatheredTags.find(originalItem => originalItem.toLowerCase() === item);
+    gatheredTags = [
+      ...new Set(gatheredTags.map((item) => item.toLowerCase())),
+    ].map((item) => {
+      return gatheredTags.find(
+        (originalItem) => originalItem.toLowerCase() === item,
+      );
     });
 
     return [...new Set(gatheredTags)];
   });
 
-	// Features to make your build faster (when you need them)
+  // Features to make your build faster (when you need them)
 
-	// If your passthrough copy gets heavy and cumbersome, add this line
-	// to emulate the file copy on the dev server. Learn more:
-	// https://www.11ty.dev/docs/copy/#emulate-passthrough-copy-during-serve
+  // If your passthrough copy gets heavy and cumbersome, add this line
+  // to emulate the file copy on the dev server. Learn more:
+  // https://www.11ty.dev/docs/copy/#emulate-passthrough-copy-during-serve
 
-	// eleventyConfig.setServerPassthroughCopyBehavior("passthrough");
+  // eleventyConfig.setServerPassthroughCopyBehavior("passthrough");
 
-	return {
-		// Control which files Eleventy will process
-		// e.g.: *.md, *.njk, *.html, *.liquid
-		templateFormats: ["md", "njk"],
+  return {
+    // Control which files Eleventy will process
+    // e.g.: *.md, *.njk, *.html, *.liquid
+    templateFormats: ["md", "njk"],
 
-		// Pre-process *.md files with: (default: `liquid`)
-		markdownTemplateEngine: "njk",
+    // Pre-process *.md files with: (default: `liquid`)
+    markdownTemplateEngine: "njk",
 
-		// Pre-process *.html files with: (default: `liquid`)
-		htmlTemplateEngine: "njk",
+    // Pre-process *.html files with: (default: `liquid`)
+    htmlTemplateEngine: "njk",
 
-		// These are all optional:
-		dir: {
-			input: ".", // default: "."
-			output: "_site", // default: "_site"
-			includes: "_includes", // default: "_includes"
-			layouts: "_layouts", // default: "_layouts"
-			data: "_data", // default: "_data"
-		},
+    // These are all optional:
+    dir: {
+      input: ".", // default: "."
+      output: "_site", // default: "_site"
+      includes: "_includes", // default: "_includes"
+      layouts: "_layouts", // default: "_layouts"
+      data: "_data", // default: "_data"
+    },
 
-		// -----------------------------------------------------------------
-		// Optional items:
-		// -----------------------------------------------------------------
+    // -----------------------------------------------------------------
+    // Optional items:
+    // -----------------------------------------------------------------
 
-		// If your site deploys to a subdirectory, change `pathPrefix`.
-		// Read more: https://www.11ty.dev/docs/config/#deploy-to-a-subdirectory-with-a-path-prefix
+    // If your site deploys to a subdirectory, change `pathPrefix`.
+    // Read more: https://www.11ty.dev/docs/config/#deploy-to-a-subdirectory-with-a-path-prefix
 
-		// When paired with the HTML <base> plugin https://www.11ty.dev/docs/plugins/html-base/
-		// it will transform any absolute URLs in your HTML to include this
-		// folder name and does **not** affect where things go in the output folder.
-		pathPrefix: "/",
-	};
-};
+    // When paired with the HTML <base> plugin https://www.11ty.dev/docs/plugins/html-base/
+    // it will transform any absolute URLs in your HTML to include this
+    // folder name and does **not** affect where things go in the output folder.
+    pathPrefix: "/",
+  };
+}

@@ -167,11 +167,23 @@ export default {
       {
         title: "Getting Started",
         children: [
-          { title: "Overview", url: "/docs/" },
-          { title: "Installation", url: "/docs/installation/" },
-          { title: "Customization", url: "/docs/customization/" },
-          { title: "Using Tailwind CSS", url: "/docs/tailwindcss/" },
-          { title: "Using Alpine.js", url: "/docs/alpinejs/" },
+          { title: "Overview", url: "/developer-edition/docs/" },
+          {
+            title: "Installation",
+            url: "/developer-edition/docs/installation/",
+          },
+          {
+            title: "Customization",
+            url: "/developer-edition/docs/customization/",
+          },
+          {
+            title: "Using Tailwind CSS",
+            url: "/developer-edition/docs/tailwindcss/",
+          },
+          {
+            title: "Using Alpine.js",
+            url: "/developer-edition/docs/alpinejs/",
+          },
         ],
       },
       {

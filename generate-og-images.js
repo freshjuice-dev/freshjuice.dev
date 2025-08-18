@@ -110,6 +110,8 @@ const htmlTemplate = `
       text-wrap: pretty;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 3;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     h1 span {
       display: block;
@@ -139,11 +141,24 @@ const htmlTemplate = `
         /*filter: drop-shadow(0 0 0.45rem crimson);*/
         filter: drop-shadow(0 0 0.35rem rgba(0,0,0,0.7));
     }
+    .fj-logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 100px;
+      line-height: 0;
+      width: 200px;
+      height: 200px;
+      margin: -30px 0 0 -30px;
+    }
+    .fj-logo img {
+        filter: drop-shadow(0 0 0.35rem rgba(0,0,0,0.7));
+    }
   </style>
 </head>
 <body style="width: 1200px; height: 630px; padding: 0; margin: 0; font-family: sans-serif">
   <div class="card {{bgColor}}" style="width: 1200px; height: 630px; box-sizing: border-box; color: #fff; padding: 70px 70px">
-    <div class="logo">{{{logo}}}</div>
+    {{{logo}}}
     <h1 class="shadow" style="font-size: 72px; font-weight: 700; margin: 20px 0 10px 40px;">{{{title}}}</h1>
     <p class="shadow" style="margin: 20px 0 0 40px; font-size: 24px; font-weight: 700;">FRESHJUICE.DEV {{collection}}</p>
   </div>
@@ -153,7 +168,7 @@ const htmlTemplate = `
 const generateImage = async (post) => {
   const outputPath = `./_static/img/og/${post.slug}.png`;
   let logo = "🍹";
-  logo = `<img src="https://freshjuice.dev/img/logo.png" alt="Fresh Juice Logo" style="width: 100%; height: 100%" />`;
+  logo = `<div class="fj-logo"><img src="https://freshjuice.dev/img/logo-transparent.png" alt="Fresh Juice Logo" style="width: 100%; height: 100%" /></div>`;
   if (!["all", "force"].includes(mode) && fs.existsSync(outputPath)) {
     console.log(chalk.yellow(`⚠️ Image for ${post.title} already exists`));
     return;
@@ -169,7 +184,7 @@ const generateImage = async (post) => {
   } else if (post.slug.startsWith("authors-")) {
     post.collection = "/ AUTHORS";
     logo = await gravatarImage(post.email, { size: 150 });
-    logo = `<img class="author" src="${logo}" alt="Author Image" style="width: 100%; height: 100%" />`;
+    logo = `<div class="logo"><img class="author" src="${logo}" alt="Author Image" style="width: 100%; height: 100%" /></div>`;
   }
   await nodeHtmlToImage({
     output: outputPath,

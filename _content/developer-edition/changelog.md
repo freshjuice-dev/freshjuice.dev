@@ -28,8 +28,8 @@ permalink: /developer-edition/changelog/
 - New Flip Cards Module
 - Big Refactor to Card and Button modules
 - Update styling and layout for some modules
-- Fix Bug [#9](https://github.com/freshjuice-dev/freshjuice-hubspot-theme/issues/9)
-- Fix Bug [#22](https://github.com/freshjuice-dev/freshjuice-hubspot-theme/pull/22)
+- Fix Bug [#9](https://github.com/freshjuice-dev/freshjuice-dev-hubspot-theme/issues/9)
+- Fix Bug [#22](https://github.com/freshjuice-dev/freshjuice-dev-hubspot-theme/pull/22)
 - Fixed Scroll to top Module incorrect strolling percentage
 - Fixed Navigation Bar Module Dropdowns for mobile devices
 
@@ -38,8 +38,8 @@ permalink: /developer-edition/changelog/
 - Update templates and sections
 - update theme image previews
 - update to some modules
-- Fix Bug [#8](https://github.com/freshjuice-dev/freshjuice-hubspot-theme/issues/8)
-- Fix Bug [#10](https://github.com/freshjuice-dev/freshjuice-hubspot-theme/issues/10)
+- Fix Bug [#8](https://github.com/freshjuice-dev/freshjuice-dev-hubspot-theme/issues/8)
+- Fix Bug [#10](https://github.com/freshjuice-dev/freshjuice-dev-hubspot-theme/issues/10)
 - New Social Icons Module
 
 **_= 1.16.1 - July 11, 2024 =_**

@@ -1,7 +1,7 @@
 async function getPackageVersion() {
   try {
     const response = await fetch(
-      "https://raw.githubusercontent.com/freshjuice-dev/freshjuice-hubspot-theme/main/package.json",
+      "https://raw.githubusercontent.com/freshjuice-dev/freshjuice-dev-hubspot-theme/main/package.json",
     );
     const data = await response.json();
     return data.version;
@@ -14,7 +14,7 @@ async function getPackageVersion() {
 async function getLatestReleaseVersion() {
   try {
     const response = await fetch(
-      "https://api.github.com/repos/freshjuice-dev/freshjuice-hubspot-theme/releases",
+      "https://api.github.com/repos/freshjuice-dev/freshjuice-dev-hubspot-theme/releases",
     );
     const data = await response.json();
     return data[0].tag_name;
@@ -27,12 +27,12 @@ async function getLatestReleaseVersion() {
 export default async () => {
   const themeVersion = await getPackageVersion();
   return {
-    repo: "https://github.com/freshjuice-dev/freshjuice-hubspot-theme",
-    gitRepo: "git@github.com:freshjuice-dev/freshjuice-hubspot-theme.git",
+    repo: "https://github.com/freshjuice-dev/freshjuice-dev-hubspot-theme",
+    gitRepo: "git@github.com:freshjuice-dev/freshjuice-dev-hubspot-theme.git",
     demo: "https://143910617.hs-sites-eu1.com/blog",
     version: themeVersion,
     releases:
-      "https://github.com/freshjuice-dev/freshjuice-hubspot-theme/releases",
-    download: `https://github.com/freshjuice-dev/freshjuice-hubspot-theme/releases/download/v${themeVersion}/freshjuice-hubspot-theme-${themeVersion}-dev.zip`,
+      "https://github.com/freshjuice-dev/freshjuice-dev-hubspot-theme/releases",
+    download: `https://github.com/freshjuice-dev/freshjuice-dev-hubspot-theme/releases/download/v${themeVersion}/freshjuice-hubspot-theme-${themeVersion}-dev.zip`,
   };
 };

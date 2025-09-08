@@ -1,7 +1,7 @@
 # freshjuice.dev
 
 [Official website](https://freshjuice.dev/)
-of [FreshJuice theme](https://github.com/freshjuice-dev/freshjuice-hubspot-theme) for HubSpot CMS.
+of [FreshJuice theme](https://github.com/freshjuice-dev/freshjuice-dev-hubspot-theme) for HubSpot CMS.
 
 FreshJuice is a vibrant and refreshing theme that brings zest to your online presence.
 Our philosophy is centered around providing you with the tools and resources to stay fresh,

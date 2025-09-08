@@ -40,7 +40,7 @@ Here's how you can get started with local customization:
    You can clone the repository using the following command:
    ```bash
    git clone {{ hsTheme.gitRepo }}
-   cd freshjuice-hubspot-theme
+   cd freshjuice-dev-hubspot-theme
    ```
 2. **Install dependencies:** Run `npm install` to install the required dependencies.
    This will install the necessary tools and libraries for local development.

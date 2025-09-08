@@ -34,7 +34,7 @@ Installation process requires you to have `Node.JS`, `git`, `HubSpot CLI`, and `
 1. Clone the repo and CD into it.
    ```bash
    git clone {{ hsTheme.gitRepo }}
-   cd freshjuice-hubspot-theme
+   cd freshjuice-dev-hubspot-theme
    ```
 2. Run `npm install` to install the dependencies.
 3. Run `npm run prepare` to prepare the theme for upload.

@@ -4,7 +4,7 @@
     @apply font-sans;
 
     #hs-eu-cookie-settings-button {
-      @apply no-underline!;
+      @apply no-underline! hover:underline!;
     }
 
     #hs-modal-accept-all,
@@ -13,6 +13,7 @@
     #hs-eu-decline-button {
       @apply text-base!;
       @apply font-semibold border-2! hover:brightness-125;
+      @apply hover:-translate-y-0.5 hover:shadow-lg;
       @apply transition-all duration-300 ease-in-out;
     }
   }

@@ -1,5 +1,6 @@
 @layer components {
   #hs-banner-parent {
+    @apply font-sans;
     button {
       @apply font-sans text-base;
       @apply font-semibold border-2 hover:brightness-125;

@@ -47,4 +47,9 @@
     @apply font-semibold mt-6 mb-2 md:mt-9 md:mb-3;
     line-height: 1.15;
   }
+
+  b,
+  strong {
+    @apply font-semibold;
+  }
 }

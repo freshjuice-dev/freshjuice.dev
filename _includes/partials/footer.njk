@@ -26,12 +26,13 @@
           <img src="https://img.shields.io/github/stars/freshjuice-dev/freshjuice-dev-hubspot-theme" alt="GitHub Repo stars" eleventy:ignore>
         </a>
       </div>
-#}
       <div class="">
         <p class="m-0 text-pretty">
           Last built on {{ build.timestamp.formatted }} (<a href="https://www.github.com/{{ build.issues.owner }}/{{ build.issues.repo }}/commit/{{ build.hash.full }}" rel="noreferrer noopener" >{{ build.hash.short }}</a>)
         </p>
       </div>
+#}
+
     </div>
 
     <div class="mt-8 border-t border-gray-900/10 pt-8 md:flex md:items-center md:justify-between md:gap-8">
@@ -41,8 +42,11 @@
         {% endfor %}
       </div>
       <p class="mt-8 md:order-1 md:mt-0 text-pretty">
-        &copy;&nbsp;<span x-text="(new Date()).getFullYear()">{% year %}</span> <a href="https://alex.zappa.dev/?utm_source=freshjuice">Alex&nbsp;Zappa</a>.
-        All&nbsp;Right&nbsp;Reserved. Except as otherwise noted, the content of this page is licensed under the <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">Creative Commons Attribution 4.0 License</a>, and code samples are licensed under the <a href="https://opensource.org/licenses/MIT" rel="noopener">MIT License</a>.
+        &copy;&nbsp;<span x-text="(new Date()).getFullYear()">{% year %}</span> <a href="/">FreshJuice</a>.
+        All rights reserved. Except where otherwise noted, content is licensed under the
+        <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>,
+        and code samples under the
+        <a href="https://opensource.org/licenses/MIT" rel="noopener">MIT License</a>.
       </p>
     </div>
 

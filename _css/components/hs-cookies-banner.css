@@ -3,6 +3,10 @@
     --hs-banner-font-family: var(--font-sans);
     @apply font-sans;
 
+    .hs-category-label {
+      @apply font-semibold!;
+    }
+
     #hs-eu-cookie-settings-button {
       @apply font-medium! no-underline! hover:underline!;
     }

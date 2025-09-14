@@ -7,6 +7,7 @@
 @import "./base/forms.css";
 
 /* Components */
+@import "./components/hs-banner-parent.css";
 @import "./components/buttons.css";
 @import "./components/prism.css";
 @import "./components/pagefind.css";

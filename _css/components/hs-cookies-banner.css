@@ -4,7 +4,7 @@
     @apply font-sans;
 
     #hs-eu-cookie-settings-button {
-      @apply no-underline! hover:underline!;
+      @apply font-medium! no-underline! hover:underline!;
     }
 
     #hs-modal-accept-all,

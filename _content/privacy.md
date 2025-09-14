@@ -19,8 +19,6 @@ Your privacy matters to us. This notice explains what data we collect, how we us
 **FreshJuice** — an independent project and brand operated by a single developer.
 For any privacy inquiries, please contact: **privacy@freshjuice.dev**
 
-We do not publish a postal address publicly. If you require our mailing address for GDPR or legal reasons, please request it by email and we will provide it.
-
 If you are in the EEA/UK, FreshJuice is the **data controller** for personal data collected via this Website.
 
 ---
@@ -134,7 +132,9 @@ We use technical and organizational measures to protect your data (encryption in
 
 ## Children
 
-This Website is not intended for children under 13. We do not knowingly collect data from children.
+This Website and our services are **not intended for individuals under the age of 18**. We do not knowingly collect or process personal data from anyone under 18 years of age.
+
+If you are under 18, please do not use this Website or provide any personal information. If we learn that we have inadvertently collected data from a minor, we will promptly delete it.
 
 ---
 
@@ -146,6 +146,5 @@ We may update this policy from time to time. Material changes will be highlighte
 
 ## Contact
 
-Questions or requests: **privacy@freshjuice.dev**
-Postal address: [replace with address]
-If you prefer not to be tracked by non-essential cookies, adjust **Cookie settings** in the footer.
+For any privacy-related inquiries, please email **privacy@freshjuice.dev**.
+We do not publish a postal address publicly. If required for GDPR or legal reasons, our mailing address can be provided upon request.

@@ -2,14 +2,18 @@
   #hs-banner-parent {
     --hs-banner-font-family: var(--font-sans);
     @apply font-sans;
-    button {
+
+    #hs-eu-cookie-settings-button {
+      @apply no-underline!;
+    }
+
+    #hs-modal-accept-all,
+    #hs-modal-save-settings,
+    #hs-eu-confirmation-button,
+    #hs-eu-decline-button {
       @apply text-base!;
       @apply font-semibold border-2! hover:brightness-125;
       @apply transition-all duration-300 ease-in-out;
-    }
-
-    #hs-eu-cookie-confirmation #hs-eu-cookie-settings-button {
-      @apply no-underline!;
     }
   }
 }

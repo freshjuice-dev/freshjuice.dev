@@ -1,5 +1,6 @@
 @layer components {
   #hs-banner-parent {
+    --hs-banner-font-family: var(--font-sans);
     @apply font-sans;
     button {
       @apply font-sans text-base;

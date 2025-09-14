@@ -1,6 +1,6 @@
 ---
 layout: prose
-title: Terms of Service
+title: Terms of Use
 permalink: /terms/
 ---
 

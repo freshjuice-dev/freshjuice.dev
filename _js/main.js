@@ -158,4 +158,12 @@ Alpine.data("xDOM", () => {
 domReady(() => {
   // Start Alpine when the page is ready.
   Alpine.start();
+
+  const cookieSettings = document.querySelector(`[href="#cookie-settings"]`);
+  if (cookieSettings) {
+    cookieSettings.addEventListener("click", (e) => {
+      e.preventDefault();
+      (window._hsp = window._hsp || []).push(["showBanner"]);
+    });
+  }
 });

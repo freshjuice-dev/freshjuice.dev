@@ -3,6 +3,8 @@ title: Lite Video Embed
 desc: Setup and usage instructions for the Lite Video Embed module in HubSpot CMS. Includes sidebar configuration steps, player options, style tab, privacy mode, and optional Video SEO schema.
 ---
 
+👉 [View module on HubSpot Marketplace](https://app.hubspot.com/l/ecosystem/marketplace/modules/lite-video-embed-module-by-freshjuice)
+
 The **Lite Video Embed** module allows you to embed YouTube or Vimeo videos in a performance-optimized way.
 All settings are available in the **sidebar panel** when editing a page in HubSpot.
 
@@ -167,3 +169,8 @@ Align the embed within its container: **Left**, **Center** (default), or **Right
   <img src="./video-style-alignment.png" alt="Style → Alignment select" eleventy:widths="300" />
   <figcaption>Style → Alignment select.</figcaption>
 </figure>
+
+---
+
+Looking to install this module?\
+👉 [Get Lite Video Embed on the HubSpot Marketplace](https://app.hubspot.com/l/ecosystem/marketplace/modules/lite-video-embed-module-by-freshjuice)

@@ -27,6 +27,7 @@ Paste the full video link or just the video ID.
 
 - Example YouTube: `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
 - Example Vimeo: `https://vimeo.com/861680818`
+
 <figure>
   <img src="./video-url.png" alt="sidebar input with YouTube/Vimeo URL" eleventy:widths="300" />
   <figcaption>Sidebar input with YouTube/Vimeo URL.</figcaption>
@@ -62,10 +63,11 @@ Upload a custom thumbnail or leave blank to use the platform’s preview.
 - **Access the YouTube Iframe Player API** — enable programmatic control (play/pause/seek/events).
   > ⚠️\
   > Enabling the JS API disables Privacy mode for YouTube (loads from `youtube.com` and may set cookies).
-  <figure>
-    <img src="./video-youtube-settings.png" alt="sidebar YouTube settings toggles/inputs" eleventy:widths="300" />
-    <figcaption>Sidebar YouTube settings toggles/inputs.</figcaption>
-  </figure>
+
+<figure>
+  <img src="./video-youtube-settings.png" alt="sidebar YouTube settings toggles/inputs" eleventy:widths="300" />
+  <figcaption>Sidebar YouTube settings toggles/inputs.</figcaption>
+</figure>
 
 ---
 
@@ -77,6 +79,7 @@ Upload a custom thumbnail or leave blank to use the platform’s preview.
 - **Loop** — loop the video when it ends.
 - **Accent color** — set the player’s accent color (e.g., `#ff9900`). Can inherit from theme’s primary color.
 - **Private token / query (optional)** — append a private token or query (e.g., `h=abc123`) for unlisted/private videos.
+
 <figure>
   <img src="./video-vimeo-settings.png" alt="sidebar Vimeo settings with color picker and toggles" eleventy:widths="300" />
   <figcaption>Sidebar Vimeo settings with color picker and toggles.</figcaption>
@@ -91,6 +94,7 @@ Expand the **Advanced** group in the sidebar:
 - **Custom CSS Class** — add classes for styling.
 - **Privacy mode** — YouTube no-cookie embed / Vimeo limited tracking.
 - **Enable Video SEO Schema** — injects structured data (VideoObject) into the page.
+
 <figure>
   <img src="./video-advanced.png" alt="sidebar Advanced toggles expanded" eleventy:widths="300" />
   <figcaption>Sidebar Advanced toggles expanded.</figcaption>
@@ -138,6 +142,7 @@ Choose the aspect ratio for **Vimeo** videos (YouTube uses fixed 16:9):
 - **4:3** — standard
 - **1:1** — square
 - **9:16** — vertical/portrait
+
 <figure>
   <img src="./video-style-aspect-ratio.png" alt="Style → Aspect Ratio select for Vimeo" eleventy:widths="300" />
   <figcaption>Style → Aspect Ratio select for Vimeo.</figcaption>
@@ -148,6 +153,7 @@ Choose the aspect ratio for **Vimeo** videos (YouTube uses fixed 16:9):
 Round the container corners (pixels per corner):
 
 - **Top Left**, **Top Right**, **Bottom Left**, **Bottom Right**
+
 <figure>
   <img src="./video-style-border-radius.png" alt="Style → Border Radius grouped number inputs" eleventy:widths="300" />
   <figcaption>Style → Border Radius grouped number inputs.</figcaption>

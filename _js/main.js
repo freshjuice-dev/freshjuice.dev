@@ -40,6 +40,9 @@ Alpine.data("xDOM", () => {
       drawerMenuOpen: false,
       searchTerm: "",
       pagefind: null,
+      docsPath: location.pathname.startsWith("/developer-edition/docs/")
+        ? "/developer-edition/docs/"
+        : "/docs/",
       toggleDrawerMenu() {
         debugLog("docsSearch: Toggle drawer menu");
         this.showOverlay = !this.showOverlay;
@@ -77,49 +80,45 @@ Alpine.data("xDOM", () => {
       loadAssets() {
         debugLog("docsSearch: Loading search assets");
         //loadStylesheet("/developer-edition/docs/pagefind/pagefind-ui.css");
-        loadScript(
-          "/developer-edition/docs/pagefind/pagefind-ui.js",
-          "defer",
-          () => {
-            debugLog("docsSearch: pagefind.js loaded");
-            this.pagefind = new PagefindUI({
-              element: "#docsSearch",
-              showSubResults: true,
-              pageSize: 100,
-              showImages: false,
-              excerptLength: 30,
-              resetStyles: true,
-              bundlePath: "/developer-edition/docs/pagefind/",
-              autofocus: true,
-              //debounceTimeoutMs: 500,
-              processTerm: (term) => {
-                debugLog("docsSearch: Process term", term);
-                this.searchTerm = term.length > 0 ? term : "nada";
-                return term;
-              },
-              processResult: (result) => {
-                debugLog("docsSearch: Process result", result);
-                if (result.url === location.pathname) {
-                  //js open link in same tab
-                  result.url = location.pathname;
-                  if (result.anchors) {
-                    result.anchors.forEach((anchor) => {
-                      anchor.url = `javascript:postMessage({type: 'closeSearch', anchor: '${anchor.id}'})`;
-                    });
-                  }
-                  if (result.sub_results) {
-                    result.sub_results.forEach((sub_result) => {
-                      sub_result.url = `javascript:postMessage({type: 'closeSearch', anchor: '${sub_result.url.split("#")[1]}'})`;
-                    });
-                  }
+        loadScript(`${this.docsPath}pagefind/pagefind-ui.js`, "defer", () => {
+          debugLog("docsSearch: pagefind.js loaded");
+          this.pagefind = new PagefindUI({
+            element: "#docsSearch",
+            showSubResults: true,
+            pageSize: 100,
+            showImages: false,
+            excerptLength: 30,
+            resetStyles: true,
+            bundlePath: `${this.docsPath}pagefind/`,
+            autofocus: true,
+            //debounceTimeoutMs: 500,
+            processTerm: (term) => {
+              debugLog("docsSearch: Process term", term);
+              this.searchTerm = term.length > 0 ? term : "nada";
+              return term;
+            },
+            processResult: (result) => {
+              debugLog("docsSearch: Process result", result);
+              if (result.url === location.pathname) {
+                //js open link in same tab
+                result.url = location.pathname;
+                if (result.anchors) {
+                  result.anchors.forEach((anchor) => {
+                    anchor.url = `javascript:postMessage({type: 'closeSearch', anchor: '${anchor.id}'})`;
+                  });
                 }
-                return result;
-              },
-            });
-          },
-        );
+                if (result.sub_results) {
+                  result.sub_results.forEach((sub_result) => {
+                    sub_result.url = `javascript:postMessage({type: 'closeSearch', anchor: '${sub_result.url.split("#")[1]}'})`;
+                  });
+                }
+              }
+              return result;
+            },
+          });
+        });
       },
-      searchInit() {
+      searchInit(docsPath) {
         debugLog("docsSearch: Init");
         window.addEventListener("message", (e) => {
           if (e.data.type === "closeSearch") {
@@ -148,7 +147,10 @@ Alpine.data("xDOM", () => {
     init() {
       debugLog("AlpineJS DOM init");
       // location path starts with /docs
-      if (location.pathname.startsWith("/developer-edition/docs")) {
+      if (
+        location.pathname.startsWith("/docs/") ||
+        location.pathname.startsWith("/developer-edition/docs/")
+      ) {
         this.docs.searchInit();
       }
     },
@@ -163,7 +165,9 @@ domReady(() => {
 
   const cookieSettings = document.querySelector(`[href="#cookie-settings"]`);
   if (cookieSettings) {
+    debugLog("Cookie Settings Link Found");
     cookieSettings.addEventListener("click", (e) => {
+      debugLog("Cookie Settings Link Clicked");
       e.preventDefault();
       window._hsp.push(["showBanner"]);
     });

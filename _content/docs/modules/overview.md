@@ -1,0 +1,33 @@
+---
+title: Modules Overview
+desc: Explore available HubSpot modules — lightweight, reusable components designed to extend your HubSpot CMS pages and templates.
+permalink: /docs/modules/
+modules:
+  - key: lite-video-embed
+    title: Lite Video Embed
+    description: A performance-friendly video embed module optimized for HubSpot pages.
+    link: /docs/modules/lite-video-embed/
+---
+
+Welcome to the HubSpot Modules library.
+Here you’ll find reusable components designed to extend HubSpot CMS pages with lightweight, modern functionality.
+
+<div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4 mt-10">
+
+{% for module in modules %}
+<a href="{{ module.link }}" class="relative block group transition-all ease-in-out hover:-translate-y-0.5">
+<img
+src="./{{ module.key }}/thumbnail.png"
+alt="{{ module.title }}"
+class="img m-0 transition-all ease-in-out group-hover:brightness-105"
+
+>
+
+  <div class="sr-only">
+    <h3>{{ module.title }}</h3>
+    <p>{{ module.description }}</p>
+  </div>
+</a>
+{% endfor %}
+
+</div>

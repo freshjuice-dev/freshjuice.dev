@@ -204,7 +204,7 @@ export default {
       },
     ];
     docsCollection.forEach((item) => {
-      let title = item.data.title;
+      let title = item.data.title || "";
       if (title.startsWith("Module: ")) {
         title = title.slice(8);
       }
@@ -269,6 +269,17 @@ export default {
     return activePage;
   },
 
+  setActiveDocsPage: (docsMenu, { url }) => {
+    return docsMenu.map((section) => ({
+      ...section,
+      children: section.children.map((child) => ({
+        ...child,
+        sectionName: section.title,
+        active: child.url === url,
+      })),
+    }));
+  },
+
   getBreadcrumbsList: ({ url }, title) => {
     const returnArray = [
       {
@@ -298,6 +309,12 @@ export default {
       returnArray.push({
         name: "Documentation",
         url: "/docs/",
+      });
+    }
+    if (/^\/docs\/.+/.test(url)) {
+      returnArray.push({
+        name: "Developer Edition Documentation",
+        url: "/developer-edition/docs/",
       });
     }
     if (/^\/tools\/.+/.test(url)) {

@@ -2,8 +2,8 @@
 layout: base.njk
 ---
 
-{% set devDocsMenu = collections.devDocs | getDocsMenu(page)%}
-{% set activeDocsPage = devDocsMenu | getActiveDocsPage %}
+{% set docsMenu = menu.docs | setActiveDocsPage(page) %}
+{% set activeDocsPage = docsMenu | getActiveDocsPage %}
 
 {# Layout Helper #}
 <div class="-mt-8 sm:-mt-12 lg:-mt-16">
@@ -42,12 +42,11 @@ layout: base.njk
         <div class="bg-gradient-to-b from-zinc-50 h-8"></div>
       </div>
 
-      {% for section in devDocsMenu %}
+      {% for section in docsMenu %}
         <div class="mb-6 lg:pr-8">
           <p class="text-lg font-semibold mb-3">{{ section.title }}</p>
           <ul class="list-none m-0 p-0 border-l border-gray-900/5 space-y-2">
-            {% set children = section.children | sortCollection("title", "ASC") if loop.index0 else section.children %}
-            {% for child in children %}
+            {% for child in section.children %}
               <li>
                 <a href="{{ child.url }}"
                    class="block pl-6 py-1 -ml-px border-l hover:border-current {% if child.active %}border-current text-red-600 font-semibold{% else %}border-transparent opacity-85 hover:opacity-100 !text-zinc-600{% endif %}">
@@ -79,12 +78,11 @@ layout: base.njk
           {% phicon "x", "regular", { class: "size-6"} %}
         </button>
 
-        {% for section in devDocsMenu %}
+        {% for section in docsMenu %}
           <div class="">
             <p class="text-lg font-semibold mb-3">{{ section.title }}</p>
             <ul class="list-none m-0 p-0 border-l border-gray-900/5 space-y-2">
-              {% set children = section.children | sortCollection("title", "ASC") if loop.index0 else section.children %}
-              {% for child in children %}
+              {% for child in section.children %}
                 <li>
                   <a href="{{ child.url }}"
                      class="block pl-6 py-1 -ml-px border-l hover:border-current {% if child.active %}border-current text-red-600 font-semibold{% else %}border-transparent opacity-85 hover:opacity-100 !text-zinc-600{% endif %}">{{ child.title }}</a>
@@ -93,6 +91,7 @@ layout: base.njk
             </ul>
           </div>
         {% endfor %}
+
       </div>
 
       {# Breadcrumbs #}
@@ -123,7 +122,7 @@ layout: base.njk
 
   <main class="prose max-w-4xl mx-auto w-full lg:max-w-full grow py-8" data-pagefind-body>
 
-    <header data-pagefind-meta="title:'{{ activeDocsPage.sectionName }}: {{ activeDocsPage.pageName }}'">
+    <header data-pagefind-meta="title:{{ activeDocsPage.sectionName }}: {{ activeDocsPage.pageName }}">
       {% if activeDocsPage.sectionName %}
         <p class="text-sm md:text-base font-semibold m-0 text-red-600 leading-none">{{ activeDocsPage.sectionName }}</p>
       {% endif %}

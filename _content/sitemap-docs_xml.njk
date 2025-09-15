@@ -1,10 +1,10 @@
 ---
-permalink: /sitemap-core.xml
+permalink: /sitemap-docs.xml
 eleventyExcludeFromCollections: true
 ---
 <?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xsl" href="{{ build.url }}/sitemap.xsl"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  {%- for page in collections.all | excludeFromCollectionsByTag(['posts','docs','dev-docs']) %}
+  {%- for page in collections.docs %}
     {%- if page.url and page.data.title and page.data.excludeFromSitemap != true -%}
       {%- set absoluteUrl %}{{ page.url | htmlBaseUrl(build.url) }}{% endset -%}
       <url>

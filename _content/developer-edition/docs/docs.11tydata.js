@@ -1,7 +1,7 @@
 import slugify from "slugify";
 
 export default {
-  suffix: " | FreshJuice Docs",
+  suffix: " | FreshJuice DEV Docs",
   tags: ["dev-docs"],
   layout: "dev-docs",
   permalink: function ({ page }) {

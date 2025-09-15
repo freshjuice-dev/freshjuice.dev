@@ -7,7 +7,8 @@
   "scripts": {
     "clean:site": "rimraf './_site' './_temp'",
     "postbuild": "npm-run-all --parallel postbuild:*",
-    "postbuild:pagefind-docs": "npx pagefind --site ./_site/developer-edition/docs",
+    "postbuild:pagefind-docs": "npx pagefind --site ./_site/docs",
+    "postbuild:pagefind-dev-docs": "npx pagefind --site ./_site/developer-edition/docs",
     "submodules:pull": "git submodule update --init --recursive",
     "submodules:merge": "git submodule update --remote --merge",
     "make:og-images": "node ./generate-og-images.js",

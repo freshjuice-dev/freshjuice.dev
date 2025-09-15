@@ -1,6 +1,6 @@
 // import { generate as criticalGenerate } from 'critical';
 import { minify as minifyHTML } from "html-minifier-terser";
-import * as cheerio from 'cheerio';
+import * as cheerio from "cheerio";
 
 export default {
   //
@@ -39,14 +39,25 @@ export default {
   externalLinks: function (content, outputPath) {
     if (outputPath && outputPath.endsWith(".html")) {
       const $ = cheerio.load(content);
-      // if link starts with http and not contains the domain name kandji.io add target="_blank" ignore if target is set also bypass any other attributes
+
       $("a[href^='http']").each((i, el) => {
-        // add to url search param utm_source=freshjuice
         const href = $(el).attr("href");
-        const url = new URL(href);
-        url.searchParams.set("utm_source", "freshjuice.dev");
-        $(el).attr("href", url.toString());
+        try {
+          const url = new URL(href);
+          if (!url.hostname.includes("freshjuice.dev")) {
+            url.searchParams.set("utm_source", "freshjuice.dev");
+            const existingRel = ($(el).attr("rel") || "").split(" ");
+            if (!existingRel.includes("noopener")) {
+              existingRel.push("noopener");
+            }
+            $(el)
+              .attr("href", url.toString())
+              .attr("target", "_blank")
+              .attr("rel", existingRel.join(" ").trim());
+          }
+        } catch (err) {}
       });
+
       content = $.html();
     }
     return content;
@@ -54,10 +65,10 @@ export default {
 
   minifyHTML: function (content, outputPath) {
     if (process.env.ELEVENTY_ENV === "production" && outputPath) {
-      if ( outputPath.endsWith(".json") ) {
+      if (outputPath.endsWith(".json")) {
         return JSON.stringify(JSON.parse(content));
       }
-      if ( outputPath.endsWith(".html") || outputPath.endsWith(".xml") ) {
+      if (outputPath.endsWith(".html") || outputPath.endsWith(".xml")) {
         return minifyHTML(content, {
           useShortDoctype: true,
           removeComments: true,
@@ -74,5 +85,4 @@ export default {
     }
     return content;
   },
-
-}
+};

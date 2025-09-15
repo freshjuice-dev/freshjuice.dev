@@ -1,0 +1,22 @@
+- title: Getting Started
+  children:
+    - title: Overview
+      url: /docs/
+    - title: Using Modules
+      url: /docs/using-modules/
+- title: HubSpot
+  children:
+    - title: Overview
+      url: /docs/hubspot/
+    - title: Website Pages
+      url: /docs/hubspot/website-pages/
+    - title: Blog
+      url: /docs/hubspot/blog/
+    - title: For Developers
+      url: /docs/hubspot/developers/
+- title: Modules
+  children:
+    - title: Overview
+      url: /docs/modules/
+    - title: Lite Video Embed
+      url: /docs/modules/lite-video-embed/

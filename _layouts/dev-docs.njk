@@ -2,7 +2,7 @@
 layout: base.njk
 ---
 
-{% set devDocsMenu = collections.devDocs | getDocsMenu(page)%}
+{% set devDocsMenu = menu.devDocs | setActiveDocsPage(page) %}
 {% set activeDocsPage = devDocsMenu | getActiveDocsPage %}
 
 {# Layout Helper #}

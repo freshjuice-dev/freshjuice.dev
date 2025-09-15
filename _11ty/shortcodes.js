@@ -125,6 +125,8 @@ export default {
           let itemCollectionName = "";
           if (item.data.tags && item.data.tags.includes("docs")) {
             itemCollectionName = "docs";
+          } else if (item.data.tags && item.data.tags.includes("dev-docs")) {
+            itemCollectionName = "devDocs";
           } else if (item.data.tags && item.data.tags.includes("posts")) {
             itemCollectionName = "blogs";
           } else if (item.data.tags && item.data.tags.includes("authors")) {

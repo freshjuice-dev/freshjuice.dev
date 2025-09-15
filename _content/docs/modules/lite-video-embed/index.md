@@ -4,7 +4,8 @@ desc: Setup and usage instructions for the Lite Video Embed module in HubSpot CM
 ---
 
 The **Lite Video Embed** module allows you to embed YouTube or Vimeo videos in a performance-optimized way.
-All settings are available in the **sidebar panel** when editing a page in HubSpot.\
+All settings are available in the **sidebar panel** when editing a page in HubSpot.
+
 👉 [View module preview](https://demo.freshjuice.dev/modules/lite-video-embed) — this is a HubSpot landing page showing the module in action. You can use it to test performance with tools like PageSpeed Insights.
 
 ---

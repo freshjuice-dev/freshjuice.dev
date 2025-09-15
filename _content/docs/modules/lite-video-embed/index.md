@@ -5,7 +5,7 @@ desc: Setup and usage instructions for the Lite Video Embed module in HubSpot CM
 
 The **Lite Video Embed** module allows you to embed YouTube or Vimeo videos in a performance-optimized way.
 All settings are available in the **sidebar panel** when editing a page in HubSpot.\
-👉 [View live demo](https://demo.freshjuice.dev/modules/lite-video-embed)
+👉 [View module preview](https://demo.freshjuice.dev/modules/lite-video-embed) — this is a HubSpot landing page showing the module in action. You can use it to test performance with tools like PageSpeed Insights.
 
 ---
 
@@ -14,7 +14,11 @@ All settings are available in the **sidebar panel** when editing a page in HubSp
 ### Video Provider
 
 Select your video platform (**YouTube** or **Vimeo**).
-_(screenshot: sidebar showing Video Provider dropdown)_
+
+<figure>
+  <img src="./video-provider.png" alt="sidebar showing Video Provider dropdown" eleventy:widths="300" />
+  <figcaption>Sidebar showing Video Provider dropdown.</figcaption>
+</figure>
 
 ### Video ID / URL
 
@@ -22,17 +26,28 @@ Paste the full video link or just the video ID.
 
 - Example YouTube: `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
 - Example Vimeo: `https://vimeo.com/861680818`
-  _(screenshot: sidebar input with YouTube/Vimeo URL)_
+<figure>
+  <img src="./video-url.png" alt="sidebar input with YouTube/Vimeo URL" eleventy:widths="300" />
+  <figcaption>Sidebar input with YouTube/Vimeo URL.</figcaption>
+</figure>
 
 ### Title
 
 Accessible label shown for the video. Default: **Play Video**.
-_(screenshot: sidebar Title field)_
+
+<figure>
+  <img src="./video-title.png" alt="sidebar Title field" eleventy:widths="300" />
+  <figcaption>Sidebar Title field.</figcaption>
+</figure>
 
 ### Thumbnail (optional)
 
 Upload a custom thumbnail or leave blank to use the platform’s preview.
-_(screenshot: sidebar Thumbnail upload)_
+
+<figure>
+  <img src="./video-thumbnail.png" alt="sidebar Thumbnail upload" eleventy:widths="300" />
+  <figcaption>Sidebar Thumbnail upload.</figcaption>
+</figure>
 
 ---
 
@@ -46,8 +61,10 @@ _(screenshot: sidebar Thumbnail upload)_
 - **Access the YouTube Iframe Player API** — enable programmatic control (play/pause/seek/events).
   > ⚠️\
   > Enabling the JS API disables Privacy mode for YouTube (loads from `youtube.com` and may set cookies).
-
-_(screenshot: sidebar YouTube settings toggles/inputs)_
+  <figure>
+    <img src="./video-youtube-settings.png" alt="sidebar YouTube settings toggles/inputs" eleventy:widths="300" />
+    <figcaption>Sidebar YouTube settings toggles/inputs.</figcaption>
+  </figure>
 
 ---
 
@@ -59,8 +76,10 @@ _(screenshot: sidebar YouTube settings toggles/inputs)_
 - **Loop** — loop the video when it ends.
 - **Accent color** — set the player’s accent color (e.g., `#ff9900`). Can inherit from theme’s primary color.
 - **Private token / query (optional)** — append a private token or query (e.g., `h=abc123`) for unlisted/private videos.
-
-_(screenshot: sidebar Vimeo settings with color picker and toggles)_
+<figure>
+  <img src="./video-vimeo-settings.png" alt="sidebar Vimeo settings with color picker and toggles" eleventy:widths="300" />
+  <figcaption>Sidebar Vimeo settings with color picker and toggles.</figcaption>
+</figure>
 
 ---
 
@@ -71,8 +90,10 @@ Expand the **Advanced** group in the sidebar:
 - **Custom CSS Class** — add classes for styling.
 - **Privacy mode** — YouTube no-cookie embed / Vimeo limited tracking.
 - **Enable Video SEO Schema** — injects structured data (VideoObject) into the page.
-
-_(screenshot: sidebar Advanced toggles expanded)_
+<figure>
+  <img src="./video-advanced.png" alt="sidebar Advanced toggles expanded" eleventy:widths="300" />
+  <figcaption>Sidebar Advanced toggles expanded.</figcaption>
+</figure>
 
 #### Example SEO schema output
 
@@ -102,7 +123,11 @@ When enabled, the page will include JSON-LD markup like this:
 ### Max Width
 
 Set a maximum width for the video block (in pixels), e.g., **1280**, **960**, or **800**.
-_(screenshot: Style → Max Width numeric input)_
+
+<figure>
+  <img src="./video-style-max-width.png" alt="Style → Max Width numeric input" eleventy:widths="300" />
+  <figcaption>Style → Max Width numeric input.</figcaption>
+</figure>
 
 ### Aspect Ratio (Vimeo only)
 
@@ -112,16 +137,26 @@ Choose the aspect ratio for **Vimeo** videos (YouTube uses fixed 16:9):
 - **4:3** — standard
 - **1:1** — square
 - **9:16** — vertical/portrait
-  _(screenshot: Style → Aspect Ratio select for Vimeo)_
+<figure>
+  <img src="./video-style-aspect-ratio.png" alt="Style → Aspect Ratio select for Vimeo" eleventy:widths="300" />
+  <figcaption>Style → Aspect Ratio select for Vimeo.</figcaption>
+</figure>
 
 ### Border Radius
 
 Round the container corners (pixels per corner):
 
 - **Top Left**, **Top Right**, **Bottom Left**, **Bottom Right**
-  _(screenshot: Style → Border Radius grouped number inputs)_
+<figure>
+  <img src="./video-style-border-radius.png" alt="Style → Border Radius grouped number inputs" eleventy:widths="300" />
+  <figcaption>Style → Border Radius grouped number inputs.</figcaption>
+</figure>
 
 ### Alignment
 
 Align the embed within its container: **Left**, **Center** (default), or **Right**.
-_(screenshot: Style → Alignment select)_
+
+<figure>
+  <img src="./video-style-alignment.png" alt="Style → Alignment select" eleventy:widths="300" />
+  <figcaption>Style → Alignment select.</figcaption>
+</figure>

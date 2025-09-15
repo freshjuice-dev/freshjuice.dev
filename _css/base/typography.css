@@ -58,7 +58,7 @@
   }
 
   .prose img {
-    @apply my-8 block;
+    @apply block; /* my-8 */
   }
 
   .prose :is(picture, figure) {

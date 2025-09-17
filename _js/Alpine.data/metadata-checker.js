@@ -3,7 +3,7 @@ import debugLog from "../modules/_debugLog";
 
 document.addEventListener("alpine:init", () => {
   Alpine.data("MetadataChecker", () => ({
-    targetUrl: '',
+    targetUrl: "",
     status: "idle", // idle, loading, success, error
     showResults: false,
     loading: false,
@@ -67,7 +67,10 @@ document.addEventListener("alpine:init", () => {
           returnString = this.previewData.og["og:image"] || "";
           break;
         case "twitter":
-          returnString = this.previewData.twitter["twitter:image"] || this.previewData.og["og:image"] || "";
+          returnString =
+            this.previewData.twitter["twitter:image"] ||
+            this.previewData.og["og:image"] ||
+            "";
           break;
         default:
           break;
@@ -83,13 +86,12 @@ document.addEventListener("alpine:init", () => {
         : returnString;
     },
     escapeHTML(htmlString) {
-      return htmlString
-        .replace(/^[ \t]+/gm, '') // Remove leading spaces
-        //.replace(/&/g, '&amp;')   // Replace & first
-        //.replace(/</g, '&lt;')    // Replace <
-        //.replace(/>/g, '&gt;')    // Replace >
-        //.replace(/"/g, '&quot;')  // Replace "
-        //.replace(/'/g, '&#39;');  // Replace '
+      return htmlString.replace(/^[ \t]+/gm, ""); // Remove leading spaces
+      //.replace(/&/g, '&amp;')   // Replace & first
+      //.replace(/</g, '&lt;')    // Replace <
+      //.replace(/>/g, '&gt;')    // Replace >
+      //.replace(/"/g, '&quot;')  // Replace "
+      //.replace(/'/g, '&#39;');  // Replace '
     },
     generateMetaTags(data) {
       if (!data) {
@@ -105,9 +107,13 @@ document.addEventListener("alpine:init", () => {
             if (key === "title") {
               returnString += this.escapeHTML(`\n<title>${value}</title>`);
             } else if (key === "canonical") {
-              returnString += this.escapeHTML(`\n<link rel="canonical" href="${value}">`);
+              returnString += this.escapeHTML(
+                `\n<link rel="canonical" href="${value}">`,
+              );
             } else {
-              returnString += this.escapeHTML(`\n<meta name="${key}" content="${value}">`);
+              returnString += this.escapeHTML(
+                `\n<meta name="${key}" content="${value}">`,
+              );
             }
           }
         }
@@ -118,7 +124,9 @@ document.addEventListener("alpine:init", () => {
         returnString += this.escapeHTML(`\n\n<!-- Open Graph Meta Tags -->`);
         for (const [key, value] of Object.entries(data.og)) {
           if (value) {
-            returnString += this.escapeHTML(`\n<meta property="${key}" content="${value}">`);
+            returnString += this.escapeHTML(
+              `\n<meta property="${key}" content="${value}">`,
+            );
           }
         }
       }
@@ -128,13 +136,19 @@ document.addEventListener("alpine:init", () => {
         returnString += this.escapeHTML(`\n\n<!-- X.com Meta Tags -->`);
         for (const [key, value] of Object.entries(data.twitter)) {
           if (value) {
-            returnString += this.escapeHTML(`\n<meta name="${key}" content="${value}">`);
+            returnString += this.escapeHTML(
+              `\n<meta name="${key}" content="${value}">`,
+            );
           }
         }
       }
 
       if (typeof Prism === "object" && typeof Prism.highlight === "function") {
-        this.metaTags = Prism.highlight(returnString, Prism.languages.html, 'html');
+        this.metaTags = Prism.highlight(
+          returnString,
+          Prism.languages.html,
+          "html",
+        );
       } else {
         this.metaTags = returnString;
       }
@@ -144,7 +158,7 @@ document.addEventListener("alpine:init", () => {
         this.initError("Invalid URL provided");
         return;
       }
-      fetch("/api/metadata-checker", {
+      fetch("https://api.freshjuice.dev/metadata-checker", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -160,7 +174,7 @@ document.addEventListener("alpine:init", () => {
         .then((data) => {
           this.previewData = data;
           this.generateMetaTags(data);
-          debugLog('Response Data:', data);
+          debugLog("Response Data:", data);
           this.initSuccess();
         })
         .catch((error) => {
@@ -168,9 +182,9 @@ document.addEventListener("alpine:init", () => {
         });
     },
     cleanDomain() {
-      return (this.previewData.homeUrl||"")
+      return (this.previewData.homeUrl || "")
         .toLowerCase()
-        .replace(/^www\./i, '');
+        .replace(/^www\./i, "");
     },
     reset() {
       history.pushState({}, "", `/tools/metadata-checker/`);
@@ -191,6 +205,6 @@ document.addEventListener("alpine:init", () => {
         this.targetUrl = url;
         this.initProcessing();
       }
-    }
+    },
   }));
 });

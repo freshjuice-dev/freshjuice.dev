@@ -13,15 +13,22 @@ permalink: /tools/
       {% set toolslist = collections.tools %}
       {% for item in toolslist | reverse %}
         {%- if item.fileSlug | slugify != "tools" %}
-          <article class="bg-neutral-200/40 hover:bg-neutral-200 transition p-4 md:p-8 rounded-md relative">
-            <h3 class="text-lg font-medium mt-0 mb-3 w-full flex gap-2">
-              {% phicon item.data.icon, "duotone", { class: "size-7 text-current" } %}
-              <a class="text-current text-pretty inline-block" href="/tools/{{ item.fileSlug | slugify }}/">
-                <span class="absolute inset-0"></span>
-                {{ item.data.title }}
-              </a>
-            </h3>
-            <p class="m-0 text-sm line-clamp-4">{{ item.data.desc }}</p>
+          {% set grad = gradients[loop.index0 % gradients.length] %}
+          <article class="border border-orange-200 hover:border-orange-400 transition-all duration-300 ease-in-out rounded-2xl relative overflow-hidden hover:brightness-110 group">
+            <div class="absolute inset-0">
+              <div class="size-10 bg-orange-600 rounded-full blur-3xl transition-all group-hover:saturate-300"></div>
+              <div class="absolute size-14 bg-amber-400 rounded-full blur-3xl right-0 bottom-0 transition-all group-hover:saturate-300"></div>
+            </div>
+            <div class="relative z-10 p-4 md:p-8">
+              <h3 class="text-lg font-medium mt-0 mb-3 w-full flex gap-2 group-hover:text-orange-600  ease-in-out duration-300">
+                {% phicon item.data.icon, "regular", { class: "size-7 text-current" } %}
+                <a class="text-current text-pretty inline-block no-underline" href="/tools/{{ item.fileSlug | slugify }}/">
+                  <span class="absolute inset-0"></span>
+                  {{ item.data.title }}
+                </a>
+              </h3>
+              <p class="m-0 text-sm line-clamp-4">{{ item.data.desc }}</p>
+            </div>
           </article>
         {%- endif %}
       {% endfor %}
@@ -49,15 +56,21 @@ permalink: /tools/
         }
       ] %}
       {% for item in thirdPartyTools %}
-        <article class="bg-neutral-200/40 hover:bg-neutral-200 transition p-4 md:p-8 rounded-md relative">
-          <h3 class="text-lg md:text-xl font-medium mt-0 mb-3 w-full flex gap-2">
-            {% phicon item.icon, "duotone", { class: "size-7 text-current" } %}
-            <a class="text-current text-pretty inline-block" href="{{ item.link }}">
-              <span class="absolute inset-0"></span>
-              {{ item.title }}
-            </a>
-          </h3>
-          <p class="m-0 text-sm line-clamp-4">{{ item.desc }}</p>
+        <article class="border border-orange-200 hover:border-orange-400 transition-all duration-300 ease-in-out rounded-2xl relative overflow-hidden hover:brightness-110 group">
+          <div class="absolute inset-0">
+            <div class="size-10 bg-orange-600 rounded-full blur-3xl transition-all group-hover:saturate-300"></div>
+            <div class="absolute size-14 bg-amber-400 rounded-full blur-3xl right-0 bottom-0 transition-all group-hover:saturate-300"></div>
+          </div>
+          <div class="relative z-10 p-4 md:p-8">
+            <h3 class="text-lg font-medium mt-0 mb-3 w-full flex gap-2 group-hover:text-orange-600  ease-in-out duration-300">
+              {% phicon item.icon, "regular", { class: "size-7 text-current" } %}
+              <a class="text-current text-pretty inline-block no-underline" href="{{ item.link }}">
+                <span class="absolute inset-0"></span>
+                {{ item.title }}
+              </a>
+            </h3>
+            <p class="m-0 text-sm line-clamp-4">{{ item.desc }}</p>
+          </div>
         </article>
       {% endfor %}
     </div>

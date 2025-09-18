@@ -1,0 +1,82 @@
+---
+layout: prose
+title: Contact Us – Get in Touch with Our Team
+desc: Reach out to FreshJuice for support, project inquiries, or partnership opportunities. Use the contact form or connect directly with our team.
+permalink: /contact/
+---
+
+<section class="" x-data="contactForm">
+
+  <h1>Contact Us</h1>
+  <p>We’d love to hear from you. Fill out the form below or reach out directly.</p>
+
+  <div class="grid gap-6">
+
+    <form class="grid grid-cols-2 gap-6"
+          x-show="status === 'idle'" x-cloak
+          @submit.prevent="submit">
+
+      <fieldset>
+        <label for="firstname">First Name</label>
+        <input type="text" id="firstname" name="firstname" required x-model.trim="fields.firstname">
+      </fieldset>
+
+      <fieldset>
+        <label for="lastname">Last Name</label>
+        <input type="text" id="lastname" name="lastname" required x-model.trim="fields.lastname">
+      </fieldset>
+
+      <fieldset class="col-span-full">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" required x-model.trim="fields.email">
+      </fieldset>
+
+      <fieldset class="col-span-full">
+        <label for="message">Your Message</label>
+        <textarea id="message" name="message" required x-model.trim="fields.message"></textarea>
+      </fieldset>
+
+      <div class="action col-span-full">
+        <p class="text-sm mt-0">
+          By submitting this form, you agree to our
+          <a href="/terms/">Terms of Service</a> and
+          <a href="/policy/">Privacy Policy</a>.
+        </p>
+
+        <button type="submit"
+                class="col-span-full btn btn-primary"
+                :disabled="loading"
+                x-text="loading ? 'Sending…' : 'Submit'">
+          Submit
+        </button>
+      </div>
+
+      {# Error message #}
+      <p class="col-span-full text-red-600 text-sm"
+         x-show="error"
+         x-text="error"
+         role="alert"
+         aria-live="polite">
+      </p>
+    </form>
+
+    {# Success state #}
+    <template x-if="status === 'success'">
+      <div class="p-4 sm:p-6 rounded-3xl bg-green-50 border border-green-200">
+        <h3 class="m-0">Thanks! 🍊</h3>
+        <p class="mt-2">We received your message and will get back to you soon.</p>
+        <button class="btn mt-4" @click="reset()">Send another message</button>
+      </div>
+    </template>
+
+    {# Error (hard-fail) state #}
+    <template x-if="status === 'failed'">
+      <div class="p-4 sm:p-6 rounded-3xl bg-red-50 border border-red-200">
+        <h3 class="m-0">Something went wrong</h3>
+        <p class="mt-2" x-text="error || 'Please try again later.'"></p>
+        <button class="btn mt-4" @click="reset()">Try again</button>
+      </div>
+    </template>
+  </div>
+
+</section>

@@ -311,7 +311,7 @@ export default {
         url: "/docs/",
       });
     }
-    if (/^\/docs\/.+/.test(url)) {
+    if (/^\/developer-edition\/docs\/.+/.test(url)) {
       returnArray.push({
         name: "Developer Edition Documentation",
         url: "/developer-edition/docs/",

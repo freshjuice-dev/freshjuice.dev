@@ -11,4 +11,4 @@ links:
 signature: '<p>May the 4th be with you,<br/><a href="https://alex.zappa.dev?utm_source=freshjuice">Alex</a></p>'
 ---
 
-Geek that enjoys solving problems, technology, software development, food, reading, photography, blogging, and traveling.
+Fresh mind, problem-solver, and builder. Passionate about turning complex challenges into clean, elegant solutions. With a love for technology, software development, and high-performance web experiences, I bring creativity and precision to everything I do. When I’m not shipping code, you’ll find me exploring food culture, capturing moments through photography, or chasing inspiration while traveling.

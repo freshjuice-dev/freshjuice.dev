@@ -71,7 +71,7 @@
         :class="showOverlay||docs.showOverlay?`overflow-hidden`:``">
 		<a href="#skip" class="sr-only">Skip to main content</a>
 
-    <div class="flex flex-col w-full justify-between min-h-screen relative z-10">
+    <div class="flex flex-col w-full justify-between min-h-dvh relative z-10">
       {% include "partials/header.njk" %}
 
       <div id="skip" class="mx-auto flex w-full max-w-7xl flex-auto flex-col justify-stretch px-6 py-8 sm:py-12 lg:py-24 lg:px-8">
@@ -105,7 +105,7 @@
     {%- endif %}
     <script defer src="/js/main.js?v={{ build.hash.short }}" type="text/javascript"></script>
 
-    <div class="absolute inset-0 z-1 h-full w-full blur-[100px] lg:blur-[150px] xl:blur-[200px] max-w-screen overflow-x-hidden">
+    <div class="absolute inset-0 z-1 h-full w-full blur-[100px] lg:blur-[150px] xl:blur-[200px] max-w-dvh overflow-x-hidden">
       <div class="rounded-full absolute -right-44 -top-8 size-64 lg:size-72 xl:size-96 bg-[#FFC100]"></div>
       <div class="rounded-full absolute -left-50 top-24 size-64 lg:size-72 xl:size-96 bg-[#FF6D00]"></div>
       <div class="rounded-full absolute -left-44 -bottom-8 size-64 lg:size-72 xl:size-96 bg-[#FFC100]"></div>

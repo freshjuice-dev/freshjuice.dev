@@ -14,11 +14,7 @@ permalink: /tools/
       {% for item in toolslist | reverse %}
         {%- if item.fileSlug | slugify != "tools" %}
           {% set grad = gradients[loop.index0 % gradients.length] %}
-          <article class="border border-orange-200 hover:border-orange-400 transition-all duration-300 ease-in-out rounded-2xl relative overflow-hidden hover:brightness-110 group">
-            <div class="absolute inset-0">
-              <div class="size-10 bg-orange-600 rounded-full blur-3xl transition-all group-hover:saturate-300"></div>
-              <div class="absolute size-14 bg-amber-400 rounded-full blur-3xl right-0 bottom-0 transition-all group-hover:saturate-300"></div>
-            </div>
+          <article class="bg-cursor/50 border-2 border-orange-200 hover:border-orange-400 transition-all duration-300 ease-in-out rounded-2xl relative overflow-hidden hover:brightness-110 group">
             <div class="relative z-10 p-4 md:p-8">
               <h3 class="text-lg font-medium mt-0 mb-3 w-full flex gap-2 group-hover:text-orange-600  ease-in-out duration-300">
                 {% phicon item.data.icon, "regular", { class: "size-7 text-current" } %}
@@ -56,11 +52,7 @@ permalink: /tools/
         }
       ] %}
       {% for item in thirdPartyTools %}
-        <article class="border border-orange-200 hover:border-orange-400 transition-all duration-300 ease-in-out rounded-2xl relative overflow-hidden hover:brightness-110 group">
-          <div class="absolute inset-0">
-            <div class="size-10 bg-orange-600 rounded-full blur-3xl transition-all group-hover:saturate-300"></div>
-            <div class="absolute size-14 bg-amber-400 rounded-full blur-3xl right-0 bottom-0 transition-all group-hover:saturate-300"></div>
-          </div>
+        <article class="bg-cursor/50 border-2 border-orange-200 hover:border-orange-400 transition-all duration-300 ease-in-out rounded-2xl relative overflow-hidden hover:brightness-110 group">
           <div class="relative z-10 p-4 md:p-8">
             <h3 class="text-lg font-medium mt-0 mb-3 w-full flex gap-2 group-hover:text-orange-600  ease-in-out duration-300">
               {% phicon item.icon, "regular", { class: "size-7 text-current" } %}

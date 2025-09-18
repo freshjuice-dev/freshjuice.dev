@@ -14,7 +14,7 @@ modules:
 <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4 mt-10">
 {% for module in modules %}
   <a href="{{ module.link }}" class="relative block group transition-all ease-in-out hover:-translate-y-0.5">
-    <img src="./{{ module.key }}/thumbnail.png" alt="{{ module.title }}" class="img m-0 transition-all ease-in-out group-hover:brightness-105">
+    <img src="./{{ module.key }}/thumbnail.png" alt="{{ module.title }}" class="img rounded-2xl m-0 transition-all ease-in-out group-hover:brightness-105">
     <div class="sr-only">
       <h3>{{ module.title }}</h3>
       <p>{{ module.description }}</p>

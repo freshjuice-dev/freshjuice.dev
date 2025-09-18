@@ -14,7 +14,7 @@ layout: base.njk
 
   <header class="sm:flex sm:gap-8 md:gap-12">
     <div class="shrink-0 size-32 md:size-44">
-      <img src="{{ email | getGravatarImage(352) }}" alt="Avatar for {{ name }}" class="rounded-full size-32 md:size-44 m-0">
+      <img src="{{ email | getGravatarImage(352) }}" alt="Avatar for {{ name }}" class="rounded-full border-4 border-orange-300 size-32 md:size-44 m-0">
     </div>
     <div class="mt-6 sm:mt-0">
       <h1 class="m-0">{{ heading or title }}{%- if draft %} <small class="text-base">[draft]</small>{%- endif %}</h1>

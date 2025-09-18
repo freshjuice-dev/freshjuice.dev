@@ -79,6 +79,18 @@
       </div>
 
       {% include "partials/footer.njk" %}
+
+      {# Overlay #}
+      <div class="fixed inset-0 bg-cursor/50 backdrop-blur-sm z-10"
+           x-cloak
+           style="display: none"
+           x-show="showOverlay||docs.showOverlay"
+           x-transition:enter="transition ease-out duration-200"
+           x-transition:enter-start="opacity-0"
+           x-transition:enter-end="opacity-100"
+           x-transition:leave="transition ease-in duration-150"
+           x-transition:leave-start="opacity-100"
+           x-transition:leave-end="opacity-0"></div>
     </div>
 
     {# Scripts #}
@@ -93,20 +105,7 @@
     {%- endif %}
     <script defer src="/js/main.js?v={{ build.hash.short }}" type="text/javascript"></script>
 
-    {# Overlay #}
-    <div class="fixed inset-0 bg-terminal/50 backdrop-blur-sm z-20"
-         x-cloak
-         style="display: none"
-         x-show="showOverlay||docs.showOverlay"
-         x-transition:enter="transition ease-out duration-200"
-         x-transition:enter-start="opacity-0"
-         x-transition:enter-end="opacity-100"
-         x-transition:leave="transition ease-in duration-150"
-         x-transition:leave-start="opacity-100"
-         x-transition:leave-end="opacity-0"></div>
-
-
-    <div class="absolute inset-0 z-5 h-full w-full blur-[100px] lg:blur-[150px] xl:blur-[200px] max-w-screen overflow-x-hidden">
+    <div class="absolute inset-0 z-1 h-full w-full blur-[100px] lg:blur-[150px] xl:blur-[200px] max-w-screen overflow-x-hidden">
       <div class="rounded-full absolute -right-44 -top-8 size-64 lg:size-72 xl:size-96 bg-[#FFC100]"></div>
       <div class="rounded-full absolute -left-50 top-24 size-64 lg:size-72 xl:size-96 bg-[#FF6D00]"></div>
       <div class="rounded-full absolute -left-44 -bottom-8 size-64 lg:size-72 xl:size-96 bg-[#FFC100]"></div>

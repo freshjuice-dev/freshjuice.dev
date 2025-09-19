@@ -81,7 +81,7 @@
       {% include "partials/footer.njk" %}
 
       {# Overlay #}
-      <div class="fixed inset-0 bg-cursor/50 backdrop-blur-sm z-10"
+      <div class="fixed inset-safe min-h-dvh bg-cursor/50 backdrop-blur-sm z-10"
            x-cloak
            style="display: none"
            x-show="showOverlay||docs.showOverlay"

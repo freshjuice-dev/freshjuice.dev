@@ -1,4 +1,5 @@
 @import "tailwindcss" source(none);
+@import "tailwindcss-safe-area";
 
 /* Base */
 @import "./base/reset.css";

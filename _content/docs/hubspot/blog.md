@@ -10,11 +10,9 @@ keywords:
   ]
 ---
 
-## Blog
-
 Everything you need to start and grow a HubSpot blog — from creating posts and tags to customizing templates and subscription emails.
 
-### Blog basics
+## Blog basics
 
 Step-by-step instructions to launch your HubSpot blog. Learn how to create blogs, publish posts, manage tags, and adjust core template settings.
 
@@ -23,7 +21,7 @@ Step-by-step instructions to launch your HubSpot blog. Learn how to create blogs
 - [Create and manage blog tags](https://knowledge.hubspot.com/blog/create-and-manage-blog-tags)
 - [Manage your blog template and settings](https://knowledge.hubspot.com/blog/manage-your-blog-template-and-settings)
 
-### Blog customization
+## Blog customization
 
 Guides for enhancing the look and feel of your blog. Edit templates, add featured images, customize listing pages, and automate subscription emails.
 

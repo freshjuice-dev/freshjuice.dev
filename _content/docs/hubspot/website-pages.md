@@ -10,11 +10,9 @@ keywords:
   ]
 ---
 
-## Website Pages
-
 Learn how to create, customize, and optimize website pages in HubSpot CMS — from drag-and-drop editing to multilingual content and A/B testing.
 
-### Page creation & customization
+## Page creation & customization
 
 Core guides to building and editing HubSpot CMS pages. Learn how to use themes, drag-and-drop areas, and navigation menus to create a professional website without coding.
 
@@ -24,7 +22,7 @@ Core guides to building and editing HubSpot CMS pages. Learn how to use themes, 
 - [Customize drag and drop content on mobile devices](https://knowledge.hubspot.com/website-pages/customize-drag-and-drop-content-on-mobile-devices)
 - [Set up your website’s navigation menus](https://knowledge.hubspot.com/website-pages/set-up-your-site-s-navigation-menus)
 
-### Theme & modules
+## Theme & modules
 
 Discover how to adjust global theme settings, work with HubSpot modules, and reuse content across templates to maintain a consistent brand experience.
 
@@ -32,7 +30,7 @@ Discover how to adjust global theme settings, work with HubSpot modules, and reu
 - [Use common modules](https://knowledge.hubspot.com/website-pages/use-common-modules)
 - [Use global content across multiple templates](https://knowledge.hubspot.com/design-manager/use-global-content-across-multiple-templates)
 
-### Advanced options
+## Advanced options
 
 Advanced resources for optimizing content. Add CTAs, integrate analytics, personalize user experiences, and experiment with multilingual content or A/B testing.
 

@@ -52,7 +52,9 @@ permalink: /contact/
       </div>
 
       {# Error message #}
-      <p class="col-span-full text-red-600 text-sm" x-cloak x-show="error" x-text="error" role="alert" aria-live="polite"></p>
+      <template x-if="error">
+        <p class="col-span-full text-red-600 text-sm" x-text="error" role="alert" aria-live="polite"></p>
+      </template>
     </form>
 
     {# Success state #}

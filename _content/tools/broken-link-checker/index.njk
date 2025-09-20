@@ -25,16 +25,16 @@ faq:
     </p>
 
     <div class="clean-prose" x-data="BrokenLinkChecker">
-      <form @submit.prevent="checkLinks" class="space-y-4">
+      <form @submit="checkLinks($event)" class="space-y-4">
         <div>
           <label for="urls">URLs</label>
-          <textarea id="urls" name="urls" placeholder="Enter your URLs" x-model="urls"></textarea>
+          <textarea id="urls" name="urls" placeholder="Enter your URLs" x-model="urls" required></textarea>
           <p class="text-sm my-0">One line for each entry</p>
         </div>
         <div>
           <button type="submit"
-                  x-text="status === 'checking' ? 'Checking…' : 'Check Links'"
-                  :disabled="status === 'checking' || !urls.trim().length">
+                  x-text="state === 'checking' ? 'Checking…' : 'Check Links'"
+                  :disabled="state === 'checking' || !urls.trim().length">
             Check Links
           </button>
         </div>
@@ -45,7 +45,7 @@ faq:
           <template x-for="item in result" :key="item.url">
             <div>
               <span x-text="item.url"></span> —
-              <span x-text="item.status"></span>
+              <span x-text="item.statusCode"></span>
             </div>
           </template>
         </div>

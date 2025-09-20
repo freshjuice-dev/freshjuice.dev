@@ -1,0 +1,80 @@
+---
+title: "Broken Link Checker"
+desc: "Free Broken Link Checker tool to find and fix broken links on your website. Improve SEO, boost rankings, and enhance user experience with quick link audits."
+icon: "link-break"
+partialScripts:
+  - broken-link-checker
+faq:
+  - question: "How do I check for broken links?"
+    answer: "Simply enter your website URL into the Broken Link Checker and click **Check Links**. The tool will quickly scan your pages and display any broken or dead links it finds, along with their status codes."
+  - question: "Why is it important to fix broken links?"
+    answer: "Fixing broken links is crucial for SEO and user experience. Dead links frustrate visitors, reduce trust, and can hurt your rankings because search engines may struggle to crawl your site effectively."
+  - question: "How often should I check my website for broken links?"
+    answer: "Best practice is to check your website at least once a month, or more frequently if you regularly publish new content or update existing pages."
+---
+
+<main class="">
+
+  <div class="prose max-w-2xl mx-auto mt-12">
+
+    <h1>{{ title }}</h1>
+    <p>
+      Find and fix broken links in seconds. Dead links hurt SEO, rankings, and user experience —
+      just enter your URL, run a quick check, and get instant results. Perfect for marketers,
+      SEOs, and site owners who want a healthier, faster, and more reliable website.
+    </p>
+
+    <div class="clean-prose" x-data="BrokenLinkChecker">
+      <form @submit.prevent="checkLinks" class="space-y-4">
+        <div>
+          <label for="urls">URLs</label>
+          <textarea id="urls" name="urls" placeholder="Enter your URLs" x-model="urls"></textarea>
+          <p class="text-sm my-0">One line for each entry</p>
+        </div>
+        <div>
+          <button type="submit"
+                  x-text="status === 'checking' ? 'Checking…' : 'Check Links'"
+                  :disabled="status === 'checking' || !urls.trim().length">
+            Check Links
+          </button>
+        </div>
+      </form>
+
+      <template x-if="result.length">
+        <div class="results">
+          <template x-for="item in result" :key="item.url">
+            <div>
+              <span x-text="item.url"></span> —
+              <span x-text="item.status"></span>
+            </div>
+          </template>
+        </div>
+      </template>
+    </div>
+
+    <h2>Frequently Asked Questions</h2>
+    <div x-data="{ openIndex: 0 }">
+      {% for item in faq %}
+        {% set i = loop.index0 %}
+        <details class="mb-4 border-2 border-orange-200 rounded-2xl overflow-hidden" :open="true">
+          <summary class="cursor-pointer px-4 py-3 flex items-center justify-between gap-4 font-semibold hover:text-red-600"
+                   @click.prevent="openIndex = (openIndex === {{ i }}) ? -1 : {{ i }}">
+            <span>{{ item.question }}</span>
+            <span class="shrink-0 size-5 transition-transform duration-200"
+                  aria-hidden="true"
+                  :class="openIndex==={{ i }}?`rotate-180`:`rotate-0`">
+              {% phicon "caret-down", "bold", { class: "size-5" } %}
+            </span>
+          </summary>
+          <div x-show="openIndex === {{ i }}" x-collapse>
+            <div class="px-4 pb-4 text-sm leading-relaxed clean-prose">
+              {{ item.answer | markdownIt | safe }}
+            </div>
+          </div>
+        </details>
+      {% endfor %}
+    </div>
+
+  </div>
+
+</main>

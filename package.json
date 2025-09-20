@@ -18,6 +18,8 @@
     "build:11ty": "npx @11ty/eleventy",
     "build:js": "npx esbuild ./_js/main.js --outfile=./_site/js/main.js --bundle --minify",
     "watch:js": "npx esbuild ./_js/main.js --outfile=./_site/js/main.js --bundle --watch --sourcemap",
+    "build:js-AlpineData-BrokenLinkChecker": "npx esbuild ./_js/Alpine.data/broken-link-checker.js --outfile=./_site/js/broken-link-checker.js --bundle --minify",
+    "watch:js-AlpineData-BrokenLinkChecker": "npx esbuild ./_js/Alpine.data/broken-link-checker.js --outfile=./_site/js/broken-link-checker.js --bundle --watch --sourcemap",
     "build:js-AlpineData-CampaignURLBuilder": "npx esbuild ./_js/Alpine.data/campaign-url-builder.js --outfile=./_site/js/campaign-url-builder.js --bundle --minify",
     "watch:js-AlpineData-CampaignURLBuilder": "npx esbuild ./_js/Alpine.data/campaign-url-builder.js --outfile=./_site/js/campaign-url-builder.js --bundle --watch --sourcemap",
     "build:js-AlpineData-MetadataChecker": "npx esbuild ./_js/Alpine.data/metadata-checker.js --outfile=./_site/js/metadata-checker.js --bundle --minify",

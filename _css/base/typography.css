@@ -92,6 +92,14 @@
     content: none;
   }
 
+  .clean-prose {
+    & > *:first-child {
+      @apply mt-0;
+    }
+    & > *:last-child {
+      @apply mb-0;
+    }
+  }
   /* Start Tables */
   .prose table {
     @apply w-full my-8 table-auto text-sm;

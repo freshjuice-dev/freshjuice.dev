@@ -17,9 +17,12 @@ document.addEventListener("alpine:init", () => {
         try {
           // Send the URL to your own backend endpoint
           const response = await fetch(
-            "http://localhost:8787/broken-link-checker",
+            "https://api.freshjuice.dev/broken-link-checker",
             {
               method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
               body: JSON.stringify({ targetUrl: link }),
             },
           );

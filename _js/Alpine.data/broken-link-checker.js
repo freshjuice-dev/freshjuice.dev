@@ -5,8 +5,17 @@ document.addEventListener("alpine:init", () => {
   Alpine.data("BrokenLinkChecker", () => ({
     result: [],
     urls: "",
-    status: "idle", // idle, loading, success, error
-    checkLinks() {},
+    state: "idle", // idle, checking, success, error
+    checkLinks(event) {
+      debugLog("Checking links");
+      event.preventDefault();
+
+      if (!this.urls.trim()) {
+        alert("Please enter at least one URL.");
+        return;
+      }
+      this.state = "checking";
+    },
     init() {
       debugLog("Broken Link Checker initialized");
     },

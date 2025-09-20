@@ -14,10 +14,10 @@ window.Alpine = Alpine;
 Alpine.plugin(intersect);
 Alpine.plugin(collapse);
 
-Alpine.data("contactForm", () => {
+Alpine.data("contactForm", (formType) => {
   return {
     API_ENDPOINT: "https://api.freshjuice.dev/contact",
-    status: "idle", // 'idle' | 'success' | 'failed'
+    state: "idle", // 'idle' | 'success' | 'failed'
     loading: false,
     error: "",
 
@@ -62,7 +62,7 @@ Alpine.data("contactForm", () => {
     },
 
     reset() {
-      this.status = "idle";
+      this.state = "idle";
       this.loading = false;
       this.error = "";
       this.fields = { firstname: "", lastname: "", email: "", message: "" };
@@ -73,6 +73,7 @@ Alpine.data("contactForm", () => {
       this.error = "";
 
       const payload = {
+        form_type: formType || "nada",
         firstname: this.fields.firstname,
         lastname: this.fields.lastname,
         email: this.fields.email,
@@ -97,7 +98,7 @@ Alpine.data("contactForm", () => {
           body: JSON.stringify(payload),
         });
         if (res.status === 202) {
-          this.status = "success";
+          this.state = "success";
           this.fields = { firstname: "", lastname: "", email: "", message: "" };
         } else {
           let detail = "Submission failed. Please try again.";
@@ -109,11 +110,11 @@ Alpine.data("contactForm", () => {
             if (txt) detail = txt;
           }
           this.error = detail;
-          this.status = "failed";
+          this.state = "failed";
         }
       } catch (err) {
         this.error = "Network error. Please try again.";
-        this.status = "failed";
+        this.state = "failed";
       } finally {
         this.loading = false;
       }

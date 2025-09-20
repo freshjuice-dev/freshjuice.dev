@@ -1,0 +1,115 @@
+---
+layout: prose
+title: Write for FreshJuice – Share Your Marketing & SEO Insights
+desc: Contribute to FreshJuice and share your marketing, SEO, and growth insights with a global audience. Get exposure, backlinks, and showcase your expertise.
+permalink: /write-for-us/
+---
+
+<section class="" x-data="contactForm('write-for-us')">
+
+  <h1>Write for Us</h1>
+  <p>FreshJuice isn’t just another blog — it’s a growing community of marketers, SEO specialists, and digital creators. We’re opening our doors to guest contributors who want to share fresh ideas, actionable insights, and stories that inspire.</p>
+
+  <h2>Why Contribute?</h2>
+  <ul class="list-none p-0">
+    <li class="flex gap-2.5">
+      <span>📣</span>
+      <span><strong>Reach a wider audience</strong> — thousands of marketers and business owners read FreshJuice.</span>
+    </li>
+    <li class="flex gap-2.5">
+      <span>🔗</span>
+      <span><strong>Earn quality backlinks</strong> — every article includes credits, links to your website, and your author bio.</span>
+    </li>
+    <li class="flex gap-2.5">
+      <span>🧩</span>
+      <span><strong>Build authority</strong> — showcase your expertise in marketing, SEO, branding, or digital growth.</span>
+    </li>
+    <li class="flex gap-2.5">
+      <span>🤝</span>
+      <span><strong>Join our network</strong> — connect with other contributors and industry professionals.</span>
+    </li>
+  </ul>
+
+  <h2>How It Works</h2>
+  <ol>
+    <li>Pitch or submit your article draft to <strong>contribute@freshjuice.dev</strong>.</li>
+    <li>Our editorial team reviews it for quality, clarity, and relevance.</li>
+    <li>If approved, we’ll publish it with your <strong>author bio and backlinks</strong>.</li>
+  </ol>
+  <p>👉 Before submitting, please read our full <a href="/contributor-policy/">Contributor Policy</a>.</p>
+  <p class="flex gap-2.5">
+    <span>💡</span>
+    <span>FreshJuice is looking for content that’s practical, original, and aligned with marketing, SEO, and digital growth. If you’ve got an idea worth sharing — we’d love to hear it!</span>
+  </p>
+
+  <h2 id="submit-article-idea">Submit Your Article Idea</h2>
+  <p>Share your pitch using the form below — our editorial team will review it and contact you by email.</p>
+
+  <div class="grid gap-6">
+
+    <form class="grid grid-cols-2 gap-6"
+          x-show="state === 'idle'"
+          @submit.prevent="submit">
+
+      <fieldset>
+        <label for="firstname">First Name</label>
+        <input type="text" id="firstname" name="firstname" required x-model.trim="fields.firstname">
+      </fieldset>
+
+      <fieldset>
+        <label for="lastname">Last Name</label>
+        <input type="text" id="lastname" name="lastname" required x-model.trim="fields.lastname">
+      </fieldset>
+
+      <fieldset class="col-span-full">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" required x-model.trim="fields.email">
+      </fieldset>
+
+      <fieldset class="col-span-full">
+        <label for="message">Your Message</label>
+        <textarea id="message" name="message" required x-model.trim="fields.message"></textarea>
+      </fieldset>
+
+      <div class="action col-span-full">
+        <p class="text-sm mt-0">
+          By submitting this form, you agree to our
+          <a href="/terms/">Terms of Service</a>,
+          <a href="/policy/">Privacy Policy</a> and
+          <a href="/contributor-policy/">Contributor Policy</a>.
+        </p>
+
+        <button type="submit"
+                class="col-span-full btn btn-primary"
+                :disabled="loading"
+                x-text="loading ? 'Sending…' : 'Submit Article Idea'">
+          Submit Article Idea
+        </button>
+      </div>
+
+      {# Error message #}
+      <template x-if="error">
+        <p class="col-span-full text-red-600 text-sm" x-text="error" role="alert" aria-live="polite"></p>
+      </template>
+    </form>
+
+    {# Success state #}
+    <template x-if="status === 'success'">
+      <div class="p-4 sm:p-6 rounded-3xl bg-green-50 border border-green-200">
+        <h3 class="m-0">Thanks! 🍊</h3>
+        <p class="mt-2">We received your message and will get back to you soon.</p>
+        <button class="btn mt-4" @click="reset()">Send another message</button>
+      </div>
+    </template>
+
+    {# Error (hard-fail) state #}
+    <template x-if="status === 'failed'">
+      <div class="p-4 sm:p-6 rounded-3xl bg-red-50 border border-red-200">
+        <h3 class="m-0">Something went wrong</h3>
+        <p class="mt-2" x-text="error || 'Please try again later.'"></p>
+        <button class="btn mt-4" @click="reset()">Try again</button>
+      </div>
+    </template>
+  </div>
+
+</section>

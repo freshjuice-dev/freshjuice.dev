@@ -5,7 +5,7 @@ desc: Reach out to FreshJuice for support, project inquiries, or partnership opp
 permalink: /contact/
 ---
 
-<section class="" x-data="contactForm">
+<section class="" x-data="contactForm('contact-us')">
 
   <h1>Contact Us</h1>
   <p>We’d love to hear from you. Fill out the form below or reach out directly.</p>
@@ -13,7 +13,7 @@ permalink: /contact/
   <div class="grid gap-6">
 
     <form class="grid grid-cols-2 gap-6"
-          x-show="status === 'idle'"
+          x-show="state === 'idle'"
           @submit.prevent="submit">
 
       <fieldset>
@@ -58,7 +58,7 @@ permalink: /contact/
     </form>
 
     {# Success state #}
-    <template x-if="status === 'success'">
+    <template x-if="state === 'success'">
       <div class="p-4 sm:p-6 rounded-3xl bg-green-50 border border-green-200">
         <h3 class="m-0">Thanks! 🍊</h3>
         <p class="mt-2">We received your message and will get back to you soon.</p>
@@ -67,7 +67,7 @@ permalink: /contact/
     </template>
 
     {# Error (hard-fail) state #}
-    <template x-if="status === 'failed'">
+    <template x-if="state === 'failed'">
       <div class="p-4 sm:p-6 rounded-3xl bg-red-50 border border-red-200">
         <h3 class="m-0">Something went wrong</h3>
         <p class="mt-2" x-text="error || 'Please try again later.'"></p>

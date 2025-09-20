@@ -13,7 +13,7 @@ permalink: /contact/
   <div class="grid gap-6">
 
     <form class="grid grid-cols-2 gap-6"
-          x-show="status === 'idle'" x-cloak
+          x-show="status === 'idle'"
           @submit.prevent="submit">
 
       <fieldset>
@@ -52,12 +52,7 @@ permalink: /contact/
       </div>
 
       {# Error message #}
-      <p class="col-span-full text-red-600 text-sm"
-         x-show="error"
-         x-text="error"
-         role="alert"
-         aria-live="polite">
-      </p>
+      <p class="col-span-full text-red-600 text-sm" x-cloak x-show="error" x-text="error" role="alert" aria-live="polite"></p>
     </form>
 
     {# Success state #}

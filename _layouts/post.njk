@@ -30,7 +30,9 @@ layout: base.njk
   </div>
 
   {# Authors #}
-  {% authorSignature author %}
+  {% if authorData.signature %}
+  <div class="prose italic">{% authorSignature author %}</div>
+  {% endif %}
 
   <footer>
     {%- if tags | filterTagList | length %}
@@ -42,46 +44,17 @@ layout: base.njk
       </ul>
     {%- endif %}
 
-    {# Sharing buttons???
-        <div class="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8 mt-16"
-             x-intersect.once="loadScript(`//cdn.jsdelivr.net/npm/share-buttons/dist/share-buttons.js`)">
-
-          <div class="text-lg md:text-xl font-semibold whitespace-nowrap">Share Post</div>
-
-          <div class="share-btn flex flex-wrap gap-4"
-               data-title="{{ title | striptags }}"
-               data-desc="{{ desc | striptags }}"
-               data-url="{{ page.url | htmlBaseUrl(metadata.url) }}">
-
-            {% set shareButtons = [
-              { id: "tw", name: "X", icon: 'x-logo' },
-              { id: "ln", name: "LinkedIn", icon: 'linkedin-logo' },
-              { id: "re", name: "Reddit", icon: 'reddit-logo' },
-              { id: "print", name: "Print", icon: 'printer' }
-            ] %}
-            {% for item in shareButtons %}
-              <a data-id="{{ item.id }}"
-                 href="#" @click="$event.preventDefault()"
-                 class="cursor-pointer">
-                {% phicon item.icon, "regular", { class: "size-8 transition-transform hover:scale-125" } %}
-                <span class="sr-only">{{ item.name }}</span>
-              </a>
-            {% endfor %}
-
-          </div>
-        </div>
-    #}
-
     {# Author #}
     {%- if authorData.name %}
-    <div class="pt-8 mt-8 border-t border-gray-900/10 flex gap-4 sm:gap-8">
+    <div class="p-6 bg-cursor/50 border-2 border-orange-200 rounded-2xl flex flex-col sm:flex-row gap-4 sm:gap-8 my-8">
       <a class="block size-14 sm:size-20 shrink-0" href="{{ authorData.url }}">
         <span class="sr-only">Visit {{ authorData.name | split(' ') | first }}`s Author Page</span>
         <img src="{{ authorData.image }}" alt="Avatar for {{ authorData.name }}" class="rounded-full border-3 border-orange-300 size-14 sm:size-20">
       </a>
       <div class="">
-        <div class="text-lg mb-2 font-semibold">
-          <a class="hover:text-red-600" href="{{ authorData.url }}">{{ authorData.name }}</a>
+        <div class="text-lg mb-2 leading-none">
+          <small class="block mb-1">Written by</small>
+          <a class="hover:text-red-600 font-semibold" href="{{ authorData.url }}">{{ authorData.name }}</a>
         </div>
         <div class="text-sm">{{ authorData.content }}</div>
       </div>
@@ -90,7 +63,7 @@ layout: base.njk
 
     {# Posts navigation #}
     {%- if collections.posts %}
-      <div class="pt-8 mt-8 border-t border-gray-900/10">
+      <div class="pt-8 mt-8">
         {%- set previousPost = collections.posts | getPreviousCollectionItem %}
         {%- set nextPost = collections.posts | getNextCollectionItem %}
         {%- if nextPost or previousPost %}

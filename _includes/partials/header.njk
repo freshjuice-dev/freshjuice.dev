@@ -8,29 +8,28 @@
         {% include "partials/logo.njk" %}
         <span class="sr-only">FreshJuice a HubSpot Theme</span>
       </a>
-      <div class="hidden md:flex md:gap-x-12">
+      <div class="hidden lg:flex md:gap-x-12">
         {% for item in menu.main %}
-          <a href="{{ item.url }}" class="text-sm font-semibold leading-6 hover:text-red-600">{{ item.title }}</a>
+          <a href="{{ item.url }}" class="text-sm font-semibold leading-6 hover:text-red-600 whitespace-nowrap">{{ item.title }}</a>
         {% endfor %}
       </div>
     </div>
 
-    <div class="hidden md:flex items-center">
+    <div class="hidden lg:flex items-center">
       <a href="/contact/" class="btn btn--primary" title="Contact FreshJuice">Contact Us</a>
     </div>
 
-    <div class="flex md:hidden items-center gap-x-4 text-gray-600 leading-none">
-      <button type="button" class="hover:text-red-600" @click="openDrawer()">
+    <div class="flex lg:hidden items-center gap-x-4 text-gray-600 leading-none">
+      <button type="button" class="btn btn--secondary btn--xs sm:btn--sm" @click="openDrawer()">
         <span class="sr-only">Open main menu</span>
-        <span class="uppercase flex items-center text-sm"
-              aria-hidden="true">M{% phicon "list", "bold", { class: "size-4", style: "margin: 0 -1px" } %}NU</span>
+        MENU {% phicon "cherries", "bold", { class: "size-4 sm:size-6" } %}
       </button>
     </div>
 
   </nav>
 
   {# Mobile menu, show/hide based on menu open state. #}
-  <div class="md:hidden flex justify-end fixed top-0 inset-x-0 p-4 transition transform origin-top-right z-30"
+  <div class="lg:hidden flex justify-end fixed top-0 inset-x-0 p-4 transition transform origin-top-right z-30"
        x-cloak
        x-show="drawerOpen"
        role="dialog"
@@ -43,15 +42,15 @@
        x-transition:leave-end="opacity-0 translate-y-3 skew-x-6">
     <div class="rounded-2xl bg-zinc-50 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 max-w-fit border-2 border-orange-300"
          @click.outside="closeDrawer()">
-      <div class="absolute right-4 top-4 p-6">
-        <button type="button" class="-m-2.5 rounded-md p-2.5 hover:text-red-600" @click="closeDrawer()">
+      <div class="absolute right-3 top-3 p-3 leaning-none">
+        <button type="button" class="rounded-full p-2 hover:text-red-600" @click="closeDrawer()">
           <span class="sr-only">Close menu</span>
-          {% phicon "x", "bold", { class: "size-6" } %}
+          {% phicon "x", "bold", { class: "size-6 m-0" } %}
         </button>
       </div>
       <div class="flow-root">
-        <div class="-my-6 min-w-40 px-6 sm:px-8">
-          <div class="flex flex-col gap-2 py-6">
+        <div class="min-w-40 px-6 sm:px-8">
+          <div class="flex flex-col gap-2 pt-6 pb-2">
             {% for item in menu.main %}
               <a href="{{ item.url }}"
                  class="max-w-fit -mx-3 px-3 py-2 text-base font-semibold leading-7 hover:text-red-600">{{ item.title }}</a>

@@ -1,7 +1,7 @@
 ---
 title: Alex Zappa
 name: Alex Zappa
-role: Creator and Maintainer
+role: Creator and Software Engineer
 email: alex@zappa.dev
 links:
   website: https://alex.zappa.com

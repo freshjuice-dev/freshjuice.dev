@@ -1,7 +1,7 @@
 ---
 title: Aleksandr Zapparov
 name: Aleksandr Zapparov
-role: Co-Creator and Maintainer
+role: Co-Creator and Web Developer
 email: alexander@zapparov.dev
 links:
   website: https://zapparov.dev

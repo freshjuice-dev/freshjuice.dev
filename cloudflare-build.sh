@@ -16,6 +16,10 @@ export GIT_SSH_COMMAND="ssh -i $SSH_KEY_PATH -o StrictHostKeyChecking=no -o Iden
 echo "$CLOUDFLARE_SUBMODULE_SSH_KEY" > $SSH_KEY_PATH
 chmod 600 $SSH_KEY_PATH
 
+# Ensure known_hosts file exists and add GitHub to known hosts
+mkdir -p ~/.ssh
+ssh-keyscan github.com >> ~/.ssh/known_hosts
+
 # Force a GitHub auth check to update "Last used" in key info
 echo "🔍 Verifying GitHub SSH authentication..."
 $GIT_SSH_COMMAND -T git@github.com || true

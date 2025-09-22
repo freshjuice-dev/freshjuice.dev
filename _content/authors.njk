@@ -1,6 +1,8 @@
 ---
 layout: page
-title: Authors
+title: FreshJuice Authors & Contributors
+desc: Discover the voices behind FreshJuice. From founder Alex Zappa to guest contributors, explore ideas on clean code, modern design, and building standout web experiences.
+suffix: " "
 permalink: /authors/
 ---
 
@@ -9,7 +11,7 @@ permalink: /authors/
 <main class="mx-auto w-full">
 
   <header class="prose grid">
-    <h1 class="mb-0">{{ heading or title }}{%- if draft %} <small class="text-base">[draft]</small>{%- endif %}</h1>
+    <h1 class="mb-0">Voices of the Blog{%- if draft %} <small class="text-base">[draft]</small>{%- endif %}</h1>
   </header>
 
   <section class="grid md:grid-cols-2 gap-8 mt-8 md:mt-12">
@@ -17,8 +19,8 @@ permalink: /authors/
       <div class="bg-cursor/50 border-2 border-orange-200 hover:border-orange-400 transition-all ease-in-out duration-300 p-4 pb-10 md:px-8 md:pt-6 md:pb-12 relative group rounded-3xl">
         {%- set authorData = author.fileSlug | getAuthorData %}
         <div class="xxs:flex gap-4 items-center">
-          <div class="shrink-0 size-12 sm:size-16">
-            <img src="{{ authorData.image }}" alt="Avatar for {{ authorData.name }}" class="rounded-full border-2 border-orange-300 size-12 sm:size-16">
+          <div class="shrink-0 size-16 sm:size-18">
+            <img src="{{ authorData.image }}" alt="Avatar for {{ authorData.name }}" class="rounded-full border-2 border-orange-300 size-16 sm:size-18">
           </div>
           <div class="mt-3 xxs:mt-0">
             <a href="{{ authorData.url }}">
@@ -26,7 +28,8 @@ permalink: /authors/
               <h2 class="m-0 text-lg font-semibold leading-tight">{{ authorData.name }}</h2>
             </a>
             {% if authorData.role %}
-            <p class="text-base">{{ authorData.role }}</p>
+            <p class="text-sm">{{ authorData.role }}</p>
+            <p class="text-sm">@ {{ authorData.company or "FreshJuice" }}</p>
             {% endif %}
           </div>
         </div>
@@ -41,6 +44,17 @@ permalink: /authors/
     {% endfor %}
   </section>
 
-  {# Contributors??? #}
+  {# Contributors #}
+  <section class="mt-16 md:mt-28 text-center prose">
+    <h2 class="mt-0">Got Wisdom to Share?</h2>
+    <p class="max-w-2xl mx-auto text-balance">
+      Have an idea, story, or insight to share with our readers?
+      We love fresh perspectives. Drop us a line and let’s create something together.
+    </p>
+    <a href="/write-for-us/" class="btn mt-1 md:mt-4">
+      Write for Us
+      {% phicon "tree", "duotone", { class: "size-6" } %}
+    </a>
+  </section>
 
 </main>

@@ -1,7 +1,9 @@
 ---
 title: Aleksandr Zapparov
 name: Aleksandr Zapparov
-role: Co-Creator and Web Developer
+role: Co-Founder and Web Developer
+company: FreshJuice
+companyUrl: /about/
 email: alexander@zapparov.dev
 links:
   website: https://zapparov.dev

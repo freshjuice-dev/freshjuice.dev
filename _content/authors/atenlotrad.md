@@ -2,6 +2,8 @@
 title: Drew Tendero
 name: Andrea Tendero López
 role: Blog Author
+company: FreshJuice
+companyUrl: /about/
 email: atenlotrad@gmail.com
 links:
   linkedin: https://www.linkedin.com/in/andrea-tendero/

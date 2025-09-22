@@ -14,8 +14,10 @@
       <meta name="robots" content="noindex">
     {%- endif %}
 
+    {% set pageTitle = ( (title or metadata.title) ~ " " ~ (suffix or metadata.suffix) ) | trim %}
+
     {# Metadata #}
-		<title>{{ title or metadata.title }}{{ suffix or metadata.suffix }}</title>
+		<title>{{ pageTitle}}</title>
     <meta name="author" content="{% if author %}{{ author | getAuthorData('name') }}{% else %}Alex Zappa{% endif %}">
     <meta name="description" content="{{ desc or description or metadata.description }}">
 		<meta name="generator" content="{{ eleventy.generator }}">
@@ -33,7 +35,7 @@
     <meta name="theme-color" content="#fafafa">
 
     {# Social #}
-    <meta property="og:title" content="{{ title or metadata.title }}{{ suffix or metadata.suffix }}">
+    <meta property="og:title" content="{{ pageTitle }}">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="FreshJuice">
     <meta property="og:description" content="{{ desc or description or metadata.description }}">
@@ -42,7 +44,7 @@
     <meta property="og:url" content="{{ page.url | htmlBaseUrl(metadata.url) }}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta name="twitter:title" content="{{ title or metadata.title }}{{ suffix or metadata.suffix }}">
+    <meta name="twitter:title" content="{{ pageTitle }}">
     <meta name="twitter:description" content="{{ desc or description or metadata.description }}">
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@FreshJuiceDev" />
@@ -67,8 +69,7 @@
     {# Schema markup #}
     {% include "partials/schema-markup.njk" %}
   </head>
-	<body class="bg-zinc-50 text-zinc-900 relative {{ bodyClass }}"
-        :class="showOverlay||docs.showOverlay?`overflow-hidden`:``">
+	<body class="bg-zinc-50 text-zinc-900 relative {{ bodyClass }}">
 		<a href="#skip" class="sr-only">Skip to main content</a>
 
     <div class="flex flex-col w-full justify-between min-h-dvh relative z-10">

@@ -1,11 +1,13 @@
 ---
 layout: base.njk
+eleventyComputed:
+  suffix: "— {{ role or position }}, {{ company or 'FreshJuice' }}"
 ---
 
 <nav class="max-w-3xl md:text-xl mx-auto w-full min-h-9 leading-none mb-6 sm:mb-8">
   <a class="inline-flex items-center gap-2 group no-underline" href="/authors/">
     {% phicon "arrow-left", "bold", { class: "size-5 group-hover:-translate-x-2 transition-transform" } %}
-    <span>Back to Authors</span>
+    <span>Back to Voices<span class="sr-only"> of the Blog</span></span>
   </a>
 </nav>
 
@@ -17,9 +19,14 @@ layout: base.njk
       <img src="{{ email | getGravatarImage(352) }}" alt="Avatar for {{ name }}" class="rounded-full border-4 border-orange-300 size-32 md:size-44 m-0">
     </div>
     <div class="mt-6 sm:mt-0">
-      <h1 class="m-0">{{ heading or title }}{%- if draft %} <small class="text-base">[draft]</small>{%- endif %}</h1>
+      <h1 class="mt-0 mb-2">{{ heading or title }}{%- if draft %} <small class="text-base">[draft]</small>{%- endif %}</h1>
       {% if role %}
-      <p class="mt-0 text-base">{{ role }}</p>
+      <p class="my-0 text-base">{{ role or "Guest Contributor" }}</p>
+      <p class="mt-0 text-base">
+        <a href="{{ authorData.companyUrl or "/about/" }}" class="text-red-600 font-medium no-underline group">
+          @ <span class="no-underline group-hover:underline">{{ authorData.company or "FreshJuice" }}</span>
+        </a>
+      </p>
       {% endif %}
       {{ content | safe }}
       {% if links %}

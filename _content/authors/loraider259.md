@@ -2,6 +2,8 @@
 title: Lorea Moreno
 name: Lorea Moreno Morales
 role: Blog Author
+company: FreshJuice
+companyUrl: /about/
 email: lorea.moreno@outlook.es
 links:
   website: https://loreamoreno.carrd.co/

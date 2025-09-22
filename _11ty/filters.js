@@ -113,7 +113,9 @@ export default {
       const returnData = {
         name: authorData.title || authorData.name || author,
         email: authorData.email || "",
-        role: authorData.role || "",
+        role: authorData.role || authorData.position || "Guest Contributor",
+        company: authorData.company || "FreshJuice",
+        companyUrl: authorData.companyUrl || "/about/",
         url: `/authors/${slugify(author, { lower: true })}/`,
         signature: authorData.signature || "",
         links: authorData.links || {},

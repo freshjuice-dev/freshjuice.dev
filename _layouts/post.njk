@@ -52,10 +52,13 @@ layout: base.njk
         <img src="{{ authorData.image }}" alt="Avatar for {{ authorData.name }}" class="rounded-full border-2 border-orange-300 size-14 sm:size-20">
       </a>
       <div class="">
-        <div class="text-lg mb-2 leading-none">
+        <div class="text-lg leading-none">
           <a class="hover:text-red-600 font-semibold" href="{{ authorData.url }}">{{ authorData.name }}</a>
         </div>
-        <div class="text-sm">{{ authorData.content }}</div>
+        <div class="">
+          {{ authorData.role }} <a href="{{ authorData.companyUrl }}" class="text-red-600 font-medium group">@ <span class="no-underline group-hover:underline">{{ authorData.company }}</span></a>
+        </div>
+        <div class="mt-2 text-sm">{{ authorData.content }}</div>
       </div>
     </div>
     {%- endif %}

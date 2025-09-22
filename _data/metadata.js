@@ -1,6 +1,6 @@
 export default {
   title: "FreshJuice",
-  suffix: " | FreshJuice",
+  suffix: "| FreshJuice",
   url: "https://freshjuice.dev",
   motherShip: "https://freshjuice.dev",
   language: "en",

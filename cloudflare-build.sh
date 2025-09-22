@@ -18,7 +18,7 @@ chmod 600 $SSH_KEY_PATH
 
 # Force a GitHub auth check to update "Last used" in key info
 echo "🔍 Verifying GitHub SSH authentication..."
-ssh -T git@github.com || true
+$GIT_SSH_COMMAND -T git@github.com || true
 echo "=============================="
 
 # Initialize and update submodules

@@ -6,7 +6,7 @@ permalink: /privacy/
 
 # {{ title }}
 
-_Last updated: 2025-09-14_
+_Last updated: September 14, 2025_
 
 Your privacy matters to us. This notice explains what data we collect, how we use it, and your rights under GDPR and other applicable laws.
 

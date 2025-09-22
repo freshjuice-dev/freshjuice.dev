@@ -6,7 +6,7 @@ company: FreshJuice
 companyUrl: /about/
 email: alex@zappa.dev
 links:
-  website: https://alex.zappa.com
+  website: https://alex.zappa.dev
   linkedin: https://www.linkedin.com/in/reatlat/
   github: https://github.com/reatlat
   x: https://x.com/reatlat

@@ -6,7 +6,7 @@ permalink: /terms/
 
 # {{ title }}
 
-_Last updated: 2025-09-14_
+_Last updated: September 14, 2025_
 
 ---
 

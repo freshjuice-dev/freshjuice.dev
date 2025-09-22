@@ -7,6 +7,8 @@ permalink: /contributor-policy/
 
 # Guest Contribution & Editorial Policy
 
+_Last updated: September 22, 2025_
+
 ## Purpose
 
 FreshJuice is more than a company blog — it’s a creative media space for ideas and perspectives that shape the future of marketing, SEO, and digital growth.
@@ -27,9 +29,17 @@ Our mission is to give space to diverse voices, highlight practical expertise, a
 - **Anonymous submissions will not be accepted.**
 - Every submission must include:
   - Author’s **full name**.
-  - A valid **email address** for editorial contact (will not be publicly shared).
-  - Optional: professional title, company, LinkedIn profile, or personal website.
-- A short author bio will appear at the bottom of each article with 1–2 links to the author’s website, social media, or portfolio.
+    - On the website, the name will link to the author’s profile page, which lists all their contributions on FreshJuice.
+  - A valid **email address**.
+    - Required for editorial contact and for generating profile images via [Gravatar](https://gravatar.com).
+    - Your email will not be published on the FreshJuice website, and you may request removal of your data at any time.
+  - Optional: professional title, company name, LinkedIn profile, or personal website.
+- **Author bio placement:**
+  - A short bio will appear at the bottom of each article, together with the author’s name (linked to their FreshJuice profile) and a company mention `@ CompanyName` that links to the author’s organization or website.
+  - The author’s profile page will include a longer bio and up to 5 links, which may include:
+    - The author’s personal website or portfolio.
+    - Social media profiles.
+    - The website or LinkedIn page of the company they represent.
 
 ### 3. Backlink Policy
 
@@ -54,6 +64,14 @@ Our mission is to give space to diverse voices, highlight practical expertise, a
 ### 6. Editorial Context
 
 - In rare cases where an article may spark debate or controversy, FreshJuice reserves the right to add a short editor’s note for context.
+
+### 7. Privacy & Removal Rights
+
+- Author information is handled in accordance with the [FreshJuice Privacy Policy](/privacy/).
+- Email addresses are collected for editorial purposes only and will **not** be published on the FreshJuice website.
+- Authors and contributors may request removal of their profile or published content at any time.
+- Removal requests will also be honored if made by the company or organization an author represents, or in response to valid legal requests.
+- Please note that deleted content may remain temporarily available in third-party caches and archives (e.g., Google, Bing, Internet Archive’s Wayback Machine), which are beyond FreshJuice’s control.
 
 ---
 

@@ -3,3 +3,9 @@
 	url = git@github.com:freshjuice-dev/blog.freshjuice.dev.git
   branch = main
   ignore = all
+
+[submodule "_content/authors/authors"]
+	path = _content/authors/authors
+	url = git@github.com:freshjuice-dev/authors.freshjuice.dev.git
+	branch = main
+  ignore = all

@@ -26,12 +26,10 @@ document.addEventListener("alpine:init", () => {
           );
 
           this.result[link] = await response.json();
+
+          debugLog(this.result);
         } catch (error) {
-          this.result.push({
-            url: link,
-            statusCode: error.status,
-            statusText: error.message,
-          });
+          // TODO: revise this error handling
         }
       }
 

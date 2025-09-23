@@ -1,10 +1,14 @@
 /* global domReady loadScript loadStylesheet PagefindUI */
 import debugLog from "./modules/_debugLog";
+import detectBrowser from "./modules/_detectBrowser";
 import "lite-youtube-embed";
 import "@zachleat/table-saw";
 import Alpine from "alpinejs";
 import intersect from "@alpinejs/intersect";
 import collapse from "@alpinejs/collapse";
+
+window.detectBrowser = detectBrowser;
+window.debugLog = debugLog;
 
 // The window.Alpine = Alpine bit is optional, but is nice to have for
 // freedom and flexibility. Like when tinkering with Alpine from the devtools for example.

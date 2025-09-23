@@ -3,7 +3,7 @@ import debugLog from "../modules/_debugLog";
 
 document.addEventListener("alpine:init", () => {
   Alpine.data("BrokenLinkChecker", () => ({
-    result: [],
+    result: {},
     urls: "",
     state: "idle", // idle, checking, success, error
     async checkLinks(event) {
@@ -12,10 +12,8 @@ document.addEventListener("alpine:init", () => {
 
       let checkList = this.urls.split("\n");
 
-      let hasErrors = false;
       for (let link of checkList) {
         try {
-          // Send the URL to your own backend endpoint
           const response = await fetch(
             "https://api.freshjuice.dev/broken-link-checker",
             {
@@ -27,11 +25,7 @@ document.addEventListener("alpine:init", () => {
             },
           );
 
-          // TODO: Sometimes the 405 or 505 (forgot) returns 999 inside object for some odd reason
-
-          // Assume the API returns a JSON object like { url, statusCode, statusText }
-          const data = await response.json();
-          this.result.push(data);
+          this.result[link] = await response.json();
         } catch (error) {
           this.result.push({
             url: link,

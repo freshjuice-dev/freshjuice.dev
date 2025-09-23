@@ -39,12 +39,31 @@ faq:
         </div>
       </form>
 
-      <template x-if="result.length">
+      <template x-data="{ openStatus: 0 }" x-if="result.length">
         <div class="results">
           <template x-for="item in result" :key="item.url">
-            <div>
-              <span x-text="item.url"></span> —
-              <span x-text="item.statusCode"></span>
+            <div class="mb-4 border-2 border-orange-200 rounded-2xl overflow-hidden">
+              <div>
+
+              </div>
+              <div>
+                <table>
+                  <tr>
+                    <th>Result</th>
+                    <th>Status Code</th>
+                    <th>Page</th>
+                  </tr>
+                  <tr>
+                    {% for statusCode in item %}
+                      {% for link in item[statusCode] %}
+                        <td>check</td>
+                        <td>{{ statusCode }}</td>
+                        <td>{{ link }}</td>
+                      {% endfor %}
+                    {% endfor %}
+                  </tr>
+                </table>
+              </div>
             </div>
           </template>
         </div>

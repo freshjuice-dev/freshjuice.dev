@@ -53,8 +53,6 @@ Upload a custom thumbnail or leave blank to use the platform’s preview.
   <figcaption>Sidebar Thumbnail upload.</figcaption>
 </figure>
 
----
-
 ## YouTube Player Setting (shown only when YouTube is selected)
 
 - **Show controls** — display YouTube UI (playbar, buttons).
@@ -71,8 +69,6 @@ Upload a custom thumbnail or leave blank to use the platform’s preview.
   <figcaption>Sidebar YouTube settings toggles/inputs.</figcaption>
 </figure>
 
----
-
 ## Vimeo Player Settings (shown only when Vimeo is selected)
 
 - **Show title** — display the video title.
@@ -87,13 +83,11 @@ Upload a custom thumbnail or leave blank to use the platform’s preview.
   <figcaption>Sidebar Vimeo settings with color picker and toggles.</figcaption>
 </figure>
 
----
-
 ## Advanced options
 
 Expand the **Advanced** group in the sidebar:
 
-- **Custom CSS Class** — add classes for styling.
+- **Custom CSS Class** — add extra classes for targeting or styling.
 - **Privacy mode** — YouTube no-cookie embed / Vimeo limited tracking.
 - **Enable Video SEO Schema** — injects structured data (VideoObject) into the page.
 

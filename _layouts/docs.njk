@@ -124,7 +124,7 @@ layout: base.njk
       {% if activeDocsPage.sectionName %}
         <p class="text-sm md:text-base font-semibold m-0 text-red-600 leading-none">{{ activeDocsPage.sectionName }}</p>
       {% endif %}
-      <h1>{{ activeDocsPage.pageName }}</h1>
+      <h1>{{ activeDocsPage.pageName or title }}</h1>
     </header>
 
     {{ content | safe }}

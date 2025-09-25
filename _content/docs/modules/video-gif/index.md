@@ -48,6 +48,16 @@ Upload a fallback image that displays while the MP4 loads or for very old browse
   <figcaption>Sidebar Poster Image upload.</figcaption>
 </figure>
 
+### Video format requirements
+
+For **maximum browser compatibility**, all uploaded videos should be in **MP4 (H.264 codec)**.
+Other formats (like WebM or HEVC) may not play in certain browsers or older devices.
+
+👉 Need to convert?\
+Use a free online tool such as [ConvertFiles — MP4 to H.264](https://www.convertfiles.com/convert/video/mp4-to-264) to quickly prepare your video before uploading.
+
+> ⚠️ Best practice: keep files short (a few seconds), muted, and under **2 MB** for optimal loading performance.
+
 ## Advanced options
 
 Expand the **Advanced** group in the sidebar:

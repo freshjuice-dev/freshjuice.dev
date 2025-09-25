@@ -5,6 +5,13 @@ document.addEventListener("alpine:init", () => {
   Alpine.data("BrokenLinkChecker", () => ({
     result: {},
     urls: "",
+    openIndex: -2,
+    keysArray: [],
+
+    getIndex(url) {
+      return this.keysArray.indexOf(url);
+    },
+
     state: "idle", // idle, checking, success, error
     async checkLinks(event) {
       debugLog("Checking links");
@@ -37,6 +44,9 @@ document.addEventListener("alpine:init", () => {
         alert("Please enter at least one URL.");
         return;
       }
+
+      this.keysArray = Object.keys(this.result);
+
       this.state = "checking";
     },
     init() {

@@ -24,7 +24,7 @@ faq:
       SEOs, and site owners who want a healthier, faster, and more reliable website.
     </p>
 
-    <div class="clean-prose" x-data="BrokenLinkChecker">
+    <div class="clean-prose space-y-4" x-data="BrokenLinkChecker">
       <form @submit="checkLinks($event)" class="space-y-4">
         <div>
           <label for="urls">URLs</label>
@@ -40,30 +40,54 @@ faq:
       </form>
 
       <template x-if="Object.keys(result).length">
-        <div class="results">
+        <div class="results flex flex-col gap-4">
           <template x-for="(statusLists, checkedUrl) in result" :key="checkedUrl">
-            <template x-for="(foundLinks, statusCode) in statusLists" :key="statusCode">
-              <template x-for="link in foundLinks" :key="link">
-                <div class="mb-4 border-2 border-orange-200 rounded-2xl overflow-hidden clean-prose">
-                  <table>
-                    <thead>
-                    <tr>
-                      <th>Checked URL</th>
-                      <th>Link Found</th>
-                      <th>Status</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                      <td x-text="checkedUrl"></td>
-                      <td x-text="link"></td>
-                      <td x-text="statusCode"></td>
-                    </tr>
-                    </tbody>
-                  </table>
+
+            <div class="mb-4 border-2 border-orange-200 rounded-2xl overflow-hidden" :open="true">
+              <div class="cursor-pointer px-4 py-3 flex items-center justify-between gap-4 font-semibold"
+                @click.prevent="openIndex = (openIndex === getIndex(checkedUrl) ? -1 : getIndex(checkedUrl))" >
+
+                <div class="flex items-center gap-4">
+                  <span>DONKEY</span>
+                  <span x-text="checkedUrl"></span>
+                  <span>(0 Broken)</span>
                 </div>
-              </template>
-            </template>
+
+                <span class="shrink-0 size-5 transition-transform duration-200"
+                      aria-hidden="true"
+                      :class="openIndex=== getIndex(checkedUrl) ?`rotate-180`:`rotate-0`">
+                  {% phicon "caret-down", "bold", { class: "size-5" } %}
+                </span>
+              </div>
+
+              <div x-show="openIndex === getIndex(checkedUrl) " x-collapse>
+                <div class="px-4 pb-4 text-sm leading-relaxed clean-prose">
+                  <template x-for="(foundLinks, statusCode) in statusLists" :key="statusCode">
+                    <template x-for="link in foundLinks" :key="link">
+
+                      <div class="mb-4 border-2 border-orange-200 rounded-2xl overflow-hidden clean-prose">
+                        <table>
+                          <thead>
+                          <tr>
+                            <th>Checked URL</th>
+                            <th>Link Found</th>
+                            <th>Status</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr>
+                            <td x-text="checkedUrl"></td>
+                            <td x-text="link"></td>
+                            <td x-text="statusCode"></td>
+                          </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </template>
+                  </template>
+                </div>
+              </div>
+            </div>
           </template>
         </div>
       </template>

@@ -120,7 +120,11 @@ export default {
           title[1] = "<span>" + title[1].replace(" ", "&nbsp;") + "</span>";
           title = title.join(" ");
         }
-        title = title.replace(/[^\p{L}\p{N}\p{P}\p{Z}]/gu, "");
+        title = title.replace(
+          /\p{Extended_Pictographic}|\p{Emoji_Component}/gu,
+          "",
+        );
+        // title = title.replace(/[^\p{L}\p{N}\p{P}\p{Z}]/gu, "");
         let url = (item.page || {}).url || "";
         if (title.trim() && url.trim()) {
           let itemCollectionName = "";

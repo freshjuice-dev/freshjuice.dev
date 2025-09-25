@@ -3,33 +3,30 @@ permalink: '/_headers'
 eleventyExcludeFromCollections: true
 ---
 
-{# Default #}
+{#- Default #}
 /*
-	X-Frame-Options: "SAMEORIGIN"
-	X-Content-Type-Options: "nosniff"
-	X-XSS-Protection: "1; mode=block"
+	X-Frame-Options: SAMEORIGIN
+	X-Content-Type-Options: nosniff
+	X-XSS-Protection: 1; mode=block
 
-{# API Endpoint #}
+{#- API Endpoint #}
 /api/*
-	Cache-Control: "max-age=0, no-cache, no-store, must-revalidate"
+	Cache-Control: max-age=0, no-cache, no-store, must-revalidate
 
-{# Helpers #}
+{#- Helpers #}
 /_helpers/*
-  X-Robots-Tag: "noindex, nofollow"
-  Cache-Control: "max-age=0, no-cache, no-store, must-revalidate"
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: max-age=0, no-cache, no-store, must-revalidate
 
-{# TW Config #}
-/tw-config/*
-  X-Robots-Tag: "noindex, nofollow"
-  Cache-Control: "max-age=0, no-cache, no-store, must-revalidate"
-
-{# Pagefind #}
+{#- Pagefind #}
 /docs/pagefind/*
-  X-Robots-Tag: "noindex, nofollow"
+  X-Robots-Tag: noindex, nofollow
+/developer-edition/docs/pagefind/*
+  X-Robots-Tag: noindex, nofollow
 
-{# CloudFlare Custom Domain #}
+{#- CloudFlare Custom Domain #}
 https://:project.pages.dev/*
-  X-Robots-Tag: "noindex, nofollow"
+  X-Robots-Tag: noindex, nofollow
 
 https://:freshjuice.pages.dev/*
   Link: <https://freshjuice.dev/:splat>; rel="canonical"

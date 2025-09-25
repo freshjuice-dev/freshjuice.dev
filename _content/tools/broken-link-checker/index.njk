@@ -61,11 +61,11 @@ faq:
               </div>
 
               <div x-show="openIndex === getIndex(checkedUrl) " x-collapse>
-                <div class="mt-4 text-sm leading-relaxed clean-prose [&_table]:block">
+                <div class="mt-4 text-sm leading-relaxed clean-prose">
                   <table>
                     <thead>
                     <tr>
-                      <th>Status</th>
+                      <th class="text-center">Status</th>
                       <th>Link Found</th>
                     </tr>
                     </thead>
@@ -73,8 +73,8 @@ faq:
                       <template x-for="(foundLinks, statusCode) in statusLists" :key="statusCode">
                         <template x-for="link in foundLinks" :key="link">
                           <tr>
-                            <td x-text="statusCode"></td>
-                            <td class="line-clamp-1 whitespace-nowrap" x-text="link"></td>
+                            <td class="text-center" x-text="statusCode"></td>
+                            <td class="line-clamp-1 block whitespace-nowrap" x-text="link"></td>
                           </tr>
                         </template>
                       </template>

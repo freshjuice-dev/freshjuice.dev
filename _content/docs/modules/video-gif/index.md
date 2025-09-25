@@ -22,7 +22,8 @@ Showcase your products in high-quality, SEO-friendly animations without sacrific
 #### URL / File
 
 Paste your MP4 file link (External) or pick a HubSpot Video.
-⚠️ For best results, keep files short, muted, and under 2 MB.
+⚠️ For best results, keep files short, muted, and under 2 MB.\
+👉 See [Video format requirements](#video-format-requirements) for compatibility details.
 
 <figure>
   <img src="./video-source.png" alt="sidebar Video Source dropdown and URL/File input" eleventy:widths="300" />
@@ -48,16 +49,6 @@ Upload a fallback image that displays while the MP4 loads or for very old browse
   <figcaption>Sidebar Poster Image upload.</figcaption>
 </figure>
 
-### Video format requirements
-
-For **maximum browser compatibility**, all uploaded videos should be in **MP4 (H.264 codec)**.
-Other formats (like WebM or HEVC) may not play in certain browsers or older devices.
-
-👉 Need to convert?\
-Use a free online tool such as [ConvertFiles — MP4 to H.264](https://www.convertfiles.com/convert/video/mp4-to-264) to quickly prepare your video before uploading.
-
-> ⚠️ Best practice: keep files short (a few seconds), muted, and under **2 MB** for optimal loading performance.
-
 ## Advanced options
 
 Expand the **Advanced** group in the sidebar:
@@ -79,6 +70,18 @@ Expand the **Advanced** group in the sidebar:
   <img src="./style-settings.png" alt="Style tab settings for max width, alignment, border radius" eleventy:widths="300" />
   <figcaption>Style → width, alignment, and border radius.</figcaption>
 </figure>
+
+---
+
+## Video format requirements
+
+For **maximum browser compatibility**, all uploaded videos should be in **MP4 (H.264 codec)**.
+Other formats (like WebM or HEVC) may not play in certain browsers or older devices.
+
+👉 Need to convert?\
+Use a free online tool such as [ConvertFiles — MP4 to H.264](https://www.convertfiles.com/convert/video/mp4-to-264) to quickly prepare your video before uploading.
+
+> ⚠️ Best practice: keep files short (a few seconds), muted, and under **2 MB** for optimal loading performance.
 
 ---
 

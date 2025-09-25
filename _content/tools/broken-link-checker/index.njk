@@ -61,30 +61,26 @@ faq:
               </div>
 
               <div x-show="openIndex === getIndex(checkedUrl) " x-collapse>
-                <div class="px-4 pb-4 text-sm leading-relaxed clean-prose">
-                  <template x-for="(foundLinks, statusCode) in statusLists" :key="statusCode">
-                    <template x-for="link in foundLinks" :key="link">
-
-                      <div class="mb-4 border-2 border-orange-200 rounded-2xl overflow-hidden clean-prose">
-                        <table>
-                          <thead>
+                <div class="mt-4 text-sm leading-relaxed clean-prose [&_table]:block">
+                  <table>
+                    <thead>
+                    <tr>
+                      <th>Status</th>
+                      <th>Link Found</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                      <template x-for="(foundLinks, statusCode) in statusLists" :key="statusCode">
+                        <template x-for="link in foundLinks" :key="link">
                           <tr>
-                            <th>Checked URL</th>
-                            <th>Link Found</th>
-                            <th>Status</th>
-                          </tr>
-                          </thead>
-                          <tbody>
-                          <tr>
-                            <td x-text="checkedUrl"></td>
-                            <td x-text="link"></td>
                             <td x-text="statusCode"></td>
+                            <td class="line-clamp-1 whitespace-nowrap" x-text="link"></td>
                           </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </template>
-                  </template>
+                        </template>
+                      </template>
+
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>

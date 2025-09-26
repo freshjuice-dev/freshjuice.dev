@@ -33,7 +33,7 @@ faq:
         </div>
         <div>
           <button type="submit"
-                  x-text="state === 'checking' ? 'Checking…' : 'Check Links'">
+                  x-text="buttonLabel">
             Check Links
           </button>
         </div>
@@ -48,7 +48,17 @@ faq:
                 @click.prevent="openIndex = (openIndex === getIndex(checkedUrl) ? -1 : getIndex(checkedUrl))" >
 
                 <div class="flex items-center gap-4">
-                  <span>DONKEY</span>
+                  <span>
+                    <span x-show="urlsStates[getIndex(checkedUrl)] === 'loading'">
+                      {% phicon "spinner", "bold", { class: "size-5 animate-spin [animation-duration:1.5s]" } %}
+                    </span>
+                    <span x-show="urlsStates[getIndex(checkedUrl)] === 'success'">
+                      ✅
+                    </span>
+                    <span x-show="urlsStates[getIndex(checkedUrl)] === 'error'">
+                      ❌
+                    </span>
+                  </span>
                   <span x-text="checkedUrl"></span>
                   <span>(0 Broken)</span>
                 </div>
@@ -78,7 +88,6 @@ faq:
                           </tr>
                         </template>
                       </template>
-
                     </tbody>
                   </table>
                 </div>

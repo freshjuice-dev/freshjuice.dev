@@ -12,6 +12,8 @@ document.addEventListener("alpine:init", () => {
     state: "idle", // idle, checking, success, error
     isValidUrl(url) {
       let strippedUrl = stripTags(url);
+      debugLog(strippedUrl);
+      debugLog(allowHttpUrl(strippedUrl));
       return allowHttpUrl(strippedUrl);
     },
 
@@ -19,30 +21,31 @@ document.addEventListener("alpine:init", () => {
       debugLog("Checking links");
       event.preventDefault();
 
-      if (!this.urls.trim()) {
+      this.result = [];
+
+      const checkList = this.urls.split("\n").filter((link) => {
+        link = this.isValidUrl(link);
+        return link.trim() !== "";
+      });
+
+      if (checkList.length === 0) {
         alert("Please enter at least one URL.");
+        this.urls = "";
         return;
       }
 
-      this.result = [];
-
-      const checkList = this.urls
-        .split("\n")
-        .filter((link) => link.trim() !== "");
-
-      checkList.forEach((link) => {
-        if (!this.isValidUrl(link)) {
-          throw new Error("Invalid URL format");
-        } else {
-          this.result.push({ url: link, status: "loading", data: {} });
-        }
-      });
+      this.result = checkList.map((link) => ({
+        url: link,
+        status: "loading",
+        data: {},
+        totalBroken: 0,
+      }));
 
       this.state = "loading";
       let i = 0;
-      let link = "";
-      try {
-        for (link of checkList) {
+
+      for (let link of checkList) {
+        try {
           const response = await fetch(
             "https://api.freshjuice.dev/broken-link-checker",
             {
@@ -54,15 +57,47 @@ document.addEventListener("alpine:init", () => {
             },
           );
 
-          const responseData = await response.json();
+          debugLog(response);
 
-          this.result[i] = { url: link, status: "success", data: responseData };
+          if (response.status !== 200) {
+            this.result[i] = {
+              url: link,
+              status: "error",
+              data: {},
+              totalBroken: 0,
+            };
+          }
+
+          const data = await response.json();
+          this.result[i] = {
+            url: link,
+            status: "success",
+            data: data,
+            totalBroken: 0,
+          };
           this.state = "success";
-          i++;
+        } catch (error) {
+          this.state = "error";
+          this.result[i] = {
+            url: link,
+            status: "error",
+            data: {},
+            totalBroken: 0,
+          };
         }
-      } catch (error) {
-        this.result[i] = { url: link, status: "error", data: {} };
-        this.state = "error";
+
+        this.result[i].totalBroken = Object.keys(this.result[i].data).reduce(
+          (count, code) => {
+            if (parseInt(code) % 400 < 100 || parseInt(code) === 999) {
+              return count + this.result[i].data[code].length;
+            }
+
+            return count;
+          },
+          0,
+        );
+
+        i++;
       }
     },
     init() {

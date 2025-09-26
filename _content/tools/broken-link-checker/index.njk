@@ -33,44 +33,45 @@ faq:
         </div>
         <div>
           <button type="submit"
-                  x-text="buttonLabel">
+                  x-text="state === 'loading' ? 'Checking...' : 'Check Links'">
             Check Links
           </button>
         </div>
       </form>
 
-      <template x-if="Object.keys(result).length">
+      <template x-if="result.length > 0">
         <div class="results flex flex-col gap-4">
-          <template x-for="(statusLists, checkedUrl) in result" :key="checkedUrl">
+          <template x-for="(item, index) in result" :key="index">
 
             <div class="mb-4 border-2 border-orange-200 rounded-2xl overflow-hidden" :open="true">
               <div class="cursor-pointer px-4 py-3 flex items-center justify-between gap-4 font-semibold"
-                @click.prevent="openIndex = (openIndex === getIndex(checkedUrl) ? -1 : getIndex(checkedUrl))" >
+                @click.prevent="openIndex = (openIndex === index ? -1 : index)" >
+
 
                 <div class="flex items-center gap-4">
                   <span>
-                    <span x-show="urlsStates[getIndex(checkedUrl)] === 'loading'">
+                    <span x-show="item.status === 'loading'">
                       {% phicon "spinner", "bold", { class: "size-5 animate-spin [animation-duration:1.5s]" } %}
                     </span>
-                    <span x-show="urlsStates[getIndex(checkedUrl)] === 'success'">
+                    <span x-show="item.status === 'success'">
                       ✅
                     </span>
-                    <span x-show="urlsStates[getIndex(checkedUrl)] === 'error'">
+                    <span x-show="item.status === 'error'">
                       ❌
                     </span>
                   </span>
-                  <span x-text="checkedUrl"></span>
+                  <span class="text-sm md:text-lg" x-text="item.url"></span>
                   <span>(0 Broken)</span>
                 </div>
 
                 <span class="shrink-0 size-5 transition-transform duration-200"
                       aria-hidden="true"
-                      :class="openIndex=== getIndex(checkedUrl) ?`rotate-180`:`rotate-0`">
+                      :class="openIndex === index  && item.status === 'success' ?`rotate-180`:`rotate-0`">
                   {% phicon "caret-down", "bold", { class: "size-5" } %}
                 </span>
               </div>
 
-              <div x-show="openIndex === getIndex(checkedUrl) " x-collapse>
+              <div x-show="openIndex === index && item.status === 'success'" x-collapse>
                 <div class="mt-4 text-sm leading-relaxed clean-prose">
                   <table>
                     <thead>
@@ -80,7 +81,7 @@ faq:
                     </tr>
                     </thead>
                     <tbody>
-                      <template x-for="(foundLinks, statusCode) in statusLists" :key="statusCode">
+                      <template x-for="(foundLinks, statusCode) in item.data" :key="statusCode">
                         <template x-for="link in foundLinks" :key="link">
                           <tr>
                             <td class="text-center" x-text="statusCode"></td>

@@ -5,31 +5,11 @@ import { stripTags, allowHttpUrl } from "../modules/_sanitize";
 document.addEventListener("alpine:init", () => {
   Alpine.data("BrokenLinkChecker", () => ({
     urls: "",
-    result: {},
+    result: [],
     isChecking: false,
     buttonLabel: "Check Links",
     openIndex: -2,
-    keysArray: [],
-    urlsStates: [],
     state: "idle", // idle, checking, success, error
-    setButtonLabel() {
-      switch (this.state) {
-        case "loading":
-          this.buttonLabel = "Checking for Broken Links...";
-          break;
-        case "success":
-          this.buttonLabel = "Check More Links";
-          break;
-        case "error":
-          this.buttonLabel = "Please try with a different URL";
-          break;
-        default:
-          this.buttonLabel = "Check Links";
-      }
-    },
-    getIndex(url) {
-      return this.keysArray.indexOf(url);
-    },
     isValidUrl(url) {
       let strippedUrl = stripTags(url);
       return allowHttpUrl(strippedUrl);
@@ -44,8 +24,7 @@ document.addEventListener("alpine:init", () => {
         return;
       }
 
-      this.isChecking = true;
-      this.result = {};
+      this.result = [];
 
       const checkList = this.urls
         .split("\n")
@@ -55,11 +34,11 @@ document.addEventListener("alpine:init", () => {
         if (!this.isValidUrl(link)) {
           throw new Error("Invalid URL format");
         } else {
-          this.result[link] = {};
-          this.urlsStates.push("loading");
+          this.result.push({ url: link, status: "loading", data: {} });
         }
       });
 
+      this.state = "loading";
       let i = 0;
       let link = "";
       try {
@@ -75,16 +54,16 @@ document.addEventListener("alpine:init", () => {
             },
           );
 
-          this.result[link] = await response.json();
-          this.urlsStates[i] = "success";
+          const responseData = await response.json();
+
+          this.result[i] = { url: link, status: "success", data: responseData };
+          this.state = "success";
           i++;
         }
       } catch (error) {
-        this.result[link] = {};
-        this.urlsStates[i] = "error";
+        this.result[i] = { url: link, status: "error", data: {} };
+        this.state = "error";
       }
-
-      this.keysArray = Object.keys(this.result);
     },
     init() {
       debugLog("Broken Link Checker initialized");

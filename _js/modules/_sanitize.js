@@ -13,7 +13,7 @@ export function stripTags(input) {
 export function allowHttpUrl(s) {
   try {
     const u = new URL(String(s));
-    if (u.protocol === "http:" || u.protocol === "https:") return u.toString();
+    if (u.protocol === "https:") return u.toString();
   } catch {}
   return "";
 }

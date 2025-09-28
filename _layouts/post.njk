@@ -44,6 +44,15 @@ layout: base.njk
       </ul>
     {%- endif %}
 
+    {# Guest Author Notice #}
+    {%- if authorData.guest %}
+      <p class="text-xs text-pretty my-4">
+        🍊 Pulp disclaimer: This is a guest squeeze! The ideas shared here belong to the author, not FreshJuice.
+        We just provide the glass.<br/>
+        See our <a href="/contributor-policy/" class="underline hover:text-red-600">Guest Contribution & Editorial Policy</a> for details.
+      </p>
+    {%- endif %}
+
     {# Author #}
     {%- if authorData.name %}
     <div class="p-6 bg-cursor/50 border-2 border-orange-200 rounded-2xl flex flex-col sm:flex-row gap-4 sm:gap-8 my-8">

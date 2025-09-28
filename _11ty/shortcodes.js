@@ -121,7 +121,7 @@ export default {
           title = title.join(" ");
         }
         title = title.replace(
-          /\p{Extended_Pictographic}|\p{Emoji_Component}/gu,
+          /[\p{Extended_Pictographic}\uFE0F\u200D\u{E0020}-\u{E007F}\u{1F3FB}-\u{1F3FF}\u{1F1E6}-\u{1F1FF}]/gu,
           "",
         );
         // title = title.replace(/[^\p{L}\p{N}\p{P}\p{Z}]/gu, "");

@@ -1,3 +1,4 @@
+{%- if page.url !== false -%}
 <!doctype html>
 <html lang="{{ metadata.language }}"
       class="{{ htmlClass }}"
@@ -117,3 +118,4 @@
 		<!-- Current page: {{ page.url | htmlBaseUrl }} -->
 	</body>
 </html>
+{%- endif -%}

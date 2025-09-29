@@ -86,6 +86,8 @@ export default {
       // Set the environment variable
       if (runMode === "serve" || runMode === "watch") {
         process.env.BUILD_DRAFTS = true;
+      } else {
+        delete process.env.BUILD_DRAFTS;
       }
     });
   },

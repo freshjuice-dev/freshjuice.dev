@@ -10,27 +10,56 @@ bodyClass: "page-404"
 
 <script>document.addEventListener('DOMContentLoaded', function () { plausible('404', { props: { path: document.location.pathname } }); });</script>
 
-<div class="grid lg:grid-cols-3 gap-8 md:gap-16">
-
-  <div class="">
-    <h1 class="mt-4 text-5xl font-bold tracking-tight text-pretty">Ahhhhhhh!<span class="block text-3xl">This page does not exist</span></h1>
-    <p class="mt-6 text-base leading-7">
-      Don't get angry with me<br/>
-      I never caused you no pain...
-    </p>
-    <p class="mt-3 text-base leading-7">
-      You can go back to <a href="/" class="text-red-500 hover:underline">homepage</a>.<br/>
-      Or sit here and listen to some music.
+<div class="prose clean-prose text-center"
+     x-data="{
+        randomQuote: null,
+        nextBandName: null,
+        collection: [
+          { _id: 'OPf0YbXqDm0', band: 'Mark Ronson ft. Bruno Mars', text: 'This page is too hot (hot damn)! 🔥\nBut it doesn’t exist…\nJump to the homepage and funk around.' },
+          { _id: 'C7dPqrmDWxs', band: 'Pharrell Williams', text: 'Clap along if you feel like a 404 is just a room without a page! 👏\nBut hey, happiness is one click away — back to the homepage.' },
+          { _id: 'dQw4w9WgXcQ', band: 'Rick Astley', text: 'Never gonna find this page 🎤\nNever gonna load it up…\nBut the homepage will never let you down 😉' },
+          { _id: 'xwtdhWltSIg', band: 'R.E.M.', text: 'That’s me in the corner…\nThat’s me in the 404, losing my page again.\nBut you can still find salvation on our homepage.' },
+          { _id: '1w7OgIMMRc4', band: 'Guns N’ Roses', text: 'Where did we go now…? 🎸\nWhere did this page go now… 404 oh oh oh…\nBut homepage is waiting for you.' },
+          { _id: 'djV11Xbc914', band: 'A-ha', text: 'Take on 404… take me on! 🎹\nThis page will be gone… in a day or two.\nBack to homepage for the real hit.' },
+          { _id: 'xMaE6toi4mk', band: 'The Clash', text: 'Should this page stay or should it go? 🤔\nWell, it’s gone.\nBut homepage is always gonna be there.' },
+          { _id: 'SSbBvKaM6sk', band: 'Blur', text: 'Woo-hoo! 🎶\nYou found a 404 instead of a page…\nJump back homepage and scream along.' },
+          { _id: 'XFkzRNyygfk', band: 'Radiohead', text: 'I’m a 404… I’m a weirdo 🎤\nWhat the hell is this page doing here?\nTake your beautiful self back to homepage.' },
+          { _id: 'Soa3gO7tL-c', band: 'Green Day', text: 'I walk a lonely road… 🎸\nThe only 404 that I have ever known.\nDon’t walk alone — take the homepage.' },
+          { _id: '_mEC54eTuGw', band: 'The Rolling Stones', text: 'Don’t get angry with me 😠\nIt’s just a 404, nothing personal.\nRoll back to homepage and keep the juice flowing 🍊.' },
+          { _id: 'RYnFIRc0k6E', band: 'Limp Bizkit', text: 'Keep rollin’, rollin’, rollin’ 🎤\n404 got you stuck, but don’t stop!\nKeep rollin’ back to the homepage.' }
+        ],
+        init() {
+            let randomIndex = Math.floor(Math.random() * this.collection.length);
+            this.randomQuote = this.collection[randomIndex];
+            this.nextBandName = this.collection[(randomIndex + 1) % this.collection.length].band;
+        }
+     }">
+  <h1 class="sr-only">Error 404 – This page does not exist.</h1>
+  <p class="mt-0 mb-4 text-sm uppercase opacity-75">Error 404</p>
+  <template x-if="randomQuote">
+    <div class="">
+      <h4 x-html="randomQuote.text.replaceAll('\\n','<br>').replace('homepage',`<a href='/'>homepage</a>`)"
+          class="whitespace-pre-line font-semibold text-pretty"></h4>
+      <iframe width="560" height="315"
+              class="mx-auto my-8 rounded-lg shadow-lg aspect-video w-full h-auto max-w-2xl"
+              :src="'https://www.youtube-nocookie.com/embed/' + randomQuote._id + ''"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen></iframe>
+    </div>
+  </template>
+  <div class="mt-8 md:mt-16 max-w-lg mx-auto text-pretty">
+    <p class="text-lg md:text-xl font-semibold">🤔 Why this video?</p>
+    <p class="text-base mb-0">
+      Because 404s don’t have to be boring.<br/>
+      We pick iconic songs that turn a “lost page” into a moment of fun.<br/>
+      Today you got <span class="font-semibold" x-text="randomQuote.band">Green Day</span>.
+      Tomorrow? Maybe <span class="font-semibold" x-text="nextBandName">Rolling Stones</span>.
     </p>
   </div>
-
-  <iframe class="w-full aspect-video rounded lg:col-span-2"
-          src="https://www.youtube-nocookie.com/embed/_mEC54eTuGw?si=AerukXEMzZpq_VlX"
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen></iframe>
-
+  <div class="mt-8 md:mt-16 max-w-md mx-auto text-pretty">
+    <p class="text-lg md:text-xl font-semibold">😅 Still disappointed?</p>
+    <a href="/" class="px-6 py-2 bg-orange-600 rounded-full shadow-md text-[16px] text-white font-semibold inline-flex items-center justify-center gap-3 border-orange-600 border-2 hover:brightness-125 transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:shadow-lg">Go back to the homepage</a>
+  </div>
 </div>
-
-

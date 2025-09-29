@@ -43,6 +43,9 @@ eleventyComputed:
         {%- if links.x %}
           <a class="text-zinc-900 hover:text-red-600" href="{{ links.x }}"><span class="sr-only">Fallow {{ name | split(' ') | first }} on X</span>{% phicon "x-logo", "regular", { class: "size-6" } %}</a>
         {%- endif %}
+        {%- if links.instagram %}
+          <a class="text-zinc-900 hover:text-red-600" href="{{ links.instagram }}"><span class="sr-only">Fallow {{ name | split(' ') | first }} on Instagram</span>{% phicon "instagram-logo", "regular", { class: "size-6" } %}</a>
+        {%- endif %}
       </div>
       {% endif %}
     </div>

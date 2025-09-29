@@ -111,6 +111,9 @@ export default {
         return item.fileSlug === author;
       }).data;
       const returnData = {
+        guest: !["reatlat", "zapalblizh", "atenlotrad", "loraider259"].includes(
+          author,
+        ),
         name: authorData.title || authorData.name || author,
         email: authorData.email || "",
         role: authorData.role || authorData.position || "Guest Contributor",

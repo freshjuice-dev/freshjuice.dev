@@ -122,7 +122,11 @@ export default {
         url: `/authors/${slugify(author, { lower: true })}/`,
         signature: authorData.signature || "",
         links: authorData.links || {},
-        image: await gravatarImage(authorData.email || "", { size: 128 }),
+        image: await gravatarImage(authorData.email || "", {
+          forceDefault: true,
+          includeExtention: true,
+          size: 128,
+        }),
         content: authorData.bio || authorData.page.rawInput.trim() || "",
       };
       if (property) {
@@ -147,7 +151,11 @@ export default {
   },
 
   getGravatarImage: async function (email, size) {
-    return await gravatarImage(email || "", { size: size || 150 });
+    return await gravatarImage(email || "", {
+      forceDefault: true,
+      includeExtention: true,
+      size: size || 150,
+    });
   },
 
   postsByYear: (collection, year) => {

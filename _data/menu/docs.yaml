@@ -22,3 +22,6 @@
       url: /docs/modules/lite-video-embed/
     - title: Video GIF
       url: /docs/modules/video-gif/
+    - title: Code Snippet Embed
+      url: /docs/modules/github-gist/
+      draft: true

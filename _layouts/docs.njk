@@ -45,12 +45,14 @@ layout: base.njk
           <p class="text-lg font-semibold mb-3">{{ section.title }}</p>
           <ul class="list-none m-0 p-0 border-l border-gray-900/5 space-y-2">
             {% for child in section.children %}
+              {% if not child.draft %}
               <li>
                 <a href="{{ child.url }}"
                    class="block pl-6 py-1 -ml-px border-l hover:border-current {% if child.active %}border-current text-red-600 font-semibold{% else %}border-transparent opacity-85 hover:opacity-100 !text-zinc-600{% endif %}">
                   {{ child.title }}
                 </a>
               </li>
+              {% endif %}
             {% endfor %}
           </ul>
         </div>
@@ -81,10 +83,14 @@ layout: base.njk
             <p class="text-lg font-semibold mb-3">{{ section.title }}</p>
             <ul class="list-none m-0 p-0 border-l border-gray-900/5 space-y-2">
               {% for child in section.children %}
+                {% if not child.draft %}
                 <li>
                   <a href="{{ child.url }}"
-                     class="block pl-6 py-1 -ml-px border-l hover:border-current {% if child.active %}border-current text-red-600 font-semibold{% else %}border-transparent opacity-85 hover:opacity-100 !text-zinc-600{% endif %}">{{ child.title }}</a>
+                     class="block pl-6 py-1 -ml-px border-l hover:border-current {% if child.active %}border-current text-red-600 font-semibold{% else %}border-transparent opacity-85 hover:opacity-100 !text-zinc-600{% endif %}">
+                    {{ child.title }}
+                  </a>
                 </li>
+                {% endif %}
               {% endfor %}
             </ul>
           </div>

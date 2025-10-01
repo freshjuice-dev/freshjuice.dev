@@ -32,14 +32,17 @@ faq:
           <p class="text-sm my-0">One line for each entry</p>
         </div>
         <div>
-          <button type="submit"
+          <button type="submit" :disabled="state !== 'idle'"
                   x-text="state === 'loading' ? 'Checking...' : 'Check Links'">
             Check Links
           </button>
         </div>
+        <div>
+          <span x-show="errorMessage !== ''" class="text-red-600 text-sm min-h-[1px] h-auto" x-text="errorMessage"></span>
+        </div>
       </form>
 
-      <template x-if="result.length > 0">
+      <template x-if="result.length > 0 && result[0].error === undefined">
         <div class="results flex flex-col gap-4">
           <template x-for="(item, index) in result" :key="index">
 
@@ -61,11 +64,12 @@ faq:
                     </span>
                   </span>
                   <span class="text-sm md:text-lg" x-text="item.url"></span>
-                  <span class="text-red-600" x-text="'(' + item.totalBroken + ' Broken)'"></span>
+                  <span class="text-red-600" x-text="item.status === 'error' ? `Bad Request` : `(` + item.totalBroken + ` Broken)`"></span>
                 </div>
 
                 <span class="shrink-0 size-5 transition-transform duration-200"
                       aria-hidden="true"
+                      x-show="item.status === 'success'"
                       :class="openIndex === index  && item.status === 'success' ?`rotate-180`:`rotate-0`">
                   {% phicon "caret-down", "bold", { class: "size-5" } %}
                 </span>

@@ -6,33 +6,35 @@ document.addEventListener("alpine:init", () => {
   Alpine.data("BrokenLinkChecker", () => ({
     urls: "",
     result: [],
-    isChecking: false,
+    errorMessage: "",
     buttonLabel: "Check Links",
     openIndex: -2,
-    state: "idle", // idle, checking, success, error
-    isValidUrl(url) {
-      let strippedUrl = stripTags(url);
-      debugLog(strippedUrl);
-      debugLog(allowHttpUrl(strippedUrl));
-      return allowHttpUrl(strippedUrl);
+    state: "idle", // idle, loading, success, error
+    checkUrl(url) {
+      url = stripTags(url);
+      return allowHttpUrl(url);
     },
 
     async checkLinks(event) {
-      debugLog("Checking links");
       event.preventDefault();
 
       this.result = [];
+      this.errorMessage = "";
 
-      const checkList = this.urls.split("\n").filter((link) => {
-        link = this.isValidUrl(link);
-        return link.trim() !== "";
-      });
+      const checkList = this.urls.split("\n").reduce((list, link) => {
+        const cleanedLink = this.checkUrl(link);
+        if (cleanedLink.trim() !== "") {
+          list.push(cleanedLink);
+        }
+        return list;
+      }, []);
 
       if (checkList.length === 0) {
-        alert("Please enter at least one URL.");
-        this.urls = "";
+        this.errorMessage = "Please enter at least one URL.";
         return;
       }
+
+      debugLog("Checking links");
 
       this.result = checkList.map((link) => ({
         url: link,
@@ -57,7 +59,7 @@ document.addEventListener("alpine:init", () => {
             },
           );
 
-          debugLog(response);
+          // debugLog(response);
 
           if (response.status !== 200) {
             this.result[i] = {
@@ -66,39 +68,50 @@ document.addEventListener("alpine:init", () => {
               data: {},
               totalBroken: 0,
             };
+          } else {
+            const data = await response.json();
+            this.result[i] = {
+              url: link,
+              status: "success",
+              data: data,
+              totalBroken: 0,
+            };
           }
-
-          const data = await response.json();
-          this.result[i] = {
-            url: link,
-            status: "success",
-            data: data,
-            totalBroken: 0,
-          };
-          this.state = "success";
         } catch (error) {
           this.state = "error";
+          this.errorMessage = error;
           this.result[i] = {
             url: link,
             status: "error",
             data: {},
-            totalBroken: 0,
+            totalBroken: -1,
           };
         }
 
-        this.result[i].totalBroken = Object.keys(this.result[i].data).reduce(
-          (count, code) => {
-            if (parseInt(code) % 400 < 100 || parseInt(code) === 999) {
-              return count + this.result[i].data[code].length;
-            }
+        if (this.result[i].status === "success") {
+          this.result[i].totalBroken = Object.keys(this.result[i].data).reduce(
+            (count, code) => {
+              if (
+                (400 <= parseInt(code) && parseInt(code) < 500) ||
+                parseInt(code) === 999
+              ) {
+                return count + this.result[i].data[code].length;
+              }
 
-            return count;
-          },
-          0,
-        );
+              return count;
+            },
+            0,
+          );
+        }
 
         i++;
       }
+
+      this.state = "success";
+
+      setTimeout(() => {
+        this.state = "idle";
+      }, 2000);
     },
     init() {
       debugLog("Broken Link Checker initialized");

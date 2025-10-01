@@ -20,7 +20,7 @@ Paste the GitHub Gist embed code here. This is the only required field — it lo
 
 <figure>
   <img src="./gist-embed-code.png" alt="sidebar Gist Embed Code textarea" eleventy:widths="300" />
-  <figcaption>Sidebar Gist Embed Code textarea.</figcaption>
+  <figcaption>Gist Embed Code textarea.</figcaption>
 </figure>
 
 ### File Name (optional)
@@ -29,7 +29,7 @@ If your Gist contains multiple files, specify the exact file you want to display
 
 <figure>
   <img src="./file-name.png" alt="sidebar File Name input" eleventy:widths="300" />
-  <figcaption>Sidebar File Name input.</figcaption>
+  <figcaption>File Name input.</figcaption>
 </figure>
 
 ### Caption (optional)
@@ -38,7 +38,7 @@ Add a short caption above the code block. Great for labeling examples like “Ex
 
 <figure>
   <img src="./caption.png" alt="sidebar Caption input" eleventy:widths="300" />
-  <figcaption>Sidebar Caption input.</figcaption>
+  <figcaption>Caption input.</figcaption>
 </figure>
 
 ### Show Lines (optional)
@@ -47,7 +47,7 @@ Display only specific lines from the snippet. Examples: 2, 1-5, 1,4,6-8. Leave e
 
 <figure>
   <img src="./show-lines.png" alt="sidebar Show Lines toggle" eleventy:widths="300" />
-  <figcaption>Sidebar Show Lines toggle.</figcaption>
+  <figcaption>Show Lines toggle.</figcaption>
 </figure>
 
 ## Highlight Lines (optional)
@@ -56,7 +56,7 @@ Highlight specific lines to draw attention to important parts of the snippet. Ex
 
 <figure>
   <img src="./highlight-lines.png" alt="sidebar Highlight Lines input" eleventy:widths="300" />
-  <figcaption>Sidebar Highlight Lines input.</figcaption>
+  <figcaption>Highlight Lines input.</figcaption>
 </figure>
 
 ## Advanced options

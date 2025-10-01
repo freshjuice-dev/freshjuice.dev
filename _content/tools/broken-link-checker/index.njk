@@ -1,0 +1,131 @@
+---
+title: "Broken Link Checker"
+desc: "Free Broken Link Checker tool to find and fix broken links on your website. Improve SEO, boost rankings, and enhance user experience with quick link audits."
+icon: "link-break"
+partialScripts:
+  - broken-link-checker
+faq:
+  - question: "How do I check for broken links?"
+    answer: "Simply enter your website URL into the Broken Link Checker and click **Check Links**. The tool will quickly scan your pages and display any broken or dead links it finds, along with their status codes."
+  - question: "Why is it important to fix broken links?"
+    answer: "Fixing broken links is crucial for SEO and user experience. Dead links frustrate visitors, reduce trust, and can hurt your rankings because search engines may struggle to crawl your site effectively."
+  - question: "How often should I check my website for broken links?"
+    answer: "Best practice is to check your website at least once a month, or more frequently if you regularly publish new content or update existing pages."
+---
+
+<main class="">
+
+  <div class="prose max-w-2xl mx-auto mt-12">
+
+    <h1>{{ title }}</h1>
+    <p>
+      Find and fix broken links in seconds. Dead links hurt SEO, rankings, and user experience —
+      just enter your URL, run a quick check, and get instant results. Perfect for marketers,
+      SEOs, and site owners who want a healthier, faster, and more reliable website.
+    </p>
+
+    <div class="clean-prose space-y-4" x-data="BrokenLinkChecker">
+      <form @submit="checkLinks($event)" class="space-y-4">
+        <div>
+          <label for="urls">URLs</label>
+          <textarea id="urls" name="urls" placeholder="Enter your URLs" x-model="urls" required></textarea>
+          <p class="text-sm my-0">One line for each entry</p>
+        </div>
+        <div>
+          <button type="submit" :disabled="state !== 'idle'"
+                  x-text="state === 'loading' ? 'Checking...' : 'Check Links'">
+            Check Links
+          </button>
+        </div>
+        <div>
+          <span x-show="errorMessage !== ''" class="text-red-600 text-sm min-h-[1px] h-auto" x-text="errorMessage"></span>
+        </div>
+      </form>
+
+      <template x-if="result.length > 0 && result[0].error === undefined">
+        <div class="results flex flex-col gap-4">
+          <template x-for="(item, index) in result" :key="index">
+
+            <div class="mb-4 border-2 border-orange-200 rounded-2xl overflow-hidden" :open="true">
+              <div class="cursor-pointer px-4 py-3 flex items-center justify-between gap-4 font-semibold"
+                @click.prevent="openIndex = (openIndex === index ? -1 : index)" >
+
+
+                <div class="flex items-center gap-4">
+                  <span>
+                    <span x-show="item.status === 'loading'">
+                      {% phicon "spinner", "bold", { class: "size-5 animate-spin [animation-duration:1.5s]" } %}
+                    </span>
+                    <span x-show="item.status === 'success'">
+                      ✅
+                    </span>
+                    <span x-show="item.status === 'error'">
+                      ❌
+                    </span>
+                  </span>
+                  <span class="text-sm md:text-lg" x-text="item.url"></span>
+                  <span class="text-red-600" x-text="item.status === 'error' ? `Bad Request` : `(` + item.totalBroken + ` Broken)`"></span>
+                </div>
+
+                <span class="shrink-0 size-5 transition-transform duration-200"
+                      aria-hidden="true"
+                      x-show="item.status === 'success'"
+                      :class="openIndex === index  && item.status === 'success' ?`rotate-180`:`rotate-0`">
+                  {% phicon "caret-down", "bold", { class: "size-5" } %}
+                </span>
+              </div>
+
+              <div x-show="openIndex === index && item.status === 'success'" x-collapse>
+                <div class="mt-4 text-sm leading-relaxed clean-prose">
+                  <table>
+                    <thead>
+                    <tr>
+                      <th class="text-center">Status</th>
+                      <th>Link Found</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                      <template x-for="(foundLinks, statusCode) in item.data" :key="statusCode">
+                        <template x-for="link in foundLinks" :key="link">
+                          <tr>
+                            <td class="text-center" x-text="statusCode"></td>
+                            <td class="line-clamp-1 block whitespace-nowrap" x-text="link"></td>
+                          </tr>
+                        </template>
+                      </template>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </template>
+        </div>
+      </template>
+    </div>
+
+    <h2>Frequently Asked Questions</h2>
+    <div x-data="{ openIndex: 0 }">
+      {% for item in faq %}
+        {% set i = loop.index0 %}
+        <details class="mb-4 border-2 border-orange-200 rounded-2xl overflow-hidden" :open="true">
+          <summary class="cursor-pointer px-4 py-3 flex items-center justify-between gap-4 font-semibold hover:text-red-600"
+                   @click.prevent="openIndex = (openIndex === {{ i }}) ? -1 : {{ i }}">
+            <span>{{ item.question }}</span>
+            <span class="shrink-0 size-5 transition-transform duration-200"
+                  aria-hidden="true"
+                  :class="openIndex==={{ i }}?`rotate-180`:`rotate-0`">
+              {% phicon "caret-down", "bold", { class: "size-5" } %}
+            </span>
+          </summary>
+          <div x-show="openIndex === {{ i }}" x-collapse>
+            <div class="px-4 pb-4 text-sm leading-relaxed clean-prose">
+              {{ item.answer | markdownIt | safe }}
+            </div>
+          </div>
+        </details>
+      {% endfor %}
+    </div>
+
+  </div>
+
+</main>

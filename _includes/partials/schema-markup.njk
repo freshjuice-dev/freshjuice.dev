@@ -153,6 +153,25 @@
   {% endif %}
 
   {# FAQ schema #}
-  {# TODO: FAQ schema in near future #}
+  {% if faq %}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {%- for item in faq %}
+          {
+            "@type": "Question",
+            "name": "{{ item.question | striptags | trim }}",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "{{ item.answer | markdownIt | striptags | trim }}"
+            }
+          }{% if not loop.last %},{% endif %}
+          {%- endfor %}
+        ]
+      }
+    </script>
+  {% endif %}
 
 {% endif %}

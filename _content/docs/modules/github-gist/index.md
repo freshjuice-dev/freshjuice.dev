@@ -5,8 +5,8 @@ desc: Code Snippet (GitHub Gist) for HubSpot – Clean, Fast, Developer-Friendly
 
 👉 [View module on HubSpot Marketplace](https://app.hubspot.com/l/ecosystem/marketplace/modules/code-snippet-github-gist-module-by-freshjuice)
 
-The **Lite Video Embed** module allows you to embed YouTube or Vimeo videos in a performance-optimized way.
-All settings are available in the **sidebar panel** when editing a page in HubSpot.
+The **Code Snippet Embed (GitHub Gist)** module lets you embed real GitHub Gists directly into your HubSpot pages.
+It comes with flexible styling, support for multi-file Gists, line highlighting, and built-in caching for blazing fast performance.
 
 👉 [View module preview](https://demo.freshjuice.dev/modules/code-snippet-github-gist) — this is a HubSpot landing page showing the module in action. You can use it to test performance with tools like PageSpeed Insights.
 

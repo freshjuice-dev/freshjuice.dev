@@ -27,8 +27,9 @@ layout: base.njk
 
     {# Desktop menu #}
     <div class="hidden lg:block">
-      <div class="sticky top-0 z-10 lg:pr-8">
-        <div class="py-8">
+      <p class="text-2xl font-semibold mb-8">Knowledge Base</p>
+      <div class="sticky top-8 z-10 lg:pr-8">
+        <div class="pb-8">
           <button type="button"
                   class="select-none flex w-full gap-2 items-center px-3 py-2 border rounded-full text-sm bg-zinc-100 hover:bg-zinc-50 transition-all cursor-pointer"
                   @click="docs.openSearch()"
@@ -105,7 +106,11 @@ layout: base.njk
           {% phicon "list", "regular", { class: "size-6" } %}
         </button>
         <ol class="mr-4 flex text-sm leading-6 whitespace-nowrap min-w-0" @click="docs.toggleDrawerMenu()">
-          <li class="pl-4 flex items-center cursor-pointer">
+          <li class="pl-4 flex items-center cursor-pointer font-semibold xs:font-normal">
+            Knowledge Base
+            {% phicon "caret-right", "regular", { class: "size-3 mx-3 hidden xs:block" } %}
+          </li>
+          <li class="items-center cursor-pointer hidden xs:flex font-semibold sm:font-normal">
             {{ activeDocsPage.sectionName or "Fruity" }}
             {% phicon "caret-right", "regular", { class: "size-3 mx-3 hidden sm:block" } %}
           </li>

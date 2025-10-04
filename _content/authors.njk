@@ -3,10 +3,11 @@ layout: page
 title: FreshJuice Authors & Contributors
 desc: Discover the voices behind FreshJuice. From founder Alex Zappa to guest contributors, explore ideas on clean code, modern design, and building standout web experiences.
 suffix: " "
+tags: [index, authors]
 permalink: /authors/
 ---
 
-{% set authors = collections.authors | sortAuthors %}
+{% set authors = collections.authors | excludeFromCollectionsByTag(['index']) | sortAuthors %}
 
 <main class="mx-auto w-full">
 

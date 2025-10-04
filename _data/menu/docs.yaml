@@ -14,7 +14,7 @@
       url: /docs/hubspot/blog/
     - title: For Developers
       url: /docs/hubspot/developers/
-- title: Modules
+- title: Pro Modules
   children:
     - title: Overview
       url: /docs/modules/

@@ -42,6 +42,7 @@ layout: base.njk
       </div>
 
       {% for section in docsMenu %}
+        {% if not section.draft %}
         <div class="mb-6 lg:pr-8">
           <p class="text-lg font-semibold mb-3">{{ section.title }}</p>
           <ul class="list-none m-0 p-0 border-l border-gray-900/5 space-y-2">
@@ -57,14 +58,20 @@ layout: base.njk
             {% endfor %}
           </ul>
         </div>
+        {% endif %}
       {% endfor %}
+
+      <p class="prose text-xs opacity-75 mt-24 mb-0">
+        Building something custom?<br/>
+        Check the <a href="/developer-edition/docs/" class="">Developer Edition docs</a>.
+      </p>
 
     </div>
 
     {# Mobile menu #}
     <div class="lg:hidden" x-cloak>
 
-      <div class="fixed z-40 inset-y-0 left-0 w-80 max-w-[calc(100%-3rem)] bg-zinc-100 p-6 overflow-y-auto space-y-6"
+      <div class="fixed z-40 inset-y-0 left-0 w-80 max-w-[calc(100%-3rem)] bg-zinc-100 p-6 overflow-y-auto flex flex-col justify-between gap-16"
            x-show="docs.drawerMenuOpen"
            x-transition:enter="transition ease-out duration-200"
            x-transition:enter-start="opacity-0 -translate-x-40"
@@ -73,29 +80,37 @@ layout: base.njk
            x-transition:leave-start="opacity-100 translate-x-0"
            x-transition:leave-end="opacity-0 -translate-x-40"
            @click.outside="docs.toggleDrawerMenu()">
-
         <button type="button" class="absolute right-6 top-6 hover:text-red-600" @click="docs.toggleDrawerMenu()">
           <span class="sr-only">Close Navigation</span>
           {% phicon "x", "regular", { class: "size-6"} %}
         </button>
 
-        {% for section in docsMenu %}
-          <div class="">
-            <p class="text-lg font-semibold mb-3">{{ section.title }}</p>
-            <ul class="list-none m-0 p-0 border-l border-gray-900/5 space-y-2">
-              {% for child in section.children %}
-                {% if not child.draft %}
-                <li>
-                  <a href="{{ child.url }}"
-                     class="block pl-6 py-1 -ml-px border-l hover:border-current {% if child.active %}border-current text-red-600 font-semibold{% else %}border-transparent opacity-85 hover:opacity-100 !text-zinc-600{% endif %}">
-                    {{ child.title }}
-                  </a>
-                </li>
-                {% endif %}
-              {% endfor %}
-            </ul>
-          </div>
-        {% endfor %}
+        <div class="space-y-6">
+          {% for section in docsMenu %}
+            {% if not section.draft %}
+            <div class="">
+              <p class="text-lg font-semibold mb-3">{{ section.title }}</p>
+              <ul class="list-none m-0 p-0 border-l border-gray-900/5 space-y-2">
+                {% for child in section.children %}
+                  {% if not child.draft %}
+                  <li>
+                    <a href="{{ child.url }}"
+                       class="block pl-6 py-1 -ml-px border-l hover:border-current {% if child.active %}border-current text-red-600 font-semibold{% else %}border-transparent opacity-85 hover:opacity-100 !text-zinc-600{% endif %}">
+                      {{ child.title }}
+                    </a>
+                  </li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+
+        <p class="prose text-xs opacity-75 my-0">
+          Building something custom?<br/>
+          Check the <a href="/developer-edition/docs/" class="">Developer Edition docs</a>.
+        </p>
 
       </div>
 

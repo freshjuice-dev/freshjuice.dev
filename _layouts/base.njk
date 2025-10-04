@@ -15,7 +15,7 @@
       <meta name="robots" content="noindex">
     {%- endif %}
 
-    {% set pageTitle = ( (title or metadata.title) ~ " " ~ (suffix or metadata.suffix) ) | trim %}
+    {% set pageTitle = ( (title or metadata.title) ~ " " ~ (suffix or metadata.suffix) ) | cleanTitle | trim %}
 
     {# Metadata #}
 		<title>{{ pageTitle}}</title>

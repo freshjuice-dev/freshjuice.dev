@@ -27,6 +27,14 @@ export default {
     );
   },
 
+  // clean Title
+  cleanTitle: (title) => {
+    return title.replace(
+      /[\p{Extended_Pictographic}\uFE0F\u200D\u{E0020}-\u{E007F}\u{1F3FB}-\u{1F3FF}\u{1F1E6}-\u{1F1FF}]/gu,
+      "",
+    );
+  },
+
   // Get the first `n` elements of a collection.
   head: (array, n) => {
     if (!Array.isArray(array) || array.length === 0) {

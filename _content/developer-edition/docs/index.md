@@ -1,18 +1,17 @@
 ---
-title: Documentation
+title: Developer Edition Documentation
 suffix: " | FreshJuice"
 heading: Fruity Docs
 permalink: /developer-edition/docs/
 ---
 
-## Welcome to FreshJuice Documentation
+## Welcome to the FreshJuice Developer Edition Documentation
 
-FreshJuice is a vibrant and refreshing theme that brings zest to your online presence.
-Our philosophy is centered around providing you with the tools and resources to stay fresh,
-stand out, and make a lasting impression on your audience.
-Discover the essence of FreshJuice and embrace the possibilities of a vibrant online journey.
+The **Developer Edition** is the free, open-source version of the FreshJuice theme — built for developers who love to build, customize, and experiment 🍊
+This documentation will guide you through installation, configuration, and the technical foundations behind the theme.
 
-Ready to install FreshJuice? Read our [Installation Guide](/developer-edition/docs/installation/).
+Looking for the full documentation and Pro modules?
+Check out the [Knowledge Base](/docs/) — that’s where the upcoming **FreshJuice Pro Theme** and advanced **Pro Modules** live.
 
 ## Frameworks we use
 

@@ -13,13 +13,23 @@ noindex: true
   </a>
 </nav>
 
-<div class="prose mx-auto">
+<div class="prose max-w-3xl mx-auto">
   <h1>{{ title }}</h1>
 </div>
 
-<div class="prose mx-auto flex flex-wrap gap-2">
+<div class="prose max-w-3xl mx-auto flex flex-wrap justify-between items-center gap-y-2 gap-x-4">
   {% for tag in collections.categories %}
-    {% set tagUrl %}/tags/{{ tag | slugify }}/{% endset %}
-    <span><a href="{{ tagUrl }}" class="post-tag">{{ tag }}</a>{%- if not loop.last %},{% endif -%}</span>
+    {% if tag != 'index' %}
+      {% set count = collections.posts | getFilteredByTag(tag) | length %}
+      {% set size = 0.8 + (count * 0.125) %}
+      {% if size > 1.8 %}{% set size = 1.8 %}{% endif %}
+      <span>
+        <a href="/tags/{{ tag | slugify }}/"
+           class="post-tag"
+           style="font-size: {{ size | round(2) }}em;">
+          {{ tag }} ({{ count }})
+        </a>
+      </span>
+    {% endif %}
   {% endfor %}
 </div>

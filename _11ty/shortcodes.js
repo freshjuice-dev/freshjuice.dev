@@ -110,12 +110,15 @@ export default {
     eleventyConfig.addShortcode("ogImagesJSON", function (allCollections) {
       let returnJson = [];
       allCollections.forEach((item) => {
+        let draft = (item.data || {}).draft || false;
+        if (draft) return;
         let title = (item.data || {}).title || "";
         if (title === "Tags") {
           title = "Blog tags";
         }
         if (title.startsWith("Tagged ")) {
           title = title.split("Tagged ");
+          if (title[1] == "“index”") return;
           title[0] = "Blogs tagged with";
           title[1] = "<span>" + title[1].replace(" ", "&nbsp;") + "</span>";
           title = title.join(" ");

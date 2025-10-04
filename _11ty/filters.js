@@ -97,6 +97,20 @@ export default {
     });
   },
 
+  random: (array) => {
+    return array[Math.floor(Math.random() * array.length)];
+  },
+
+  getFilteredByTag: (collection, tag) => {
+    if (typeof collection === "undefined" || typeof tag === "undefined") {
+      return [];
+    }
+    return collection.filter((item) => {
+      const itemTags = ((item || {}).data || {}).tags || [];
+      return itemTags.includes(tag);
+    });
+  },
+
   getPostYears: (collection) => {
     let years = new Set();
     for (let item of collection) {

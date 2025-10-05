@@ -10,7 +10,7 @@
 /* Components */
 @import "./components/hs-cookies-banner.css";
 @import "./components/buttons.css";
-@import "./components/cf-turnstile.css";
+/*@import "./components/cf-turnstile.css";*/
 @import "./components/prism.css";
 @import "./components/pagefind.css";
 @import "./components/yt-lite.css";

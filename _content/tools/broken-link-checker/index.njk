@@ -3,6 +3,7 @@ title: "Broken Link Checker"
 desc: "Free Broken Link Checker tool to find and fix broken links on your website. Improve SEO, boost rankings, and enhance user experience with quick link audits."
 icon: "link-break"
 partialScripts:
+  - //challenges.cloudflare.com/turnstile/v0/api.js
   - broken-link-checker
 faq:
   - question: "How do I check for broken links?"
@@ -32,6 +33,7 @@ faq:
           <p class="text-sm px-4 my-0">One line for each entry</p>
         </div>
         <div>
+          <div class="cf-turnstile" data-sitekey="{{ build.turnstile.sitekey }}" data-theme="light" data-size="normal"></div>
           <button type="submit" :disabled="state !== 'idle'"
                   x-text="state === 'loading' ? 'Checking...' : 'Check Links'">
             Check Links

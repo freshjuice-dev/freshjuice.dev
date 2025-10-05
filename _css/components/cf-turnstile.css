@@ -1,0 +1,10 @@
+@layer components {
+  .cf-turnstile {
+    width: 300px;
+    height: 65px;
+    @apply overflow-hidden rounded-[24px] border border-gray-300 bg-zinc-100;
+  }
+  .cf-turnstile > div {
+    @apply -translate-y-[1px] -translate-x-[1px];
+  }
+}

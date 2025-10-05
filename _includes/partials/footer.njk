@@ -1,42 +1,37 @@
-<footer class="[&_a:hover]:text-red-600" aria-labelledby="footer-heading">
+<footer class="[&_a:hover]:text-red-600 overflow-x-hidden" aria-labelledby="footer-heading">
   <h2 id="footer-heading" class="sr-only">Footer</h2>
   <div class="mx-auto max-w-7xl px-6 py-8 lg:px-8 text-xs leading-5">
 
-    <div class="flex flex-col md:flex-row md:justify-between md:items-end gap-6 md:gap-12">
-      <div class="flex md:justify-center md:items-center md:order-2 gap-4">
-        <a href="{{ metadata.social.linkedin.link }}" title="Follow us on LinkedIn">
-          <span class="sr-only">Follow us on LinkedIn</span>
-          {% phicon "linkedin-logo", "regular", { class: "size-7" } %}
-        </a>
-        <a href="{{ metadata.social.github.link }}" title="Follow us on GitHub">
-          <span class="sr-only">Follow us on GitHub</span>
-          {% phicon "github-logo", "regular", { class: "size-7" } %}
-        </a>
-        <a href="{{ metadata.social.x.link }}" title="Follow us on X">
-          <span class="sr-only">Follow us on X</span>
-          {% phicon "x-logo", "regular", { class: "size-7" } %}
-        </a>
-      </div>
-{#
-      <div class="flex justify-center items-center md:order-2">
-        <a href="https://github.com/freshjuice-dev/freshjuice-dev-hubspot-theme/network/members">
-          <img src="https://img.shields.io/github/forks/freshjuice-dev/freshjuice-dev-hubspot-theme" alt="GitHub forks" eleventy:ignore>
-        </a>
-        <a href="https://github.com/freshjuice-dev/freshjuice-dev-hubspot-theme/stargazers">
-          <img src="https://img.shields.io/github/stars/freshjuice-dev/freshjuice-dev-hubspot-theme" alt="GitHub Repo stars" eleventy:ignore>
-        </a>
-      </div>
-      <div class="">
-        <p class="m-0 text-pretty">
-          Last built on {{ build.timestamp.formatted }} (<a href="https://www.github.com/{{ build.issues.owner }}/{{ build.issues.repo }}/commit/{{ build.hash.full }}" rel="noreferrer noopener" >{{ build.hash.short }}</a>)
-        </p>
-      </div>
-#}
+    <div class="w-12 mx-auto">
+      {% include "partials/logo-orange.njk" %}
+    </div>
 
+    <p class="prose mt-5 mb-16 text-center text-base sm:text-lg md:text-xl font-medium italic mx-auto max-w-md text-pretty">
+      FreshJuice — blending HubSpot modules &amp; themes with&nbsp;flavor since 2019
+    </p>
+
+    <div class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 gap-10 mt-16 md:mt-24">
+      {% for section in menu.footerSitemap %}
+        <div class="">
+          <p class="text-lg lg:text-xl font-semibold mb-5">{{ section.title }}</p>
+          <ul class="list-none m-0 p-0 space-y-2.5 text-base lg:text-lg leading-tight {{ 'flex gap-4' if section.type == 'social' }}">
+            {% for child in section.children %}
+              <li>
+                <a href="{{ child.url }}" class="inline-flex items-center gap-1.5">
+                  {% if child.icon %}
+                    {% phicon child.icon, "regular", { class: "size-7" } %}
+                  {% endif %}
+                  <span class="{{ 'sr-only' if section.type == 'social' }}">{{ child.title }}</span>
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
     </div>
 
     <div class="mt-8 border-t border-gray-900/10 pt-8 md:flex md:items-center md:justify-between md:gap-8">
-      <div class="flex space-x-6 md:order-2">
+      <div class="flex flex-wrap sm:flex-nowrap space-x-6 gap-y-4 md:order-2">
         {% for item in menu.footer %}
           <a href="{{ item.url }}" class="whitespace-nowrap">{{ item.title }}</a>
         {% endfor %}

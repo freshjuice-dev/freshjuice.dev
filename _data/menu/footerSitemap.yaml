@@ -1,0 +1,63 @@
+- title: Resources
+  children:
+    - title: Knowledge Base
+      url: /docs/
+    - title: Using Modules
+      url: /docs/using-modules/
+    - title: HubSpot Basics
+      url: /docs/hubspot/
+    - title: HubSpot Developer Docs
+      url: https://developers.hubspot.com/docs
+    - title: HubSpot Knowledge Base
+      url: https://knowledge.hubspot.com
+    - title: HubSpot Community
+      url: https://community.hubspot.com
+    - title: Developer Edition Docs
+      url: /developer-edition/docs/
+
+- title: Tools
+  children:
+    - title: Fresh Tools
+      url: /tools/
+    - title: Campaign URL Builder
+      url: /tools/campaign-url-builder/
+    - title: Am I Responsive?
+      url: /tools/am-i-responsive/
+    - title: Metadata Checker
+      url: /tools/metadata-checker/
+    - title: Broken Link Checker
+      url: /tools/broken-link-checker/
+
+- title: Discover
+  children:
+    - title: Juicy Blog
+      url: /blog/
+    - title: Voices of the Blog
+      url: /authors/
+    - title: Demos
+      url: https://demo.freshjuice.dev/
+    - title: About Us
+      url: /about/
+    - title: Contact Us
+      url: /contact/
+    - title: Write for Us
+      url: /write-for-us/
+
+- title: Follow Us
+  type: social
+  children:
+    - title: Contribute on GitHub
+      url: https://github.com/freshjuice-dev/
+      icon: github-logo
+    - title: Follow us on LinkedIn
+      url: https://www.linkedin.com/company/freshjuice
+      icon: linkedin-logo
+    - title: Follow us on X (Twitter)
+      url: https://x.com/FreshJuiceDev/
+      icon: x-logo
+    - title: Follow us on YouTube
+      url: https://www.youtube.com/@FreshJuiceDev
+      icon: youtube-logo
+    - title: Follow us on Mastodon
+      url: https://mastodon.social/@FreshJuiceDev
+      icon: mastodon-logo

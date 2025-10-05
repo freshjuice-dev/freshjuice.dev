@@ -3,6 +3,7 @@ layout: prose
 title: Contact Us – Get in Touch with Our Team
 desc: Reach out to FreshJuice for support, project inquiries, or partnership opportunities. Use the contact form or connect directly with our team.
 permalink: /contact/
+turnstile: true
 ---
 
 <section class="" x-data="contactForm('contact_us')">
@@ -35,6 +36,8 @@ permalink: /contact/
         <label for="message">Your Message</label>
         <textarea id="message" name="message" required x-model.trim="fields.message"></textarea>
       </fieldset>
+
+      <div class="cf-turnstile" data-sitekey="{{ build.turnstile.sitekey }}" data-theme="light" data-size="normal" data-callback="onTurnstileSuccess"></div>
 
       <div class="action col-span-full">
         <p class="text-sm mt-0">

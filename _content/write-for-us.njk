@@ -3,6 +3,7 @@ layout: prose
 title: Write for FreshJuice – Share Your Marketing & SEO Insights
 desc: Contribute to FreshJuice and share your marketing, SEO, and growth insights with a global audience. Get exposure, backlinks, and showcase your expertise.
 permalink: /write-for-us/
+turnstile: true
 ---
 
 <section class="" x-data="contactForm('write_for_us')">
@@ -73,6 +74,8 @@ permalink: /write-for-us/
         <label for="message">Your Message</label>
         <textarea id="message" name="message" required x-model.trim="fields.message"></textarea>
       </fieldset>
+
+      <div class="cf-turnstile" data-sitekey="{{ build.turnstile.sitekey }}" data-theme="light" data-size="normal" data-callback="onTurnstileSuccess"></div>
 
       <div class="action col-span-full">
         <p class="text-sm mt-0">

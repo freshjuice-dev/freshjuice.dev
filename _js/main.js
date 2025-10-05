@@ -10,6 +10,10 @@ import collapse from "@alpinejs/collapse";
 window.detectBrowser = detectBrowser;
 window.debugLog = debugLog;
 
+window.onTurnstileSuccess = function (token) {
+  debugLog("Turnstile Success", token);
+};
+
 // The window.Alpine = Alpine bit is optional, but is nice to have for
 // freedom and flexibility. Like when tinkering with Alpine from the devtools for example.
 window.Alpine = Alpine;

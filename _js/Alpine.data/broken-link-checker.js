@@ -48,6 +48,9 @@ document.addEventListener("alpine:init", () => {
 
       for (let link of checkList) {
         try {
+          const turnstile = document.querySelector(
+            '[name="cf-turnstile-response"]',
+          );
           const response = await fetch(
             "https://api.freshjuice.dev/broken-link-checker",
             {
@@ -55,11 +58,14 @@ document.addEventListener("alpine:init", () => {
               headers: {
                 "Content-Type": "application/json",
               },
-              body: JSON.stringify({ targetUrl: link }),
+              body: JSON.stringify({
+                targetUrl: link,
+                turnstile: turnstile ? turnstile.value : "",
+              }),
             },
           );
 
-          // debugLog(response);
+          debugLog(`Checked ${link} - Status: ${response.status}`);
 
           if (response.status !== 200) {
             this.result[i] = {

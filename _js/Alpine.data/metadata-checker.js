@@ -158,12 +158,18 @@ document.addEventListener("alpine:init", () => {
         this.initError("Invalid URL provided");
         return;
       }
+      const turnstile = document.querySelector(
+        '[name="cf-turnstile-response"]',
+      );
       fetch("https://api.freshjuice.dev/metadata-checker", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ targetUrl: this.targetUrl }),
+        body: JSON.stringify({
+          targetUrl: this.targetUrl,
+          turnstile: turnstile ? turnstile.value : "",
+        }),
       })
         .then((response) => {
           if (!response.ok) {

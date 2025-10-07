@@ -9,7 +9,9 @@
   }
 
   .prose :is(p, ul, ol, blockquote, pre) {
-    @apply text-base md:text-xl;
+    /*@apply text-base md:text-xl;*/
+    @apply text-[1em] md:text-[1.125em] text-pretty;
+    /*font-size: 1.125em;*/
     margin: 1.5em 0;
   }
 

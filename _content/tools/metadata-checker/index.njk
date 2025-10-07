@@ -3,7 +3,6 @@ title: "Metadata Checker"
 desc: "Analyze your website’s metadata to boost SEO and social media visibility with optimized meta tags like Open Graph and Twitter Cards."
 icon: "scan"
 partialScripts:
-  - //challenges.cloudflare.com/turnstile/v0/api.js
   - //cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js
   - metadata-checker
 ---
@@ -41,7 +40,6 @@ partialScripts:
           <span x-text="buttonLabel">Check Website Metadata</span>
         </button>
       </div>
-      <div class="cf-turnstile" data-sitekey="{{ build.turnstile.sitekey }}" data-theme="light" data-size="normal"></div>
     </form>
   </div>
 

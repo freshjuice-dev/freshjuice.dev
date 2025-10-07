@@ -3,8 +3,6 @@ layout: prose
 title: Write for FreshJuice – Share Your Marketing & SEO Insights
 desc: Contribute to FreshJuice and share your marketing, SEO, and growth insights with a global audience. Get exposure, backlinks, and showcase your expertise.
 permalink: /write-for-us/
-partialScripts:
-  - //challenges.cloudflare.com/turnstile/v0/api.js
 ---
 
 <section class="" x-data="contactForm('write_for_us')">
@@ -77,15 +75,12 @@ partialScripts:
       </fieldset>
 
       <div class="action col-span-full">
-        <div class="cf-turnstile" data-sitekey="{{ build.turnstile.sitekey }}" data-theme="light" data-size="normal"></div>
-
         <p class="text-sm mt-0">
           By submitting this form, you agree to our
           <a href="/terms/">Terms of Service</a>,
           <a href="/privacy/">Privacy Policy</a> and
           <a href="/contributor-policy/">Contributor Policy</a>.
         </p>
-
         <button type="submit"
                 class="col-span-full btn btn-primary"
                 :disabled="loading"

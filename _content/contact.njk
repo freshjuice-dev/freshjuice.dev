@@ -3,8 +3,6 @@ layout: prose
 title: Contact Us – Get in Touch with Our Team
 desc: Reach out to FreshJuice for support, project inquiries, or partnership opportunities. Use the contact form or connect directly with our team.
 permalink: /contact/
-partialScripts:
-  - //challenges.cloudflare.com/turnstile/v0/api.js
 ---
 
 <section class="" x-data="contactForm('contact_us')">
@@ -39,14 +37,11 @@ partialScripts:
       </fieldset>
 
       <div class="action col-span-full">
-        <div class="cf-turnstile" data-sitekey="{{ build.turnstile.sitekey }}" data-theme="light" data-size="normal"></div>
-
         <p class="text-sm mt-0">
           By submitting this form, you agree to our
           <a href="/terms/">Terms of Service</a> and
           <a href="/privacy/">Privacy Policy</a>.
         </p>
-
         <button type="submit"
                 class="col-span-full btn btn-primary"
                 :disabled="loading"

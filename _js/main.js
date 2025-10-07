@@ -80,10 +80,6 @@ Alpine.data("contactForm", (formType) => {
       this.loading = true;
       this.error = "";
 
-      const turnstile = document.querySelector(
-        '[name="cf-turnstile-response"]',
-      );
-
       const payload = {
         form_type: formType || "nada",
         firstname: this.fields.firstname,
@@ -101,8 +97,6 @@ Alpine.data("contactForm", (formType) => {
         utm_medium: this.meta.utm_medium,
         utm_term: this.meta.utm_term,
         utm_content: this.meta.utm_content,
-
-        turnstile: turnstile ? turnstile.value : "",
       };
 
       try {

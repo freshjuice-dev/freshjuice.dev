@@ -1,28 +1,17 @@
 ---
 permalink: /sitemap-index.xml
 eleventyExcludeFromCollections: true
+sitemapsList:
+  - core
+  - blogs
+  - authors
+  - docs
+  - dev-docs
+  - demo
 ---
 <?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xsl" href="{{ build.url }}/sitemap.xsl"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <sitemap>
-    <loc>{{ 'sitemap-core.xml' | htmlBaseUrl(build.url) }}</loc>
-    <lastmod>{{ build.timestamp.iso }}</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>{{ 'sitemap-blogs.xml' | htmlBaseUrl(build.url) }}</loc>
-    <lastmod>{{ build.timestamp.iso }}</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>{{ 'sitemap-authors.xml' | htmlBaseUrl(build.url) }}</loc>
-    <lastmod>{{ build.timestamp.iso }}</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>{{ 'sitemap-docs.xml' | htmlBaseUrl(build.url) }}</loc>
-    <lastmod>{{ build.timestamp.iso }}</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>{{ 'sitemap-dev-docs.xml' | htmlBaseUrl(build.url) }}</loc>
-    <lastmod>{{ build.timestamp.iso }}</lastmod>
-  </sitemap>
+{%- for sitemapName in sitemapsList -%}
+  <sitemap><loc>{{ ('sitemap-' ~ sitemapName ~ '.xml') | htmlBaseUrl(build.url) }}</loc><lastmod>{{ build.timestamp.iso }}</lastmod></sitemap>
+{%- endfor -%}
 </sitemapindex>
-

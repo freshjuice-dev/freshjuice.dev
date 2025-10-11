@@ -1,0 +1,15 @@
+---
+permalink: /sitemap-demo.xml
+eleventyExcludeFromCollections: true
+pageLinks:
+  - demo.freshjuice.dev
+  - demo.freshjuice.dev/modules/code-snippet-github-gist
+  - demo.freshjuice.dev/modules/video-gif
+  - demo.freshjuice.dev/modules/lite-video-embed
+---
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xsl" href="{{ build.url }}/sitemap.xsl"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+{%- for page in pageLinks %}
+    <url><loc>https://{{ page }}</loc><lastmod>{{ build.timestamp.iso }}</lastmod></url>
+{%- endfor %}
+</urlset>

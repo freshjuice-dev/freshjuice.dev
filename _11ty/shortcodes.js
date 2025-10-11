@@ -165,7 +165,7 @@ export default {
         if (videoId.startsWith("https://")) {
           videoId = findYouTubeVideoId(videoId);
         }
-        return `<lite-youtube x-on:click.stop videoid="${videoId}" class="img" style="background-image: url('https://i.ytimg.com/vi/${videoId}/hqdefault.jpg');"></lite-youtube>`;
+        return `<div><lite-youtube x-on:click.stop videoid="${videoId}" class="img" style="background-image: url('https://i.ytimg.com/vi/${videoId}/hqdefault.jpg');"></lite-youtube></div>`;
       },
     );
   },
@@ -183,6 +183,7 @@ export default {
         return `<strong class="text-red-500">Error: No video source provided</strong>`;
       }
       return `
+        <div>
           <video
             x-data="{ shown: false }" x-intersect.once="shown = true"
             autoplay muted playsinline
@@ -196,7 +197,8 @@ export default {
             </template>
             Your browser does not support the video tag.
           </video>
-        `;
+        </div>
+      `;
     });
   },
 

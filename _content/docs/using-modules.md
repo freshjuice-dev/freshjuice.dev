@@ -16,6 +16,8 @@ This guide explains how to add a module to a page and configure its settings.
 4. Select the module to open the **right-hand sidebar** with Content and Style settings.
 5. Configure the module options, then **Publish** your page.
 
+<!-- break -->
+
 {% videoGIF { src: '/video/getting-started--using-modules.mp4', width: 700, height: 411 } %}
 
 ---

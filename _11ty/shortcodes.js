@@ -170,6 +170,36 @@ export default {
     );
   },
 
+  videoGIF: (eleventyConfig) => {
+    eleventyConfig.addShortcode("videoGIF", function (args = {}) {
+      args = {
+        width: 700,
+        height: 394,
+        class: "mx-auto",
+        loop: true,
+        ...args,
+      };
+      if (!args.src) {
+        return `<strong class="text-red-500">Error: No video source provided</strong>`;
+      }
+      return `
+          <video
+            x-data="{ shown: false }" x-intersect.once="shown = true"
+            autoplay muted playsinline
+            width="${args.width}"
+            height="${args.height}"
+            class="${args.class} rounded shadow-lg"
+            ${args.loop ? "loop" : ""}
+          >
+            <template x-if="shown">
+              <source src="${args.src}" type="video/mp4" />
+            </template>
+            Your browser does not support the video tag.
+          </video>
+        `;
+    });
+  },
+
   speedlifyJSON: (eleventyConfig) => {
     eleventyConfig.addShortcode("speedlifyJSON", function (collection) {
       const returnObject = {

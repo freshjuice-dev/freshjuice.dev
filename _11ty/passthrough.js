@@ -6,11 +6,10 @@
  */
 
 export default {
-
   static: (eleventyConfig) => {
     eleventyConfig.addPassthroughCopy({
-      "_static/": "/"
+      "_static/": "/",
+      "_content/blog/posts/posts/assets/video/": "/video/",
     });
-  }
-
-}
+  },
+};

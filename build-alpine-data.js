@@ -4,7 +4,7 @@ import { spawn } from "child_process";
 import path from "path";
 
 const dir = "./_js/Alpine.data";
-const outDir = "./_site/js/alpine.data";
+const outDir = "./_site/js/alpine-data";
 const mode = process.argv[2] === "watch" ? "watch" : "build";
 
 const files = readdirSync(dir).filter((f) => f.endsWith(".js"));

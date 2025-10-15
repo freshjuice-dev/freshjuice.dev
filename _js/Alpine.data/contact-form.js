@@ -2,7 +2,7 @@
 import debugLog from "../modules/_debugLog";
 
 document.addEventListener("alpine:init", () => {
-  Alpine.data("contactForm", (formType) => {
+  Alpine.data("ContactForm", (formType) => {
     return {
       API_ENDPOINT: "https://api.freshjuice.dev/contact",
       state: "idle", // 'idle' | 'success' | 'failed'

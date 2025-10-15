@@ -15,7 +15,7 @@ partialScripts:
     <div class="grid md:grid-cols-4 gap-6 gap-x-10">
 
       <div class="">
-        <form @submit.prevent class="grid grid-cols-1 xs:grid-cols-4 md:grid-cols-1 gap-2.5" style="--color-orange-600: var(--color-stone-800)">
+        <form @submit.prevent class="grid grid-cols-3 xs:grid-cols-4 md:grid-cols-1 gap-5 xs:gap-3 md:gap-2.5" style="--color-orange-600: var(--color-stone-800)">
 
           <label for="size" class="sr-only">Number of units</label>
           <input type="number" min="1" max="100"
@@ -23,28 +23,26 @@ partialScripts:
                  x-model.number="size"
                  @input.debounce.300ms="setSize()"
                  placeholder="2"
-                 class="input text-center">
-
+                 class="input text-center col-span-full xs:col-span-1">
           <p class="sr-only">Mode</p>
-
           <button
             type="button"
             :class="mode === 'paragraphs' ? '' : 'btn--ghost'"
-            class="btn "
+            class="btn btn--xs md:btn--md"
             @click="setMode('paragraphs')">
             Paragraphs
           </button>
           <button
             type="button"
             :class="mode === 'words' ? '' : 'btn--ghost'"
-            class="btn "
+            class="btn btn--xs md:btn--md"
             @click="setMode('words')">
             Words
           </button>
           <button
             type="button"
             :class="mode === 'lists' ? '' : 'btn--ghost'"
-            class="btn "
+            class="btn btn--xs md:btn--md"
             @click="setMode('lists')">
             Lists
           </button>

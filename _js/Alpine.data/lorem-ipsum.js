@@ -7,6 +7,7 @@ document.addEventListener("alpine:init", () => {
     size: 2,
     mode: "paragraphs", // 'words' | 'lists'
     outputStyle: "plain", // 'html' | 'plain'
+    copySuccess: false,
     resultHtml:
       "<p>Lorem ipsum dolor sit amet consectetur adipiscing elit faucibus tristique arcu condimentum, ullamcorper etiam fermentum ultrices integer ultricies turpis hac natoque volutpat. Feugiat elementum egestas pulvinar quam sociis arcu condimentum volutpat, libero aenean aliquet placerat ultrices orci sociosqu litora sapien, nunc tellus auctor morbi metus erat viverra. Odio venenatis vestibulum pretium viverra lacinia senectus, tempus lacus primis massa vitae sollicitudin, mus mauris suspendisse aptent ultricies.</p><p>Ornare porttitor nullam orci accumsan himenaeos libero sapien sem a praesent augue luctus, facilisis commodo scelerisque imperdiet venenatis arcu montes dictumst enim sociis risus. Id nunc nisl parturient scelerisque nibh inceptos varius fames fermentum, cum at litora integer eget sollicitudin lectus nulla, diam molestie ad class sociis volutpat suspendisse porttitor.</p>",
 
@@ -334,6 +335,16 @@ document.addEventListener("alpine:init", () => {
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;");
     },
+    copyToClipboard() {
+      const textToCopy = "";
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        debugLog("Copied to clipboard");
+        this.copySuccess = true;
+        setTimeout(() => {
+          this.copySuccess = false;
+        }, 3000);
+      });
+    },
 
     // ======== generation logic for each mode ========
     generateText() {
@@ -363,7 +374,8 @@ document.addEventListener("alpine:init", () => {
     },
 
     init() {
-      this.generateText();
+      debugLog("Lorem Ipsum generator initialized");
+      // this.generateText();
     },
   }));
 });

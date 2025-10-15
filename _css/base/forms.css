@@ -23,7 +23,7 @@
   textarea,
   select,
   .FormControl {
-    @apply block w-full rounded-[24px] border border-gray-300 bg-zinc-100 text-gray-900 placeholder:text-zinc-500;
+    @apply block text-base w-full rounded-[24px] border border-gray-300 bg-zinc-100 text-gray-900 placeholder:text-zinc-500;
 
     /* font-size: 1rem; */
     /* line-height: 1.5rem; */

@@ -321,7 +321,9 @@ document.addEventListener("alpine:init", () => {
       if (isNaN(this.size) || this.size < 1) this.size = 1;
       if (this.size > 100) this.size = 100;
     },
-    setSize() {
+    setSize(direction) {
+      if (direction === "plus") this.size++;
+      else if (direction === "minus") this.size--;
       this._clampSize();
       this.generateText();
     },
@@ -336,7 +338,18 @@ document.addEventListener("alpine:init", () => {
         .replace(/>/g, "&gt;");
     },
     copyToClipboard() {
-      const textToCopy = "";
+      let textToCopy = this.resultHtml;
+      if (this.outputStyle === "plain") {
+        textToCopy = textToCopy
+          .replace(/<p>/g, "\n\n")
+          .replace(/<\/p>/g, "")
+          .replace(/<li>/g, "\n- ")
+          .replace(/<\/li>/g, "")
+          .replace(/<ul>/g, "\n")
+          .replace(/<\/ul>/g, "")
+          .replace(/<[^>]+>/g, "") // remove any other HTML tags
+          .trim();
+      }
       navigator.clipboard.writeText(textToCopy).then(() => {
         debugLog("Copied to clipboard");
         this.copySuccess = true;

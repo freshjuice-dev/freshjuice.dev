@@ -21,6 +21,8 @@ partialScripts:
           <label for="size" class="sr-only">Number of units</label>
           <input type="number" min="1" max="100"
                  name="size" id="size"
+                 inputmode="numeric"
+                 pattern="[0-9]*"
                  x-model.number="size"
                  @input.debounce.300ms="setSize()"
                  placeholder="2"

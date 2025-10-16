@@ -69,3 +69,15 @@
     @apply hover:-translate-y-0.5 hover:shadow-lg;
   }
 }
+
+@utility no-spinner {
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  &[type="number"] {
+    -moz-appearance: textfield;
+  }
+}

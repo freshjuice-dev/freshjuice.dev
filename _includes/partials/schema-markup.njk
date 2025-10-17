@@ -84,6 +84,13 @@
           "url": "{{ author | getAuthorData('url') | htmlBaseUrl(metadata.url) }}",
           "description": "{{ author | getAuthorData('content') | striptags | trim | truncate(160) }}"
         },
+        {%- if author | getAuthorData('guest') %}
+        "editor": {
+          "@type": "Person",
+          "name": "FreshJuice Editorial Team",
+          "url": "{{ metadata.url }}/about/"
+        },
+        {%- endif %}
         "publisher": {
           "@type": "Organization",
           "name": "FreshJuice",
@@ -140,12 +147,12 @@
           "jobTitle": "{{ role }}",
           "worksFor": {
             "@type": "Organization",
-            "name": "FreshJuice"
+            "name": "{{ company or 'FreshJuice' }}"
           },
           "memberOf": {
             "@type": "Organization",
-            "name": "FreshJuice",
-            "url": "{{ metadata.url }}"
+            "name": "{{ company or 'FreshJuice' }}",
+            "url": "{{ companyUrl or metadata.url }}"
           }
         }
       }

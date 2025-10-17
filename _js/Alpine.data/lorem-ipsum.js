@@ -355,7 +355,7 @@ document.addEventListener("alpine:init", () => {
         this.copySuccess = true;
         setTimeout(() => {
           this.copySuccess = false;
-        }, 3000);
+        }, 2500);
       });
     },
 

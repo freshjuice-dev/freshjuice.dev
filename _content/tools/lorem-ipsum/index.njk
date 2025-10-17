@@ -68,29 +68,40 @@ partialScripts:
 
       <div class="md:col-span-3">
 
-        <div class="flex justify-between text-xs font-medium">
+        <div class="flex justify-between text-xs font-medium select-none relative z-1">
           <div class="flex">
-            <div class="flex gap-1 items-center border-t-2 border-l-2 border-orange-200 hover:bg-orange-100 transition-all rounded-tl-2xl px-4 py-1 cursor-pointer"
+            <div class="flex gap-1 items-center border-t-2 border-l-2 border-orange-200 bg-cursor/50 hover:bg-orange-100 transition-all rounded-tl-2xl px-4 py-1 cursor-pointer"
                  @click="outputStyle='plain'"
                  :class="outputStyle==='plain'?'bg-orange-200':''">
               {% phicon "article-ny-times", "regular", { class: "size-4" } %}
               <span>Text</span>
             </div>
-            <div class="flex gap-1 items-center border-t-2 border-r-2 border-orange-200 hover:bg-orange-100 transition-all rounded-tr-2xl px-4 py-1 cursor-pointer"
+            <div class="flex gap-1 items-center border-t-2 border-r-2 border-orange-200 bg-cursor/50 hover:bg-orange-100 transition-all rounded-tr-2xl px-4 py-1 cursor-pointer"
                  @click="outputStyle='html'"
                  :class="outputStyle==='html'?'bg-orange-200':''">
               {% phicon "code", "regular", { class: "size-4" } %}
               <span>HTML</span>
             </div>
           </div>
-          <div class="flex gap-1 items-center border-2 border-b-0 border-orange-200 hover:bg-orange-100 transition-all rounded-t-2xl px-4 py-1 cursor-pointer"
-               @click="copyToClipboard()">
-            {% phicon "copy", "duotone", { class: "size-4" } %}
-            <span>Copy</span>
+          <div class="flex gap-4 items-center">
+            <div class="" x-show="copySuccess"
+                 aria-hidden="true"
+                 x-transition:enter="transition ease-out duration-300"
+                 x-transition:enter-start="opacity-0 transform translate-y-4"
+                 x-transition:enter-end="opacity-100 transform translate-y-0"
+                 x-transition:leave="transition ease-in duration-200"
+                 x-transition:leave-start="opacity-100 transform translate-y-0"
+                 x-transition:leave-end="opacity-0 transform translate-y-4"
+                 x-cloak style="display:none">Copied!</div>
+            <div class="flex gap-1 items-center border-2 border-b-0 border-orange-200 bg-cursor/50 hover:bg-orange-100 transition-all rounded-t-2xl px-4 py-1 cursor-pointer"
+                 @click="copyToClipboard()">
+              {% phicon "copy", "duotone", { class: "size-4" } %}
+              <span>Copy</span>
+            </div>
           </div>
         </div>
 
-        <div class="border-2 border-orange-200 rounded-b-2xl overflow-hidden text-justify">
+        <div class="bg-cursor/50 border-2 border-orange-200 rounded-b-2xl overflow-hidden text-justify relative z-2">
           <div x-show="outputStyle==='plain'" class="p-4 md:p-6 clean-prose text-sm min-h-80 max-h-160 overflow-auto" x-html="resultHtml"><p>Lorem ipsum dolor sit amet consectetur adipiscing elit faucibus tristique arcu condimentum, ullamcorper etiam fermentum ultrices integer ultricies turpis hac natoque volutpat. Feugiat elementum egestas pulvinar quam sociis arcu condimentum volutpat, libero aenean aliquet placerat ultrices orci sociosqu litora sapien, nunc tellus auctor morbi metus erat viverra. Odio venenatis vestibulum pretium viverra lacinia senectus, tempus lacus primis massa vitae sollicitudin, mus mauris suspendisse aptent ultricies.</p><p>Ornare porttitor nullam orci accumsan himenaeos libero sapien sem a praesent augue luctus, facilisis commodo scelerisque imperdiet venenatis arcu montes dictumst enim sociis risus. Id nunc nisl parturient scelerisque nibh inceptos varius fames fermentum, cum at litora integer eget sollicitudin lectus nulla, diam molestie ad class sociis volutpat suspendisse porttitor.</p></div>
           <pre x-cloak style="display: none" x-show="outputStyle==='html'" class="language-html p-4 md:p-6 m-0 rounded-none min-h-80 max-h-160 overflow-auto"><code class="language-html whitespace-pre-wrap" x-html="resultHtmlRaw(resultHtml)"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span>Lorem ipsum dolor sit amet consectetur adipiscing elit faucibus tristique arcu condimentum, ullamcorper etiam fermentum ultrices integer ultricies turpis hac natoque volutpat. Feugiat elementum egestas pulvinar quam sociis arcu condimentum volutpat, libero aenean aliquet placerat ultrices orci sociosqu litora sapien, nunc tellus auctor morbi metus erat viverra. Odio venenatis vestibulum pretium viverra lacinia senectus, tempus lacus primis massa vitae sollicitudin, mus mauris suspendisse aptent ultricies.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span>Ornare porttitor nullam orci accumsan himenaeos libero sapien sem a praesent augue luctus, facilisis commodo scelerisque imperdiet venenatis arcu montes dictumst enim sociis risus. Id nunc nisl parturient scelerisque nibh inceptos varius fames fermentum, cum at litora integer eget sollicitudin lectus nulla, diam molestie ad class sociis volutpat suspendisse porttitor.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span></code></pre>
         </div>

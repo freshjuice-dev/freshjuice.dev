@@ -15,6 +15,19 @@ document.addEventListener("alpine:init", () => {
       return allowHttpUrl(url);
     },
 
+    setRefUTMs(link) {
+      const url = new URL(link);
+      const params = url.searchParams;
+
+      params.set("utm_source", "freshjuice.dev");
+      params.set("utm_medium", "tool");
+      params.set("utm_campaign", "broken-link-checker");
+
+      url.search = params.toString();
+
+      return url.toString();
+    },
+
     async checkLinks(event) {
       event.preventDefault();
 

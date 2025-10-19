@@ -105,16 +105,21 @@ faq:
                       ❌
                     </span>
                   </span>
-                  <span class="text-sm md:text-lg" x-text="item.url"></span>
-                  <span class="text-red-600" x-text="item.status === 'error' ? `Bad Request` : `(` + item.totalBroken + ` Broken)`"></span>
+                  <div class="grid">
+                    <span class="text-sm md:text-base truncate" x-text="item.url"></span>
+                  </div>
                 </div>
 
-                <span class="shrink-0 size-5 transition-transform duration-200"
-                      aria-hidden="true"
-                      x-show="item.status === 'success'"
-                      :class="openIndex === index  && item.status === 'success' ?`rotate-180`:`rotate-0`">
-                  {% phicon "caret-down", "bold", { class: "size-5" } %}
-                </span>
+                <div class="flex items-center gap-4">
+                  <span class="text-xs text-red-600 whitespace-nowrap" x-text="item.status === 'error' ? `Bad Request` : (item.totalBroken !== 0 ? `(` + item.totalBroken + ` Broken)` : ``)"></span>
+
+                  <span class="shrink-0 size-5 transition-transform duration-200"
+                        aria-hidden="true"
+                        x-show="item.status === 'success'"
+                        :class="openIndex === index  && item.status === 'success' ?`rotate-180`:`rotate-0`">
+                    {% phicon "caret-down", "bold", { class: "size-5" } %}
+                  </span>
+                </div>
               </div>
 
               <div x-show="openIndex === index && item.status === 'success'" x-collapse>
@@ -131,7 +136,15 @@ faq:
                         <template x-for="link in foundLinks" :key="link">
                           <tr>
                             <td class="text-center" x-text="statusCode"></td>
-                            <td class="line-clamp-1 block whitespace-nowrap" x-text="link"></td>
+                            <td class="">
+                              <div class="grid">
+                                <a class="truncate whitespace-nowrap"
+                                   rel="nofollow noopener"
+                                   target="_blank"
+                                   href="javascript:void(0);"
+                                   x-text="link" :href="setRefUTMs(link)"></a>
+                              </div>
+                            </td>
                           </tr>
                         </template>
                       </template>

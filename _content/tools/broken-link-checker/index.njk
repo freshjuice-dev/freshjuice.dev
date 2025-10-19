@@ -18,26 +18,26 @@ faq:
       **2xx** = success, **3xx** = redirects, **4xx** = client errors, **5xx** = server errors.
       | Code | Meaning |
       |------|----------|
-      | 200 | **OK** — The request succeeded. |
-      | 201 | **Created** — The resource was successfully created. |
-      | 204 | **No Content** — Successful request, but no content returned. |
-      | 301 | **Moved Permanently** — The resource has a new permanent URL. |
-      | 302 | **Found** — Temporary redirect to another URL. |
-      | 307 | **Temporary Redirect** — The request should be repeated with another URL. |
-      | 308 | **Permanent Redirect** — The resource is permanently moved; method remains unchanged. |
-      | 400 | **Bad Request** — The request cannot be processed due to a client error. |
-      | 401 | **Unauthorized** — Authentication is required. |
-      | 403 | **Forbidden** — The server understood the request but refuses to authorize it. |
-      | 404 | **Not Found** — The requested resource could not be found. |
-      | 405 | **Method Not Allowed** — The method is not supported for the requested resource. |
-      | 410 | **Gone** — The resource is no longer available. |
-      | 418 | **I’m a teapot** — Fun Easter egg from RFC 2324. |
-      | 429 | **Too Many Requests** — Rate limit exceeded. |
-      | 500 | **Internal Server Error** — A generic server error occurred. |
-      | 501 | **Not Implemented** — The server does not support the functionality required. |
-      | 502 | **Bad Gateway** — Invalid response from the upstream server. |
-      | 503 | **Service Unavailable** — The server is temporarily overloaded or down. |
-      | 504 | **Gateway Timeout** — The upstream server failed to respond in time. |
+      | **200** | **OK** — The request succeeded. |
+      | **201** | **Created** — The resource was successfully created. |
+      | **204** | **No Content** — Successful request, but no content returned. |
+      | **301** | **Moved Permanently** — The resource has a new permanent URL. |
+      | **302** | **Found** — Temporary redirect to another URL. |
+      | **307** | **Temporary Redirect** — The request should be repeated with another URL. |
+      | **308** | **Permanent Redirect** — The resource is permanently moved; method remains unchanged. |
+      | **400** | **Bad Request** — The request cannot be processed due to a client error. |
+      | **401** | **Unauthorized** — Authentication is required. |
+      | **403** | **Forbidden** — The server understood the request but refuses to authorize it. |
+      | **404** | **Not Found** — The requested resource could not be found. |
+      | **405** | **Method Not Allowed** — The method is not supported for the requested resource. |
+      | **410** | **Gone** — The resource is no longer available. |
+      | **418** | **I’m a teapot** — Fun Easter egg from RFC 2324. |
+      | **429** | **Too Many Requests** — Rate limit exceeded. |
+      | **500** | **Internal Server Error** — A generic server error occurred. |
+      | **501** | **Not Implemented** — The server does not support the functionality required. |
+      | **502** | **Bad Gateway** — Invalid response from the upstream server. |
+      | **503** | **Service Unavailable** — The server is temporarily overloaded or down. |
+      | **504** | **Gateway Timeout** — The upstream server failed to respond in time. |
 
       For a complete reference, check the official [IANA HTTP Status Code Registry](https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml).
   - question: "Why do some social networks like Twitter or LinkedIn show error codes even when links work?"
@@ -135,10 +135,13 @@ faq:
                       <template x-for="(foundLinks, statusCode) in item.data" :key="statusCode">
                         <template x-for="link in foundLinks" :key="link">
                           <tr>
-                            <td class="text-center" x-text="statusCode"></td>
+                            <td class="text-center font-semibold"
+                                :class="statusCode.toString().startsWith('2') ? 'text-green-600' : (statusCode.toString().startsWith('3') ? 'text-blue-600' : 'text-red-600')"
+                                x-text="statusCode"></td>
                             <td class="">
                               <div class="grid">
                                 <a class="truncate whitespace-nowrap"
+                                   :class="statusCode.toString().startsWith('2') || statusCode.toString().startsWith('3') ? `text-current` : `text-red-600`"
                                    rel="nofollow noopener"
                                    target="_blank"
                                    href="javascript:void(0);"

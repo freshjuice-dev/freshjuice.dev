@@ -51,7 +51,7 @@ By using the Services, you represent that you meet this requirement.
 
 ### 5. Open Source Projects
 
-Some of our projects (such as **FreshJuice Developer Edition**) are released under the [MIT License](https://opensource.org/licenses/MIT).
+Some of our projects (such as **FreshJuice Developer Edition**) are released under the [MIT License](https://opensource.org/license/MIT).
 
 - For these projects, the **MIT License governs** usage, copying, modification, and distribution of the source code.
 - These Terms of Service **do not override or restrict** the rights granted under the MIT License.

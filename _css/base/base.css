@@ -38,12 +38,18 @@
     line-height: 1.15;
   }
   h3 {
-    font-size: clamp(1.25rem, 3.21vw + 0.4375rem, 1.875rem);
+    font-size: clamp(1.35rem, 3.21vw + 0.4375rem, 1.875rem);
     @apply font-semibold mt-8 mb-3 md:mt-12 md:mb-5;
     line-height: 1.15;
   }
   h4 {
-    font-size: clamp(1rem, 2.56vw + 0.35rem, 1.5rem);
+    font-size: clamp(1.3rem, 2.56vw + 0.35rem, 1.5rem);
+    @apply font-semibold mt-6 mb-2 md:mt-9 md:mb-3;
+    line-height: 1.15;
+  }
+
+  h5 {
+    font-size: clamp(1.1rem, 2.56vw + 0.35rem, 1.25rem);
     @apply font-semibold mt-6 mb-2 md:mt-9 md:mb-3;
     line-height: 1.15;
   }

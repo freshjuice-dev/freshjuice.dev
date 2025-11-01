@@ -165,7 +165,7 @@ export default {
         if (videoId.startsWith("https://")) {
           videoId = findYouTubeVideoId(videoId);
         }
-        return `<div><lite-youtube x-on:click.stop videoid="${videoId}" class="img" style="background-image: url('https://i.ytimg.com/vi/${videoId}/hqdefault.jpg');"></lite-youtube></div>`;
+        return `<div><lite-youtube x-on:click.stop videoid="${videoId}" class="img" style="background-image: url('https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg');"></lite-youtube></div>`;
       },
     );
   },

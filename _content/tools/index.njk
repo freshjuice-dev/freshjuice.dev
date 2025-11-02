@@ -5,6 +5,15 @@ suffix: " "
 permalink: /tools/
 ---
 
+{% set tagsMap = {
+  'dev': 'Development',
+  'seo': 'SEO',
+  'utils': 'Utilities',
+  'text': 'Text',
+  'design': 'Design',
+  'marketing': 'Marketing'
+} %}
+
 <div class="prose max-w-4xl mx-auto">
 
     <h1>Fresh Tools</h1>
@@ -14,7 +23,8 @@ permalink: /tools/
       {% for item in toolslist | reverse %}
         {%- if item.fileSlug | slugify != "tools" %}
           {% set grad = gradients[loop.index0 % gradients.length] %}
-          <article class="bg-cursor/50 border-2 border-orange-200 hover:border-orange-400 transition-all duration-300 ease-in-out rounded-2xl relative overflow-hidden hover:brightness-110 group">
+          <article class="bg-cursor/50 border-2 border-orange-200 hover:border-orange-400 transition-all duration-300 ease-in-out rounded-2xl relative overflow-hidden hover:brightness-110 group"
+                   data-type="{{ item.data.type }}">
             <div class="relative z-10 p-4 md:p-8">
               <h3 class="text-lg font-medium mt-0 mb-3 w-full flex gap-2 group-hover:text-orange-600  ease-in-out duration-300">
                 {% phicon item.data.icon, "regular", { class: "size-7 text-current" } %}
@@ -37,22 +47,26 @@ permalink: /tools/
         {
           title: "Schema Markup Testing Tool",
           icon: "code",
+          type: "seo",
           desc: "For generic schema validation, use the Schema Markup Validator to test all types of schema.org markup, without Google-specific validation. Rich Results Test.",
           link: "https://developers.google.com/search/docs/appearance/structured-data"
         }, {
           title: "Google PageSpeed Insights",
           icon: "speedometer",
+          type: "dev",
           desc: "PageSpeed Insights (PSI) reports on the user experience of a page on both mobile and desktop devices, and provides suggestions on how that page may be improved.",
           link: "https://developers.google.com/speed/pagespeed/insights/"
         }, {
           title: "Schema Markup Generator",
           icon: "brackets-curly",
+          type: "seo",
           desc: "A Schema.org structured data generator that supports the creation of JSON-LD markups. Including all of the required item properties and more.",
           link: "https://technicalseo.com/tools/schema-markup-generator/"
         }
       ] %}
       {% for item in thirdPartyTools %}
-        <article class="bg-cursor/50 border-2 border-orange-200 hover:border-orange-400 transition-all duration-300 ease-in-out rounded-2xl relative overflow-hidden hover:brightness-110 group">
+        <article class="bg-cursor/50 border-2 border-orange-200 hover:border-orange-400 transition-all duration-300 ease-in-out rounded-2xl relative overflow-hidden hover:brightness-110 group"
+                 data-type="{{ item.type }}">
           <div class="relative z-10 p-4 md:p-8">
             <h3 class="text-lg font-medium mt-0 mb-3 w-full flex gap-2 group-hover:text-orange-600  ease-in-out duration-300">
               {% phicon item.icon, "regular", { class: "size-7 text-current" } %}

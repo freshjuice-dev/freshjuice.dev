@@ -35,6 +35,7 @@ document.addEventListener("alpine:init", () => {
       this.showResults = false;
       this.state = "idle";
       this.errorMessage = "";
+      this.targetUrl = "";
       this.setButtonLabel();
       history.pushState({}, "", location.pathname);
       this.$nextTick(() => this.$refs?.targetUrl?.focus?.());

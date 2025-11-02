@@ -39,7 +39,7 @@ partialScripts:
           <span x-text="buttonLabel">Extract Headings</span>
         </button>
       </div>
-      <p class="text-red-600 text-sm mt-2" x-show="state==='error' && errorMessage" x-text="String(errorMessage)" x-cloak></p>
+      <p class="text-red-600 text-sm md:text-base mt-2" x-show="state==='error' && errorMessage" x-text="String(errorMessage)" x-cloak></p>
     </form>
   </div>
 
@@ -48,35 +48,35 @@ partialScripts:
        x-show="state!=='idle'">
 
     <template x-if="state==='loading'">
-      <div class="flex items-center gap-3 text-sm">
-        <div class="size-4 rounded-full border-2 border-orange-300 border-r-transparent animate-spin"></div>
+      <div class="flex items-center gap-3 text-sm md:text-base">
+        <div class="size-6 rounded-full border-2 border-orange-300 border-r-transparent animate-spin"></div>
         <span>Extracting headings…</span>
       </div>
     </template>
 
     <template x-if="state==='success' && headings.length === 0">
-      <p class="text-sm">No headings found on this page.</p>
+      <p class="text-sm md:text-base">No headings found on this page.</p>
     </template>
 
     <template x-if="state==='success' && headings.length > 0">
       <div class="">
         <h2 class="mt-0">Headings overview</h2>
-        <div class="text-sm font-mono mb-3" x-text="`${headings.length} heading(s) found`"></div>
+        <div class="text-sm md:text-base font-mono mb-3" x-text="`${headings.length} heading(s) found`"></div>
 
-        <ol class="not-prose list-none p-0 m-0 space-y-1">
+        <ol class="not-prose list-none p-0 m-0 space-y-1 md:space-y-2">
           <template x-for="(h, idx) in headings" :key="idx">
             <li class="flex items-start gap-2">
               <span class="shrink-0 inline-block leading-0" :style="`padding-left: ${(h.level - 1) * 0.75}rem`">
                 <span class="inline-flex items-center justify-center h-5.5 px-2 rounded-md border bg-white border-orange-200 text-xs font-mono font-bold">H<span x-text="h.level"></span>
                 </span>
               </span>
-              <div class="grow mt-0.5 text-sm leading-snug" x-text="h.text"></div>
+              <div class="grow mt-0.5 text-sm md:mt-0 md:text-base leading-snug" x-text="h.text"></div>
             </li>
           </template>
         </ol>
 
         <h3>Summary</h3>
-        <ul class="list-none text-sm font-mono">
+        <ul class="list-none text-sm md:text-base font-mono">
           <li>Total Headings: <strong x-text="headings.length"></strong></li>
           <li>h1: <strong x-text="headings.filter(h => h.level === 1).length"></strong></li>
           <li>h2: <strong x-text="headings.filter(h => h.level === 2).length"></strong></li>

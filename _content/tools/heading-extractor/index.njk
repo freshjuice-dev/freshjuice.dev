@@ -1,10 +1,84 @@
 ---
 title: "Extract Headings from a Webpage"
-desc: "Extract and preview all headings (H1–H6) from any public URL."
+desc: "Analyze and visualize your webpage heading structure (H1–H6) for better SEO and readability."
 icon: "text-h"
 type: seo
 partialScripts:
   - alpine-data/heading-extractor
+faq:
+  - question: "How can I extract headings from a webpage?"
+    answer: >
+      Simply paste a full website URL into the input field and hit **Extract Headings**.
+      The tool will fetch the page, locate all heading tags from **H1** through **H6**,
+      and display them in a structured tree showing how your content is organized.
+  - question: "Why do headings matter for SEO?"
+    answer: >
+      Headings tell search engines how your content is structured and what topics each
+      section covers. A clean hierarchy improves keyword targeting, helps crawlers
+      understand context, and makes your page easier to read—benefiting both users and rankings.
+  - question: "Which heading levels does this tool detect?"
+    answer: >
+      It recognizes all standard HTML heading elements: **H1**, **H2**, **H3**, **H4**, **H5**, and **H6**.
+      The extractor keeps their natural order so you can instantly see how each level
+      fits into the overall page structure.
+  - question: "Is it okay to use multiple H1 headings?"
+    answer: >
+      It’s best practice to have a single **H1** that represents the main topic or title of the page.
+      Extra H1s can dilute meaning and confuse search engines. If the tool finds more than one,
+      consider turning the additional ones into H2s instead.
+  - question: "What does a good heading hierarchy look like?"
+    answer: >
+      A logical flow usually starts with one **H1** (page title), then **H2s** for main sections,
+      followed by **H3s** and lower levels for nested topics.
+      Avoid skipping levels (for example, going from H2 straight to H4) to maintain clarity and accessibility.
+  - question: "Do headings really influence search rankings?"
+    answer: >
+      Yes. Search engines rely on headings to identify key topics, spot keywords naturally,
+      and interpret content relevance. Strong heading structure also improves user engagement
+      and reading experience—both positive SEO signals.
+  - question: "Can I use this tool to study competitors’ pages?"
+    answer: >
+      Absolutely. You can analyze any public URL to see how competitors organize content,
+      where they use keywords, and how deep their structure goes.
+      It’s a great way to benchmark and refine your own SEO layout.
+  - question: "What makes an effective SEO-friendly heading?"
+    answer: >
+      Write headings that are descriptive, relevant, and easy to scan.
+      Include keywords where they fit naturally, summarize the section clearly,
+      and keep them concise while maintaining logical structure.
+  - question: "How do headings improve the reader experience?"
+    answer: >
+      Well-organized headings guide visitors through your content like a table of contents.
+      They make text scannable, highlight key ideas, and help accessibility tools such as
+      screen readers interpret page flow more accurately.
+  - question: "Should every heading contain a keyword?"
+    answer: >
+      Not necessarily. Include keywords only where they make sense.
+      Over-optimizing can sound unnatural. Focus on clarity first—good headings
+      that read well tend to perform best in search too.
+  - question: "How do I correct poor heading structure?"
+    answer: >
+      Use the extracted results to spot issues such as duplicate H1s,
+      missing intermediate levels, or vague section titles.
+      Then rewrite or re-order headings so they follow a logical pattern
+      and support your target keywords naturally.
+
+  - question: "What’s the difference between a title tag and an H1 heading?"
+    answer: >
+      The **title tag** is what appears in browser tabs and search results,
+      while the **H1** is shown on the page itself.
+      They can share similar wording but serve different SEO roles.
+      This tool focuses on visible H1–H6 headings.
+  - question: "How often should I review my heading structure?"
+    answer: >
+      Recheck your headings whenever you add new content, redesign a page,
+      or notice ranking changes. A quarterly review for key pages helps ensure
+      your structure stays optimized and aligned with current SEO goals.
+  - question: "Do good headings help with featured snippets?"
+    answer: >
+      Yes. Search engines often extract snippet answers from well-structured headings
+      and their accompanying paragraphs. Using clear, question-based headings
+      can increase your chance of earning a featured snippet spot.
 ---
 
 <main x-data="HeadingExtractor">
@@ -92,5 +166,29 @@ partialScripts:
   <article class="prose max-w-3xl mx-auto mt-12">
     <h2>About this tool</h2>
     <p>This heading extractor fetches a page server-side and returns a clean list of headings so you can quickly audit content structure and SEO hierarchy. It supports <code>H1</code> through <code>H6</code>, preserving order.</p>
+
+    <h2>Frequently Asked Questions</h2>
+    <div x-data="{ openIndex: 0 }" class="text-base" itemscope itemtype="https://schema.org/FAQPage">
+      {% for item in faq %}
+        {% set i = loop.index0 %}
+        <details class="mb-4 border-2 border-orange-200 rounded-2xl overflow-hidden" :open="true" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <summary class="cursor-pointer px-4 py-3 flex items-center justify-between gap-4 font-semibold hover:text-red-600"
+                   @click.prevent="openIndex = (openIndex === {{ i }}) ? -1 : {{ i }}">
+            <span itemprop="name">{{ item.question }}</span>
+            <span class="shrink-0 size-5 transition-transform duration-200"
+                  aria-hidden="true"
+                  :class="openIndex==={{ i }}?`rotate-180`:`rotate-0`">
+              {% phicon "caret-down", "bold", { class: "size-5" } %}
+            </span>
+          </summary>
+          <div x-show="openIndex === {{ i }}" x-collapse itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <div class="px-4 pb-4 text-sm leading-relaxed clean-prose [&_table]:-mx-4 [&_table]:w-[calc(100%+2rem)]" itemprop="text">
+              {{ item.answer | markdownIt | safe }}
+            </div>
+          </div>
+        </details>
+      {% endfor %}
+    </div>
   </article>
+
 </main>

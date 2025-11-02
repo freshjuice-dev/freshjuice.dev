@@ -80,7 +80,6 @@
     "@zachleat/table-saw": "^1.0.6",
     "alpinejs": "^3.15.1",
     "autoprefixer": "^10.4.21",
-    "axios": "^1.13.1",
     "chalk": "^5.6.2",
     "cssnano": "^7.1.2",
     "dotenv": "^17.2.3",

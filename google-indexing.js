@@ -1,23 +1,33 @@
-import axios from "axios";
+import "dotenv/config"; // Automatically loads variables from .env
 import { google } from "googleapis";
 import { parseStringPromise } from "xml2js";
-import key from "./.google-service-account.json" assert { type: "json" };
+
+function normalizeGooglePrivateKey(raw) {
+  if (!raw) return "";
+  // Remove surrounding quotes if present and convert \n to real newlines
+  return raw
+    .replace(/^"(.*)"$/s, "$1")
+    .replace(/\\n/g, "\n")
+    .trim();
+}
+
+const CLIENT_EMAIL = process.env.GOOGLE_CLIENT_EMAIL || "";
+const PRIVATE_KEY = normalizeGooglePrivateKey(process.env.GOOGLE_PRIVATE_KEY);
 
 // List of sitemap URLs
 const SITEMAPS = [
+  "https://freshjuice.dev/sitemap-tools.xml",
   "https://freshjuice.dev/sitemap-core.xml",
   "https://freshjuice.dev/sitemap-blogs.xml",
   "https://freshjuice.dev/sitemap-docs.xml",
 ];
 
 // Create JWT client
-const jwtClient = new google.auth.JWT(
-  key.client_email,
-  null,
-  key.private_key,
-  ["https://www.googleapis.com/auth/indexing"],
-  null,
-);
+const jwtClient = new google.auth.JWT({
+  email: CLIENT_EMAIL,
+  key: PRIVATE_KEY,
+  scopes: ["https://www.googleapis.com/auth/indexing"],
+});
 
 // Get access token
 async function getAccessToken() {
@@ -29,26 +39,26 @@ async function getAccessToken() {
 async function sendIndexingRequest(urls, accessToken) {
   for (const url of urls) {
     try {
-      const response = await axios.post(
+      const response = await fetch(
         "https://indexing.googleapis.com/v3/urlNotifications:publish",
         {
-          url,
-          type: "URL_UPDATED",
-        },
-        {
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${accessToken}`,
           },
+          body: JSON.stringify({ url, type: "URL_UPDATED" }),
         },
       );
 
+      if (!response.ok) {
+        const text = await response.text().catch(() => "<no body>");
+        throw new Error(`${response.status} ${response.statusText} — ${text}`);
+      }
+
       console.log(`✅ Indexed: ${url}`);
     } catch (error) {
-      console.error(
-        `❌ Error indexing ${url}:`,
-        error.response?.data || error.message,
-      );
+      console.error(`❌ Error indexing ${url}:`, error.message || error);
     }
   }
 }
@@ -56,7 +66,12 @@ async function sendIndexingRequest(urls, accessToken) {
 // Parse one sitemap
 async function parseSitemap(sitemapUrl) {
   try {
-    const { data: xml } = await axios.get(sitemapUrl);
+    const res = await fetch(sitemapUrl);
+    if (!res.ok) {
+      const text = await res.text().catch(() => "<no body>");
+      throw new Error(`${res.status} ${res.statusText} — ${text}`);
+    }
+    const xml = await res.text();
     const result = await parseStringPromise(xml);
     const urls = result.urlset?.url?.map((entry) => entry.loc[0]) || [];
 
@@ -65,7 +80,7 @@ async function parseSitemap(sitemapUrl) {
   } catch (error) {
     console.error(
       `❌ Failed to fetch or parse sitemap: ${sitemapUrl}`,
-      error.message,
+      error.message || error,
     );
     return [];
   }

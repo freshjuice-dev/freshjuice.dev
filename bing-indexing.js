@@ -1,5 +1,4 @@
 import "dotenv/config"; // Automatically loads variables from .env
-import axios from "axios";
 import { parseStringPromise } from "xml2js";
 
 // Read API key from environment
@@ -15,14 +14,19 @@ const SITEMAPS = [
 // Parse one sitemap
 async function parseSitemap(sitemapUrl) {
   try {
-    const { data: xml } = await axios.get(sitemapUrl);
+    const res = await fetch(sitemapUrl);
+    if (!res.ok) {
+      const text = await res.text().catch(() => "<no body>");
+      throw new Error(`${res.status} ${res.statusText} — ${text}`);
+    }
+    const xml = await res.text();
     const result = await parseStringPromise(xml);
     const urls = result.urlset?.url?.map((entry) => entry.loc[0]) || [];
 
     console.log(`🔗 ${urls.length} URLs found in ${sitemapUrl}`);
     return urls;
   } catch (error) {
-    console.error(`❌ Failed to parse ${sitemapUrl}:`, error.message);
+    console.error(`❌ Failed to parse ${sitemapUrl}:`, error.message || error);
     return [];
   }
 }
@@ -40,26 +44,37 @@ async function submitToBing(urls) {
   }
 
   try {
-    const response = await axios.post(
+    const response = await fetch(
       `https://ssl.bing.com/webmaster/api.svc/json/SubmitUrlbatch?apikey=${API_KEY}`,
       {
-        siteUrl: SITE_URL,
-        urlList: urls,
-      },
-      {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        body: JSON.stringify({
+          siteUrl: SITE_URL,
+          urlList: urls,
+        }),
       },
     );
 
+    const text = await response.text().catch(() => "<no body>");
+    if (!response.ok) {
+      throw new Error(`${response.status} ${response.statusText} — ${text}`);
+    }
+
+    // Try parse JSON, but fall back to raw text
+    let body;
+    try {
+      body = JSON.parse(text);
+    } catch {
+      body = text;
+    }
+
     console.log(`✅ Bing responded with status: ${response.status}`);
-    console.log("🧾 Response body:", response.data);
+    console.log("🧾 Response body:", body);
   } catch (error) {
-    console.error(
-      "❌ Bing submission error:",
-      error.response?.data || error.message,
-    );
+    console.error("❌ Bing submission error:", error.message || error);
   }
 }
 

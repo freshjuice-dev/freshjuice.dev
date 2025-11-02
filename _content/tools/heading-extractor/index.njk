@@ -1,0 +1,96 @@
+---
+title: "Extract Headings from a Webpage"
+desc: "Extract and preview all headings (H1–H6) from any public URL."
+icon: "text-h"
+type: seo
+partialScripts:
+  - alpine-data/heading-extractor
+---
+
+<main x-data="HeadingExtractor">
+  <div class="prose max-w-3xl mx-auto">
+    <h1>Heading Extractor</h1>
+    <form @submit.prevent class="">
+      <label for="targetUrl">Enter Full URL:</label>
+      <div class="flex flex-col md:flex-row w-full gap-5">
+        <div class="w-full relative">
+          <input id="targetUrl"
+                 x-ref="targetUrl"
+                 class="w-full h-full relative pr-12 xs:pr-24"
+                 type="url"
+                 pattern="https?://.+"
+                 required
+                 x-model="targetUrl"
+                 placeholder="https://example.com">
+          <div class="cursor-pointer font-mono text-sm absolute right-1 top-1 px-1.5 md:px-3 py-1.5 rounded-full transition-all bg-gray-100 hover:bg-gray-200 border-2 border-gray-300 inline-flex gap-2 items-center text-terminal"
+               x-show="showResults && headings.length > 0" x-cloak
+               x-transition:enter="transition ease-out duration-700"
+               x-transition:enter-start="opacity-0"
+               x-transition:enter-end="opacity-100"
+               x-transition:leave="transition ease-in duration-300"
+               x-transition:leave-start="opacity-100"
+               x-transition:leave-end="opacity-0"
+               @click="reset">
+            {% phicon "trash", "duotone", { class: "size-5" } %}
+            <span class="hidden xs:inline">reset</span>
+          </div>
+        </div>
+        <button @click="initProcessing" class="text-bold leading-4 md:whitespace-nowrap" type="submit">
+          <span x-text="buttonLabel">Extract Headings</span>
+        </button>
+      </div>
+      <p class="text-red-600 text-sm mt-2" x-show="state==='error' && errorMessage" x-text="String(errorMessage)" x-cloak></p>
+    </form>
+  </div>
+
+  <div class="prose max-w-3xl mx-auto mt-8"
+       x-cloak
+       x-show="state!=='idle'">
+
+    <template x-if="state==='loading'">
+      <div class="flex items-center gap-3 text-sm">
+        <div class="size-4 rounded-full border-2 border-orange-300 border-r-transparent animate-spin"></div>
+        <span>Extracting headings…</span>
+      </div>
+    </template>
+
+    <template x-if="state==='success' && headings.length === 0">
+      <p class="text-sm">No headings found on this page.</p>
+    </template>
+
+    <template x-if="state==='success' && headings.length > 0">
+      <div class="">
+        <h2 class="mt-0">Headings overview</h2>
+        <div class="text-sm font-mono mb-3" x-text="`${headings.length} heading(s) found`"></div>
+
+        <ol class="not-prose list-none p-0 m-0 space-y-1">
+          <template x-for="(h, idx) in headings" :key="idx">
+            <li class="flex items-start gap-2">
+              <span class="shrink-0 inline-block leading-0" :style="`padding-left: ${(h.level - 1) * 0.75}rem`">
+                <span class="inline-flex items-center justify-center h-5.5 px-2 rounded-md border bg-white border-orange-200 text-xs font-mono font-bold">H<span x-text="h.level"></span>
+                </span>
+              </span>
+              <div class="grow mt-0.5 text-sm leading-snug" x-text="h.text"></div>
+            </li>
+          </template>
+        </ol>
+
+        <h3>Summary</h3>
+        <ul class="list-none text-sm font-mono">
+          <li>Total Headings: <strong x-text="headings.length"></strong></li>
+          <li>h1: <strong x-text="headings.filter(h => h.level === 1).length"></strong></li>
+          <li>h2: <strong x-text="headings.filter(h => h.level === 2).length"></strong></li>
+          <li>h3: <strong x-text="headings.filter(h => h.level === 3).length"></strong></li>
+          <li>h4: <strong x-text="headings.filter(h => h.level === 4).length"></strong></li>
+          <li>h5: <strong x-text="headings.filter(h => h.level === 5).length"></strong></li>
+          <li>h6: <strong x-text="headings.filter(h => h.level === 6).length"></strong></li>
+        </ul>
+      </div>
+    </template>
+  </div>
+
+  <article class="prose max-w-3xl mx-auto mt-12">
+    <h2>About this tool</h2>
+    <p>This heading extractor fetches a page server-side and returns a clean list of headings so you can quickly audit content structure and SEO hierarchy. It supports <code>H1</code> through <code>H6</code>, preserving order.</p>
+  </article>
+</main>

@@ -7,6 +7,8 @@ document.addEventListener("alpine:init", () => {
     size: 2,
     mode: "paragraphs", // 'words' | 'lists'
     outputStyle: "plain", // 'html' | 'plain'
+    // Max words allowed per generated paragraph (cap applied when mode === 'paragraphs')
+    maxWordsPerParagraph: 65,
     copySuccess: false,
     resultHtml:
       "<p>Lorem ipsum dolor sit amet consectetur adipiscing elit faucibus tristique arcu condimentum, ullamcorper etiam fermentum ultrices integer ultricies turpis hac natoque volutpat. Feugiat elementum egestas pulvinar quam sociis arcu condimentum volutpat, libero aenean aliquet placerat ultrices orci sociosqu litora sapien, nunc tellus auctor morbi metus erat viverra. Odio venenatis vestibulum pretium viverra lacinia senectus, tempus lacus primis massa vitae sollicitudin, mus mauris suspendisse aptent ultricies.</p><p>Ornare porttitor nullam orci accumsan himenaeos libero sapien sem a praesent augue luctus, facilisis commodo scelerisque imperdiet venenatis arcu montes dictumst enim sociis risus. Id nunc nisl parturient scelerisque nibh inceptos varius fames fermentum, cum at litora integer eget sollicitudin lectus nulla, diam molestie ad class sociis volutpat suspendisse porttitor.</p>",
@@ -291,13 +293,23 @@ document.addEventListener("alpine:init", () => {
       return out.join(" ");
     },
     _paragraphs(count, startWithLorem = false) {
-      // Return an array of paragraphs, each with ~N(5.8, 1.93) sentences
+      // Return an array of paragraphs with random word counts, capped by `maxWordsPerParagraph`.
+      // We generate a target number of words for each paragraph, then split into sentences
+      // to keep natural punctuation and capitalization.
       const paras = [];
+      const cap = Math.max(1, Number(this.maxWordsPerParagraph) || 65);
       for (let i = 0; i < count; i++) {
-        const sentencesCount = Math.max(1, Math.round(this._gauss(5.8, 1.93)));
-        const p = this._sentences(sentencesCount, startWithLorem);
+        // Choose a random target length per paragraph.
+        // Use a uniform distribution in [minWords, cap] where minWords is reasonable but <= cap.
+        const minWords = Math.min(20, cap); // keep at least some body if cap >= 20; otherwise use cap
+        const wordsTarget =
+          minWords + Math.floor(Math.random() * (cap - minWords + 1));
+
+        const tokens = this._wordsArray(wordsTarget, startWithLorem);
         startWithLorem = false;
-        paras.push(p);
+        const sentences = this._sentencise(tokens);
+        const paragraph = sentences.join(" ");
+        paras.push(paragraph);
       }
       return paras;
     },

@@ -1,6 +1,6 @@
 // import { generate as criticalGenerate } from 'critical';
 import { minify as minifyHTML } from "html-minifier-terser";
-import * as cheerio from "cheerio";
+import { parseHTML } from "linkedom";
 
 export default {
   //
@@ -38,27 +38,25 @@ export default {
 
   externalLinks: function (content, outputPath) {
     if (outputPath && outputPath.endsWith(".html")) {
-      const $ = cheerio.load(content);
-
-      $("a[href^='http']").each((i, el) => {
-        const href = $(el).attr("href");
+      const { document } = parseHTML(content);
+      const anchors = document.querySelectorAll("a[href^='http']");
+      anchors.forEach((el) => {
+        const href = el.getAttribute("href");
         try {
           const url = new URL(href);
           if (!url.hostname.includes("freshjuice.dev")) {
             url.searchParams.set("utm_source", "freshjuice.dev");
-            const existingRel = ($(el).attr("rel") || "").split(" ");
+            let existingRel = (el.getAttribute("rel") || "").split(" ");
             if (!existingRel.includes("noopener")) {
               existingRel.push("noopener");
             }
-            $(el)
-              .attr("href", url.toString())
-              .attr("target", "_blank")
-              .attr("rel", existingRel.join(" ").trim());
+            el.setAttribute("href", url.toString());
+            el.setAttribute("target", "_blank");
+            el.setAttribute("rel", existingRel.join(" ").trim());
           }
         } catch (err) {}
       });
-
-      content = $.html();
+      content = document.toString();
     }
     return content;
   },

@@ -1,0 +1,191 @@
+---
+title: "Keyword Density Checker"
+desc: "Analyze and optimize the keyword density of your text. Calculate percentages for single words and multi‑word phrases, spot over‑optimization, and find top terms."
+icon: "percent"
+type: seo
+partialScripts:
+  - alpine-data/keyword-density-checker
+faq:
+  - question: "How does the Keyword Density Checker work?"
+    answer: >
+      The Keyword Density Checker scans your text and counts how often each word or phrase appears. It then compares these counts to the total word count to show keyword percentages. You’ll also see reports of which single words or phrases appear most often. It’s a quick way to understand how search-friendly and balanced your content is.
+  - question: "What are stop words and should I exclude them?"
+    answer: >
+      Stop words are very common words like “the”, “and”, “of”, or “in” that usually don’t carry much meaning on their own. When you exclude stop words, the checker focuses on the more important terms in your text, like product names, topics, and key phrases. This makes your keyword reports cleaner and easier to read. If you want to see the raw, full picture of every word used, you can turn stop word filtering off.
+  - question: "Why is keyword density important for SEO?"
+    answer: >
+      Keyword density helps search engines figure out what your page is about. Keeping a healthy balance makes your content relevant for specific searches without looking spammy. It’s a key factor in showing search engines you’re covering a topic naturally and in depth.
+  - question: "What is the optimal keyword density for SEO?"
+    answer: >
+      Aim for roughly 1–2% for your main keywords. Don’t obsess over exact numbers — the goal is to sound natural and helpful. Anything much higher than 3% might look forced or spammy to search engines. Write for readers first and use your keywords where they make sense.
+  - question: "Can the Keyword Density Checker analyze long texts?"
+    answer: >
+      Yes. You can use it for short blog posts or full-length articles, guides, and ebooks. The tool handles any text size and gives you detailed keyword breakdowns no matter how long your content is.
+  - question: "What is keyword stuffing and how can I avoid it?"
+    answer: >
+      Keyword stuffing means cramming too many keywords into a page in an unnatural way. It can hurt both rankings and readability. To avoid it, write naturally, mix in synonyms, and make sure your text flows well. Keeping keyword usage below 3% usually keeps you safe.
+  - question: "Should I check keyword density for every page?"
+    answer: >
+      Yes — it’s a good habit for all major pages: blogs, product pages, landing pages, and services. Each should focus on its own keywords at a healthy level. Regular checks help you find pages that need more balance or better targeting.
+  - question: "How should I read keyword density results?"
+    answer: >
+      Look at the top keywords and their percentages. Ideally, your main keywords appear around 1–2%, and related terms are spread naturally. Over 3% means you might be overdoing it; below 0.5% could mean the topic isn’t clear enough. The best content feels natural but still focused.
+  - question: "Can I use it to check competitor content?"
+    answer: >
+      Definitely. You can paste in a competitor’s text to see what keywords they focus on, how often they use them, and which topics they emphasize. It’s a great way to spot opportunities or areas where your content could outperform theirs.
+  - question: "How does keyword density affect voice search?"
+    answer: >
+      Voice search likes natural, conversational language. Focus more on question-style phrases and longer, human-like wording instead of short, exact keywords. A slightly lower keyword density with varied phrasing performs better for voice-based results.
+  - question: "What's the difference between keyword density and TF-IDF?"
+    answer: >
+      Keyword density measures how often a word appears compared to the total number of words. TF-IDF goes further — it compares how often that word appears in your text versus how common it is across the web. Density gives a basic view; TF-IDF shows how important a keyword really is in context.
+  - question: "Should I optimize for single keywords or phrases?"
+    answer: >
+      Use both. Single words help cover broad topics, while longer keyword phrases (three to five words) attract more specific searches and conversions. The checker analyzes both types so you can fine-tune your balance.
+  - question: "How do related or LSI keywords connect to keyword density?"
+    answer: >
+      LSI (Latent Semantic Indexing) keywords are words and phrases related to your main topic. Using them helps search engines understand context. Instead of repeating one keyword, mix in similar terms and related concepts to build richer, more natural content.
+  - question: "Can keyword density tools help improve writing quality?"
+    answer: >
+      Yes. They highlight where you might be repeating too much or missing key terms. That makes it easier to keep your writing clear, natural, and focused. Just remember: the tool supports good writing — it doesn’t replace it.
+  - question: "How often should I check keyword density?"
+    answer: >
+      It’s smart to check whenever you publish new content, update old pages, or review SEO performance. Many editors also recheck density after big algorithm updates. A quick quarterly review of your key pages keeps your site healthy and well-optimized.
+---
+
+<main x-data="KeywordDensityChecker">
+  <div class="prose max-w-3xl mx-auto">
+    <h1>Keyword Density Checker</h1>
+    <form @submit.prevent class="space-y-5">
+      <div>
+        <label for="inputText">Your Text</label>
+        <textarea id="inputText"
+                  x-model="inputText"
+                  class="w-full h-52"
+                  placeholder="Paste or type your content here…"></textarea>
+      </div>
+
+      <div>
+        <label for="keywords">Keywords</label>
+        <input id="keywords" type="text" x-model="keywordsRaw" placeholder="keyword one; keyword two; three word phrase" />
+        <p class="text-sm mt-1">Enter keywords separated by semicolons. Multi-word phrases are supported.</p>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <label class="inline-flex items-center gap-2 text-sm">
+          <input type="checkbox" x-model="excludeStopwords" />
+          <span>Exclude common stopwords (recommended)</span>
+        </label>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <button @click="analyze" type="submit" class="text-bold leading-4">
+          <span x-text="buttonLabel">Analyze Density</span>
+        </button>
+
+        <div class="cursor-pointer font-mono text-sm px-3 py-1.5 rounded-full transition-all bg-gray-100 hover:bg-gray-200 border-2 border-gray-300 inline-flex gap-2 items-center text-terminal"
+             x-show="showResults" x-cloak
+             @click="reset">
+          {% phicon "trash", "duotone", { class: "size-5" } %}
+          <span class="hidden xs:inline">reset</span>
+        </div>
+      </div>
+
+      <p class="text-red-600 text-sm md:text-base mt-2" x-show="state==='error' && errorMessage" x-text="String(errorMessage)" x-cloak></p>
+    </form>
+  </div>
+
+  <div class="prose max-w-3xl mx-auto mt-8" x-show="state!=='idle'" x-cloak>
+    <template x-if="state==='analyzing'">
+      <div class="flex items-center gap-3 text-sm md:text-base">
+        <div class="size-6 rounded-full border-2 border-orange-300 border-r-transparent animate-spin"></div>
+        <span>Analyzing text…</span>
+      </div>
+    </template>
+
+    <template x-if="state==='success'">
+      <div>
+        <h2 class="mt-0">Overview</h2>
+        <ul class="list-none text-sm md:text-base font-mono">
+          <li>Total words: <strong x-text="totalWords"></strong></li>
+          <li>Unique words: <strong x-text="uniqueWords"></strong></li>
+        </ul>
+
+        <template x-if="keywordStats.length">
+          <div class="mt-6">
+            <h3>Tracked keywords</h3>
+            <ol class="not-prose list-none p-0 m-0 space-y-2">
+              <template x-for="(k, idx) in keywordStats" :key="idx">
+                <li class="flex items-start justify-between gap-4 border rounded-xl p-3"
+                    :class="{
+                      'border-red-300 bg-red-50/60' : k.classification.level==='high',
+                      'border-green-300 bg-green-50/60' : k.classification.level==='optimal',
+                      'border-gray-200' : k.classification.level==='low' || k.classification.level==='none'
+                    }">
+                  <div class="min-w-0">
+                    <div class="font-semibold" x-text="k.term"></div>
+                    <div class="text-xs font-mono text-gray-600">Occurrences: <span x-text="k.occurrences"></span></div>
+                  </div>
+                  <div class="shrink-0 text-right">
+                    <div class="font-mono text-base"><span x-text="k.density.toFixed(2)"></span>%</div>
+                    <div class="text-xs text-gray-600" x-text="k.classification.label"></div>
+                  </div>
+                </li>
+              </template>
+            </ol>
+          </div>
+        </template>
+
+        <div class="mt-10">
+          <h3>Top single words</h3>
+          <ol class="not-prose list-none p-0 m-0 space-y-1 md:space-y-1.5">
+            <template x-for="(w, idx) in topSingles" :key="idx">
+              <li class="flex items-center justify-between gap-3 font-mono text-sm md:text-base border rounded-lg px-2 py-1.5">
+                <span class="truncate" x-text="w.word"></span>
+                <span class="shrink-0"><span x-text="w.density.toFixed(2)"></span>% · <span x-text="w.count"></span></span>
+              </li>
+            </template>
+          </ol>
+        </div>
+
+        <div class="mt-8 text-sm text-gray-600">
+          <p>
+            Guidance: primary keywords typically perform best at 1–2% density. Above 3% may
+            signal over‑optimization. Always prioritize readability and user intent.
+          </p>
+        </div>
+      </div>
+    </template>
+  </div>
+
+  <article class="prose max-w-3xl mx-auto mt-12">
+    <h2>About this tool</h2>
+    <p>
+      This tool helps you analyze and optimize the keyword density of any text in seconds.
+      It’s designed for SEO specialists, content creators, and digital marketers who want to keep their writing balanced, readable, and search-friendly.
+      No software installation required — just paste your content, click <code>Analyze</code>, and get instant insights.
+    </p>
+    <h2>Frequently Asked Questions</h2>
+    <div x-data="{ openIndex: 0 }" class="text-base" itemscope itemtype="https://schema.org/FAQPage">
+      {% for item in faq %}
+        {% set i = loop.index0 %}
+        <details class="mb-4 border-2 border-orange-200 rounded-2xl overflow-hidden" :open="true" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <summary class="cursor-pointer px-4 py-3 flex items-center justify-between gap-4 font-semibold hover:text-red-600"
+                   @click.prevent="openIndex = (openIndex === {{ i }}) ? -1 : {{ i }}">
+            <span itemprop="name">{{ item.question }}</span>
+            <span class="shrink-0 size-5 transition-transform duration-200"
+                  aria-hidden="true"
+                  :class="openIndex==={{ i }}?`rotate-180`:`rotate-0`">
+              {% phicon "caret-down", "bold", { class: "size-5" } %}
+            </span>
+          </summary>
+          <div x-show="openIndex === {{ i }}" x-collapse itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <div class="px-4 pb-4 text-sm leading-relaxed clean-prose [&_table]:-mx-4 [&_table]:w-[calc(100%+2rem)]" itemprop="text">
+              {{ item.answer | markdownIt | safe }}
+            </div>
+          </div>
+        </details>
+      {% endfor %}
+    </div>
+  </article>
+</main>

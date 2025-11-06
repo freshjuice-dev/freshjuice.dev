@@ -33,6 +33,6 @@ export default async () => {
     version: themeVersion,
     releases:
       "https://github.com/freshjuice-dev/freshjuice-dev-hubspot-theme/releases",
-    download: `https://github.com/freshjuice-dev/freshjuice-dev-hubspot-theme/releases/download/v${themeVersion}/freshjuice-hubspot-theme-${themeVersion}-dev.zip`,
+    download: `https://github.com/freshjuice-dev/freshjuice-dev-hubspot-theme/releases/download/v${themeVersion}/freshjuice-hubspot-theme-v${themeVersion}-dev.zip`,
   };
 };

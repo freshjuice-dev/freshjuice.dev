@@ -1,0 +1,198 @@
+---
+title: "Readability Score Checker"
+desc: "Evaluate and improve the readability of your text. Calculate Flesch Reading Ease, Flesch–Kincaid Grade Level, Gunning Fog, SMOG, Coleman–Liau, and ARI with instant suggestions to make your writing clearer."
+icon: "book"
+type: writing
+partialScripts:
+  - alpine-data/readability-score-checker
+faq:
+  - question: "How does the Readability Score Checker work?"
+    answer: >
+      The Readability Score Checker analyzes your text using proven algorithms measuring sentence length, word complexity, syllable count, and overall structure. It calculates multiple readability scores (Flesch-Kincaid, Gunning Fog, SMOG) providing comprehensive insights into how easily your audience can understand your content.
+  - question: "Why is readability important?"
+    answer: >
+      Readability is crucial for audience engagement, content effectiveness, user experience, reducing bounce rates, improving time on page, increasing conversions, ensuring accessibility, and SEO performance. Easy-to-read content reaches wider audiences, maintains reader attention, and communicates messages more effectively than complex, difficult text.
+  - question: "What readability scores are supported?"
+    answer: >
+      The Readability Score Checker supports multiple metrics: Flesch Reading Ease (0-100 scale), Flesch-Kincaid Grade Level (US grade), Gunning Fog Index (years of education), SMOG Index (education level), Coleman-Liau Index, Automated Readability Index (ARI), and others. Each provides unique insights into text complexity and accessibility.
+  - question: "How can I improve my text's readability score?"
+    answer: >
+      Improve readability by using shorter sentences (under 20 words), choosing simpler words over complex alternatives, breaking large paragraphs into smaller chunks, using active voice instead of passive, adding subheadings for navigation, employing bullet points for lists, removing jargon, and writing conversationally.
+  - question: "What is the Flesch Reading Ease score?"
+    answer: >
+      Flesch Reading Ease scores text from 0-100. Higher scores mean easier reading: 90-100 (very easy, 5th grade), 60-70 (standard, 8-9th grade), 30-50 (difficult, college level), 0-30 (very difficult, professional). Aim for 60-70 for general audiences, 80+ for broad accessibility.
+  - question: "What Flesch-Kincaid Grade Level should I target?"
+    answer: >
+      Target grade 7-8 for general audiences, ensuring 80% of US adults can easily understand your content. Marketing content often targets grade 6-8, technical documentation 10-12, academic writing 12-16. Lower grade levels reach broader audiences and improve engagement across education levels.
+  - question: "How does readability affect SEO?"
+    answer: >
+      Readable content improves SEO through increased time on page, reduced bounce rates, higher engagement, more social shares, better user signals to Google, and improved accessibility. While not a direct ranking factor, readability significantly impacts user experience metrics that influence search rankings.
+  - question: "What is the Gunning Fog Index?"
+    answer: >
+      Gunning Fog Index estimates years of education needed to understand text on first reading. Score of 8 means 8th-grade level, 12 means high school senior, 17+ means college graduate. Aim for 8-10 for web content, 12 for business writing, lower for broader accessibility.
+  - question: "Can I check readability for different audiences?"
+    answer: >
+      Yes, adjust target scores based on audience: children (grade 3-5), general public (grade 7-8), high school students (grade 9-12), college educated (grade 13-16), professionals (grade 16+). Use our checker to ensure your content matches your audience's reading comprehension level.
+  - question: "How do short sentences improve readability?"
+    answer: >
+      Short sentences (under 20 words) are easier to process, reduce cognitive load, improve comprehension, maintain reader attention, and flow better. Long, complex sentences confuse readers, bury key points, and increase bounce rates. Break complex ideas into multiple short sentences for clarity.
+  - question: "What role does vocabulary complexity play?"
+    answer: >
+      Complex, multi-syllable words increase reading difficulty. Use simple alternatives: 'use' instead of 'utilize', 'help' instead of 'facilitate', 'buy' instead of 'purchase'. Reserve technical terms for professional audiences. Simple vocabulary improves comprehension, accessibility, and engagement for broader audiences.
+  - question: "Should I check readability before or after writing?"
+    answer: >
+      Check both. Pre-writing: set readability targets for your audience. Post-writing: verify you hit targets and revise accordingly. Iterative checking during editing improves content progressively. Regular readability audits during content creation ensure consistently accessible, engaging writing.
+  - question: "How does readability affect content marketing?"
+    answer: >
+      Readable content generates more shares, longer engagement, better conversion rates, and broader reach. Marketing content should target grade 7-8 readability for maximum accessibility. Easy-to-read copy keeps readers on page, improves message retention, and increases call-to-action effectiveness.
+  - question: "Can I improve readability without changing meaning?"
+    answer: >
+      Absolutely. Maintain meaning while improving readability by shortening sentences, choosing simpler synonyms, eliminating redundancy, using active voice, adding examples, employing visual formatting (bullets, headings), and restructuring complex ideas into clearer explanations. Good writing is clear writing.
+---
+
+<main x-data="ReadabilityScoreChecker">
+  <div class="prose max-w-3xl mx-auto">
+    <h1>Readability Score Checker</h1>
+    <form @submit.prevent class="space-y-5">
+      <div>
+        <label for="inputText">Your Text</label>
+        <textarea id="inputText"
+                  x-ref="inputText"
+                  x-model="inputText"
+                  class="w-full h-52"
+                  placeholder="Paste or type your content here…"></textarea>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <button @click="analyze" type="submit" class="text-bold leading-4">
+          <span x-text="buttonLabel">Analyze Readability</span>
+        </button>
+
+        <div class="cursor-pointer font-mono text-sm px-3 py-1.5 rounded-full transition-all bg-gray-100 hover:bg-gray-200 border-2 border-gray-300 inline-flex gap-2 items-center text-terminal"
+             x-show="showResults" x-cloak
+             @click="reset">
+          {% phicon "trash", "duotone", { class: "size-5" } %}
+          <span class="hidden xs:inline">reset</span>
+        </div>
+      </div>
+
+      <p class="text-red-600 text-sm md:text-base mt-2" x-show="state==='error' && errorMessage" x-text="String(errorMessage)" x-cloak></p>
+    </form>
+  </div>
+
+  <div class="prose max-w-3xl mx-auto mt-8" x-show="state!=='idle'" x-cloak>
+    <template x-if="state==='analyzing'">
+      <div class="flex items-center gap-3 text-sm md:text-base">
+        <div class="size-6 rounded-full border-2 border-orange-300 border-r-transparent animate-spin"></div>
+        <span>Analyzing text…</span>
+      </div>
+    </template>
+
+    <template x-if="state==='success'">
+      <div>
+        <h2 class="mt-0">Overview</h2>
+        <ul class="list-none text-sm md:text-base font-mono">
+          <li>Sentences: <strong x-text="sentences"></strong></li>
+          <li>Words: <strong x-text="words"></strong></li>
+          <li>Unique words: <strong x-text="uniqueWords"></strong></li>
+          <li>Syllables: <strong x-text="syllables"></strong></li>
+          <li>Complex words (3+ syllables): <strong x-text="complexWords"></strong></li>
+          <li>Avg. sentence length: <strong x-text="avgSentenceLen.toFixed(2)"></strong></li>
+          <li>Avg. syllables/word: <strong x-text="avgSyllablesPerWord.toFixed(2)"></strong></li>
+        </ul>
+
+        <div class="mt-8">
+          <h3>Readability scores</h3>
+          <ol class="not-prose list-none p-0 m-0 space-y-2">
+            <li class="flex items-center justify-between gap-4 border rounded-xl p-3">
+              <div>
+                <div class="font-semibold">Flesch Reading Ease</div>
+                <div class="text-sm opacity-80" x-text="readingEaseInfo().label"></div>
+              </div>
+              <div class="shrink-0 font-mono text-base" x-text="readingEase.toFixed(2)"></div>
+            </li>
+            <li class="flex items-center justify-between gap-4 border rounded-xl p-3">
+              <div>
+                <div class="font-semibold">Flesch–Kincaid Grade Level</div>
+                <div class="text-sm opacity-80" x-text="gradeInfo(fkGrade).label"></div>
+              </div>
+              <div class="shrink-0 font-mono text-base" x-text="fkGrade.toFixed(2)"></div>
+            </li>
+            <li class="flex items-center justify-between gap-4 border rounded-xl p-3">
+              <div>
+                <div class="font-semibold">Gunning Fog Index</div>
+                <div class="text-sm opacity-80" x-text="gradeInfo(fogIndex).label"></div>
+              </div>
+              <div class="shrink-0 font-mono text-base" x-text="fogIndex.toFixed(2)"></div>
+            </li>
+            <li class="flex items-center justify-between gap-4 border rounded-xl p-3">
+              <div>
+                <div class="font-semibold">SMOG Index</div>
+                <div class="text-sm opacity-80" x-text="gradeInfo(smogIndex).label"></div>
+              </div>
+              <div class="shrink-0 font-mono text-base" x-text="smogIndex.toFixed(2)"></div>
+            </li>
+            <li class="flex items-center justify-between gap-4 border rounded-xl p-3">
+              <div>
+                <div class="font-semibold">Coleman–Liau Index</div>
+                <div class="text-sm opacity-80" x-text="gradeInfo(colemanLiau).label"></div>
+              </div>
+              <div class="shrink-0 font-mono text-base" x-text="colemanLiau.toFixed(2)"></div>
+            </li>
+            <li class="flex items-center justify-between gap-4 border rounded-xl p-3">
+              <div>
+                <div class="font-semibold">Automated Readability Index (ARI)</div>
+                <div class="text-sm opacity-80" x-text="gradeInfo(ari).label"></div>
+              </div>
+              <div class="shrink-0 font-mono text-base" x-text="ari.toFixed(2)"></div>
+            </li>
+          </ol>
+        </div>
+
+        <div class="mt-8">
+          <h3>Suggestions</h3>
+          <ul class="not-prose list-disc pl-6 text-sm md:text-base">
+            <template x-for="s in suggestions">
+              <li x-text="s"></li>
+            </template>
+          </ul>
+        </div>
+
+        <div class="mt-8 text-sm text-gray-600">
+          <p>
+            Guidance: aim for a Flesch Reading Ease of 60–70 and grade level 7–8 for general audiences. Use short sentences and simple vocabulary for the clearest communication.
+          </p>
+        </div>
+      </div>
+    </template>
+  </div>
+
+  <article class="prose max-w-3xl mx-auto mt-12">
+    <h2>About this tool</h2>
+    <p>
+      Evaluate and improve how easy your writing is to read and understand. Paste your text, click <code>Analyze</code>, and see detailed scores and practical suggestions — no software installation required.
+    </p>
+    <h2>Frequently Asked Questions</h2>
+    <div x-data="{ openIndex: 0 }" class="text-base" itemscope itemtype="https://schema.org/FAQPage">
+      {% for item in faq %}
+        {% set i = loop.index0 %}
+        <details class="mb-4 border-2 border-orange-200 rounded-2xl overflow-hidden" :open="true" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <summary class="cursor-pointer px-4 py-3 flex items-center justify-between gap-4 font-semibold hover:text-red-600"
+                   @click.prevent="openIndex = (openIndex === {{ i }}) ? -1 : {{ i }}">
+            <span itemprop="name">{{ item.question }}</span>
+            <span class="shrink-0 size-5 transition-transform duration-200"
+                  aria-hidden="true"
+                  :class="{ 'rotate-180': openIndex=== {{ i }}, 'rotate-0': openIndex!== {{ i }} }">
+              {% phicon "caret-down", "bold", { class: "size-5" } %}
+            </span>
+          </summary>
+          <div x-show="openIndex === {{ i }}" x-collapse itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <div class="px-4 pb-4 text-sm leading-relaxed clean-prose [&_table]:-mx-4 [&_table]:w-[calc(100%+2rem)]" itemprop="text">
+              {{ item.answer | markdownIt | safe }}
+            </div>
+          </div>
+        </details>
+      {% endfor %}
+    </div>
+  </article>
+</main>

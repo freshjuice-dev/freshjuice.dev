@@ -1,0 +1,219 @@
+---
+title: "Link Checker"
+desc: "Scan a page and categorize all links: internal, external, nofollow, and non-HTTP schemes like mailto/tel/javascript. Great for SEOs, developers, and content editors."
+icon: "link"
+type: seo
+partialScripts:
+  - alpine-data/link-checker
+faq:
+  - question: "What does the Link Checker do?"
+    answer: "It scans a given web page and extracts links, categorizing them into internal, external, nofollow, and non-HTTP (mailto, tel, ftp, etc.)."
+  - question: "Is this the same as the Broken Link Checker?"
+    answer: "No. The Link Checker focuses on discovering and categorizing links on a page, while the Broken Link Checker tests link HTTP status codes to find dead links."
+  - question: "What URL formats are supported?"
+    answer: "Please use fully-qualified URLs starting with http or https (e.g., https://example.com)."
+---
+
+<main class="">
+
+  <div class="prose max-w-2xl mx-auto mt-12">
+
+    <h1>{{ title }}</h1>
+    <p>
+      Ensure the integrity of your website's link structure. Enter a URL, run the check,
+      and instantly see internal, external, nofollow, and special non-HTTP links like
+      <code>mailto:</code> and <code>tel:</code>. Perfect for webmasters and SEOs.
+    </p>
+
+    <div class="clean-prose space-y-4" x-data="LinkChecker">
+      <form @submit="checkLinks($event)" class="space-y-4">
+        <div>
+          <label for="urls">URLs</label>
+          <textarea id="urls" name="urls" placeholder="Enter your URLs" x-model="urls" required></textarea>
+          <p class="text-sm px-4 my-0">One line for each entry</p>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <button type="submit" :disabled="state !== 'idle'"
+                  x-text="state === 'loading' ? 'Checking...' : 'Check Links'">
+            Check Links
+          </button>
+
+          <div class="cursor-pointer font-mono text-sm px-3 py-1.5 rounded-full transition-all bg-gray-100 hover:bg-gray-200 border-2 border-gray-300 inline-flex gap-2 items-center text-terminal"
+               x-show="showResults" x-cloak
+               @click.prevent="reset()">
+            {% phicon "trash", "duotone", { class: "size-5" } %}
+            <span class="hidden xs:inline">reset</span>
+          </div>
+        </div>
+
+        <div>
+
+        </div>
+        <div>
+          <span x-show="errorMessage !== ''" class="text-red-600 text-sm min-h-[1px] h-auto" x-text="errorMessage"></span>
+        </div>
+      </form>
+
+      <template x-if="result.length > 0">
+        <div class="results flex flex-col gap-4">
+          <template x-for="(item, index) in result" :key="index">
+
+            <div class="mb-4 border-2 border-orange-200 rounded-2xl overflow-hidden" :open="true">
+              <div class="cursor-pointer px-4 py-3 flex items-center justify-between gap-4 font-semibold"
+                @click.prevent="openIndex = (openIndex === index ? -1 : index)" >
+
+                <div class="flex items-center gap-4">
+                  <span>
+                    <span x-show="item.status === 'loading'">
+                      {% phicon "spinner", "bold", { class: "size-5 animate-spin [animation-duration:1.5s]" } %}
+                    </span>
+                    <span x-show="item.status === 'success'">
+                      ✅
+                    </span>
+                    <span x-show="item.status === 'error'">
+                      ❌
+                    </span>
+                  </span>
+                  <div class="grid">
+                    <span class="text-sm md:text-base truncate" x-text="item.url"></span>
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-4">
+                  <span class="text-xs text-red-600 whitespace-nowrap" x-text="item.status === 'error' ? `Bad Request` : ``"></span>
+
+                  <span class="shrink-0 size-5 transition-transform duration-200"
+                        aria-hidden="true"
+                        x-show="item.status === 'success'"
+                        :class="openIndex === index  && item.status === 'success' ?`rotate-180`:`rotate-0`">
+                    {% phicon "caret-down", "bold", { class: "size-5" } %}
+                  </span>
+                </div>
+              </div>
+
+              <div x-show="openIndex === index && item.status === 'success'" x-collapse>
+                <div class="mt-4 text-sm leading-relaxed clean-prose">
+
+                  <div class="grid gap-6">
+
+                    <div class="border-2 border-orange-200 rounded-2xl overflow-hidden">
+                      <div class="px-4 py-3 font-semibold flex items-center justify-between">
+                        <span>Internal Links</span>
+                        <span class="text-xs text-gray-600" x-text="item.data.internal_links.length + ' found'"></span>
+                      </div>
+                      <div class="px-4 pb-3">
+                        <template x-if="item.data.internal_links.length === 0">
+                          <p class="text-sm text-gray-600">No internal links found.</p>
+                        </template>
+                        <ul class="list-disc pl-5 space-y-1">
+                          <template x-for="(link, i) in item.data.internal_links" :key="i">
+                            <li>
+                              <a class="truncate whitespace-nowrap" target="_blank" rel="nofollow noopener" :href="setRefUTMs(link)" x-text="link"></a>
+                            </li>
+                          </template>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="border-2 border-orange-200 rounded-2xl overflow-hidden">
+                      <div class="px-4 py-3 font-semibold flex items-center justify-between">
+                        <span>External Links</span>
+                        <span class="text-xs text-gray-600" x-text="item.data.external_links.length + ' found'"></span>
+                      </div>
+                      <div class="px-4 pb-3">
+                        <template x-if="item.data.external_links.length === 0">
+                          <p class="text-sm text-gray-600">No external links found.</p>
+                        </template>
+                        <ul class="list-disc pl-5 space-y-1">
+                          <template x-for="(link, i) in item.data.external_links" :key="i">
+                            <li>
+                              <a class="truncate whitespace-nowrap" target="_blank" rel="nofollow noopener" :href="setRefUTMs(link)" x-text="link"></a>
+                            </li>
+                          </template>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="border-2 border-orange-200 rounded-2xl overflow-hidden">
+                      <div class="px-4 py-3 font-semibold flex items-center justify-between">
+                        <span>Nofollow Links</span>
+                        <span class="text-xs text-gray-600" x-text="item.data.nofollow_links.length + ' found'"></span>
+                      </div>
+                      <div class="px-4 pb-3">
+                        <template x-if="item.data.nofollow_links.length === 0">
+                          <p class="text-sm text-gray-600">No nofollow links found.</p>
+                        </template>
+                        <ul class="list-disc pl-5 space-y-1">
+                          <template x-for="(link, i) in item.data.nofollow_links" :key="i">
+                            <li>
+                              <a class="truncate whitespace-nowrap" target="_blank" rel="nofollow noopener" :href="setRefUTMs(link)" x-text="link"></a>
+                            </li>
+                          </template>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="border-2 border-orange-200 rounded-2xl overflow-hidden">
+                      <div class="px-4 py-3 font-semibold flex items-center justify-between">
+                        <span>Non-HTTP Links</span>
+                        <span class="text-xs text-gray-600">
+                          <span x-text="Object.values(item.data.non_http_links).reduce((n, arr) => n + ((arr && arr.length) ? arr.length : 0), 0)"></span>
+                          found
+                        </span>
+                      </div>
+                      <div class="px-4 pb-3">
+                        <template x-if="Object.keys(item.data.non_http_links).length === 0">
+                          <p class="text-sm text-gray-600">No non-HTTP links found.</p>
+                        </template>
+                        <template x-for="(links, scheme) in item.data.non_http_links" :key="scheme">
+                          <div class="mb-3">
+                            <div class="font-semibold text-sm capitalize" x-text="scheme"></div>
+                            <ul class="list-disc pl-5 space-y-1 mt-1">
+                              <template x-for="(link, i) in links" :key="scheme + '-' + i">
+                                <li>
+                                  <a class="truncate whitespace-nowrap" target="_blank" rel="nofollow noopener" :href="setRefUTMs(link)" x-text="link"></a>
+                                </li>
+                              </template>
+                            </ul>
+                          </div>
+                        </template>
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </template>
+        </div>
+      </template>
+    </div>
+
+    <h2>Frequently Asked Questions</h2>
+    <div x-data="{ openIndex: 0 }" class="text-base" itemscope itemtype="https://schema.org/FAQPage">
+      {% for item in faq %}
+        {% set i = loop.index0 %}
+        <details class="mb-4 border-2 border-orange-200 rounded-2xl overflow-hidden" :open="true" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <summary class="cursor-pointer px-4 py-3 flex items-center justify-between gap-4 font-semibold hover:text-red-600"
+                   @click.prevent="openIndex = (openIndex === {{ i }}) ? -1 : {{ i }}">
+            <span itemprop="name">{{ item.question }}</span>
+            <span class="shrink-0 size-5 transition-transform duration-200"
+                  aria-hidden="true"
+                  :class="openIndex==={{ i }}?`rotate-180`:`rotate-0`">
+              {% phicon "caret-down", "bold", { class: "size-5" } %}
+            </span>
+          </summary>
+          <div x-show="openIndex === {{ i }}" x-collapse itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <div class="px-4 pb-4 text-sm leading-relaxed clean-prose [&_table]:-mx-4 [&_table]:w-[calc(100%+2rem)]" itemprop="text">
+              {{ item.answer | markdownIt | safe }}
+            </div>
+          </div>
+        </details>
+      {% endfor %}
+    </div>
+
+  </div>
+
+</main>

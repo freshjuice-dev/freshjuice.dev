@@ -157,7 +157,7 @@ faq:
                         <ul class="list-disc pl-5 space-y-1">
                           <template x-for="(link, i) in item.data.internal_links" :key="i">
                             <li>
-                              <a class="text-current truncate whitespace-nowrap" target="_blank" rel="nofollow noopener" :href="setRefUTMs(link)" x-text="link"></a>
+                              <a class="text-current truncate whitespace-nowrap" target="_blank" rel="nofollow noopener" :href="setRefUTMs(link)" x-text="formatInternalDisplay(link)"></a>
                             </li>
                           </template>
                         </ul>

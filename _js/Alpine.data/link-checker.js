@@ -64,6 +64,17 @@ document.addEventListener("alpine:init", () => {
       };
     },
 
+    // Display helper: strip protocol and domain from internal URLs for view only
+    formatInternalDisplay(link) {
+      try {
+        const u = new URL(link);
+        return `${u.pathname}${u.search}${u.hash}` || "/";
+      } catch (e) {
+        // If it isn't a full URL (unexpected), fall back to original
+        return link;
+      }
+    },
+
     async checkLinks(event) {
       event.preventDefault();
 

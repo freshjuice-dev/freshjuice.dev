@@ -99,12 +99,6 @@ faq:
             Check Links
           </button>
 
-          <div class="cursor-pointer font-mono text-sm px-3 py-1.5 rounded-full transition-all bg-gray-100 hover:bg-gray-200 border-2 border-gray-300 inline-flex gap-2 items-center text-terminal"
-               x-show="showResults" x-cloak
-               @click.prevent="reset()">
-            {% phicon "trash", "duotone", { class: "size-5" } %}
-            <span class="hidden xs:inline">reset</span>
-          </div>
         </div>
 
         <div>
@@ -226,7 +220,7 @@ faq:
                             <ul class="list-disc pl-5 space-y-1 mt-1">
                               <template x-for="(link, i) in links" :key="scheme + '-' + i">
                                 <li>
-                                  <a class="text-current truncate whitespace-nowrap" target="_blank" rel="nofollow noopener" :href="setRefUTMs(link)" x-text="link"></a>
+                                  <span class="text-current truncate whitespace-nowrap" x-text="link"></span>
                                 </li>
                               </template>
                             </ul>

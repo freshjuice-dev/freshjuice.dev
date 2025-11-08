@@ -154,19 +154,10 @@ document.addEventListener("alpine:init", () => {
 
       this.state = "success";
 
-      // Do not auto-reset to idle to avoid clearing visible results
-    },
-
-    reset() {
-      this.urls = "";
-      this.result = [];
-      this.errorMessage = "";
-      this.openIndex = -2;
-      this.state = "idle";
-    },
-
-    get showResults() {
-      return Array.isArray(this.result) && this.result.length > 0;
+      // Auto-reset to idle after a short delay so the button becomes clickable again
+      setTimeout(() => {
+        this.state = "idle";
+      }, 2000);
     },
 
     init() {

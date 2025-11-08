@@ -70,9 +70,15 @@ document.addEventListener("alpine:init", () => {
       this.result = [];
       this.errorMessage = "";
 
-      const checkList = this.urls.split("\n").reduce((list, link) => {
-        const cleanedLink = this.checkUrl(link);
-        if (cleanedLink && cleanedLink.trim() !== "") {
+      const seen = new Set();
+      const checkList = this.urls.split("\n").reduce((list, raw) => {
+        const cleanedLink = this.checkUrl(raw);
+        if (
+          cleanedLink &&
+          cleanedLink.trim() !== "" &&
+          !seen.has(cleanedLink)
+        ) {
+          seen.add(cleanedLink);
           list.push(cleanedLink);
         }
         return list;

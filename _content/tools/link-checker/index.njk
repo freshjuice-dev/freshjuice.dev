@@ -7,11 +7,71 @@ partialScripts:
   - alpine-data/link-checker
 faq:
   - question: "What does the Link Checker do?"
-    answer: "It scans a given web page and extracts links, categorizing them into internal, external, nofollow, and non-HTTP (mailto, tel, ftp, etc.)."
+    answer: >
+      The Link Checker scans a page and collects every link it can find. It then
+      groups them into internal, external, nofollow, and non-HTTP links (like
+      mailto, tel, javascript, ftp, etc.) so you can quickly understand how your
+      page is wired.
+
+  - question: "How do I use the Link Checker?"
+    answer: >
+      Paste one or more URLs into the field, click “Check Links,” and let the tool
+      run. For each page, you’ll get a structured report showing internal links,
+      external links, nofollow links, and special non-HTTP schemes so you can scan
+      the results at a glance.
+
+  - question: "What information does the Link Checker provide?"
+    answer: >
+      You’ll see total counts for internal, external, nofollow, and non-HTTP links,
+      plus the actual URLs in each group. It’s perfect for spotting odd patterns
+      (like too many external links or missing internal links) and for planning
+      internal linking improvements.
+
   - question: "Is this the same as the Broken Link Checker?"
-    answer: "No. The Link Checker focuses on discovering and categorizing links on a page, while the Broken Link Checker tests link HTTP status codes to find dead links."
+    answer: >
+      No. The Link Checker focuses on discovery and categorization—what kinds of
+      links you have and where they point. If you want to test whether links are
+      actually working and see HTTP status codes (like 404 or 500), use the Broken
+      Link Checker instead.
+
+  - question: "Why is it important to check links on my site?"
+    answer: >
+      Healthy links mean better navigation, happier users, and cleaner SEO signals.
+      A quick audit helps you catch outdated URLs, missing internal links, or
+      overly aggressive external linking before they turn into bounce rates and
+      ranking drops.
+
   - question: "What URL formats are supported?"
-    answer: "Please use fully-qualified URLs starting with http or https (e.g., https://example.com)."
+    answer: >
+      Use fully qualified URLs that start with http or https, for example:
+      https://example.com/page. Relative URLs, files on your computer, or
+      browser-only paths aren’t supported.
+
+  - question: "What are internal links?"
+    answer: >
+      Internal links are links that point to other pages on the same domain (or
+      subdomain, depending on your setup). They help visitors move around your
+      site, and they help search engines understand which pages matter most.
+
+  - question: "What are external links?"
+    answer: >
+      External links point from your site to a different domain. They’re useful
+      for citing sources, sending users to tools or partners, and adding context—
+      but they should stay relevant, trustworthy, and up to date.
+
+  - question: "What are nofollow links and when should I use them?"
+    answer: >
+      Nofollow links use the rel="nofollow" attribute to tell search engines not to
+      treat them as an endorsement. They’re commonly used for paid placements,
+      untrusted content, or links you don’t want to pass SEO value to, while still
+      keeping them clickable for users.
+
+  - question: "How often should I check my site links?"
+    answer: >
+      For small sites, a monthly check is usually enough. Bigger, fast-moving
+      sites or blogs benefit from weekly audits and extra checks after major
+      content updates or site restructures. The more you change, the more often
+      you should scan.
 ---
 
 <main class="">
@@ -20,9 +80,9 @@ faq:
 
     <h1>{{ title }}</h1>
     <p>
-      Ensure the integrity of your website's link structure. Enter a URL, run the check,
-      and instantly see internal, external, nofollow, and special non-HTTP links like
-      <code>mailto:</code> and <code>tel:</code>. Perfect for webmasters and SEOs.
+      Ensure the integrity of your website’s link structure.
+      Enter any URL, run a quick scan, and instantly see all internal, external, nofollow, and even special links like <code>mailto:</code> and <code>tel:</code>.
+      Perfect for webmasters and SEO pros who like their sites clean and connected.
     </p>
 
     <div class="clean-prose space-y-4" x-data="LinkChecker">
@@ -65,15 +125,9 @@ faq:
 
                 <div class="flex items-center gap-4">
                   <span>
-                    <span x-show="item.status === 'loading'">
-                      {% phicon "spinner", "bold", { class: "size-5 animate-spin [animation-duration:1.5s]" } %}
-                    </span>
-                    <span x-show="item.status === 'success'">
-                      ✅
-                    </span>
-                    <span x-show="item.status === 'error'">
-                      ❌
-                    </span>
+                    <span x-show="item.status === 'loading'">{% phicon "spinner", "bold", { class: "size-5 animate-spin [animation-duration:1.5s]" } %}</span>
+                    <span x-show="item.status === 'success'">✅</span>
+                    <span x-show="item.status === 'error'">❌</span>
                   </span>
                   <div class="grid">
                     <span class="text-sm md:text-base truncate" x-text="item.url"></span>
@@ -93,69 +147,69 @@ faq:
               </div>
 
               <div x-show="openIndex === index && item.status === 'success'" x-collapse>
-                <div class="mt-4 text-sm leading-relaxed clean-prose">
+                <div class="text-sm leading-relaxed clean-prose">
 
                   <div class="grid gap-6">
 
-                    <div class="border-2 border-orange-200 rounded-2xl overflow-hidden">
-                      <div class="px-4 py-3 font-semibold flex items-center justify-between">
+                    <div class="">
+                      <div class="px-4 py-3 font-semibold flex items-center justify-between bg-gray-100">
                         <span>Internal Links</span>
                         <span class="text-xs text-gray-600" x-text="item.data.internal_links.length + ' found'"></span>
                       </div>
-                      <div class="px-4 pb-3">
+                      <div class="px-4 pb-3 bg-gray-50 text-xs font-mono">
                         <template x-if="item.data.internal_links.length === 0">
                           <p class="text-sm text-gray-600">No internal links found.</p>
                         </template>
                         <ul class="list-disc pl-5 space-y-1">
                           <template x-for="(link, i) in item.data.internal_links" :key="i">
                             <li>
-                              <a class="truncate whitespace-nowrap" target="_blank" rel="nofollow noopener" :href="setRefUTMs(link)" x-text="link"></a>
+                              <a class="text-current truncate whitespace-nowrap" target="_blank" rel="nofollow noopener" :href="setRefUTMs(link)" x-text="link"></a>
                             </li>
                           </template>
                         </ul>
                       </div>
                     </div>
 
-                    <div class="border-2 border-orange-200 rounded-2xl overflow-hidden">
-                      <div class="px-4 py-3 font-semibold flex items-center justify-between">
+                    <div class="">
+                      <div class="px-4 py-3 font-semibold flex items-center justify-between bg-gray-100">
                         <span>External Links</span>
                         <span class="text-xs text-gray-600" x-text="item.data.external_links.length + ' found'"></span>
                       </div>
-                      <div class="px-4 pb-3">
+                      <div class="px-4 pb-3 bg-gray-50 text-xs font-mono">
                         <template x-if="item.data.external_links.length === 0">
                           <p class="text-sm text-gray-600">No external links found.</p>
                         </template>
                         <ul class="list-disc pl-5 space-y-1">
                           <template x-for="(link, i) in item.data.external_links" :key="i">
                             <li>
-                              <a class="truncate whitespace-nowrap" target="_blank" rel="nofollow noopener" :href="setRefUTMs(link)" x-text="link"></a>
+                              <a class="text-current truncate whitespace-nowrap" target="_blank" rel="nofollow noopener" :href="setRefUTMs(link)" x-text="link"></a>
                             </li>
                           </template>
                         </ul>
                       </div>
                     </div>
 
-                    <div class="border-2 border-orange-200 rounded-2xl overflow-hidden">
-                      <div class="px-4 py-3 font-semibold flex items-center justify-between">
+                    <div class="">
+                      <div class="px-4 py-3 font-semibold flex items-center justify-between bg-gray-100">
                         <span>Nofollow Links</span>
                         <span class="text-xs text-gray-600" x-text="item.data.nofollow_links.length + ' found'"></span>
                       </div>
-                      <div class="px-4 pb-3">
+                      <div class="px-4 pb-3 bg-gray-50 text-xs font-mono">
                         <template x-if="item.data.nofollow_links.length === 0">
                           <p class="text-sm text-gray-600">No nofollow links found.</p>
                         </template>
                         <ul class="list-disc pl-5 space-y-1">
                           <template x-for="(link, i) in item.data.nofollow_links" :key="i">
                             <li>
-                              <a class="truncate whitespace-nowrap" target="_blank" rel="nofollow noopener" :href="setRefUTMs(link)" x-text="link"></a>
+                              <a class="text-current truncate whitespace-nowrap" target="_blank" rel="nofollow noopener" :href="setRefUTMs(link)" x-text="link"></a>
                             </li>
                           </template>
                         </ul>
                       </div>
                     </div>
 
-                    <div class="border-2 border-orange-200 rounded-2xl overflow-hidden">
-                      <div class="px-4 py-3 font-semibold flex items-center justify-between">
+                    <div class="">
+                      <div class="px-4 py-3 font-semibold flex items-center justify-between bg-gray-100">
                         <span>Non-HTTP Links</span>
                         <span class="text-xs text-gray-600">
                           <span x-text="Object.values(item.data.non_http_links).reduce((n, arr) => n + ((arr && arr.length) ? arr.length : 0), 0)"></span>
@@ -167,12 +221,12 @@ faq:
                           <p class="text-sm text-gray-600">No non-HTTP links found.</p>
                         </template>
                         <template x-for="(links, scheme) in item.data.non_http_links" :key="scheme">
-                          <div class="mb-3">
+                          <div class="my-3">
                             <div class="font-semibold text-sm capitalize" x-text="scheme"></div>
                             <ul class="list-disc pl-5 space-y-1 mt-1">
                               <template x-for="(link, i) in links" :key="scheme + '-' + i">
                                 <li>
-                                  <a class="truncate whitespace-nowrap" target="_blank" rel="nofollow noopener" :href="setRefUTMs(link)" x-text="link"></a>
+                                  <a class="text-current truncate whitespace-nowrap" target="_blank" rel="nofollow noopener" :href="setRefUTMs(link)" x-text="link"></a>
                                 </li>
                               </template>
                             </ul>
@@ -191,28 +245,7 @@ faq:
       </template>
     </div>
 
-    <h2>Frequently Asked Questions</h2>
-    <div x-data="{ openIndex: 0 }" class="text-base" itemscope itemtype="https://schema.org/FAQPage">
-      {% for item in faq %}
-        {% set i = loop.index0 %}
-        <details class="mb-4 border-2 border-orange-200 rounded-2xl overflow-hidden" :open="true" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-          <summary class="cursor-pointer px-4 py-3 flex items-center justify-between gap-4 font-semibold hover:text-red-600"
-                   @click.prevent="openIndex = (openIndex === {{ i }}) ? -1 : {{ i }}">
-            <span itemprop="name">{{ item.question }}</span>
-            <span class="shrink-0 size-5 transition-transform duration-200"
-                  aria-hidden="true"
-                  :class="openIndex==={{ i }}?`rotate-180`:`rotate-0`">
-              {% phicon "caret-down", "bold", { class: "size-5" } %}
-            </span>
-          </summary>
-          <div x-show="openIndex === {{ i }}" x-collapse itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-            <div class="px-4 pb-4 text-sm leading-relaxed clean-prose [&_table]:-mx-4 [&_table]:w-[calc(100%+2rem)]" itemprop="text">
-              {{ item.answer | markdownIt | safe }}
-            </div>
-          </div>
-        </details>
-      {% endfor %}
-    </div>
+    {% include "partials/faq-section.njk" %}
 
   </div>
 

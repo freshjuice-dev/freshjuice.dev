@@ -172,27 +172,6 @@ faq:
     <p>
       Evaluate and improve how easy your writing is to read and understand. Paste your text, click <code>Analyze</code>, and see detailed scores and practical suggestions — no software installation required.
     </p>
-    <h2>Frequently Asked Questions</h2>
-    <div x-data="{ openIndex: 0 }" class="text-base" itemscope itemtype="https://schema.org/FAQPage">
-      {% for item in faq %}
-        {% set i = loop.index0 %}
-        <details class="mb-4 border-2 border-orange-200 rounded-2xl overflow-hidden" :open="true" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-          <summary class="cursor-pointer px-4 py-3 flex items-center justify-between gap-4 font-semibold hover:text-red-600"
-                   @click.prevent="openIndex = (openIndex === {{ i }}) ? -1 : {{ i }}">
-            <span itemprop="name">{{ item.question }}</span>
-            <span class="shrink-0 size-5 transition-transform duration-200"
-                  aria-hidden="true"
-                  :class="{ 'rotate-180': openIndex=== {{ i }}, 'rotate-0': openIndex!== {{ i }} }">
-              {% phicon "caret-down", "bold", { class: "size-5" } %}
-            </span>
-          </summary>
-          <div x-show="openIndex === {{ i }}" x-collapse itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-            <div class="px-4 pb-4 text-sm leading-relaxed clean-prose [&_table]:-mx-4 [&_table]:w-[calc(100%+2rem)]" itemprop="text">
-              {{ item.answer | markdownIt | safe }}
-            </div>
-          </div>
-        </details>
-      {% endfor %}
-    </div>
+    {% include "partials/faq-section.njk" %}
   </article>
 </main>

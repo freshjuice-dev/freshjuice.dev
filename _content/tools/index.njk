@@ -8,7 +8,6 @@ permalink: /tools/
 {% set tagsMap = {
   'dev': 'Development',
   'seo': 'SEO',
-  'utils': 'Utilities',
   'text': 'Text',
   'design': 'Design',
   'marketing': 'Marketing'
@@ -18,26 +17,53 @@ permalink: /tools/
 
     <h1>Fresh Tools</h1>
 
-    <div class="grid sm:grid-cols-2 gap-4 lg:gap-8">
-      {% set toolslist = collections.tools %}
-      {% for item in toolslist | reverse %}
-        {%- if item.fileSlug | slugify != "tools" %}
-          {% set grad = gradients[loop.index0 % gradients.length] %}
-          <article class="bg-cursor/50 border-2 border-orange-200 hover:border-orange-400 transition-all duration-300 ease-in-out rounded-2xl relative overflow-hidden hover:brightness-110 group"
-                   data-type="{{ item.data.type }}">
-            <div class="relative z-10 p-4 md:p-8">
-              <h3 class="text-lg font-medium mt-0 mb-3 w-full flex gap-2 group-hover:text-orange-600  ease-in-out duration-300">
-                {% phicon item.data.icon, "regular", { class: "size-7 text-current" } %}
-                <a class="text-current text-pretty inline-block no-underline" href="/tools/{{ item.fileSlug | slugify }}/">
-                  <span class="absolute inset-0"></span>
-                  {{ item.data.title }}
-                </a>
-              </h3>
-              <p class="m-0 text-sm line-clamp-4">{{ item.data.desc }}</p>
-            </div>
-          </article>
-        {%- endif %}
-      {% endfor %}
+    <div class="" x-data="{ selected: null }">
+      <div class="not-prose mt-4 mb-6 flex flex-wrap gap-2">
+        <button
+          type="button"
+          @click="selected = null"
+          :aria-pressed="(selected === null).toString()"
+          :class="(selected === null) ? 'bg-terminal text-white border-terminal' : 'bg-transparent text-orange-700 hover:bg-orange-50 border-orange-300'"
+          class="px-3 py-1.5 rounded-full border text-sm font-medium transition-colors">
+          All
+        </button>
+        <!-- Dynamic chips from tagsMap -->
+        {% for key, label in tagsMap %}
+          <button
+            type="button"
+            @click="selected === '{{ key }}' ? selected = null : selected = '{{ key }}'"
+            :aria-pressed="(selected === '{{ key }}').toString()"
+            :class="(selected === '{{ key }}') ? 'bg-terminal text-white border-terminal' : 'bg-transparent text-orange-700 hover:bg-orange-50 border-orange-300'"
+            class="px-3 py-1.5 rounded-full border text-sm font-medium transition-colors">
+            {{ label }}
+          </button>
+        {% endfor %}
+      </div>
+
+      <div class="grid sm:grid-cols-3 gap-4 lg:gap-8">
+        {% set toolslist = collections.tools %}
+        {% for item in toolslist | reverse %}
+          {%- if item.fileSlug | slugify != "tools" %}
+            {% set grad = gradients[loop.index0 % gradients.length] %}
+            <article class="bg-cursor/50 border-2 border-orange-200 hover:border-orange-400 transition-all duration-300 ease-in-out rounded-2xl relative overflow-hidden hover:brightness-110 group"
+                     data-type="{{ item.data.type }}"
+                     x-show="selected === null || selected === '{{ item.data.type }}'">
+              <div class="relative z-10 p-4">
+                <div class="inline-block px-2 py-1 rounded-full border text-xs font-medium text-orange-700 bg-orange-50 border-orange-300">
+                  {{ tagsMap[item.data.type] }}
+                </div>
+                <h3 class="text-base font-medium my-2 w-full flex gap-2 group-hover:text-orange-600  ease-in-out duration-300">
+                  <a class="text-current text-pretty inline-block no-underline" href="/tools/{{ item.fileSlug | slugify }}/">
+                    <span class="absolute inset-0"></span>
+                    {{ item.data.title }}
+                  </a>
+                </h3>
+                <p class="m-0 text-sm line-clamp-2">{{ item.data.desc }}</p>
+              </div>
+            </article>
+          {%- endif %}
+        {% endfor %}
+      </div>
     </div>
 
     <h2>Third Party Tools</h2>
@@ -67,15 +93,15 @@ permalink: /tools/
       {% for item in thirdPartyTools %}
         <article class="bg-cursor/50 border-2 border-orange-200 hover:border-orange-400 transition-all duration-300 ease-in-out rounded-2xl relative overflow-hidden hover:brightness-110 group"
                  data-type="{{ item.type }}">
-          <div class="relative z-10 p-4 md:p-8">
-            <h3 class="text-lg font-medium mt-0 mb-3 w-full flex gap-2 group-hover:text-orange-600  ease-in-out duration-300">
-              {% phicon item.icon, "regular", { class: "size-7 text-current" } %}
+          <div class="relative z-10 p-4">
+            {% phicon item.icon, "regular", { class: "size-7 text-current" } %}
+            <h3 class="text-base font-medium my-2 w-full flex gap-2 group-hover:text-orange-600  ease-in-out duration-300">
               <a class="text-current text-pretty inline-block no-underline" href="{{ item.link }}">
                 <span class="absolute inset-0"></span>
                 {{ item.title }}
               </a>
             </h3>
-            <p class="m-0 text-sm line-clamp-4">{{ item.desc }}</p>
+            <p class="m-0 text-sm line-clamp-2">{{ item.desc }}</p>
           </div>
         </article>
       {% endfor %}

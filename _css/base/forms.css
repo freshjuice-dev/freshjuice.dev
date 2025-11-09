@@ -47,6 +47,11 @@
     @apply mr-2;
   }
 
+  button,
+  [type="submit"] {
+    @apply cursor-pointer;
+  }
+
   .is-invalid,
   .error,
   .invalid,

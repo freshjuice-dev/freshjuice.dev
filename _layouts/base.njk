@@ -11,9 +11,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {%- if noindex %}
-      <meta name="robots" content="noindex">
-    {%- endif %}
+    <meta name="robots" content="{{ 'noindex, nofollow' if noindex else 'index, follow' }}">
 
     {% set pageTitle = ( (title or metadata.title) ~ " " ~ (suffix or metadata.suffix) ) | cleanTitle | trim %}
 

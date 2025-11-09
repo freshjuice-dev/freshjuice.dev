@@ -107,8 +107,8 @@ faq:
             <h3>Recommendations</h3>
             <ol class="not-prose list-none p-0 m-0 space-y-2">
               <template x-for="rec in sortedRecommendations" :key="rec.id">
-                <li class="border rounded-xl p-3">
-                  <div class="flex items-start justify-between gap-4">
+                <li class="border rounded-xl overflow-hidden ml-0 pl-0">
+                  <div class="flex items-start justify-between gap-4 p-3">
                     <div class="min-w-0">
                       <div class="flex flex-wrap items-center gap-2">
                         <span class="text-xs px-2 py-0.5 rounded-full border" :class="severityBadge(rec.severity)" x-text="severityLabel(rec.severity)"></span>
@@ -123,11 +123,15 @@ faq:
                       <span x-show="openIndex.includes(rec.id)" x-cloak>Hide code example</span>
                     </button>
                   </div>
-                  <div class="pt-3" x-show="openIndex.includes(rec.id) && hasRecDetails(rec)" x-collapse x-cloak>
+                  <div class="" x-show="openIndex.includes(rec.id) && hasRecDetails(rec)" x-collapse x-cloak>
                     <template x-if="rec.code">
-                      <div>
-                        <pre class="text-xs overflow-auto border rounded-lg p-3"><code class="language-html" x-html="escapeCode(rec.code)"></code></pre>
-                        <button class="text-xs mt-2" @click="copy(rec.code)">Copy code example</button>
+                      <div class="relative grid mt-3">
+                        <pre class="text-xs overflow-auto rounded-none p-3 my-0"><code class="language-html" x-html="escapeCode(rec.code)"></code></pre>
+                        <button class="flex items-center gap-1 text-xs font-mono text-cursor hover:text-yellow-400 bg-terminal border border-current rounded-full px-2 py-1 absolute z-10 top-2.5 right-2"
+                                @click="copy(rec.code)">
+                          {% phicon "copy", "duotone", { class: "size-3" } %}
+                          <span>Copy<span class="sr-only"> code example</span></span>
+                        </button>
                       </div>
                     </template>
                   </div>
@@ -141,7 +145,7 @@ faq:
           <h3>Detailed analysis</h3>
           <div class="not-prose grid gap-4">
             <!-- Semantics -->
-            <section class="border rounded-xl p-4">
+            <section class="border rounded-xl overflow-hidden p-4">
               <h4 class="text-lg m-0 flex items-center gap-2">{% phicon "tree-structure", "regular", { class: "size-5" } %} <span>Semantics</span></h4>
               <div class="text-sm mt-2 grid grid-cols-1 sm:grid-cols-2 gap-2">
                 <div>main: <strong x-text="bool(result && result.semantics && result.semantics.hasMain)"></strong> (<span x-text="result && result.semantics ? (result.semantics.mainCount || 0) : 0"></span>)</div>
@@ -156,7 +160,7 @@ faq:
               <template x-if="result && result.semantics && result.semantics.issues && result.semantics.issues.length">
                 <div class="pt-3">
                   <div class="text-sm font-semibold">Issues</div>
-                  <ul class="list-disc pl-6 text-sm">
+                  <ul class="list-disc pl-6 text-sm font-mono my-2">
                     <template x-for="i in result.semantics.issues">
                       <li class="text-red-700" x-text="i"></li>
                     </template>
@@ -166,9 +170,9 @@ faq:
               <template x-if="result && result.semantics && result.semantics.warnings && result.semantics.warnings.length">
                 <div class="pt-2">
                   <div class="text-sm font-semibold">Warnings</div>
-                  <ul class="list-disc pl-6 text-sm">
+                  <ul class="list-disc pl-6 text-sm font-mono my-2">
                     <template x-for="w in result.semantics.warnings">
-                      <li class="text-yellow-700" x-text="w"></li>
+                      <li class="text-yellow-800" x-text="w"></li>
                     </template>
                   </ul>
                 </div>
@@ -176,23 +180,23 @@ faq:
             </section>
 
             <!-- Meta -->
-            <section class="border rounded-xl p-4">
+            <section class="border rounded-xl overflow-hidden p-4">
               <h4 class="text-lg m-0 flex items-center gap-2">{% phicon "meta-logo", "regular", { class: "size-5" } %} <span>Meta tags</span></h4>
               <div class="text-sm mt-2 grid grid-cols-1 sm:grid-cols-2 gap-2">
-                <div>Title: <strong x-text="bool(result && result.meta && result.meta.hasTitle)"></strong> (<span x-text="result && result.meta ? (result.meta.titleLength || 0) : 0"></span> chars)</div>
-                <div>Description: <strong x-text="bool(result && result.meta && result.meta.hasMetaDescription)"></strong> (<span x-text="result && result.meta ? (result.meta.metaDescriptionLength || 0) : 0"></span> chars)</div>
-                <div>Viewport: <strong x-text="bool(result && result.meta && result.meta.hasViewport)"></strong></div>
-                <div>Charset: <strong x-text="bool(result && result.meta && result.meta.hasCharset)"></strong></div>
-                <div>Lang: <strong x-text="bool(result && result.meta && result.meta.hasLang)"></strong> (<span x-text="result && result.meta && result.meta.lang ? result.meta.lang : '-' "></span>)</div>
-                <div>Canonical: <strong x-text="bool(result && result.meta && result.meta.hasCanonical)"></strong></div>
-                <div>OG tags: <strong x-text="bool(result && result.meta && result.meta.hasOpenGraph)"></strong></div>
-                <div>Twitter Card: <strong x-text="bool(result && result.meta && result.meta.hasTwitterCard)"></strong></div>
-                <div>Robots: <strong x-text="bool(result && result.meta && result.meta.hasRobots)"></strong> (<span x-text="robotsFlags"></span>)</div>
+                <div>Title: <span class="font-mono"><strong x-text="bool(result && result.meta && result.meta.hasTitle)"></strong> (<span x-text="result && result.meta ? (result.meta.titleLength || 0) : 0"></span> chars)</span></div>
+                <div>Description: <span class="font-mono"><strong x-text="bool(result && result.meta && result.meta.hasMetaDescription)"></strong> (<span x-text="result && result.meta ? (result.meta.metaDescriptionLength || 0) : 0"></span> chars)</span></div>
+                <div>Viewport: <span class="font-mono"><strong x-text="bool(result && result.meta && result.meta.hasViewport)"></strong></span></div>
+                <div>Charset: <span class="font-mono"><strong x-text="bool(result && result.meta && result.meta.hasCharset)"></strong></span></div>
+                <div>Lang: <span class="font-mono"><strong x-text="bool(result && result.meta && result.meta.hasLang)"></strong> (<span x-text="result && result.meta && result.meta.lang ? result.meta.lang : '-' "></span>)</span></div>
+                <div>Canonical: <span class="font-mono"><strong x-text="bool(result && result.meta && result.meta.hasCanonical)"></strong></span></div>
+                <div>OG tags: <span class="font-mono"><strong x-text="bool(result && result.meta && result.meta.hasOpenGraph)"></strong></span></div>
+                <div>Twitter Card: <span class="font-mono"><strong x-text="bool(result && result.meta && result.meta.hasTwitterCard)"></strong></span></div>
+                <div>Robots: <span class="font-mono"><strong x-text="bool(result && result.meta && result.meta.hasRobots)"></strong> (<span x-text="robotsFlags"></span>)</span></div>
               </div>
               <template x-if="result && result.meta && result.meta.issues && result.meta.issues.length">
                 <div class="pt-3">
                   <div class="text-sm font-semibold">Issues</div>
-                  <ul class="list-disc pl-6 text-sm">
+                  <ul class="list-disc pl-6 text-sm font-mono my-2">
                     <template x-for="i in result.meta.issues">
                       <li class="text-red-700" x-text="i"></li>
                     </template>
@@ -202,9 +206,9 @@ faq:
               <template x-if="result && result.meta && result.meta.warnings && result.meta.warnings.length">
                 <div class="pt-2">
                   <div class="text-sm font-semibold">Warnings</div>
-                  <ul class="list-disc pl-6 text-sm">
+                  <ul class="list-disc pl-6 text-sm font-mono my-2">
                     <template x-for="w in result.meta.warnings">
-                      <li class="text-yellow-700" x-text="w"></li>
+                      <li class="text-yellow-800" x-text="w"></li>
                     </template>
                   </ul>
                 </div>
@@ -212,7 +216,7 @@ faq:
             </section>
 
             <!-- Headings -->
-            <section class="border rounded-xl p-4">
+            <section class="border rounded-xl overflow-hidden p-4">
               <h4 class="text-lg m-0 flex items-center gap-2">{% phicon "article-ny-times", "regular", { class: "size-5" } %} <span>Headings</span></h4>
               <div class="text-sm mt-2">
                 <div>H1 count: <strong x-text="result && result.headings ? (result.headings.h1Count || 0) : 0"></strong></div>
@@ -232,21 +236,21 @@ faq:
             </section>
 
             <!-- Schemas -->
-            <section class="border rounded-xl p-4">
-              <h4 class="text-lg m-0 flex items-center gap-2">{% phicon "brackets-curly", "regular", { class: "size-5" } %} <span>Schemas</span></h4>
+            <section class="border rounded-xl overflow-hidden">
+              <h4 class="text-lg m-0 pt-4 px-4 flex items-center gap-2">{% phicon "brackets-curly", "regular", { class: "size-5" } %} <span>Schemas</span></h4>
               <div class="text-sm mt-2">
-                <div class="flex flex-wrap gap-1" x-show="result && result.schemas && result.schemas.detected && result.schemas.detected.length">
+                <div class="flex flex-wrap gap-1 px-4" x-show="result && result.schemas && result.schemas.detected && result.schemas.detected.length">
                   <template x-for="s in result.schemas.detected">
                     <span class="text-xs px-2 py-0.5 rounded-full bg-gray-100 border text-gray-700" x-text="s"></span>
                   </template>
                 </div>
                 <template x-if="missingSchemasList && missingSchemasList.length">
-                  <div class="pt-2">
+                  <div class="pt-2 px-4">
                     <div class="text-sm font-semibold">Missing schemas (with suggestions)</div>
-                    <ol class="not-prose list-none p-0 m-0 space-y-2 mt-2">
-                      <template x-for="item in missingSchemasList">
-                        <li class="border rounded-lg p-3">
-                          <div class="flex items-start justify-between gap-3">
+                    <ol class="not-prose list-none p-0 m-0 mt-2">
+                      <template x-for="(item, idx) in missingSchemasList">
+                        <li class="border rounded-lg p-0 overflow-hidden" :class="idx === missingSchemasList.length - 1 ? 'mb-4' : 'mb-2'">
+                          <div class="flex items-center justify-between gap-3 p-3">
                             <div class="min-w-0">
                               <div class="flex flex-wrap items-center gap-2">
                                 <span class="text-xs px-2 py-0.5 rounded-full bg-yellow-50 border border-yellow-200 text-yellow-800" x-text="item.name"></span>
@@ -260,9 +264,13 @@ faq:
                               <span x-show="openIndex.includes(missingKey(item.name))" x-cloak>Hide JSON‑LD example</span>
                             </button>
                           </div>
-                          <div class="pt-2" x-show="openIndex.includes(missingKey(item.name)) && hasSchemaExample(item)" x-collapse x-cloak>
-                            <pre class="text-xs overflow-auto border rounded-lg p-3"><code class="language-json" x-html="escapeCode(jsonLdExamplePretty(item))"></code></pre>
-                            <button class="text-xs mt-2" @click="copy(jsonLdExamplePretty(item))">Copy JSON‑LD example</button>
+                          <div class="grid relative" x-show="openIndex.includes(missingKey(item.name)) && hasSchemaExample(item)" x-collapse x-cloak>
+                            <pre class="text-xs overflow-auto rounded-none p-3 m-0"><code class="language-json" x-html="escapeCode(jsonLdExamplePretty(item))"></code></pre>
+                            <button class="flex items-center gap-1 text-xs font-mono text-cursor hover:text-yellow-400 bg-terminal border border-current rounded-full px-2 py-1 absolute z-10 top-2.5 right-2"
+                                    @click="copy(jsonLdExamplePretty(item))">
+                              {% phicon "copy", "duotone", { class: "size-3" } %}
+                              <span>Copy<span class="sr-only"> JSON‑LD example</span></span>
+                            </button>
                           </div>
                         </li>
                       </template>
@@ -271,9 +279,15 @@ faq:
                 </template>
                 <template x-if="result && result.schemas && result.schemas.jsonld && result.schemas.jsonld.length">
                   <div class="pt-3">
-                    <div class="text-sm font-semibold">JSON‑LD</div>
-                    <pre class="text-xs overflow-auto border rounded-lg"><code class="language-json" x-html="escapeCode(jsonldPretty)"></code></pre>
-                    <button class="text-xs mt-2" @click="copy(jsonldPretty)">Copy JSON‑LD</button>
+                    <div class="text-sm font-semibold px-4 pb-4">JSON‑LD</div>
+                    <div class="grid relative">
+                      <pre class="text-xs overflow-auto rounded-none p-3 m-0"><code class="language-json" x-html="escapeCode(jsonldPretty)"></code></pre>
+                      <button class="flex items-center gap-1 text-xs font-mono text-cursor hover:text-yellow-400 bg-terminal border border-current rounded-full px-2 py-1 absolute z-10 top-2.5 right-2"
+                              @click="copy(jsonldPretty)">
+                        {% phicon "copy", "duotone", { class: "size-3" } %}
+                        <span>Copy<span class="sr-only"> JSON‑LD</span></span>
+                      </button>
+                    </div>
                   </div>
                 </template>
               </div>
@@ -282,7 +296,7 @@ faq:
             <!-- Accessibility -->
             <section class="border rounded-xl p-4">
               <h4 class="text-lg m-0 flex items-center gap-2">{% phicon "person-arms-spread", "regular", { class: "size-5" } %} <span>Accessibility</span></h4>
-              <div class="text-sm mt-2 grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <div class="text-sm mt-2 grid grid-cols-1 sm:grid-cols-2 gap-2 font-mono">
                 <div>Images without alt: <strong x-text="result && result.accessibility ? (result.accessibility.imagesWithoutAlt || 0) : 0"></strong> / <span x-text="result && result.accessibility ? (result.accessibility.totalImages || 0) : 0"></span></div>
                 <div>Images with empty alt: <strong x-text="result && result.accessibility ? (result.accessibility.imagesWithEmptyAlt || 0) : 0"></strong></div>
                 <div>Links without text: <strong x-text="result && result.accessibility ? (result.accessibility.linksWithoutText || 0) : 0"></strong> / <span x-text="result && result.accessibility ? (result.accessibility.totalLinks || 0) : 0"></span></div>
@@ -293,7 +307,7 @@ faq:
               <template x-if="result && result.accessibility && result.accessibility.issues && result.accessibility.issues.length">
                 <div class="pt-3">
                   <div class="text-sm font-semibold">Issues</div>
-                  <ul class="list-disc pl-6 text-sm">
+                  <ul class="list-disc pl-6 text-sm font-mono my-2">
                     <template x-for="i in result.accessibility.issues">
                       <li class="text-red-700" x-text="i"></li>
                     </template>
@@ -303,9 +317,9 @@ faq:
               <template x-if="result && result.accessibility && result.accessibility.warnings && result.accessibility.warnings.length">
                 <div class="pt-2">
                   <div class="text-sm font-semibold">Warnings</div>
-                  <ul class="list-disc pl-6 text-sm">
+                  <ul class="list-disc pl-6 text-sm font-mono my-2">
                     <template x-for="w in result.accessibility.warnings">
-                      <li class="text-yellow-700" x-text="w"></li>
+                      <li class="text-yellow-800" x-text="w"></li>
                     </template>
                   </ul>
                 </div>

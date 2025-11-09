@@ -122,7 +122,7 @@ document.addEventListener("alpine:init", () => {
     },
 
     bool(v) {
-      return v ? "✓" : "✗";
+      return v ? "✅" : "❌";
     },
 
     severityLabel(sev) {

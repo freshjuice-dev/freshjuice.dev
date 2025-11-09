@@ -2,6 +2,6 @@
 All Right Reserved.
 Except as otherwise noted,
 codebase and code snippets are licensed under
-the [MIT License](https://opensource.org/licenses/MIT)
+the [MIT License](https://opensource.org/license/MIT)
 and the [content (./\_content/)](./_content/) of this repo is licensed under
 the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/).

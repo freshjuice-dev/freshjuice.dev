@@ -10,13 +10,67 @@ partialScripts:
 faq:
   - question: "What does the SEO Analyzer check?"
     answer: >
-      It reviews your page for semantic HTML usage, meta tags and Open Graph/Twitter, heading structure, structured data (JSON‑LD, Microdata, RDFa), and common accessibility pitfalls. You’ll get a score and prioritized recommendations with copy‑ready code snippets where possible.
-  - question: "How accurate is the score?"
+      The analyzer performs a comprehensive on-page SEO audit across five key areas: **Semantic HTML** (proper use of main, header, footer, nav, article, section tags), **Meta Tags** (title, description, viewport, charset, lang attribute, canonical URL, Open Graph, Twitter Cards), **Heading Structure** (H1-H6 hierarchy and proper nesting), **Structured Data** (JSON-LD, Microdata, and RDFa schemas like Article, Organization, BreadcrumbList), and **Accessibility** (alt text on images, form labels, link descriptions, skip links). You'll receive a weighted score out of 100 plus actionable recommendations with code examples.
+
+  - question: "How is the SEO score calculated?"
+    answer: |-
+      The score is weighted across five categories:
+
+      **Meta Tags (25%)** — checks for title (30-60 chars optimal), meta description (120-160 chars optimal), lang attribute, viewport, and noindex warnings;
+
+      **Semantic HTML (25%)** — validates proper use of main (must be present once), header, footer, nav, and content wrapped in article/section tags;
+
+      **Headings (20%)** — ensures single H1, no skipped levels (e.g., H2→H4), and proper hierarchy;
+
+      **Structured Data (20%)** — looks for Article/BlogPosting, Organization, BreadcrumbList schemas and validates completeness;
+
+      **Accessibility (10%)** — checks images for alt text, forms for labels, links for descriptive text, and presence of skip links. Each category is scored 0-100, then weighted and combined. A score of 90+ is excellent, 75-89 is good, 50-74 needs improvement, and below 50 requires significant work.
+
+  - question: "What do the severity levels mean?"
+    answer: |-
+      Recommendations are prioritized by severity:
+
+      **Critical** issues (like missing title tag) will prevent search engines from properly indexing your page and should be fixed immediately.
+
+      **High** severity items (like missing meta description or alt text) significantly impact SEO and accessibility and should be addressed soon.
+
+      **Medium** issues (like heading hierarchy problems or missing schemas) improve rankings and user experience but won't break functionality.
+
+      **Low** priority items (like missing breadcrumbs or skip links) are best practices that provide incremental improvements. Fix issues from top to bottom for maximum impact.
+
+  - question: "Does it check all pages on my website?"
     answer: >
-      The score is a weighted heuristic across checks. It’s designed to be directionally accurate and actionable — use it to prioritize fixes, not as a replacement for a full technical audit.
-  - question: "Does it change my website?"
+      No, the analyzer checks only the single URL you provide. Each page on your site may have different SEO characteristics, so you'll need to analyze important pages individually (homepage, key landing pages, blog posts, product pages). This per-page approach ensures you get accurate, actionable feedback for each specific page rather than a generic site-wide overview.
+
+  - question: "Will this tool modify or access my website?"
     answer: >
-      No. The analyzer fetches and inspects the target page. It does not modify your site. You’ll receive suggestions and example code you can apply.
+      Absolutely not. The analyzer only *fetches* and *reads* the public HTML of the URL you provide — exactly what a search engine bot would see. It performs a read-only analysis and never modifies, writes to, or accesses any backend systems, databases, or admin areas. You receive suggestions and code examples that you can choose to implement yourself. Your website remains completely unchanged.
+
+  - question: "Why did my page get a low score?"
+    answer: >
+      Low scores typically result from one or more of these issues: missing or poorly optimized meta tags (especially title and description), lack of semantic HTML structure (using divs instead of main, article, header tags), broken heading hierarchy (multiple H1s, skipped levels), absence of structured data schemas (missing Article, Organization, or BreadcrumbList markup), or accessibility problems (images without alt text, forms without labels). Check the recommendations section — it lists specific issues in priority order with code examples. Even fixing the top 2-3 critical/high severity items can significantly boost your score.
+
+  - question: "How accurate is the score compared to Google?"
+    answer: >
+      The score is a **directional indicator** based on established SEO best practices and Google's documented guidelines, not an official Google ranking score. It measures technical on-page factors that Google's algorithms consider, but actual rankings depend on many additional factors we can't measure: backlinks, domain authority, content quality, user engagement, Core Web Vitals, mobile-friendliness, site speed, competitor strength, and search intent matching. Use this score to identify and fix technical SEO issues — think of it as a health check for your page's SEO fundamentals, not a ranking prediction. A high score means you have a solid technical foundation, which is necessary but not sufficient for top rankings.
+
+  - question: "What's the difference between issues and warnings?"
+    answer: |-
+      **Issues** are problems that violate SEO or accessibility standards and will negatively impact your page (missing main tag, multiple H1s, images without alt text). These should be fixed.
+
+      **Warnings** are recommendations for improvement where you're not technically wrong, but could do better (sections without headings, short meta description, missing Open Graph tags). Warnings are lower priority but still worth addressing for optimal results.
+
+  - question: "Can I use this for client audits or reports?"
+    answer: >
+      Yes! The analyzer provides professional-grade SEO insights suitable for client presentations, audit reports, or internal documentation. Each recommendation includes specific issues, severity levels, impact statements, and copy-ready code examples. You can copy the results, take screenshots, or integrate the findings into your audit documents. Just note that this checks on-page technical SEO only — a complete audit should also include content analysis, backlink profile, Core Web Vitals, and competitor research.
+
+  - question: "What are structured data schemas and why do they matter?"
+    answer: >
+      Structured data (schemas) are standardized code snippets using Schema.org vocabulary that help search engines understand your content's meaning and context. For example, Article schema tells Google "this is a blog post with this author, published on this date" while Organization schema defines "this is a company with this logo and social profiles." When implemented correctly, schemas enable **rich results** in search — enhanced listings with images, ratings, dates, breadcrumbs, or FAQ accordions that stand out and improve click-through rates. The analyzer checks for JSON-LD (recommended by Google), Microdata, and RDFa formats, and suggests missing schemas relevant to your content type.
+
+  - question: "How often should I re-check my pages?"
+    answer: >
+      Run the analyzer after any significant page updates (design changes, content revisions, template modifications) or when launching new pages. For established pages, quarterly checks ensure you maintain SEO health as best practices evolve. If you're actively improving SEO, analyze before and after implementing recommendations to measure progress. There's no downside to frequent checks — the analysis is non-invasive and completes in seconds.
 ---
 
 <main x-data="SeoAnalyzer">
@@ -27,8 +81,7 @@ faq:
     <form @submit.prevent class="space-y-5">
       <div>
         <label for="targetUrl">Page URL</label>
-        <input id="targetUrl" type="url" x-model="url" placeholder="https://example.com/page" />
-        <p class="text-sm mt-1">Enter an absolute URL (http/https). Example: <code>https://your-site.com/blog/post</code></p>
+        <input id="targetUrl" type="url" x-model="url" placeholder="https://example.com" />
       </div>
 
       <fieldset>
@@ -243,7 +296,7 @@ faq:
               <h4 class="text-lg m-0 pt-4 px-4 flex items-center gap-2">{% phicon "brackets-curly", "regular", { class: "size-5" } %} <span>Schemas</span></h4>
               <div class="text-sm mt-2">
                 <div class="flex flex-wrap gap-2 px-4" x-show="result && result.schemas && result.schemas.detected && result.schemas.detected.length">
-                  <div class="text-sm font-semibold w-full shrink-0">Founded</div>
+                  <div class="text-sm font-semibold w-full shrink-0">Detected</div>
                   <template x-for="s in result.schemas.detected">
                     <span class="text-xs px-2 py-0.5 rounded-full border border-green-200 bg-green-50 text-green-800" x-text="s"></span>
                   </template>

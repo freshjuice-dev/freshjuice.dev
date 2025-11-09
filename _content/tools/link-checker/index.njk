@@ -115,7 +115,7 @@ faq:
 
             <div class="mb-4 border-2 border-orange-200 rounded-2xl overflow-hidden" :open="true">
               <div class="cursor-pointer px-4 py-3 flex items-center justify-between gap-4 font-semibold"
-                @click.prevent="openIndex = (openIndex === index ? -1 : index)" >
+                   @click.prevent="toggleOpen(index)">
 
                 <div class="flex items-center gap-4">
                   <span>
@@ -134,13 +134,13 @@ faq:
                   <span class="shrink-0 size-5 transition-transform duration-200"
                         aria-hidden="true"
                         x-show="item.status === 'success'"
-                        :class="openIndex === index  && item.status === 'success' ?`rotate-180`:`rotate-0`">
+                        :class="openIndex.includes(index) && item.status === 'success' ? `rotate-180` : `rotate-0`">
                     {% phicon "caret-down", "bold", { class: "size-5" } %}
                   </span>
                 </div>
               </div>
 
-              <div x-show="openIndex === index && item.status === 'success'" x-collapse>
+              <div x-show="openIndex.includes(index) && item.status === 'success'" x-collapse>
                 <div class="text-sm leading-relaxed clean-prose">
 
                   <div class="grid gap-6">

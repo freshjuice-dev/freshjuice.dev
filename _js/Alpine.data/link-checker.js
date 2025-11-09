@@ -23,8 +23,14 @@ document.addEventListener("alpine:init", () => {
     urls: "",
     result: [], // array of per-URL results
     errorMessage: "",
-    openIndex: -2,
+    openIndex: [],
     state: "idle", // idle, loading, success, error
+
+    toggleOpen(key) {
+      this.openIndex = this.openIndex.includes(key)
+        ? this.openIndex.filter((i) => i !== key)
+        : [...this.openIndex, key];
+    },
 
     checkUrl(url) {
       url = stripTags(url);

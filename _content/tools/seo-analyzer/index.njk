@@ -222,11 +222,14 @@ faq:
                 <div>H1 count: <strong x-text="result && result.headings ? (result.headings.h1Count || 0) : 0"></strong></div>
                 <template x-if="result && result.headings && result.headings.structure && result.headings.structure.length">
                   <div class="pt-2">
-                    <div class="text-sm font-semibold">Structure</div>
-                    <ol class="not-prose list-none p-0 m-0 space-y-1">
+                    <div class="text-sm font-semibold mb-2">Structure</div>
+                    <ol class="not-prose list-none p-0 m-0 space-y-1 md:space-y-2">
                       <template x-for="h in result.headings.structure">
-                        <li class="flex items-center justify-between gap-3 border rounded-lg px-2 py-1.5">
-                          <span class="truncate"><span class="opacity-60">H</span><span x-text="h.level"></span> — <span x-text="h.text"></span></span>
+                        <li class="flex items-start gap-2">
+                          <span class="shrink-0 inline-block leading-0" :style="`padding-left: ${(h.level - 1) * 0.75}rem`">
+                            <span class="inline-flex items-center justify-center h-5.5 px-2 rounded-md border bg-white border-orange-200 text-xs font-mono font-bold">H<span x-text="h.level"></span></span>
+                          </span>
+                          <div class="grow mt-0.5 text-sm md:mt-0 md:text-base leading-snug" x-text="h.text"></div>
                         </li>
                       </template>
                     </ol>
@@ -248,8 +251,8 @@ faq:
                   <div class="pt-2 px-4">
                     <div class="text-sm font-semibold">Missing schemas (with suggestions)</div>
                     <ol class="not-prose list-none p-0 m-0 mt-2">
-                      <template x-for="(item, idx) in missingSchemasList">
-                        <li class="border rounded-lg p-0 overflow-hidden" :class="idx === missingSchemasList.length - 1 ? 'mb-4' : 'mb-2'">
+                      <template x-for="item in missingSchemasList">
+                        <li class="border rounded-lg p-0 overflow-hidden mb-2">
                           <div class="flex items-center justify-between gap-3 p-3">
                             <div class="min-w-0">
                               <div class="flex flex-wrap items-center gap-2">
@@ -279,7 +282,7 @@ faq:
                 </template>
                 <template x-if="result && result.schemas && result.schemas.jsonld && result.schemas.jsonld.length">
                   <div class="pt-3">
-                    <div class="text-sm font-semibold px-4 pb-4">JSON‑LD</div>
+                    <div class="text-sm font-semibold px-4 pb-4">Found JSON-LD</div>
                     <div class="grid relative">
                       <pre class="text-xs overflow-auto rounded-none p-3 m-0"><code class="language-json" x-html="escapeCode(jsonldPretty)"></code></pre>
                       <button class="flex items-center gap-1 text-xs font-mono text-cursor hover:text-yellow-400 bg-terminal border border-current rounded-full px-2 py-1 absolute z-10 top-2.5 right-2"

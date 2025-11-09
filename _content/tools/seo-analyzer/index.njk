@@ -148,14 +148,14 @@ faq:
             <section class="border rounded-xl overflow-hidden p-4">
               <h4 class="text-lg m-0 flex items-center gap-2">{% phicon "tree-structure", "regular", { class: "size-5" } %} <span>Semantics</span></h4>
               <div class="text-sm mt-2 grid grid-cols-1 sm:grid-cols-2 gap-2">
-                <div>main: <strong x-text="bool(result && result.semantics && result.semantics.hasMain)"></strong> (<span x-text="result && result.semantics ? (result.semantics.mainCount || 0) : 0"></span>)</div>
-                <div>header: <strong x-text="bool(result && result.semantics && result.semantics.hasHeader)"></strong></div>
-                <div>footer: <strong x-text="bool(result && result.semantics && result.semantics.hasFooter)"></strong></div>
-                <div>nav: <strong x-text="bool(result && result.semantics && result.semantics.hasNav)"></strong></div>
-                <div>articles: <strong x-text="result && result.semantics ? (result.semantics.articleCount || 0) : 0"></strong></div>
-                <div>sections: <strong x-text="result && result.semantics ? (result.semantics.sectionCount || 0) : 0"></strong></div>
-                <div>asides: <strong x-text="result && result.semantics ? (result.semantics.asideCount || 0) : 0"></strong></div>
-                <div>divs: <strong x-text="result && result.semantics ? (result.semantics.divCount || 0) : 0"></strong></div>
+                <div>main:&nbsp;&nbsp;<span class="font-mono"><strong x-text="bool(result && result.semantics && result.semantics.hasMain)"></strong> (<span x-text="result && result.semantics ? (result.semantics.mainCount || 0) : 0"></span>)</span></div>
+                <div>header:&nbsp;&nbsp;<span class="font-mono"><strong x-text="bool(result && result.semantics && result.semantics.hasHeader)"></strong></span></div>
+                <div>footer:&nbsp;&nbsp;<span class="font-mono"><strong x-text="bool(result && result.semantics && result.semantics.hasFooter)"></strong></span></div>
+                <div>nav:&nbsp;&nbsp;<span class="font-mono"><strong x-text="bool(result && result.semantics && result.semantics.hasNav)"></strong></span></div>
+                <div>articles:&nbsp;&nbsp;<span class="font-mono"><strong x-text="result && result.semantics ? (result.semantics.articleCount || 0) : 0"></strong></span></div>
+                <div>sections:&nbsp;&nbsp;<span class="font-mono"><strong x-text="result && result.semantics ? (result.semantics.sectionCount || 0) : 0"></strong></span></div>
+                <div>asides:&nbsp;&nbsp;<span class="font-mono"><strong x-text="result && result.semantics ? (result.semantics.asideCount || 0) : 0"></strong></span></div>
+                <div>divs:&nbsp;&nbsp;<span class="font-mono"><strong x-text="result && result.semantics ? (result.semantics.divCount || 0) : 0"></strong></span></div>
               </div>
               <template x-if="result && result.semantics && result.semantics.issues && result.semantics.issues.length">
                 <div class="pt-3">
@@ -183,15 +183,15 @@ faq:
             <section class="border rounded-xl overflow-hidden p-4">
               <h4 class="text-lg m-0 flex items-center gap-2">{% phicon "meta-logo", "regular", { class: "size-5" } %} <span>Meta tags</span></h4>
               <div class="text-sm mt-2 grid grid-cols-1 sm:grid-cols-2 gap-2">
-                <div>Title: <span class="font-mono"><strong x-text="bool(result && result.meta && result.meta.hasTitle)"></strong> (<span x-text="result && result.meta ? (result.meta.titleLength || 0) : 0"></span> chars)</span></div>
-                <div>Description: <span class="font-mono"><strong x-text="bool(result && result.meta && result.meta.hasMetaDescription)"></strong> (<span x-text="result && result.meta ? (result.meta.metaDescriptionLength || 0) : 0"></span> chars)</span></div>
-                <div>Viewport: <span class="font-mono"><strong x-text="bool(result && result.meta && result.meta.hasViewport)"></strong></span></div>
-                <div>Charset: <span class="font-mono"><strong x-text="bool(result && result.meta && result.meta.hasCharset)"></strong></span></div>
-                <div>Lang: <span class="font-mono"><strong x-text="bool(result && result.meta && result.meta.hasLang)"></strong> (<span x-text="result && result.meta && result.meta.lang ? result.meta.lang : '-' "></span>)</span></div>
-                <div>Canonical: <span class="font-mono"><strong x-text="bool(result && result.meta && result.meta.hasCanonical)"></strong></span></div>
-                <div>OG tags: <span class="font-mono"><strong x-text="bool(result && result.meta && result.meta.hasOpenGraph)"></strong></span></div>
-                <div>Twitter Card: <span class="font-mono"><strong x-text="bool(result && result.meta && result.meta.hasTwitterCard)"></strong></span></div>
-                <div>Robots: <span class="font-mono"><strong x-text="bool(result && result.meta && result.meta.hasRobots)"></strong> (<span x-text="robotsFlags"></span>)</span></div>
+                <div>Title:&nbsp;&nbsp;<span class="font-mono"><strong x-text="bool(result && result.meta && result.meta.hasTitle)"></strong> (<span x-text="result && result.meta ? (result.meta.titleLength || 0) : 0"></span> chars)</span></div>
+                <div>Description:&nbsp;&nbsp;<span class="font-mono"><strong x-text="bool(result && result.meta && result.meta.hasMetaDescription)"></strong> (<span x-text="result && result.meta ? (result.meta.metaDescriptionLength || 0) : 0"></span> chars)</span></div>
+                <div>Viewport:&nbsp;&nbsp;<span class="font-mono"><strong x-text="bool(result && result.meta && result.meta.hasViewport)"></strong></span></div>
+                <div>Charset:&nbsp;&nbsp;<span class="font-mono"><strong x-text="bool(result && result.meta && result.meta.hasCharset)"></strong></span></div>
+                <div>Lang:&nbsp;&nbsp;<span class="font-mono"><strong x-text="bool(result && result.meta && result.meta.hasLang)"></strong> (<span x-text="result && result.meta && result.meta.lang ? result.meta.lang : '-' "></span>)</span></div>
+                <div>Canonical:&nbsp;&nbsp;<span class="font-mono"><strong x-text="bool(result && result.meta && result.meta.hasCanonical)"></strong></span></div>
+                <div>OG tags:&nbsp;&nbsp;<span class="font-mono"><strong x-text="bool(result && result.meta && result.meta.hasOpenGraph)"></strong></span></div>
+                <div>Twitter Card:&nbsp;&nbsp;<span class="font-mono"><strong x-text="bool(result && result.meta && result.meta.hasTwitterCard)"></strong></span></div>
+                <div>Robots:&nbsp;&nbsp;<span class="font-mono"><strong x-text="bool(result && result.meta && result.meta.hasRobots)"></strong> (<span x-text="robotsFlags"></span>)</span></div>
               </div>
               <template x-if="result && result.meta && result.meta.issues && result.meta.issues.length">
                 <div class="pt-3">

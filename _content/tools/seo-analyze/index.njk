@@ -1,0 +1,306 @@
+---
+title: "SEO Analyzer"
+desc: "Comprehensive on-page SEO analysis for any URL. Check semantics, meta tags, headings, structured data (schemas), and accessibility — then get prioritized recommendations."
+icon: "search"
+type: seo
+partialScripts:
+  - alpine-data/seo-analyze
+faq:
+  - question: "What does the SEO Analyzer check?"
+    answer: >
+      It reviews your page for semantic HTML usage, meta tags and Open Graph/Twitter, heading structure, structured data (JSON‑LD, Microdata, RDFa), and common accessibility pitfalls. You’ll get a score and prioritized recommendations with copy‑ready code snippets where possible.
+  - question: "How accurate is the score?"
+    answer: >
+      The score is a weighted heuristic across checks. It’s designed to be directionally accurate and actionable — use it to prioritize fixes, not as a replacement for a full technical audit.
+  - question: "Does it change my website?"
+    answer: >
+      No. The analyzer fetches and inspects the target page. It does not modify your site. You’ll receive suggestions and example code you can apply.
+---
+
+<main x-data="SeoAnalyze">
+  <div class="prose max-w-3xl mx-auto">
+    <h1>SEO Analyzer</h1>
+    <p class="mt-0">Comprehensive SEO analysis for your website. Paste a full URL, run the analyzer, and get a prioritized list of improvements.</p>
+
+    <form @submit.prevent class="space-y-5">
+      <div>
+        <label for="targetUrl">Page URL</label>
+        <input id="targetUrl" type="url" x-model="url" placeholder="https://example.com/page" />
+        <p class="text-sm mt-1">Enter an absolute URL (http/https). Example: <code>https://your-site.com/blog/post</code></p>
+      </div>
+
+      <fieldset>
+        <legend class="text-sm font-semibold">Modules</legend>
+        <div class="flex flex-wrap gap-4 mt-2">
+          <label class="inline-flex items-center gap-2 text-sm">
+            <input type="checkbox" x-model="options.checkSemantics" />
+            <span>Semantics</span>
+          </label>
+          <label class="inline-flex items-center gap-2 text-sm">
+            <input type="checkbox" x-model="options.checkMeta" />
+            <span>Meta tags</span>
+          </label>
+          <label class="inline-flex items-center gap-2 text-sm">
+            <input type="checkbox" x-model="options.checkHeadings" />
+            <span>Headings</span>
+          </label>
+          <label class="inline-flex items-center gap-2 text-sm">
+            <input type="checkbox" x-model="options.checkSchemas" />
+            <span>Schemas</span>
+          </label>
+          <label class="inline-flex items-center gap-2 text-sm">
+            <input type="checkbox" x-model="options.checkAccessibility" />
+            <span>Accessibility</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <div class="flex items-center gap-4">
+        <button @click="analyze" type="submit" class="text-bold leading-4">
+          <span x-text="buttonLabel">Analyze SEO</span>
+        </button>
+
+        <div class="cursor-pointer font-mono text-sm px-3 py-1.5 rounded-full transition-all bg-gray-100 hover:bg-gray-200 border-2 border-gray-300 inline-flex gap-2 items-center text-terminal"
+             x-show="state==='success'" x-cloak
+             @click="reset">
+          {% phicon "trash", "duotone", { class: "size-5" } %}
+          <span class="hidden xs:inline">reset</span>
+        </div>
+      </div>
+
+      <p class="text-red-600 text-sm md:text-base mt-2" x-show="state==='error' && errorMessage" x-text="String(errorMessage)" x-cloak></p>
+    </form>
+  </div>
+
+  <div class="prose max-w-3xl mx-auto mt-8" x-show="state!=='idle'" x-cloak>
+    <template x-if="state==='loading'">
+      <div class="flex items-center gap-3 text-sm md:text-base">
+        <div class="size-6 rounded-full border-2 border-orange-300 border-r-transparent animate-spin"></div>
+        <span>Analyzing page…</span>
+      </div>
+    </template>
+
+    <template x-if="state==='success'">
+      <div>
+        <h2 class="mt-0">Score</h2>
+        <div class="not-prose border rounded-xl p-4 flex items-center justify-between gap-4"
+             :class="scoreCardClass">
+          <div class="min-w-0">
+            <div class="text-sm opacity-70">Overall SEO score</div>
+            <div class="text-2xl font-semibold" x-text="(result && result.score ? result.score : 0) + '/100'"></div>
+            <div class="text-xs opacity-70 mt-1">
+              <span class="font-mono" x-text="result && result.url ? result.url : ''"></span>
+              · <span x-text="analyzedAtLocal"></span>
+            </div>
+          </div>
+          <div class="shrink-0">
+            <div class="size-14 rounded-full grid place-items-center font-mono text-lg border" :class="scoreBadgeClass">
+              <span x-text="result && typeof result.score==='number' ? result.score : 0"></span>
+            </div>
+          </div>
+        </div>
+
+        <template x-if="result && result.recommendations && result.recommendations.length">
+          <div class="mt-8">
+            <h3>Recommendations</h3>
+            <ol class="not-prose list-none p-0 m-0 space-y-2">
+              <template x-for="rec in sortedRecommendations" :key="rec.id">
+                <li class="border rounded-xl p-3">
+                  <div class="flex items-start justify-between gap-4">
+                    <div class="min-w-0">
+                      <div class="flex flex-wrap items-center gap-2">
+                        <span class="text-xs px-2 py-0.5 rounded-full border" :class="severityBadge(rec.severity)" x-text="severityLabel(rec.severity)"></span>
+                        <span class="text-xs px-2 py-0.5 rounded-full bg-gray-100 border text-gray-700" x-text="rec.category"></span>
+                      </div>
+                      <div class="font-semibold mt-1" x-text="rec.title"></div>
+                      <div class="text-sm opacity-80" x-text="rec.description"></div>
+                      <div class="text-xs mt-1 opacity-70" x-show="rec.impact" x-text="'Impact: ' + rec.impact"></div>
+                    </div>
+                    <button class="text-sm" @click="toggleOpen(rec.id)">
+                      <span x-show="!openIndex.includes(rec.id)" x-cloak>View</span>
+                      <span x-show="openIndex.includes(rec.id)" x-cloak>Hide</span>
+                    </button>
+                  </div>
+                  <div class="mt-3" x-show="openIndex.includes(rec.id)" x-cloak>
+                    <template x-if="rec.code">
+                      <div>
+                        <pre class="text-xs overflow-auto border rounded-lg p-3 bg-gray-50"><code x-text="rec.code"></code></pre>
+                        <button class="text-xs mt-2" @click="copy(rec.code)">Copy code</button>
+                      </div>
+                    </template>
+                  </div>
+                </li>
+              </template>
+            </ol>
+          </div>
+        </template>
+
+        <div class="mt-10">
+          <h3>Detailed analysis</h3>
+          <div class="not-prose grid gap-4">
+            <!-- Semantics -->
+            <section class="border rounded-xl p-4">
+              <h4 class="m-0 flex items-center gap-2">{% phicon "brackets-curly", "duotone", { class: "size-5" } %} <span>Semantics</span></h4>
+              <div class="text-sm mt-2 grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <div>main: <strong x-text="bool(result && result.semantics && result.semantics.hasMain)"></strong> (<span x-text="result && result.semantics ? (result.semantics.mainCount || 0) : 0"></span>)</div>
+                <div>header: <strong x-text="bool(result && result.semantics && result.semantics.hasHeader)"></strong></div>
+                <div>footer: <strong x-text="bool(result && result.semantics && result.semantics.hasFooter)"></strong></div>
+                <div>nav: <strong x-text="bool(result && result.semantics && result.semantics.hasNav)"></strong></div>
+                <div>articles: <strong x-text="result && result.semantics ? (result.semantics.articleCount || 0) : 0"></strong></div>
+                <div>sections: <strong x-text="result && result.semantics ? (result.semantics.sectionCount || 0) : 0"></strong></div>
+                <div>asides: <strong x-text="result && result.semantics ? (result.semantics.asideCount || 0) : 0"></strong></div>
+                <div>divs: <strong x-text="result && result.semantics ? (result.semantics.divCount || 0) : 0"></strong></div>
+              </div>
+              <template x-if="result && result.semantics && result.semantics.issues && result.semantics.issues.length">
+                <div class="mt-3">
+                  <div class="text-sm font-semibold">Issues</div>
+                  <ul class="list-disc pl-6 text-sm">
+                    <template x-for="i in result.semantics.issues">
+                      <li class="text-red-700" x-text="i"></li>
+                    </template>
+                  </ul>
+                </div>
+              </template>
+              <template x-if="result && result.semantics && result.semantics.warnings && result.semantics.warnings.length">
+                <div class="mt-2">
+                  <div class="text-sm font-semibold">Warnings</div>
+                  <ul class="list-disc pl-6 text-sm">
+                    <template x-for="w in result.semantics.warnings">
+                      <li class="text-yellow-700" x-text="w"></li>
+                    </template>
+                  </ul>
+                </div>
+              </template>
+            </section>
+
+            <!-- Meta -->
+            <section class="border rounded-xl p-4">
+              <h4 class="m-0 flex items-center gap-2">{% phicon "meta-logo", "duotone", { class: "size-5" } %} <span>Meta tags</span></h4>
+              <div class="text-sm mt-2 grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <div>Title: <strong x-text="bool(result && result.meta && result.meta.hasTitle)"></strong> (<span x-text="result && result.meta ? (result.meta.titleLength || 0) : 0"></span> chars)</div>
+                <div>Description: <strong x-text="bool(result && result.meta && result.meta.hasMetaDescription)"></strong> (<span x-text="result && result.meta ? (result.meta.metaDescriptionLength || 0) : 0"></span> chars)</div>
+                <div>Viewport: <strong x-text="bool(result && result.meta && result.meta.hasViewport)"></strong></div>
+                <div>Charset: <strong x-text="bool(result && result.meta && result.meta.hasCharset)"></strong></div>
+                <div>Lang: <strong x-text="bool(result && result.meta && result.meta.hasLang)"></strong> (<span x-text="result && result.meta && result.meta.lang ? result.meta.lang : '-' "></span>)</div>
+                <div>Canonical: <strong x-text="bool(result && result.meta && result.meta.hasCanonical)"></strong></div>
+                <div>OG tags: <strong x-text="bool(result && result.meta && result.meta.hasOpenGraph)"></strong></div>
+                <div>Twitter Card: <strong x-text="bool(result && result.meta && result.meta.hasTwitterCard)"></strong></div>
+                <div>Robots: <strong x-text="bool(result && result.meta && result.meta.hasRobots)"></strong> (<span x-text="robotsFlags"></span>)</div>
+              </div>
+              <template x-if="result && result.meta && result.meta.issues && result.meta.issues.length">
+                <div class="mt-3">
+                  <div class="text-sm font-semibold">Issues</div>
+                  <ul class="list-disc pl-6 text-sm">
+                    <template x-for="i in result.meta.issues">
+                      <li class="text-red-700" x-text="i"></li>
+                    </template>
+                  </ul>
+                </div>
+              </template>
+              <template x-if="result && result.meta && result.meta.warnings && result.meta.warnings.length">
+                <div class="mt-2">
+                  <div class="text-sm font-semibold">Warnings</div>
+                  <ul class="list-disc pl-6 text-sm">
+                    <template x-for="w in result.meta.warnings">
+                      <li class="text-yellow-700" x-text="w"></li>
+                    </template>
+                  </ul>
+                </div>
+              </template>
+            </section>
+
+            <!-- Headings -->
+            <section class="border rounded-xl p-4">
+              <h4 class="m-0 flex items-center gap-2">{% phicon "article-ny-times", "duotone", { class: "size-5" } %} <span>Headings</span></h4>
+              <div class="text-sm mt-2">
+                <div>H1 count: <strong x-text="result && result.headings ? (result.headings.h1Count || 0) : 0"></strong></div>
+                <template x-if="result && result.headings && result.headings.structure && result.headings.structure.length">
+                  <div class="mt-2">
+                    <div class="text-sm font-semibold">Structure</div>
+                    <ol class="not-prose list-none p-0 m-0 space-y-1">
+                      <template x-for="h in result.headings.structure">
+                        <li class="flex items-center justify-between gap-3 border rounded-lg px-2 py-1.5">
+                          <span class="truncate"><span class="opacity-60">H</span><span x-text="h.level"></span> — <span x-text="h.text"></span></span>
+                        </li>
+                      </template>
+                    </ol>
+                  </div>
+                </template>
+              </div>
+            </section>
+
+            <!-- Schemas -->
+            <section class="border rounded-xl p-4">
+              <h4 class="m-0 flex items-center gap-2">{% phicon "brackets-curly", "duotone", { class: "size-5" } %} <span>Schemas</span></h4>
+              <div class="text-sm mt-2">
+                <div class="flex flex-wrap gap-1" x-show="result && result.schemas && result.schemas.detected && result.schemas.detected.length">
+                  <template x-for="s in result.schemas.detected">
+                    <span class="text-xs px-2 py-0.5 rounded-full bg-gray-100 border text-gray-700" x-text="s"></span>
+                  </template>
+                </div>
+                <template x-if="result && result.schemas && result.schemas.missing && result.schemas.missing.length">
+                  <div class="mt-2">
+                    <div class="text-sm font-semibold">Suggested</div>
+                    <div class="flex flex-wrap gap-1">
+                      <template x-for="s in result.schemas.missing">
+                        <span class="text-xs px-2 py-0.5 rounded-full bg-yellow-50 border border-yellow-200 text-yellow-800" x-text="s"></span>
+                      </template>
+                    </div>
+                  </div>
+                </template>
+                <template x-if="result && result.schemas && result.schemas.jsonld && result.schemas.jsonld.length">
+                  <div class="mt-3">
+                    <div class="text-sm font-semibold">JSON‑LD</div>
+                    <pre class="text-xs overflow-auto border rounded-lg p-3 bg-gray-50"><code x-text="jsonldPretty"></code></pre>
+                    <button class="text-xs mt-2" @click="copy(jsonldPretty)">Copy JSON‑LD</button>
+                  </div>
+                </template>
+              </div>
+            </section>
+
+            <!-- Accessibility -->
+            <section class="border rounded-xl p-4">
+              <h4 class="m-0 flex items-center gap-2">{% phicon "person-arms-spread", "duotone", { class: "size-5" } %} <span>Accessibility</span></h4>
+              <div class="text-sm mt-2 grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <div>Images without alt: <strong x-text="result && result.accessibility ? (result.accessibility.imagesWithoutAlt || 0) : 0"></strong> / <span x-text="result && result.accessibility ? (result.accessibility.totalImages || 0) : 0"></span></div>
+                <div>Images with empty alt: <strong x-text="result && result.accessibility ? (result.accessibility.imagesWithEmptyAlt || 0) : 0"></strong></div>
+                <div>Links without text: <strong x-text="result && result.accessibility ? (result.accessibility.linksWithoutText || 0) : 0"></strong> / <span x-text="result && result.accessibility ? (result.accessibility.totalLinks || 0) : 0"></span></div>
+                <div>Inputs without labels: <strong x-text="result && result.accessibility ? (result.accessibility.inputsWithoutLabels || 0) : 0"></strong> / <span x-text="result && result.accessibility ? (result.accessibility.totalInputs || 0) : 0"></span></div>
+                <div>Buttons without text: <strong x-text="result && result.accessibility ? (result.accessibility.buttonsWithoutText || 0) : 0"></strong> / <span x-text="result && result.accessibility ? (result.accessibility.totalButtons || 0) : 0"></span></div>
+                <div>Skip link present: <strong x-text="bool(result && result.accessibility && result.accessibility.hasSkipLink)"></strong></div>
+              </div>
+              <template x-if="result && result.accessibility && result.accessibility.issues && result.accessibility.issues.length">
+                <div class="mt-3">
+                  <div class="text-sm font-semibold">Issues</div>
+                  <ul class="list-disc pl-6 text-sm">
+                    <template x-for="i in result.accessibility.issues">
+                      <li class="text-red-700" x-text="i"></li>
+                    </template>
+                  </ul>
+                </div>
+              </template>
+              <template x-if="result && result.accessibility && result.accessibility.warnings && result.accessibility.warnings.length">
+                <div class="mt-2">
+                  <div class="text-sm font-semibold">Warnings</div>
+                  <ul class="list-disc pl-6 text-sm">
+                    <template x-for="w in result.accessibility.warnings">
+                      <li class="text-yellow-700" x-text="w"></li>
+                    </template>
+                  </ul>
+                </div>
+              </template>
+            </section>
+          </div>
+        </div>
+      </div>
+    </template>
+  </div>
+
+  <article class="prose max-w-3xl mx-auto mt-12">
+    <h2>About this tool</h2>
+    <p>
+      Inspect a page’s on‑page SEO signals in seconds. Enter a URL, click <code>Analyze</code>, and review structured results with copy‑ready fixes.
+    </p>
+    {% include "partials/faq-section.njk" %}
+  </article>
+</main>

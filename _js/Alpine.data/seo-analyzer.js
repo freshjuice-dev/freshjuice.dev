@@ -3,7 +3,7 @@ import debugLog from "../modules/_debugLog";
 import { stripTags, allowHttpUrl } from "../modules/_sanitize";
 
 document.addEventListener("alpine:init", () => {
-  Alpine.data("SeoAnalyze", () => ({
+  Alpine.data("SeoAnalyzer", () => ({
     // State
     url: "",
     result: null,
@@ -62,6 +62,39 @@ document.addEventListener("alpine:init", () => {
       });
     },
 
+    // Normalize new API shape for schemas.missing (object map) while supporting legacy array
+    get missingSchemasList() {
+      const schemas = this.result && this.result.schemas;
+      if (!schemas || schemas.missing == null) return [];
+      const missing = schemas.missing;
+      if (Array.isArray(missing)) {
+        return missing.map((name) => ({ name }));
+      }
+      if (typeof missing === "object") {
+        return Object.keys(missing).map((name) => {
+          const v = missing[name] || {};
+          return {
+            name,
+            schemaUrl: typeof v.schemaUrl === "string" ? v.schemaUrl : null,
+            jsonLdExample:
+              typeof v.jsonLdExample === "string" ? v.jsonLdExample : null,
+          };
+        });
+      }
+      return [];
+    },
+
+    hasSchemaExample(item) {
+      if (!item) return false;
+      const ex = item.jsonLdExample;
+      return typeof ex === "string" && ex.trim().length > 0;
+    },
+
+    missingKey(name) {
+      const n = String(name || "").trim();
+      return `missing:${n}`;
+    },
+
     bool(v) {
       return v ? "✓" : "✗";
     },
@@ -89,6 +122,14 @@ document.addEventListener("alpine:init", () => {
         default:
           return "border-blue-300 bg-blue-50 text-blue-700";
       }
+    },
+
+    // Show toggle only when there are details to reveal (e.g., code snippet)
+    hasRecDetails(rec) {
+      if (!rec) return false;
+      const code = rec.code;
+      if (typeof code === "string") return code.trim().length > 0;
+      return !!code;
     },
 
     get scoreCardClass() {
@@ -163,7 +204,7 @@ document.addEventListener("alpine:init", () => {
         const controller = new AbortController();
         const timeout = setTimeout(() => controller.abort(), 15000);
 
-        const res = await fetch("https://api.freshjuice.dev/seo-analyze", {
+        const res = await fetch("https://api.freshjuice.dev/seo-analyzer", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

@@ -4,7 +4,7 @@ desc: "Comprehensive on-page SEO analysis for any URL. Check semantics, meta tag
 icon: "search"
 type: seo
 partialScripts:
-  - alpine-data/seo-analyze
+  - alpine-data/seo-analyzer
 faq:
   - question: "What does the SEO Analyzer check?"
     answer: >
@@ -17,7 +17,7 @@ faq:
       No. The analyzer fetches and inspects the target page. It does not modify your site. You’ll receive suggestions and example code you can apply.
 ---
 
-<main x-data="SeoAnalyze">
+<main x-data="SeoAnalyzer">
   <div class="prose max-w-3xl mx-auto">
     <h1>SEO Analyzer</h1>
     <p class="mt-0">Comprehensive SEO analysis for your website. Paste a full URL, run the analyzer, and get a prioritized list of improvements.</p>
@@ -63,7 +63,7 @@ faq:
         <div class="cursor-pointer font-mono text-sm px-3 py-1.5 rounded-full transition-all bg-gray-100 hover:bg-gray-200 border-2 border-gray-300 inline-flex gap-2 items-center text-terminal"
              x-show="state==='success'" x-cloak
              @click="reset">
-          {% phicon "trash", "duotone", { class: "size-5" } %}
+          {% phicon "trash", "regular", { class: "size-5" } %}
           <span class="hidden xs:inline">reset</span>
         </div>
       </div>
@@ -116,16 +116,16 @@ faq:
                       <div class="text-sm opacity-80" x-text="rec.description"></div>
                       <div class="text-xs mt-1 opacity-70" x-show="rec.impact" x-text="'Impact: ' + rec.impact"></div>
                     </div>
-                    <button class="text-sm" @click="toggleOpen(rec.id)">
-                      <span x-show="!openIndex.includes(rec.id)" x-cloak>View</span>
-                      <span x-show="openIndex.includes(rec.id)" x-cloak>Hide</span>
+                    <button class="text-sm" @click="toggleOpen(rec.id)" x-show="hasRecDetails(rec)" x-cloak :aria-expanded="openIndex.includes(rec.id)">
+                      <span x-show="!openIndex.includes(rec.id)" x-cloak>Show code example</span>
+                      <span x-show="openIndex.includes(rec.id)" x-cloak>Hide code example</span>
                     </button>
                   </div>
-                  <div class="mt-3" x-show="openIndex.includes(rec.id)" x-cloak>
+                  <div class="pt-3" x-show="openIndex.includes(rec.id) && hasRecDetails(rec)" x-collapse x-cloak>
                     <template x-if="rec.code">
                       <div>
                         <pre class="text-xs overflow-auto border rounded-lg p-3 bg-gray-50"><code x-text="rec.code"></code></pre>
-                        <button class="text-xs mt-2" @click="copy(rec.code)">Copy code</button>
+                        <button class="text-xs mt-2" @click="copy(rec.code)">Copy code example</button>
                       </div>
                     </template>
                   </div>
@@ -140,7 +140,7 @@ faq:
           <div class="not-prose grid gap-4">
             <!-- Semantics -->
             <section class="border rounded-xl p-4">
-              <h4 class="m-0 flex items-center gap-2">{% phicon "brackets-curly", "duotone", { class: "size-5" } %} <span>Semantics</span></h4>
+              <h4 class="m-0 flex items-center gap-2">{% phicon "tree-structure", "regular", { class: "size-5" } %} <span>Semantics</span></h4>
               <div class="text-sm mt-2 grid grid-cols-1 sm:grid-cols-2 gap-2">
                 <div>main: <strong x-text="bool(result && result.semantics && result.semantics.hasMain)"></strong> (<span x-text="result && result.semantics ? (result.semantics.mainCount || 0) : 0"></span>)</div>
                 <div>header: <strong x-text="bool(result && result.semantics && result.semantics.hasHeader)"></strong></div>
@@ -152,7 +152,7 @@ faq:
                 <div>divs: <strong x-text="result && result.semantics ? (result.semantics.divCount || 0) : 0"></strong></div>
               </div>
               <template x-if="result && result.semantics && result.semantics.issues && result.semantics.issues.length">
-                <div class="mt-3">
+                <div class="pt-3">
                   <div class="text-sm font-semibold">Issues</div>
                   <ul class="list-disc pl-6 text-sm">
                     <template x-for="i in result.semantics.issues">
@@ -162,7 +162,7 @@ faq:
                 </div>
               </template>
               <template x-if="result && result.semantics && result.semantics.warnings && result.semantics.warnings.length">
-                <div class="mt-2">
+                <div class="pt-2">
                   <div class="text-sm font-semibold">Warnings</div>
                   <ul class="list-disc pl-6 text-sm">
                     <template x-for="w in result.semantics.warnings">
@@ -175,7 +175,7 @@ faq:
 
             <!-- Meta -->
             <section class="border rounded-xl p-4">
-              <h4 class="m-0 flex items-center gap-2">{% phicon "meta-logo", "duotone", { class: "size-5" } %} <span>Meta tags</span></h4>
+              <h4 class="m-0 flex items-center gap-2">{% phicon "meta-logo", "regular", { class: "size-5" } %} <span>Meta tags</span></h4>
               <div class="text-sm mt-2 grid grid-cols-1 sm:grid-cols-2 gap-2">
                 <div>Title: <strong x-text="bool(result && result.meta && result.meta.hasTitle)"></strong> (<span x-text="result && result.meta ? (result.meta.titleLength || 0) : 0"></span> chars)</div>
                 <div>Description: <strong x-text="bool(result && result.meta && result.meta.hasMetaDescription)"></strong> (<span x-text="result && result.meta ? (result.meta.metaDescriptionLength || 0) : 0"></span> chars)</div>
@@ -188,7 +188,7 @@ faq:
                 <div>Robots: <strong x-text="bool(result && result.meta && result.meta.hasRobots)"></strong> (<span x-text="robotsFlags"></span>)</div>
               </div>
               <template x-if="result && result.meta && result.meta.issues && result.meta.issues.length">
-                <div class="mt-3">
+                <div class="pt-3">
                   <div class="text-sm font-semibold">Issues</div>
                   <ul class="list-disc pl-6 text-sm">
                     <template x-for="i in result.meta.issues">
@@ -198,7 +198,7 @@ faq:
                 </div>
               </template>
               <template x-if="result && result.meta && result.meta.warnings && result.meta.warnings.length">
-                <div class="mt-2">
+                <div class="pt-2">
                   <div class="text-sm font-semibold">Warnings</div>
                   <ul class="list-disc pl-6 text-sm">
                     <template x-for="w in result.meta.warnings">
@@ -211,11 +211,11 @@ faq:
 
             <!-- Headings -->
             <section class="border rounded-xl p-4">
-              <h4 class="m-0 flex items-center gap-2">{% phicon "article-ny-times", "duotone", { class: "size-5" } %} <span>Headings</span></h4>
+              <h4 class="m-0 flex items-center gap-2">{% phicon "article-ny-times", "regular", { class: "size-5" } %} <span>Headings</span></h4>
               <div class="text-sm mt-2">
                 <div>H1 count: <strong x-text="result && result.headings ? (result.headings.h1Count || 0) : 0"></strong></div>
                 <template x-if="result && result.headings && result.headings.structure && result.headings.structure.length">
-                  <div class="mt-2">
+                  <div class="pt-2">
                     <div class="text-sm font-semibold">Structure</div>
                     <ol class="not-prose list-none p-0 m-0 space-y-1">
                       <template x-for="h in result.headings.structure">
@@ -231,25 +231,44 @@ faq:
 
             <!-- Schemas -->
             <section class="border rounded-xl p-4">
-              <h4 class="m-0 flex items-center gap-2">{% phicon "brackets-curly", "duotone", { class: "size-5" } %} <span>Schemas</span></h4>
+              <h4 class="m-0 flex items-center gap-2">{% phicon "brackets-curly", "regular", { class: "size-5" } %} <span>Schemas</span></h4>
               <div class="text-sm mt-2">
                 <div class="flex flex-wrap gap-1" x-show="result && result.schemas && result.schemas.detected && result.schemas.detected.length">
                   <template x-for="s in result.schemas.detected">
                     <span class="text-xs px-2 py-0.5 rounded-full bg-gray-100 border text-gray-700" x-text="s"></span>
                   </template>
                 </div>
-                <template x-if="result && result.schemas && result.schemas.missing && result.schemas.missing.length">
-                  <div class="mt-2">
-                    <div class="text-sm font-semibold">Suggested</div>
-                    <div class="flex flex-wrap gap-1">
-                      <template x-for="s in result.schemas.missing">
-                        <span class="text-xs px-2 py-0.5 rounded-full bg-yellow-50 border border-yellow-200 text-yellow-800" x-text="s"></span>
+                <template x-if="missingSchemasList && missingSchemasList.length">
+                  <div class="pt-2">
+                    <div class="text-sm font-semibold">Missing schemas (with suggestions)</div>
+                    <ol class="not-prose list-none p-0 m-0 space-y-2 mt-2">
+                      <template x-for="item in missingSchemasList">
+                        <li class="border rounded-lg p-3">
+                          <div class="flex items-start justify-between gap-3">
+                            <div class="min-w-0">
+                              <div class="flex flex-wrap items-center gap-2">
+                                <span class="text-xs px-2 py-0.5 rounded-full bg-yellow-50 border border-yellow-200 text-yellow-800" x-text="item.name"></span>
+                                <template x-if="item.schemaUrl">
+                                  <a :href="item.schemaUrl" target="_blank" rel="nofollow noopener" class="text-xs underline text-blue-700">Schema.org</a>
+                                </template>
+                              </div>
+                            </div>
+                            <button class="text-xs" x-show="hasSchemaExample(item)" x-cloak @click="toggleOpen(missingKey(item.name))" :aria-expanded="openIndex.includes(missingKey(item.name))">
+                              <span x-show="!openIndex.includes(missingKey(item.name))" x-cloak>Show JSON‑LD example</span>
+                              <span x-show="openIndex.includes(missingKey(item.name))" x-cloak>Hide JSON‑LD example</span>
+                            </button>
+                          </div>
+                          <div class="pt-2" x-show="openIndex.includes(missingKey(item.name)) && hasSchemaExample(item)" x-collapse x-cloak>
+                            <pre class="text-xs overflow-auto border rounded-lg p-3 bg-gray-50"><code x-text="item.jsonLdExample"></code></pre>
+                            <button class="text-xs mt-2" @click="copy(item.jsonLdExample)">Copy JSON‑LD example</button>
+                          </div>
+                        </li>
                       </template>
-                    </div>
+                    </ol>
                   </div>
                 </template>
                 <template x-if="result && result.schemas && result.schemas.jsonld && result.schemas.jsonld.length">
-                  <div class="mt-3">
+                  <div class="pt-3">
                     <div class="text-sm font-semibold">JSON‑LD</div>
                     <pre class="text-xs overflow-auto border rounded-lg p-3 bg-gray-50"><code x-text="jsonldPretty"></code></pre>
                     <button class="text-xs mt-2" @click="copy(jsonldPretty)">Copy JSON‑LD</button>
@@ -260,7 +279,7 @@ faq:
 
             <!-- Accessibility -->
             <section class="border rounded-xl p-4">
-              <h4 class="m-0 flex items-center gap-2">{% phicon "person-arms-spread", "duotone", { class: "size-5" } %} <span>Accessibility</span></h4>
+              <h4 class="m-0 flex items-center gap-2">{% phicon "person-arms-spread", "regular", { class: "size-5" } %} <span>Accessibility</span></h4>
               <div class="text-sm mt-2 grid grid-cols-1 sm:grid-cols-2 gap-2">
                 <div>Images without alt: <strong x-text="result && result.accessibility ? (result.accessibility.imagesWithoutAlt || 0) : 0"></strong> / <span x-text="result && result.accessibility ? (result.accessibility.totalImages || 0) : 0"></span></div>
                 <div>Images with empty alt: <strong x-text="result && result.accessibility ? (result.accessibility.imagesWithEmptyAlt || 0) : 0"></strong></div>
@@ -270,7 +289,7 @@ faq:
                 <div>Skip link present: <strong x-text="bool(result && result.accessibility && result.accessibility.hasSkipLink)"></strong></div>
               </div>
               <template x-if="result && result.accessibility && result.accessibility.issues && result.accessibility.issues.length">
-                <div class="mt-3">
+                <div class="pt-3">
                   <div class="text-sm font-semibold">Issues</div>
                   <ul class="list-disc pl-6 text-sm">
                     <template x-for="i in result.accessibility.issues">
@@ -280,7 +299,7 @@ faq:
                 </div>
               </template>
               <template x-if="result && result.accessibility && result.accessibility.warnings && result.accessibility.warnings.length">
-                <div class="mt-2">
+                <div class="pt-2">
                   <div class="text-sm font-semibold">Warnings</div>
                   <ul class="list-disc pl-6 text-sm">
                     <template x-for="w in result.accessibility.warnings">

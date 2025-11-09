@@ -213,6 +213,8 @@ export default {
         core: [],
         tags: [],
         docs: [],
+        authors: [],
+        tools: [],
         blogs: [],
       };
       collection.forEach((item) => {
@@ -224,6 +226,10 @@ export default {
             returnObject.docs.push(url);
           } else if (item.data.tags && item.data.tags.includes("posts")) {
             returnObject.blogs.push(url);
+          } else if (item.data.tags && item.data.tags.includes("authors")) {
+            returnObject.authors.push(url);
+          } else if (item.data.tags && item.data.tags.includes("tools")) {
+            returnObject.tools.push(url);
           } else {
             returnObject.core.push(url);
           }

@@ -77,7 +77,11 @@ document.addEventListener("alpine:init", () => {
             name,
             schemaUrl: typeof v.schemaUrl === "string" ? v.schemaUrl : null,
             jsonLdExample:
-              typeof v.jsonLdExample === "string" ? v.jsonLdExample : null,
+              typeof v.jsonLdExample === "object" && v.jsonLdExample !== null
+                ? v.jsonLdExample
+                : typeof v.jsonLdExample === "string"
+                  ? v.jsonLdExample
+                  : null,
           };
         });
       }
@@ -87,7 +91,29 @@ document.addEventListener("alpine:init", () => {
     hasSchemaExample(item) {
       if (!item) return false;
       const ex = item.jsonLdExample;
-      return typeof ex === "string" && ex.trim().length > 0;
+      if (typeof ex === "string") return ex.trim().length > 0;
+      if (ex && typeof ex === "object") return Object.keys(ex).length > 0;
+      return false;
+    },
+
+    jsonLdExamplePretty(item) {
+      if (!item || item.jsonLdExample == null) return "";
+      const ex = item.jsonLdExample;
+      try {
+        if (typeof ex === "object") return JSON.stringify(ex, null, 2);
+        if (typeof ex === "string") {
+          // keep as-is; if it's valid JSON string, try to pretty print
+          try {
+            const parsed = JSON.parse(ex);
+            return JSON.stringify(parsed, null, 2);
+          } catch (e) {
+            return ex;
+          }
+        }
+      } catch (e) {
+        // ignore
+      }
+      return String(ex);
     },
 
     missingKey(name) {
@@ -121,6 +147,24 @@ document.addEventListener("alpine:init", () => {
           return "border-yellow-300 bg-yellow-50 text-yellow-700";
         default:
           return "border-blue-300 bg-blue-50 text-blue-700";
+      }
+    },
+
+    // Prism helpers
+    escapeCode(str) {
+      if (str == null) return "";
+      return String(str)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;");
+    },
+    highlightPrism() {
+      try {
+        if (window.Prism && typeof window.Prism.highlightAll === "function") {
+          window.Prism.highlightAll();
+        }
+      } catch (e) {
+        // ignore
       }
     },
 
@@ -158,6 +202,11 @@ document.addEventListener("alpine:init", () => {
       this.openIndex = this.openIndex.includes(id)
         ? this.openIndex.filter((i) => i !== id)
         : [...this.openIndex, id];
+      if (this.$nextTick) {
+        this.$nextTick(() => this.highlightPrism());
+      } else {
+        setTimeout(() => this.highlightPrism(), 0);
+      }
     },
 
     copy(text) {
@@ -245,6 +294,11 @@ document.addEventListener("alpine:init", () => {
         this.result = data.data || null;
         this.state = "success";
         this.buttonLabel = "Analyze again";
+        if (this.$nextTick) {
+          this.$nextTick(() => this.highlightPrism());
+        } else {
+          setTimeout(() => this.highlightPrism(), 0);
+        }
       } catch (e) {
         debugLog(e);
         const msg = String(e && e.message ? e.message : e);

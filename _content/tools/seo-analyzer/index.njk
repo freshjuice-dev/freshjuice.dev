@@ -4,6 +4,8 @@ desc: "Comprehensive on-page SEO analysis for any URL. Check semantics, meta tag
 icon: "search"
 type: seo
 partialScripts:
+  - //cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js
+  - //cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-json.min.js
   - alpine-data/seo-analyzer
 faq:
   - question: "What does the SEO Analyzer check?"
@@ -124,7 +126,7 @@ faq:
                   <div class="pt-3" x-show="openIndex.includes(rec.id) && hasRecDetails(rec)" x-collapse x-cloak>
                     <template x-if="rec.code">
                       <div>
-                        <pre class="text-xs overflow-auto border rounded-lg p-3 bg-gray-50"><code x-text="rec.code"></code></pre>
+                        <pre class="text-xs overflow-auto border rounded-lg p-3"><code class="language-html" x-html="escapeCode(rec.code)"></code></pre>
                         <button class="text-xs mt-2" @click="copy(rec.code)">Copy code example</button>
                       </div>
                     </template>
@@ -140,7 +142,7 @@ faq:
           <div class="not-prose grid gap-4">
             <!-- Semantics -->
             <section class="border rounded-xl p-4">
-              <h4 class="m-0 flex items-center gap-2">{% phicon "tree-structure", "regular", { class: "size-5" } %} <span>Semantics</span></h4>
+              <h4 class="text-lg m-0 flex items-center gap-2">{% phicon "tree-structure", "regular", { class: "size-5" } %} <span>Semantics</span></h4>
               <div class="text-sm mt-2 grid grid-cols-1 sm:grid-cols-2 gap-2">
                 <div>main: <strong x-text="bool(result && result.semantics && result.semantics.hasMain)"></strong> (<span x-text="result && result.semantics ? (result.semantics.mainCount || 0) : 0"></span>)</div>
                 <div>header: <strong x-text="bool(result && result.semantics && result.semantics.hasHeader)"></strong></div>
@@ -175,7 +177,7 @@ faq:
 
             <!-- Meta -->
             <section class="border rounded-xl p-4">
-              <h4 class="m-0 flex items-center gap-2">{% phicon "meta-logo", "regular", { class: "size-5" } %} <span>Meta tags</span></h4>
+              <h4 class="text-lg m-0 flex items-center gap-2">{% phicon "meta-logo", "regular", { class: "size-5" } %} <span>Meta tags</span></h4>
               <div class="text-sm mt-2 grid grid-cols-1 sm:grid-cols-2 gap-2">
                 <div>Title: <strong x-text="bool(result && result.meta && result.meta.hasTitle)"></strong> (<span x-text="result && result.meta ? (result.meta.titleLength || 0) : 0"></span> chars)</div>
                 <div>Description: <strong x-text="bool(result && result.meta && result.meta.hasMetaDescription)"></strong> (<span x-text="result && result.meta ? (result.meta.metaDescriptionLength || 0) : 0"></span> chars)</div>
@@ -211,7 +213,7 @@ faq:
 
             <!-- Headings -->
             <section class="border rounded-xl p-4">
-              <h4 class="m-0 flex items-center gap-2">{% phicon "article-ny-times", "regular", { class: "size-5" } %} <span>Headings</span></h4>
+              <h4 class="text-lg m-0 flex items-center gap-2">{% phicon "article-ny-times", "regular", { class: "size-5" } %} <span>Headings</span></h4>
               <div class="text-sm mt-2">
                 <div>H1 count: <strong x-text="result && result.headings ? (result.headings.h1Count || 0) : 0"></strong></div>
                 <template x-if="result && result.headings && result.headings.structure && result.headings.structure.length">
@@ -231,7 +233,7 @@ faq:
 
             <!-- Schemas -->
             <section class="border rounded-xl p-4">
-              <h4 class="m-0 flex items-center gap-2">{% phicon "brackets-curly", "regular", { class: "size-5" } %} <span>Schemas</span></h4>
+              <h4 class="text-lg m-0 flex items-center gap-2">{% phicon "brackets-curly", "regular", { class: "size-5" } %} <span>Schemas</span></h4>
               <div class="text-sm mt-2">
                 <div class="flex flex-wrap gap-1" x-show="result && result.schemas && result.schemas.detected && result.schemas.detected.length">
                   <template x-for="s in result.schemas.detected">
@@ -259,8 +261,8 @@ faq:
                             </button>
                           </div>
                           <div class="pt-2" x-show="openIndex.includes(missingKey(item.name)) && hasSchemaExample(item)" x-collapse x-cloak>
-                            <pre class="text-xs overflow-auto border rounded-lg p-3 bg-gray-50"><code x-text="item.jsonLdExample"></code></pre>
-                            <button class="text-xs mt-2" @click="copy(item.jsonLdExample)">Copy JSON‑LD example</button>
+                            <pre class="text-xs overflow-auto border rounded-lg p-3"><code class="language-json" x-html="escapeCode(jsonLdExamplePretty(item))"></code></pre>
+                            <button class="text-xs mt-2" @click="copy(jsonLdExamplePretty(item))">Copy JSON‑LD example</button>
                           </div>
                         </li>
                       </template>
@@ -270,7 +272,7 @@ faq:
                 <template x-if="result && result.schemas && result.schemas.jsonld && result.schemas.jsonld.length">
                   <div class="pt-3">
                     <div class="text-sm font-semibold">JSON‑LD</div>
-                    <pre class="text-xs overflow-auto border rounded-lg p-3 bg-gray-50"><code x-text="jsonldPretty"></code></pre>
+                    <pre class="text-xs overflow-auto border rounded-lg"><code class="language-json" x-html="escapeCode(jsonldPretty)"></code></pre>
                     <button class="text-xs mt-2" @click="copy(jsonldPretty)">Copy JSON‑LD</button>
                   </div>
                 </template>
@@ -279,7 +281,7 @@ faq:
 
             <!-- Accessibility -->
             <section class="border rounded-xl p-4">
-              <h4 class="m-0 flex items-center gap-2">{% phicon "person-arms-spread", "regular", { class: "size-5" } %} <span>Accessibility</span></h4>
+              <h4 class="text-lg m-0 flex items-center gap-2">{% phicon "person-arms-spread", "regular", { class: "size-5" } %} <span>Accessibility</span></h4>
               <div class="text-sm mt-2 grid grid-cols-1 sm:grid-cols-2 gap-2">
                 <div>Images without alt: <strong x-text="result && result.accessibility ? (result.accessibility.imagesWithoutAlt || 0) : 0"></strong> / <span x-text="result && result.accessibility ? (result.accessibility.totalImages || 0) : 0"></span></div>
                 <div>Images with empty alt: <strong x-text="result && result.accessibility ? (result.accessibility.imagesWithEmptyAlt || 0) : 0"></strong></div>

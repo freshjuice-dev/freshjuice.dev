@@ -13,9 +13,9 @@ layout: base.njk
 
 
 <main class="max-w-3xl mx-auto w-full">
+  <article>
 
-  <div class="prose">
-    <header class="grid">
+    <header class="prose grid">
       <h1 class="mb-0">{{ heading or title }}{%- if draft %} <small class="text-base">[draft]</small>{%- endif %}</h1>
       <p class="post-metadata text-sm md:text-base">
         <time datetime="{{ page.date | htmlDateString }}">{{ page.date | readableDate("LLLL d, yyyy") }}</time>
@@ -26,86 +26,89 @@ layout: base.njk
       </p>
     </header>
 
-    {{ content | safe }}
-  </div>
-
-  {# Authors #}
-  {% if authorData.signature %}
-  <div class="prose italic">{% authorSignature author %}</div>
-  {% endif %}
-
-  <footer>
-    {%- if tags | filterTagList | length %}
-      <ul class="post-tags list-none flex flex-wrap gap-2 m-0 p-0 italic text-base">
-        {%- for tag in tags | filterTagList | head(4) %}
-          {%- set tagUrl %}/tags/{{ tag | slugify }}/{% endset %}
-          <li class="m-0 p-0"><a href="{{ tagUrl }}" rel="nofollow" class="hover:text-red-600">#{{ tag | replace(' ', '') }}</a>{%- if not loop.last %},{% endif %}</li>
-        {%- endfor %}
-      </ul>
-    {%- endif %}
-
-    {# Guest Author Notice #}
-    {%- if authorData.guest %}
-      <p class="text-xs text-pretty my-4">
-        🍊 Pulp disclaimer: This is a guest squeeze! The ideas shared here belong to the author, not FreshJuice.
-        We just provide the glass.<br/>
-        See our <a href="/contributor-policy/" class="underline hover:text-red-600">Guest Contribution & Editorial Policy</a> for details.
-      </p>
-    {%- endif %}
-
-    {# Author #}
-    {%- if authorData.name %}
-    <div class="p-6 bg-cursor/50 border-2 border-orange-200 rounded-2xl flex flex-col sm:flex-row gap-4 sm:gap-8 my-8">
-      <a class="block size-14 sm:size-20 shrink-0" href="{{ authorData.url }}">
-        <span class="sr-only">Visit {{ authorData.name | split(' ') | first }}`s Author Page</span>
-        <img src="{{ authorData.image }}" alt="Avatar for {{ authorData.name }}" class="rounded-full border-2 border-orange-300 size-14 sm:size-20">
-      </a>
-      <div class="">
-        <div class="text-lg leading-none">
-          <a class="hover:text-red-600 font-semibold" href="{{ authorData.url }}">{{ authorData.name }}</a>
-        </div>
-        <div class="">
-          {{ authorData.role }} <a href="{{ authorData.companyUrl }}" class="text-red-600 font-medium group">@ <span class="no-underline group-hover:underline">{{ authorData.company }}</span></a>
-        </div>
-        <div class="mt-2 text-sm">{{ authorData.content }}</div>
-      </div>
+    <div class="prose">
+      {{ content | safe }}
     </div>
+
+    {# Personal sign-off after article content #}
+    {%- if authorData.signature %}
+    <div class="italic">{% authorSignature author %}</div>
     {%- endif %}
 
-    {# Posts navigation #}
-    {%- if collections.posts %}
-      <div class="pt-8 mt-8">
-        {%- set previousPost = collections.posts | getPreviousCollectionItem %}
-        {%- set nextPost = collections.posts | getNextCollectionItem %}
-        {%- if nextPost or previousPost %}
-          <ul class="list-none p-0 m-0 grid xs:grid-cols-2 gap-8">
-            {%- if previousPost %}
-              <li class="text-left m-0 p-0">
-                <a class="!no-underline group inline-block" href="{{ previousPost.url }}">
-                  <span class="text-sm flex gap-1 items-center justify-start -ml-1">
-                    {% phicon "arrow-up-left", "regular", { "class": "size-5" } %}<span>Previous</span>
-                  </span>
-                  <span class="group-hover:text-red-600 inline-block leading-tight text-pretty">{{ previousPost.data.title }}</span>
-                </a>
-              </li>
-            {%- else %}
-              <li></li>
-            {%- endif %}
-            {%- if nextPost %}
-              <li class="text-right m-0 p-0">
-                <a class="!no-underline group inline-block" href="{{ nextPost.url }}">
-                  <span class="text-sm flex gap-1 items-center justify-end -mr-1">
-                    <span>Next</span>{% phicon "arrow-up-right", "regular", { "class": "size-5" } %}
-                  </span>
-                  <span class="group-hover:text-red-600 inline-block leading-tight text-pretty">{{ nextPost.data.title }}</span>
-                </a>
-              </li>
-            {%- else %}
-              <li></li>
-            {%- endif %}
-          </ul>
-        {%- endif %}
+    <footer>
+      {%- if tags | filterTagList | length %}
+        <ul class="post-tags list-none flex flex-wrap gap-2 m-0 p-0 italic text-base">
+          {%- for tag in tags | filterTagList | head(4) %}
+            {%- set tagUrl %}/tags/{{ tag | slugify }}/{% endset %}
+            <li class="m-0 p-0"><a href="{{ tagUrl }}" rel="nofollow" class="hover:text-red-600">#{{ tag | replace(' ', '') }}</a>{%- if not loop.last %},{% endif %}</li>
+          {%- endfor %}
+        </ul>
+      {%- endif %}
+
+      {# Guest Author Notice #}
+      {%- if authorData.guest %}
+        <p class="text-xs text-pretty my-4">
+          🍊 Pulp disclaimer: This is a guest squeeze! The ideas shared here belong to the author, not FreshJuice.
+          We just provide the glass.<br/>
+          See our <a href="/contributor-policy/" class="underline hover:text-red-600">Guest Contribution & Editorial Policy</a> for details.
+        </p>
+      {%- endif %}
+
+      {# Author #}
+      {%- if authorData.name %}
+      <div class="p-6 bg-cursor/50 border-2 border-orange-200 rounded-2xl flex flex-col sm:flex-row gap-4 sm:gap-8 my-8">
+        <a class="block size-14 sm:size-20 shrink-0" href="{{ authorData.url }}">
+          <span class="sr-only">Visit {{ authorData.name | split(' ') | first }}`s Author Page</span>
+          <img src="{{ authorData.image }}" alt="Avatar for {{ authorData.name }}" class="rounded-full border-2 border-orange-300 size-14 sm:size-20">
+        </a>
+        <div class="">
+          <div class="text-lg leading-none">
+            <a class="hover:text-red-600 font-semibold" href="{{ authorData.url }}">{{ authorData.name }}</a>
+          </div>
+          <div class="">
+            {{ authorData.role }} <a href="{{ authorData.companyUrl }}" class="text-red-600 font-medium group">@ <span class="no-underline group-hover:underline">{{ authorData.company }}</span></a>
+          </div>
+          <div class="mt-2 text-sm">{{ authorData.content }}</div>
+        </div>
       </div>
-    {%- endif %}
-  </footer>
+      {%- endif %}
+
+      {# Posts navigation #}
+      {%- if collections.posts %}
+        <div class="pt-8 mt-8">
+          {%- set previousPost = collections.posts | getPreviousCollectionItem %}
+          {%- set nextPost = collections.posts | getNextCollectionItem %}
+          {%- if nextPost or previousPost %}
+            <ul class="list-none p-0 m-0 grid xs:grid-cols-2 gap-8">
+              {%- if previousPost %}
+                <li class="text-left m-0 p-0">
+                  <a class="!no-underline group inline-block" href="{{ previousPost.url }}">
+                    <span class="text-sm flex gap-1 items-center justify-start -ml-1">
+                      {% phicon "arrow-up-left", "regular", { "class": "size-5" } %}<span>Previous</span>
+                    </span>
+                    <span class="group-hover:text-red-600 inline-block leading-tight text-pretty">{{ previousPost.data.title }}</span>
+                  </a>
+                </li>
+              {%- else %}
+                <li></li>
+              {%- endif %}
+              {%- if nextPost %}
+                <li class="text-right m-0 p-0">
+                  <a class="!no-underline group inline-block" href="{{ nextPost.url }}">
+                    <span class="text-sm flex gap-1 items-center justify-end -mr-1">
+                      <span>Next</span>{% phicon "arrow-up-right", "regular", { "class": "size-5" } %}
+                    </span>
+                    <span class="group-hover:text-red-600 inline-block leading-tight text-pretty">{{ nextPost.data.title }}</span>
+                  </a>
+                </li>
+              {%- else %}
+                <li></li>
+              {%- endif %}
+            </ul>
+          {%- endif %}
+        </div>
+      {%- endif %}
+    </footer>
+
+  </article>
 </main>

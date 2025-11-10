@@ -1,6 +1,6 @@
 /* global Alpine */
 import debugLog from "../modules/_debugLog";
-import { stripTags, allowHttpUrl } from "../modules/_sanitize";
+import { stripTags } from "../modules/_sanitize";
 
 document.addEventListener("alpine:init", () => {
   Alpine.data("SeoAnalyzer", () => ({
@@ -229,15 +229,58 @@ document.addEventListener("alpine:init", () => {
       this.buttonLabel = "Analyze SEO";
     },
 
-    sanitizeUrl(u) {
+    // Normalize to HTTPS scheme and sanitize
+    normalizeHttps(u) {
+      u = String(u || "").trim();
+      if (!u) return "";
+      // remove any leading protocol and force https
+      try {
+        // If it already parses as a URL, coerce protocol to https
+        const tmp = new URL(
+          u,
+          /^https?:\/\//i.test(u) ? undefined : "https://",
+        );
+        // If base was used, we need to detect
+        let host = tmp.host;
+        let path = tmp.pathname + (tmp.search || "") + (tmp.hash || "");
+        if (!host && tmp.href.startsWith("https://")) {
+          // Relative or schemeless input, extract from pathname
+          const rest = tmp.href.replace("https://", "");
+          if (/^\/?\S/.test(rest)) {
+            // looks like host is included, try to rebuild
+            const guess = rest.replace(/^\//, "");
+            return `https://${guess}`;
+          }
+        }
+        if (host) {
+          return `https://${host}${path}`;
+        }
+      } catch (e) {
+        // Fall through to basic cleanup
+      }
+      // Basic fallback cleanup: strip any http(s) and prepend https://
+      const cleaned = u.replace(/^\s*https?:\/\//i, "").replace(/^\/*/, "");
+      return cleaned ? `https://${cleaned}` : "";
+    },
+
+    sanitizeUrlHttps(u) {
       u = stripTags(u);
-      return allowHttpUrl(u);
+      const normalized = this.normalizeHttps(u);
+      try {
+        const parsed = new URL(normalized);
+        if (parsed.protocol !== "https:") return "";
+        // require absolute https URL with host
+        if (!parsed.host) return "";
+        return parsed.toString();
+      } catch (e) {
+        return "";
+      }
     },
 
     // Encoded current URL (prefer analyzed result url)
     encodedUrl() {
       const u = this.result && this.result.url ? this.result.url : this.url;
-      const cleaned = this.sanitizeUrl(u || "");
+      const cleaned = this.sanitizeUrlHttps(u || "");
       if (!cleaned) return "";
       try {
         return encodeURIComponent(cleaned);
@@ -260,13 +303,27 @@ document.addEventListener("alpine:init", () => {
       return `${base}${sep}url=${encoded}`;
     },
 
+    onUrlInput(strict = false) {
+      const current = String(this.url || "");
+      // Always keep https:// prefix while typing
+      const normalized = this.normalizeHttps(current);
+      if (!strict) {
+        this.url = normalized;
+        return;
+      }
+      // On blur or strict mode, fully sanitize/validate; if invalid, still keep normalized field value
+      const cleaned = this.sanitizeUrlHttps(normalized);
+      this.url = cleaned || normalized;
+    },
+
     async analyze(event) {
       if (event) event.preventDefault();
       this.errorMessage = "";
 
-      const cleaned = this.sanitizeUrl(this.url);
+      const cleaned = this.sanitizeUrlHttps(this.url);
       if (!cleaned) {
-        this.errorMessage = "Please enter a valid absolute URL (http/https).";
+        this.errorMessage =
+          "Please enter a valid absolute HTTPS URL (must start with https://).";
         this.state = "error";
         return;
       }
@@ -336,7 +393,7 @@ document.addEventListener("alpine:init", () => {
 
     mapError(msg) {
       if (/Invalid URL/i.test(msg))
-        return "Invalid URL format (must be absolute http/https).";
+        return "Invalid URL format (must be absolute HTTPS starting with https://).";
       if (/not html/i.test(msg))
         return "Target is not HTML (unsupported content type).";
       if (/reachable/i.test(msg))
@@ -357,7 +414,7 @@ document.addEventListener("alpine:init", () => {
         const params = new URLSearchParams(location.search);
         const q = params.get("url");
         if (q) {
-          const cleaned = this.sanitizeUrl(q);
+          const cleaned = this.sanitizeUrlHttps(q);
           if (cleaned) {
             this.url = cleaned;
             // Defer to ensure component is fully mounted
@@ -367,8 +424,8 @@ document.addEventListener("alpine:init", () => {
               setTimeout(() => this.analyze(), 0);
             }
           } else {
-            // Prefill raw to aid correction but don't auto-run
-            this.url = String(q);
+            // Prefill raw query to let the user edit without aggressive normalization
+            this.url = String(q).trim();
           }
         }
       } catch (e) {

@@ -234,6 +234,32 @@ document.addEventListener("alpine:init", () => {
       return allowHttpUrl(u);
     },
 
+    // Encoded current URL (prefer analyzed result url)
+    encodedUrl() {
+      const u = this.result && this.result.url ? this.result.url : this.url;
+      const cleaned = this.sanitizeUrl(u || "");
+      if (!cleaned) return "";
+      try {
+        return encodeURIComponent(cleaned);
+      } catch (e) {
+        return "";
+      }
+    },
+
+    // Unified internal cross-tool link builder (no UTM params)
+    buildToolLink(name) {
+      const encoded = this.encodedUrl();
+      if (!encoded) return "";
+      const map = {
+        "metadata-checker": "/tools/metadata-checker/",
+        "heading-extractor": "/tools/heading-extractor/",
+      };
+      const base = map[name] || name || ""; // allow passing a direct path as fallback
+      if (!base) return "";
+      const sep = base.includes("?") ? "&" : "?";
+      return `${base}${sep}url=${encoded}`;
+    },
+
     async analyze(event) {
       if (event) event.preventDefault();
       this.errorMessage = "";
@@ -326,6 +352,28 @@ document.addEventListener("alpine:init", () => {
 
     init() {
       debugLog("SEO Analyzer initialized");
+      // Autofill and auto-run if ?url= is provided
+      try {
+        const params = new URLSearchParams(location.search);
+        const q = params.get("url");
+        if (q) {
+          const cleaned = this.sanitizeUrl(q);
+          if (cleaned) {
+            this.url = cleaned;
+            // Defer to ensure component is fully mounted
+            if (this.$nextTick) {
+              this.$nextTick(() => this.analyze());
+            } else {
+              setTimeout(() => this.analyze(), 0);
+            }
+          } else {
+            // Prefill raw to aid correction but don't auto-run
+            this.url = String(q);
+          }
+        }
+      } catch (e) {
+        // ignore URLSearchParams errors in non-browser contexts
+      }
     },
   }));
 });

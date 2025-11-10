@@ -8,10 +8,6 @@ partialScripts:
   - //cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-json.min.js
   - alpine-data/seo-analyzer
 faq:
-  - question: "What does the SEO Analyzer check?"
-    answer: >
-      The analyzer performs a comprehensive on-page SEO audit across five key areas: **Semantic HTML** (proper use of main, header, footer, nav, article, section tags), **Meta Tags** (title, description, viewport, charset, lang attribute, canonical URL, Open Graph, Twitter Cards), **Heading Structure** (H1-H6 hierarchy and proper nesting), **Structured Data** (JSON-LD, Microdata, and RDFa schemas like Article, Organization, BreadcrumbList), and **Accessibility** (alt text on images, form labels, link descriptions, skip links). You'll receive a weighted score out of 100 plus actionable recommendations with code examples.
-
   - question: "How is the SEO score calculated?"
     answer: |-
       The score is weighted across five categories:
@@ -266,6 +262,17 @@ faq:
                   </ul>
                 </div>
               </template>
+
+              <div class="pt-3 text-right">
+                <a class="btn btn--secondary btn--xs"
+                   :href="buildToolLink('metadata-checker')"
+                   x-show="encodedUrl()" x-cloak
+                   target="_blank"
+                   aria-label="Open Metadata Checker for this URL">
+                  {% phicon "meta-logo", "regular", { class: "size-4" } %}
+                  <span>Open Metadata Checker</span>
+                </a>
+              </div>
             </section>
 
             <!-- Headings -->
@@ -288,6 +295,16 @@ faq:
                     </ol>
                   </div>
                 </template>
+                <div class="pt-3 text-right">
+                  <a class="btn btn--secondary btn--xs"
+                     :href="buildToolLink('heading-extractor')"
+                     x-show="encodedUrl()" x-cloak
+                     target="_blank"
+                     aria-label="Open Heading Extractor for this URL">
+                    {% phicon "article-ny-times", "regular", { class: "size-4" } %}
+                    <span>Open Heading Extractor</span>
+                  </a>
+                </div>
               </div>
             </section>
 
@@ -334,6 +351,16 @@ faq:
                     </ol>
                   </div>
                 </template>
+                <div class="p-3 text-right">
+                  <a class="btn btn--secondary btn--xs"
+                     href="https://developers.google.com/search/docs/appearance/structured-data?utm_source=freshjuice.dev"
+                     target="_blank"
+                     rel="nofollow noopener"
+                     aria-label="Open Schema Markup Testing Tool">
+                    {% phicon "code", "regular", { class: "size-4" } %}
+                    <span>Open Schema Markup Testing Tool</span>
+                  </a>
+                </div>
               </div>
             </section>
 
@@ -378,7 +405,17 @@ faq:
   <article class="prose max-w-3xl mx-auto mt-12">
     <h2>About this tool</h2>
     <p>
-      Inspect a page’s on‑page SEO signals in seconds. Enter a URL, click <code>Analyze</code>, and review structured results with copy‑ready fixes.
+      The SEO Analyzer performs a comprehensive on-page SEO audit across five key areas:
+    </p>
+    <ul>
+      <li><strong>Semantic HTML</strong> (proper use of main, header, footer, nav, article, section tags),</li>
+      <li><strong>Meta Tags</strong> (title, description, viewport, charset, lang attribute, canonical URL, Open Graph, Twitter Cards),</li>
+      <li><strong>Heading Structure</strong> (H1-H6 hierarchy and proper nesting),</li>
+      <li><strong>Structured Data</strong> (JSON-LD, Microdata, and RDFa schemas like Article, Organization, BreadcrumbList),</li>
+      <li><strong>Accessibility</strong> (alt text on images, form labels, link descriptions, skip links).</li>
+    </ul>
+    <p>
+      You'll receive a weighted score out of 100 plus actionable recommendations with code examples.
     </p>
     {% include "partials/faq-section.njk" %}
   </article>

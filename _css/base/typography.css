@@ -19,8 +19,7 @@
     padding-left: 1.5em;
   }
 
-  .prose :is(p, blockquote, pre) > :is(p, li),
-  .prose :is(ul, ol) li > :is(p, li) {
+  .prose :is(ul, ol, p, blockquote, pre) > :is(p, * > li) {
     font-size: 1em;
   }
 

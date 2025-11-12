@@ -71,17 +71,17 @@ partialScripts:
         <input type="email" id="email" name="email" required x-model.trim="fields.email">
       </fieldset>
 
+      <fieldset class="col-span-full">
+        <label for="message">Your Message</label>
+        <textarea id="message" name="message" required x-model.trim="fields.message"></textarea>
+      </fieldset>
+
       {# TODO: Consider adding explicit opt-in checkbox for newsletter/marketing communications in future #}
       <fieldset class="col-span-full sr-only pointer-events-none" aria-hidden="true" tabindex="-1">
         <label for="user_consent_mode">
           <input type="checkbox" id="user_consent_mode" name="user_consent_mode" x-model="fields.user_consent_mode" tabindex="-1">
-          I agree to receive marketing communications and consent to data processing
+          I promise my content is 100% organic, locally-sourced, and free from artificial AI-generated fluff
         </label>
-      </fieldset>
-
-      <fieldset class="col-span-full">
-        <label for="message">Your Message</label>
-        <textarea id="message" name="message" required x-model.trim="fields.message"></textarea>
       </fieldset>
 
       <div class="action col-span-full">

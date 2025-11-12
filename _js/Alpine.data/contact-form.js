@@ -14,6 +14,7 @@ document.addEventListener("alpine:init", () => {
         lastname: "",
         email: "",
         message: "",
+        user_consent_mode: false,
       },
 
       meta: {
@@ -39,7 +40,13 @@ document.addEventListener("alpine:init", () => {
         this.state = "idle";
         this.loading = false;
         this.error = "";
-        this.fields = { firstname: "", lastname: "", email: "", message: "" };
+        this.fields = {
+          firstname: "",
+          lastname: "",
+          email: "",
+          message: "",
+          user_consent_mode: false,
+        };
       },
 
       async submit() {
@@ -52,6 +59,7 @@ document.addEventListener("alpine:init", () => {
           lastname: this.fields.lastname,
           email: this.fields.email,
           message: this.fields.message,
+          user_consent_mode: this.fields.user_consent_mode,
 
           pageUri: this.meta.pageUri,
           document_title: this.meta.document_title,
@@ -78,6 +86,7 @@ document.addEventListener("alpine:init", () => {
               lastname: "",
               email: "",
               message: "",
+              user_consent_mode: false,
             };
           } else {
             let detail = "Submission failed. Please try again.";

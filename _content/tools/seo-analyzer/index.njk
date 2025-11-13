@@ -10,17 +10,19 @@ partialScripts:
 faq:
   - question: "How is the SEO score calculated?"
     answer: |-
-      The score is weighted across five categories:
+      The score is weighted across six categories:
 
-      **Meta Tags (25%)** — checks for title (30-60 chars optimal), meta description (120-160 chars optimal), lang attribute, viewport, and noindex warnings;
+      **Semantic HTML (23%)** — validates proper use of main (must be present once), header, footer, nav, and content wrapped in article/section tags;
 
-      **Semantic HTML (25%)** — validates proper use of main (must be present once), header, footer, nav, and content wrapped in article/section tags;
+      **Meta Tags (22%)** — checks for title (30-60 chars optimal), meta description (120-160 chars optimal), lang attribute, viewport, and noindex warnings;
 
-      **Headings (20%)** — ensures single H1, no skipped levels (e.g., H2→H4), and proper hierarchy;
+      **Crawling (10%)** — validates robots.txt presence and configuration, checks for sitemap directives, and recommends llms.txt for AI crawler guidance. Each category is scored 0-100, then weighted and combined. A score of 90+ is excellent, 75-89 is good, 50-74 needs improvement, and below 50 requires significant work.
 
-      **Structured Data (20%)** — looks for Article/BlogPosting, Organization, BreadcrumbList schemas and validates completeness;
+      **Headings (18%)** — ensures single H1, no skipped levels (e.g., H2→H4), and proper hierarchy;
 
-      **Accessibility (10%)** — checks images for alt text, forms for labels, links for descriptive text, and presence of skip links. Each category is scored 0-100, then weighted and combined. A score of 90+ is excellent, 75-89 is good, 50-74 needs improvement, and below 50 requires significant work.
+      **Structured Data (17%)** — looks for Article/BlogPosting, Organization, BreadcrumbList schemas and validates completeness;
+
+      **Accessibility (10%)** — checks images for alt text, forms for labels, links for descriptive text, and presence of skip links;
 
   - question: "What do the severity levels mean?"
     answer: |-
@@ -90,6 +92,10 @@ faq:
           <label class="inline-flex items-center gap-2 text-sm">
             <input type="checkbox" x-model="options.checkMeta" />
             <span>Meta tags</span>
+          </label>
+          <label class="inline-flex items-center gap-2 text-sm">
+            <input type="checkbox" x-model="options.checkRobots" />
+            <span>Crawling</span>
           </label>
           <label class="inline-flex items-center gap-2 text-sm">
             <input type="checkbox" x-model="options.checkHeadings" />
@@ -276,6 +282,100 @@ faq:
               </div>
             </section>
 
+            <!-- Crawling & Indexing -->
+            <template x-if="hasRobotsTxtData">
+              <section class="border rounded-xl overflow-hidden">
+                <h4 class="text-lg m-0 pt-4 px-4 flex items-center gap-2">{% phicon "robot", "regular", { class: "size-5" } %} <span>Crawling &amp; Indexing</span></h4>
+                <div class="text-sm mt-2 px-4">
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- robots.txt status -->
+                    <div class="space-y-2">
+                      <div class="font-semibold">robots.txt</div>
+                      <template x-if="robotsTxtStatus">
+                        <div class="grid grid-cols-1 gap-2 font-mono">
+                          <div>File found:&nbsp;&nbsp;<span><strong x-text="bool(robotsTxtStatus.hasFile)"></strong></span>
+                            <template x-if="robotsTxtStatus.hasFile && robotsTxtStatus.robotsTxtUrl">
+                              <a :href="robotsTxtStatus.robotsTxtUrl" target="_blank" rel="nofollow noopener" class="text-xs ml-2">(view)</a>
+                            </template>
+                          </div>
+                          <template x-if="robotsTxtStatus.hasFile">
+                            <div>
+                              <span :class="robotsTxtStatus.allowsCrawling ? 'text-green-700' : 'text-red-700'">
+                                Allows crawling:&nbsp;&nbsp;<strong x-text="bool(robotsTxtStatus.allowsCrawling)"></strong>
+                              </span>
+                            </div>
+                          </template>
+                          <template x-if="robotsTxtStatus.hasFile">
+                            <div>Has Sitemap:&nbsp;&nbsp;<strong x-text="bool(robotsTxtStatus.hasSitemap)"></strong></div>
+                          </template>
+                          <template x-if="robotsTxtStatus.hasFile">
+                            <div>Has User-agent:&nbsp;&nbsp;<strong x-text="bool(robotsTxtStatus.hasUserAgent)"></strong></div>
+                          </template>
+                        </div>
+                      </template>
+                    </div>
+
+                    <!-- llms.txt status -->
+                    <div class="space-y-2">
+                      <div class="font-semibold">llms.txt</div>
+                      <template x-if="robotsTxtStatus">
+                        <div class="grid grid-cols-1 gap-2 font-mono">
+                          <div>File found:&nbsp;&nbsp;<span><strong x-text="bool(robotsTxtStatus.hasLlmsTxt)"></strong></span>
+                            <template x-if="robotsTxtStatus.hasLlmsTxt && robotsTxtStatus.llmsTxtUrl">
+                              <a :href="robotsTxtStatus.llmsTxtUrl" target="_blank" rel="nofollow noopener" class="text-xs ml-2">(view)</a>
+                            </template>
+                          </div>
+                        </div>
+                      </template>
+                    </div>
+                  </div>
+
+                  <!-- Critical warning for blocked crawling -->
+                  <template x-if="robotsTxtStatus && robotsTxtStatus.hasFile && !robotsTxtStatus.allowsCrawling">
+                    <div class="mt-4 p-3 border-2 border-red-300 bg-red-50 rounded-lg">
+                      <div class="flex items-start gap-2">
+                        <span class="text-lg">⚠️</span>
+                        <div>
+                          <div class="font-semibold text-red-700 text-sm">Critical SEO Issue</div>
+                          <div class="text-xs text-red-600 mt-1">Your robots.txt is blocking all search engines. Your site will not appear in search results.</div>
+                        </div>
+                      </div>
+                    </div>
+                  </template>
+
+                  <!-- Issues and warnings -->
+                  <template x-if="robotsTxtStatus && robotsTxtStatus.issues && robotsTxtStatus.issues.length">
+                    <div class="pt-3">
+                      <div class="text-sm font-semibold">Issues</div>
+                      <ul class="list-disc pl-6 text-sm font-mono my-2">
+                        <template x-for="i in robotsTxtStatus.issues">
+                          <li class="text-red-700" x-text="i"></li>
+                        </template>
+                      </ul>
+                    </div>
+                  </template>
+                  <template x-if="robotsTxtStatus && robotsTxtStatus.warnings && robotsTxtStatus.warnings.length">
+                    <div class="pt-2">
+                      <div class="text-sm font-semibold">Warnings</div>
+                      <ul class="list-disc pl-6 text-sm font-mono my-2">
+                        <template x-for="w in robotsTxtStatus.warnings">
+                          <li class="text-yellow-800" x-text="w"></li>
+                        </template>
+                      </ul>
+                    </div>
+                  </template>
+
+                  <template x-if="!robotsTxtStatus || !robotsTxtStatus.hasLlmsTxt">
+                    <div class="text-xs text-right opacity-80 italic py-4">
+                      <b>llms.txt</b> is an emerging standard for guiding AI/LLM crawlers.
+                      <a href="/blog/llms-txt-implementation-guide/" target="_blank" class="underline">Learn more</a>
+                    </div>
+                  </template>
+
+                </div>
+              </section>
+            </template>
+
             <!-- Headings -->
             <section class="border rounded-xl overflow-hidden p-4">
               <h4 class="text-lg m-0 flex items-center gap-2">{% phicon "article-ny-times", "regular", { class: "size-5" } %} <span>Headings</span></h4>
@@ -405,14 +505,15 @@ faq:
   <article class="prose max-w-3xl mx-auto mt-12">
     <h2>About this tool</h2>
     <p>
-      The SEO Analyzer performs a comprehensive on-page SEO audit across five key areas:
+      The SEO Analyzer performs a comprehensive on-page SEO audit across six key areas:
     </p>
     <ul>
       <li><strong>Semantic HTML</strong> (proper use of main, header, footer, nav, article, section tags),</li>
       <li><strong>Meta Tags</strong> (title, description, viewport, charset, lang attribute, canonical URL, Open Graph, Twitter Cards),</li>
+      <li><strong>Crawling &amp; Indexing</strong> (robots.txt configuration, sitemap directives, llms.txt for AI crawler guidance).</li>
       <li><strong>Heading Structure</strong> (H1-H6 hierarchy and proper nesting),</li>
       <li><strong>Structured Data</strong> (JSON-LD, Microdata, and RDFa schemas like Article, Organization, BreadcrumbList),</li>
-      <li><strong>Accessibility</strong> (alt text on images, form labels, link descriptions, skip links).</li>
+      <li><strong>Accessibility</strong> (alt text on images, form labels, link descriptions, skip links),</li>
     </ul>
     <p>
       You'll receive a weighted score out of 100 plus actionable recommendations with code examples.

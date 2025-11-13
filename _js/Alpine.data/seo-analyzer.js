@@ -19,6 +19,7 @@ document.addEventListener("alpine:init", () => {
       checkHeadings: true,
       checkMeta: true,
       checkAccessibility: true,
+      checkRobots: true,
     },
 
     // Helpers / derived
@@ -48,6 +49,27 @@ document.addEventListener("alpine:init", () => {
       } catch (e) {
         return "";
       }
+    },
+
+    // robots.txt helpers
+    get hasRobotsTxtData() {
+      return !!(this.result && this.result.robotsTxt);
+    },
+
+    get robotsTxtStatus() {
+      const data = this.result && this.result.robotsTxt;
+      if (!data) return null;
+      return {
+        hasFile: !!data.hasRobotsTxt,
+        hasLlmsTxt: !!data.hasLlmsTxt,
+        allowsCrawling: !!data.robotsAllowsCrawling,
+        hasSitemap: !!data.hasSitemap,
+        hasUserAgent: !!data.hasUserAgent,
+        robotsTxtUrl: data.robotsTxtUrl || "",
+        llmsTxtUrl: data.llmsTxtUrl || "",
+        issues: Array.isArray(data.issues) ? data.issues : [],
+        warnings: Array.isArray(data.warnings) ? data.warnings : [],
+      };
     },
 
     get sortedRecommendations() {
@@ -347,6 +369,7 @@ document.addEventListener("alpine:init", () => {
               checkHeadings: !!this.options.checkHeadings,
               checkMeta: !!this.options.checkMeta,
               checkAccessibility: !!this.options.checkAccessibility,
+              checkRobots: !!this.options.checkRobots,
             },
           }),
           signal: controller.signal,

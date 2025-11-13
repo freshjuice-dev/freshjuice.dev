@@ -8,3 +8,4 @@
 ./functions/**/*
 ./_content/blog/posts/README.md
 ./_content/authors/authors/README.md
+**/CLAUDE.md

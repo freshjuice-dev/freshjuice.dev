@@ -394,4 +394,20 @@ export default {
       return !tags.some((tag) => (item.data.tags || []).includes(tag));
     });
   },
+
+  // Normalize text for plain text files (llms.txt, etc.)
+  // Converts smart quotes, dashes, and special characters to plain ASCII
+  plainText: (text) => {
+    if (!text) return "";
+    return String(text)
+      .replace(/[""]/g, '"') // Smart double quotes
+      .replace(/['']/g, "'") // Smart single quotes
+      .replace(/[—–]/g, "-") // Em dash and en dash
+      .replace(/…/g, "...") // Ellipsis
+      .replace(/[«»]/g, '"') // Angle quotes
+      .replace(/[\u2018\u2019]/g, "'") // Unicode single quotes
+      .replace(/[\u201C\u201D]/g, '"') // Unicode double quotes
+      .replace(/[\u2013\u2014]/g, "-") // Unicode dashes
+      .replace(/\u2026/g, "..."); // Unicode ellipsis
+  },
 };

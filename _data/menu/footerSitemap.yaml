@@ -19,6 +19,8 @@
   children:
     - title: Fresh Tools
       url: /tools/
+    - title: Free SEO Analysis Tool
+      url: /tools/seo-analyzer
     - title: Campaign URL Builder
       url: /tools/campaign-url-builder/
     - title: Am I Responsive?

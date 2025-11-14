@@ -7,6 +7,7 @@ document.addEventListener("alpine:init", () => {
     // State
     url: "",
     result: null,
+    metadata: null, // stores generatedBy, toolUrl, aiAssistantPrompt
     errorMessage: "",
     state: "idle", // idle, loading, success, error
     buttonLabel: "Analyze SEO",
@@ -243,8 +244,49 @@ document.addEventListener("alpine:init", () => {
       );
     },
 
+    downloadJson() {
+      if (!this.result) return;
+      try {
+        // Merge metadata properties at the beginning
+        const reportData = {
+          ...(this.metadata || {}),
+          ...this.result,
+        };
+
+        // Create JSON string (single line)
+        const jsonString = JSON.stringify(reportData);
+        const blob = new Blob([jsonString], { type: "application/json" });
+
+        // Generate filename with domain, date, and time
+        const url = this.result.url || this.url || "website";
+        const domain = url
+          .replace(/^https?:\/\//, "")
+          .split("/")[0]
+          .replace(/\W/g, "-");
+        const isoString = new Date().toISOString();
+        const date = isoString.split("T")[0];
+        const time = isoString.split("T")[1].split(".")[0].replace(/:/g, "-");
+        const filename = `freshjuice-seo-analysis_${domain}_${date}_${time}.json`;
+
+        // Trigger download
+        const downloadUrl = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = downloadUrl;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(downloadUrl);
+
+        debugLog(`Downloaded JSON: ${filename}`);
+      } catch (e) {
+        debugLog("Failed to download JSON:", e);
+      }
+    },
+
     reset() {
       this.result = null;
+      this.metadata = null;
       this.errorMessage = "";
       this.state = "idle";
       this.openIndex = [];
@@ -396,6 +438,13 @@ document.addEventListener("alpine:init", () => {
               : "Unexpected API response";
           throw new Error(err);
         }
+
+        // Store metadata for JSON export
+        this.metadata = {
+          generatedBy: data.generatedBy || null,
+          toolUrl: data.toolUrl || null,
+          aiAssistantPrompt: data.aiAssistantPrompt || null,
+        };
 
         this.result = data.data || null;
         this.state = "success";

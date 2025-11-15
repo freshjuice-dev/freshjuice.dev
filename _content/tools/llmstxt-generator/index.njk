@@ -1,0 +1,450 @@
+---
+title: "llms.txt Generator"
+desc: "Generate llms.txt files for your website to guide AI crawlers. Create a structured file from your sitemap or URL list that helps LLMs like Claude, GPT, and Gemini understand your site content."
+icon: "robot"
+type: seo
+partialScripts:
+  - alpine-data/llms-txt-generator
+faq:
+  - question: "What is llms.txt?"
+    answer: |-
+      llms.txt is a standardized markdown file that provides LLM-friendly documentation of your website's content. It lists important pages with titles and descriptions, organized by category (core pages, product pages, documentation, resources, support, blog posts, company info, legal pages). This helps AI crawlers and language models understand your site structure and prioritize content when answering questions about your business.
+  - question: "Where should I place the llms.txt file?"
+    answer: |-
+      Place the generated `llms.txt` file in your website's root directory (e.g., `https://example.com/llms.txt`). This makes it easily discoverable by AI crawlers following the llms.txt standard.
+  - question: "How does automatic categorization work?"
+    answer: |-
+      When you provide a sitemap, the tool automatically categorizes URLs based on common patterns:
+
+      - **Core Pages**: `/about`, `/contact`, `/pricing`, `/features`, `/services`
+      - **Product Pages**: `/product/`, `/solutions/`, `/plans/`
+      - **Documentation**: `/docs/`, `/guides/`, `/api/`, `/reference/`, `/tutorial/`
+      - **Resources**: `/resources/`, `/case-studies/`, `/whitepapers/`, `/ebooks/`, `/templates/`, `/downloads/`
+      - **Support**: `/help/`, `/faq/`, `/support/`, `/knowledge-base/`, `/troubleshooting/`
+      - **Blog Posts**: `/blog/`, `/posts/`, `/articles/`, `/news/`
+      - **Company**: `/company/`, `/careers/`, `/jobs/`, `/team/`, `/press/`, `/investors/`
+      - **Legal**: `/privacy/`, `/terms/`, `/cookies/`, `/gdpr/`, `/compliance/`
+
+      You can provide custom regex patterns for your specific URL structure.
+  - question: "What if my sitemap has more than 100 URLs?"
+    answer: |-
+      The tool automatically prioritizes URLs when your sitemap exceeds 100 entries. Priority order: Core → Product → Documentation → Resources → Support → Blog → Company → Legal → Other. This ensures your most important pages are included. You can review and adjust the selection before generating.
+  - question: "Can I edit the generated file?"
+    answer: |-
+      Yes! The llms.txt file is just formatted markdown text. After downloading, you can edit it in any text editor to add custom sections, reorder pages, or update descriptions. The tool provides a starting point that you can customize to your needs.
+  - question: "How is this different from robots.txt or sitemap.xml?"
+    answer: |-
+      While `robots.txt` tells bots what *not* to crawl and `sitemap.xml` lists all URLs for search engines, `llms.txt` provides human-readable context about your content specifically for LLMs. It includes descriptions and categorization that help AI understand what each page is about, making it easier to provide accurate answers about your business.
+---
+
+<main class="max-w-3xl mx-auto" x-data="llmstxtGenerator">
+
+  <div class="prose max-w-full">
+    <h1>{{ title }}</h1>
+    <p class="lead">Generate a standardized llms.txt file from your website's sitemap or URL list. Help AI crawlers understand your content structure and prioritize important pages.</p>
+  </div>
+
+  {# Step Indicator #}
+  <div class="not-prose flex items-center justify-center gap-4 my-8">
+    <div class="flex items-center gap-2">
+      <div class="size-8 rounded-full flex items-center justify-center font-bold transition-colors"
+           :class="currentStep >= 1 ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-500'">
+        1
+      </div>
+      <span class="text-sm font-medium" :class="currentStep === 1 ? 'text-orange-500' : 'text-gray-500'">Input</span>
+    </div>
+    <div class="h-0.5 w-12 transition-colors" :class="currentStep >= 2 ? 'bg-orange-500' : 'bg-gray-200'"></div>
+    <div class="flex items-center gap-2">
+      <div class="size-8 rounded-full flex items-center justify-center font-bold transition-colors"
+           :class="currentStep >= 2 ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-500'">
+        2
+      </div>
+      <span class="text-sm font-medium" :class="currentStep === 2 ? 'text-orange-500' : 'text-gray-500'">Review</span>
+    </div>
+    <div class="h-0.5 w-12 transition-colors" :class="currentStep >= 3 ? 'bg-orange-500' : 'bg-gray-200'"></div>
+    <div class="flex items-center gap-2">
+      <div class="size-8 rounded-full flex items-center justify-center font-bold transition-colors"
+           :class="currentStep >= 3 ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-500'">
+        3
+      </div>
+      <span class="text-sm font-medium" :class="currentStep === 3 ? 'text-orange-500' : 'text-gray-500'">Generate</span>
+    </div>
+  </div>
+
+  {# Loading Indicator #}
+  <div x-show="isLoading" x-cloak class="not-prose border-2 border-orange-200 rounded-2xl p-6 bg-orange-50 mb-6">
+    <div class="flex items-center gap-3">
+      <div class="animate-spin size-6 border-2 border-orange-500 border-t-transparent rounded-full"></div>
+      <p class="text-base font-medium text-orange-900" x-text="loadingMessage"></p>
+    </div>
+  </div>
+
+  {# Error Message #}
+  <div x-show="errorMessage" x-cloak class="not-prose border-2 border-red-200 rounded-2xl p-4 bg-red-50 mb-6">
+    <div class="flex items-start gap-3">
+      {% phicon "warning-circle", "duotone", { class: "size-6 text-red-600 flex-shrink-0 mt-0.5" } %}
+      <div class="flex-1">
+        <p class="text-sm font-medium text-red-900" x-text="errorMessage"></p>
+      </div>
+      <button @click="errorMessage = ''" class="text-red-600 hover:text-red-800">
+        {% phicon "x", "bold", { class: "size-5" } %}
+      </button>
+    </div>
+  </div>
+
+  {# Success Message #}
+  <div x-show="successMessage" x-cloak class="not-prose border-2 border-green-200 rounded-2xl p-4 bg-green-50 mb-6">
+    <div class="flex items-start gap-3">
+      {% phicon "check-circle", "duotone", { class: "size-6 text-green-600 flex-shrink-0 mt-0.5" } %}
+      <div class="flex-1">
+        <p class="text-sm font-medium text-green-900" x-text="successMessage"></p>
+      </div>
+      <button @click="successMessage = ''" class="text-green-600 hover:text-green-800">
+        {% phicon "x", "bold", { class: "size-5" } %}
+      </button>
+    </div>
+  </div>
+
+  {# Step 1: Input Method Selection #}
+  <div x-show="currentStep === 1" x-cloak>
+
+    <h2>Choose Your Input Method</h2>
+
+    <div class="not-prose grid sm:grid-cols-2 gap-4 mb-6">
+      <label class="border-2 rounded-2xl p-4 cursor-pointer transition-all hover:border-orange-300"
+             :class="inputMethod === 'sitemap' ? 'border-orange-500 bg-orange-50' : 'border-gray-200'">
+        <input type="radio" x-model="inputMethod" value="sitemap" class="sr-only">
+        <div class="flex items-start gap-3">
+          <span class="size-8 shrink-0" :class="inputMethod===`sitemap`?`text-orange-500`:``">
+            {% phicon "tree-structure", "reular", { class: "size-8" } %}
+          </span>
+          <div>
+            <p class="font-bold text-base mb-1">Use Sitemap</p>
+            <p class="text-sm text-gray-600">Parse your sitemap.xml to automatically discover and categorize URLs</p>
+          </div>
+        </div>
+      </label>
+
+      <label class="border-2 rounded-2xl p-4 cursor-pointer transition-all hover:border-orange-300"
+             :class="inputMethod === 'manual' ? 'border-orange-500 bg-orange-50' : 'border-gray-200'">
+        <input type="radio" x-model="inputMethod" value="manual" class="sr-only">
+        <div class="flex items-start gap-3">
+          <span class="size-8 shrink-0" :class="inputMethod===`manual`?`text-orange-500`:``">
+            {% phicon "list-bullets", "reular", { class: "size-8" } %}
+          </span>
+          <div>
+            <p class="font-bold text-base mb-1">Enter URLs Manually</p>
+            <p class="text-sm text-gray-600">Provide a custom list of URLs (max 100)</p>
+          </div>
+        </div>
+      </label>
+    </div>
+
+    {# Sitemap Input #}
+    <div x-show="inputMethod === 'sitemap'" x-cloak>
+      <h3>Enter Sitemap URL</h3>
+      <form @submit.prevent="parseSitemap()" class="not-prose">
+        <div class="mb-4">
+          <label for="sitemap-url" class="block text-sm font-medium mb-2">Sitemap URL</label>
+          <input
+            type="url"
+            id="sitemap-url"
+            x-model="sitemapUrl"
+            placeholder="https://example.com/sitemap.xml"
+            class="input w-full"
+            required
+            :disabled="isLoading"
+          >
+          <p class="text-xs text-gray-500 mt-1">Enter the URL to your sitemap.xml or sitemap index file</p>
+        </div>
+
+        <details class="mb-4 border rounded-lg p-4 bg-gray-50">
+          <summary class="cursor-pointer font-medium text-sm">Advanced: Custom Category Patterns</summary>
+          <div class="mt-4 space-y-3">
+            <div>
+              <label for="core-pattern" class="block text-xs font-medium mb-1">Core Pattern (regex)</label>
+              <input type="text" id="core-pattern" x-model="customHints.corePattern" placeholder="/about|/contact|/pricing" class="input w-full text-sm">
+            </div>
+            <div>
+              <label for="product-pattern" class="block text-xs font-medium mb-1">Product Pattern (regex)</label>
+              <input type="text" id="product-pattern" x-model="customHints.productPattern" placeholder="/product/" class="input w-full text-sm">
+            </div>
+            <div>
+              <label for="docs-pattern" class="block text-xs font-medium mb-1">Documentation Pattern (regex)</label>
+              <input type="text" id="docs-pattern" x-model="customHints.docsPattern" placeholder="/docs/" class="input w-full text-sm">
+            </div>
+            <div>
+              <label for="resources-pattern" class="block text-xs font-medium mb-1">Resources Pattern (regex)</label>
+              <input type="text" id="resources-pattern" x-model="customHints.resourcesPattern" placeholder="/resources/|/case-studies/" class="input w-full text-sm">
+            </div>
+            <div>
+              <label for="support-pattern" class="block text-xs font-medium mb-1">Support Pattern (regex)</label>
+              <input type="text" id="support-pattern" x-model="customHints.supportPattern" placeholder="/help/|/support/" class="input w-full text-sm">
+            </div>
+            <div>
+              <label for="blog-pattern" class="block text-xs font-medium mb-1">Blog Pattern (regex)</label>
+              <input type="text" id="blog-pattern" x-model="customHints.blogPattern" placeholder="/blog/" class="input w-full text-sm">
+            </div>
+            <div>
+              <label for="company-pattern" class="block text-xs font-medium mb-1">Company Pattern (regex)</label>
+              <input type="text" id="company-pattern" x-model="customHints.companyPattern" placeholder="/company/|/careers/" class="input w-full text-sm">
+            </div>
+            <div>
+              <label for="legal-pattern" class="block text-xs font-medium mb-1">Legal Pattern (regex)</label>
+              <input type="text" id="legal-pattern" x-model="customHints.legalPattern" placeholder="/privacy/|/terms/" class="input w-full text-sm">
+            </div>
+          </div>
+        </details>
+
+        <button type="submit" :disabled="!isValidSitemapUrl || isLoading">
+          {% phicon "magnifying-glass", "duotone", { class: "size-5" } %}
+          <span>Parse Sitemap</span>
+        </button>
+      </form>
+    </div>
+
+    {# Manual URL Input #}
+    <div x-show="inputMethod === 'manual'" x-cloak>
+      <h3>Enter URLs</h3>
+      <form @submit.prevent="analyzeFromManualUrls()" class="not-prose">
+        <div class="mb-4">
+          <label for="manual-urls" class="block text-sm font-medium mb-2">URLs (one per line, max 100)</label>
+          <textarea
+            id="manual-urls"
+            x-model="manualUrls"
+            rows="12"
+            placeholder="https://example.com/about&#10;https://example.com/product/feature-1&#10;https://example.com/docs/getting-started"
+            class="input w-full font-mono text-sm"
+            :disabled="isLoading"
+          ></textarea>
+          <p class="text-xs mt-1" :class="manualUrlsArray.length > 100 ? 'text-red-600 font-medium' : 'text-gray-500'">
+            <span x-text="manualUrlsArray.length"></span> URLs entered (max 100)
+          </p>
+        </div>
+
+        <button type="submit" class="btn" :disabled="!isValidManualUrls || isLoading">
+          {% phicon "magnifying-glass", "duotone", { class: "size-5" } %}
+          <span>Analyze URLs</span>
+        </button>
+      </form>
+    </div>
+
+  </div>
+
+  {# Step 2: Review Analyzed Pages #}
+  <div x-show="currentStep === 2" x-cloak>
+
+    {# Parse Results Summary (for sitemap method) #}
+    <div x-show="inputMethod === 'sitemap' && parseResults" class="not-prose border-2 border-blue-200 rounded-2xl p-4 bg-blue-50 mb-6">
+      <h3 class="text-base font-bold mb-2">Sitemap Parsed Successfully</h3>
+      <div class="grid sm:grid-cols-3 gap-4 text-sm">
+        <div>
+          <p class="text-blue-600 font-medium">Total URLs Found</p>
+          <p class="text-2xl font-bold" x-text="totalUrls"></p>
+        </div>
+        <div>
+          <p class="text-blue-600 font-medium">URLs Included</p>
+          <p class="text-2xl font-bold" x-text="includedUrls"></p>
+        </div>
+        <div>
+          <p class="text-blue-600 font-medium">Sitemaps Processed</p>
+          <p class="text-2xl font-bold" x-text="sitemapsProcessed"></p>
+        </div>
+      </div>
+      <div x-show="limitApplied" class="mt-3 p-3 bg-yellow-100 rounded-lg border border-yellow-300">
+        <p class="text-xs text-yellow-800">
+          {% phicon "warning", "duotone", { class: "size-4 inline mr-1" } %}
+          <strong>Automatic prioritization applied:</strong> Found more than 100 URLs. The tool automatically prioritized core pages, product pages, documentation, and blog posts.
+        </p>
+      </div>
+    </div>
+
+    {# Analysis in Progress #}
+    <div x-show="inputMethod === 'sitemap' && parseResults && processedCount === 0" class="not-prose text-center py-8">
+      <button @click="analyzeFromSitemap()" class="btn btn--lg" :disabled="isLoading">
+        {% phicon "sparkle", "duotone", { class: "size-6" } %}
+        <span>Analyze Selected URLs</span>
+      </button>
+    </div>
+
+    {# Analyzed Pages #}
+    <div x-show="processedCount > 0">
+
+      <div class="not-prose flex flex-wrap items-center justify-between gap-4 mb-6">
+        <div class="flex items-center gap-4 text-sm">
+          <div class="flex items-center gap-2">
+            <span class="text-gray-500">Analyzed:</span>
+            <span class="font-bold text-green-600" x-text="processedCount"></span>
+          </div>
+          <div x-show="failedCount > 0" class="flex items-center gap-2">
+            <span class="text-gray-500">Failed:</span>
+            <span class="font-bold text-red-600" x-text="failedCount"></span>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <button @click="selectAllPages()" class="btn btn--xs btn--ghost">Select All</button>
+          <button @click="deselectAllPages()" class="btn btn--xs btn--ghost">Deselect All</button>
+        </div>
+      </div>
+
+      <div class="not-prose mb-6">
+        <p class="text-sm text-gray-600 mb-2">
+          <span class="font-bold text-orange-600" x-text="totalSelectedPages"></span> pages selected for generation
+        </p>
+      </div>
+
+      {# Pages by Category #}
+      <template x-for="category in ['core', 'product', 'docs', 'resources', 'support', 'blog', 'company', 'legal', 'other']" :key="category">
+        <div x-show="analyzedPages[category].length > 0" class="mb-6">
+          <h3 class="flex items-center gap-2 mb-3">
+            <span x-text="category.charAt(0).toUpperCase() + category.slice(1) + ' Pages'"></span>
+            <span class="text-sm font-normal text-gray-500" x-text="`(${analyzedPages[category].length})`"></span>
+          </h3>
+
+          <div class="not-prose space-y-2">
+            <template x-for="page in analyzedPages[category]" :key="page.url">
+              <label class="flex items-start gap-3 p-3 border-2 rounded-lg cursor-pointer transition-all hover:border-orange-300"
+                     :class="isPageSelected(page) ? 'border-orange-500 bg-orange-50' : 'border-gray-200'">
+                <input
+                  type="checkbox"
+                  :checked="isPageSelected(page)"
+                  @change="togglePageSelection(page)"
+                  class="mt-1 size-4 rounded border-gray-300 text-orange-500 focus:ring-orange-500"
+                >
+                <div class="flex-1 min-w-0 clean-prose">
+                  <p class="font-bold text-sm mb-1 truncate" x-text="page.title"></p>
+                  <p class="text-xs text-gray-600 mt-1 mb-2 line-clamp-2" x-text="page.description"></p>
+                  <p class="text-xs text-gray-400 mt-2 truncate font-mono" x-text="page.url"></p>
+                </div>
+              </label>
+            </template>
+          </div>
+        </div>
+      </template>
+
+      {# Site Metadata (Optional) #}
+      <div class="not-prose border-t-2 pt-6 mt-6">
+        <h3 class="text-base font-bold mb-4">Optional: Add Site Metadata</h3>
+        <div class="space-y-3">
+          <div>
+            <label for="site-name" class="block text-sm font-medium mb-1">Site Name</label>
+            <input type="text" id="site-name" x-model="siteName" placeholder="Example Company" class="input w-full">
+          </div>
+          <div>
+            <label for="site-url" class="block text-sm font-medium mb-1">Site URL</label>
+            <input type="url" id="site-url" x-model="siteUrl" placeholder="https://example.com" class="input w-full">
+          </div>
+          <div>
+            <label for="site-description" class="block text-sm font-medium mb-1">Site Description</label>
+            <textarea id="site-description" x-model="siteDescription" placeholder="A brief description of your website" rows="3" class="input w-full"></textarea>
+          </div>
+        </div>
+      </div>
+
+      {# Generate Button #}
+      <div class="not-prose mt-6">
+        <button @click="generateLlmsTxt()" class="btn btn--lg" :disabled="!canGenerate || isLoading">
+          {% phicon "file-text", "duotone", { class: "size-6" } %}
+          <span>Generate llms.txt</span>
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  {# Step 3: Generated Output #}
+  <div x-show="currentStep === 3" x-cloak>
+
+    <h2>Your llms.txt File</h2>
+
+    <div x-show="stats" class="not-prose grid sm:grid-cols-2 gap-4 mb-6">
+      <div class="border-2 border-green-200 rounded-xl p-4 bg-green-50">
+        <p class="text-sm text-green-600 font-medium mb-1">Total Pages</p>
+        <p class="text-3xl font-bold" x-text="stats?.totalPages"></p>
+      </div>
+      <div class="border-2 border-blue-200 rounded-xl p-4 bg-blue-50">
+        <p class="text-sm text-blue-600 font-medium mb-1">Categories</p>
+        <div class="flex flex-wrap gap-2 mt-2">
+          <template x-for="(count, cat) in stats?.byCategory" :key="cat">
+            <span x-show="count > 0" class="text-xs px-2 py-1 bg-white rounded-full border" x-text="`${cat}: ${count}`"></span>
+          </template>
+        </div>
+      </div>
+    </div>
+
+    {# Preview #}
+    <div class="not-prose mb-6">
+      <div class="flex items-center justify-between mb-2">
+        <label class="text-sm font-medium">Preview</label>
+        <div class="flex gap-2">
+          <button @click="copyToClipboard()" class="btn btn--xs">
+            {% phicon "copy", "duotone", { class: "size-4" } %}
+            <span>Copy</span>
+          </button>
+          <button @click="downloadLlmsTxt()" class="btn btn--xs">
+            {% phicon "download", "duotone", { class: "size-4" } %}
+            <span>Download</span>
+          </button>
+        </div>
+      </div>
+      <pre class="text-xs p-4 bg-gray-900 text-green-400 rounded-lg overflow-x-auto max-h-96" x-text="generatedLlmsTxt"></pre>
+    </div>
+
+    {# Actions #}
+    <div class="not-prose flex flex-wrap gap-3">
+      <button @click="generateLlmsTxt()" class="btn btn--secondary">
+        {% phicon "arrow-counter-clockwise", "duotone", { class: "size-5" } %}
+        <span>Regenerate</span>
+      </button>
+      <button @click="reset()" class="btn btn--ghost">
+        {% phicon "arrow-left", "duotone", { class: "size-5" } %}
+        <span>Start Over</span>
+      </button>
+    </div>
+
+  </div>
+
+  {# About Section #}
+  <article class="prose max-w-3xl mx-auto mt-16 pt-8 border-t-2">
+    <h2>About llms.txt</h2>
+
+    <p>The llms.txt file is an emerging standard for providing LLM-friendly documentation of your website's content. Similar to how <code>robots.txt</code> tells search engine crawlers what to index, <code>llms.txt</code> helps AI language models understand your site structure and content priorities.</p>
+
+    <h3>Why Use llms.txt?</h3>
+
+    <ul>
+      <li><strong>Better AI Understanding:</strong> Provides context about your pages that helps LLMs give more accurate answers about your business</li>
+      <li><strong>Content Prioritization:</strong> Highlight your most important pages for AI crawlers</li>
+      <li><strong>Structured Information:</strong> Organize content by category (core, product, docs, blog) for better comprehension</li>
+      <li><strong>SEO for AI:</strong> As AI-powered search becomes more prevalent, llms.txt helps your content appear in AI-generated responses</li>
+    </ul>
+
+    <h3>How It Works</h3>
+
+    <ol>
+      <li><strong>Generate:</strong> Use this tool to create your llms.txt file from a sitemap or URL list</li>
+      <li><strong>Customize:</strong> Review and edit the generated file to match your needs</li>
+      <li><strong>Deploy:</strong> Place the file at <code>https://yoursite.com/llms.txt</code></li>
+      <li><strong>Update:</strong> Regenerate periodically as your content evolves</li>
+    </ol>
+
+    <h3>Best Practices</h3>
+
+    <ul>
+      <li>Focus on evergreen content rather than time-sensitive posts</li>
+      <li>Include clear, descriptive titles and summaries for each page</li>
+      <li>Organize content logically by category</li>
+      <li>Keep the file under 100 entries for optimal performance</li>
+      <li>Update quarterly or when major content changes occur</li>
+    </ul>
+
+    <h3>Related Tools</h3>
+
+    <p>Check out our <a href="/tools/seo-analyzer/">SEO Analyzer</a> for comprehensive on-page SEO analysis and optimization recommendations.</p>
+  </article>
+
+  {# FAQ Section #}
+  {% include "partials/faq-section.njk" %}
+
+</main>

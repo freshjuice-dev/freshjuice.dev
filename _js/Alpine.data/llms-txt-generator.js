@@ -57,10 +57,18 @@ document.addEventListener("alpine:init", () => {
     failedCount: 0,
     errors: [],
 
+    // Auto-detected site metadata from API
+    detectedSite: {
+      name: "",
+      url: "",
+      suffix: "",
+      description: "",
+    },
+
     // Selected pages for generation
     selectedPages: [],
 
-    // Generation metadata
+    // Generation metadata (user can override detected values)
     siteName: "",
     siteUrl: "",
     siteDescription: "",
@@ -222,6 +230,29 @@ document.addEventListener("alpine:init", () => {
         this.processedCount = data.processed;
         this.failedCount = data.failed;
         this.errors = data.errors || [];
+
+        // Store auto-detected site metadata
+        if (data.site) {
+          this.detectedSite = {
+            name: data.site.name || "",
+            url: data.site.url || "",
+            suffix: data.site.suffix || "",
+            description: data.site.description || "",
+          };
+
+          // Auto-populate form fields with detected values (only if user hasn't filled them)
+          if (!this.siteName && data.site.name) {
+            this.siteName = data.site.name;
+          }
+          if (!this.siteUrl && data.site.url) {
+            this.siteUrl = data.site.url;
+          }
+          if (!this.siteDescription && data.site.description) {
+            this.siteDescription = data.site.description;
+          }
+
+          debugLog("Detected site metadata:", this.detectedSite);
+        }
 
         // Auto-select all successfully analyzed pages
         this.selectedPages = [
@@ -393,6 +424,16 @@ document.addEventListener("alpine:init", () => {
       return this.selectedPages.some((p) => p.url === page.url);
     },
 
+    cleanPageTitle(title) {
+      if (!title || !this.detectedSite.suffix) return title;
+
+      if (title.endsWith(this.detectedSite.suffix)) {
+        return title.slice(0, -this.detectedSite.suffix.length).trim();
+      }
+
+      return title;
+    },
+
     selectAllPages() {
       this.selectedPages = [
         ...(this.analyzedPages.core || []),
@@ -469,6 +510,7 @@ document.addEventListener("alpine:init", () => {
       this.processedCount = 0;
       this.failedCount = 0;
       this.errors = [];
+      this.detectedSite = { name: "", url: "", suffix: "", description: "" };
       this.selectedPages = [];
       this.siteName = "";
       this.siteUrl = "";

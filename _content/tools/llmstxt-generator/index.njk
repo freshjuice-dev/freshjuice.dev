@@ -82,11 +82,11 @@ faq:
   {# Error Message #}
   <div x-show="errorMessage" x-cloak class="not-prose border-2 border-red-200 rounded-2xl p-4 bg-red-50 mb-6">
     <div class="flex items-start gap-3">
-      {% phicon "warning-circle", "duotone", { class: "size-6 text-red-600 flex-shrink-0 mt-0.5" } %}
-      <div class="flex-1">
+      {% phicon "warning-circle", "duotone", { class: "size-6 text-red-600 flex-shrink-0" } %}
+      <div class="flex-1 min-h-6 flex items-center">
         <p class="text-sm font-medium text-red-900" x-text="errorMessage"></p>
       </div>
-      <button @click="errorMessage = ''" class="text-red-600 hover:text-red-800">
+      <button @click="errorMessage = ''" class="text-red-600 hover:text-red-800 p-0.5">
         {% phicon "x", "bold", { class: "size-5" } %}
       </button>
     </div>
@@ -95,11 +95,11 @@ faq:
   {# Success Message #}
   <div x-show="successMessage" x-cloak class="not-prose border-2 border-green-200 rounded-2xl p-4 bg-green-50 mb-6">
     <div class="flex items-start gap-3">
-      {% phicon "check-circle", "duotone", { class: "size-6 text-green-600 flex-shrink-0 mt-0.5" } %}
-      <div class="flex-1">
+      {% phicon "check-circle", "duotone", { class: "size-6 text-green-600 flex-shrink-0" } %}
+      <div class="flex-1 min-h-6 flex items-center">
         <p class="text-sm font-medium text-green-900" x-text="successMessage"></p>
       </div>
-      <button @click="successMessage = ''" class="text-green-600 hover:text-green-800">
+      <button @click="successMessage = ''" class="text-green-600 hover:text-green-800 p-0.5">
         {% phicon "x", "bold", { class: "size-5" } %}
       </button>
     </div>
@@ -119,7 +119,7 @@ faq:
             {% phicon "tree-structure", "reular", { class: "size-8" } %}
           </span>
           <div>
-            <p class="font-bold text-base mb-1">Use Sitemap</p>
+            <p class="font-bold text-base mb-1">Use Sitemap <sup class="text-xs font-normal">(recommended)</sup></p>
             <p class="text-sm text-gray-600">Parse your sitemap.xml to automatically discover and categorize URLs</p>
           </div>
         </div>
@@ -158,44 +158,6 @@ faq:
           <p class="text-xs text-gray-500 mt-1">Enter the URL to your sitemap.xml or sitemap index file</p>
         </div>
 
-        <details class="mb-4 border rounded-lg p-4 bg-gray-50">
-          <summary class="cursor-pointer font-medium text-sm">Advanced: Custom Category Patterns</summary>
-          <div class="mt-4 space-y-3">
-            <div>
-              <label for="core-pattern" class="block text-xs font-medium mb-1">Core Pattern (regex)</label>
-              <input type="text" id="core-pattern" x-model="customHints.corePattern" placeholder="/about|/contact|/pricing" class="input w-full text-sm">
-            </div>
-            <div>
-              <label for="product-pattern" class="block text-xs font-medium mb-1">Product Pattern (regex)</label>
-              <input type="text" id="product-pattern" x-model="customHints.productPattern" placeholder="/product/" class="input w-full text-sm">
-            </div>
-            <div>
-              <label for="docs-pattern" class="block text-xs font-medium mb-1">Documentation Pattern (regex)</label>
-              <input type="text" id="docs-pattern" x-model="customHints.docsPattern" placeholder="/docs/" class="input w-full text-sm">
-            </div>
-            <div>
-              <label for="resources-pattern" class="block text-xs font-medium mb-1">Resources Pattern (regex)</label>
-              <input type="text" id="resources-pattern" x-model="customHints.resourcesPattern" placeholder="/resources/|/case-studies/" class="input w-full text-sm">
-            </div>
-            <div>
-              <label for="support-pattern" class="block text-xs font-medium mb-1">Support Pattern (regex)</label>
-              <input type="text" id="support-pattern" x-model="customHints.supportPattern" placeholder="/help/|/support/" class="input w-full text-sm">
-            </div>
-            <div>
-              <label for="blog-pattern" class="block text-xs font-medium mb-1">Blog Pattern (regex)</label>
-              <input type="text" id="blog-pattern" x-model="customHints.blogPattern" placeholder="/blog/" class="input w-full text-sm">
-            </div>
-            <div>
-              <label for="company-pattern" class="block text-xs font-medium mb-1">Company Pattern (regex)</label>
-              <input type="text" id="company-pattern" x-model="customHints.companyPattern" placeholder="/company/|/careers/" class="input w-full text-sm">
-            </div>
-            <div>
-              <label for="legal-pattern" class="block text-xs font-medium mb-1">Legal Pattern (regex)</label>
-              <input type="text" id="legal-pattern" x-model="customHints.legalPattern" placeholder="/privacy/|/terms/" class="input w-full text-sm">
-            </div>
-          </div>
-        </details>
-
         <button type="submit" :disabled="!isValidSitemapUrl || isLoading">
           {% phicon "magnifying-glass", "duotone", { class: "size-5" } %}
           <span>Parse Sitemap</span>
@@ -222,12 +184,62 @@ faq:
           </p>
         </div>
 
-        <button type="submit" class="btn" :disabled="!isValidManualUrls || isLoading">
+        <button type="submit" class="btn btn--blue" :disabled="!isValidManualUrls || isLoading">
           {% phicon "magnifying-glass", "duotone", { class: "size-5" } %}
           <span>Analyze URLs</span>
         </button>
       </form>
     </div>
+
+    {# Advanced Custom Category Patterns - Shared for both input methods #}
+    <details x-data="{ open: false }" class="mt-6 border-2 border-gray-200 rounded-2xl overflow-hidden">
+      <summary class="cursor-pointer px-4 py-3 flex items-center justify-between gap-4 text-sm font-medium hover:text-gray-700"
+               @click="open=!open">
+        <span>Advanced: Custom Category Patterns</span>
+        <span class="shrink-0 size-5 transition-transform duration-200"
+              aria-hidden="true"
+              :class="open?`rotate-180`:`rotate-0`">
+          {% phicon "caret-down", "bold", { class: "size-5" } %}
+        </span>
+      </summary>
+      <div x-show="open" x-collapse>
+        <div class="px-4 pb-4 space-y-3">
+          <p class="text-xs text-gray-600 mb-3">Customize how URLs are categorized using regex patterns. These patterns apply to both sitemap parsing and manual URL analysis.</p>
+          <div>
+            <label for="core-pattern" class="block text-xs font-medium mb-1">Core Pattern (regex)</label>
+            <input type="text" id="core-pattern" x-model="customHints.corePattern" placeholder="/about|/contact|/pricing" class="input w-full text-sm">
+          </div>
+          <div>
+            <label for="product-pattern" class="block text-xs font-medium mb-1">Product Pattern (regex)</label>
+            <input type="text" id="product-pattern" x-model="customHints.productPattern" placeholder="/product/" class="input w-full text-sm">
+          </div>
+          <div>
+            <label for="docs-pattern" class="block text-xs font-medium mb-1">Documentation Pattern (regex)</label>
+            <input type="text" id="docs-pattern" x-model="customHints.docsPattern" placeholder="/docs/" class="input w-full text-sm">
+          </div>
+          <div>
+            <label for="resources-pattern" class="block text-xs font-medium mb-1">Resources Pattern (regex)</label>
+            <input type="text" id="resources-pattern" x-model="customHints.resourcesPattern" placeholder="/resources/|/case-studies/" class="input w-full text-sm">
+          </div>
+          <div>
+            <label for="support-pattern" class="block text-xs font-medium mb-1">Support Pattern (regex)</label>
+            <input type="text" id="support-pattern" x-model="customHints.supportPattern" placeholder="/help/|/support/" class="input w-full text-sm">
+          </div>
+          <div>
+            <label for="blog-pattern" class="block text-xs font-medium mb-1">Blog Pattern (regex)</label>
+            <input type="text" id="blog-pattern" x-model="customHints.blogPattern" placeholder="/blog/" class="input w-full text-sm">
+          </div>
+          <div>
+            <label for="company-pattern" class="block text-xs font-medium mb-1">Company Pattern (regex)</label>
+            <input type="text" id="company-pattern" x-model="customHints.companyPattern" placeholder="/company/|/careers/" class="input w-full text-sm">
+          </div>
+          <div>
+            <label for="legal-pattern" class="block text-xs font-medium mb-1">Legal Pattern (regex)</label>
+            <input type="text" id="legal-pattern" x-model="customHints.legalPattern" placeholder="/privacy/|/terms/" class="input w-full text-sm">
+          </div>
+        </div>
+      </div>
+    </details>
 
   </div>
 
@@ -236,7 +248,7 @@ faq:
 
     {# Parse Results Summary (for sitemap method) #}
     <div x-show="inputMethod === 'sitemap' && parseResults" class="not-prose border-2 border-blue-200 rounded-2xl p-4 bg-blue-50 mb-6">
-      <h3 class="text-base font-bold mb-2">Sitemap Parsed Successfully</h3>
+      <h3 class="text-base font-bold mt-0 mb-2">Sitemap Parsed Successfully</h3>
       <div class="grid sm:grid-cols-3 gap-4 text-sm">
         <div>
           <p class="text-blue-600 font-medium">Total URLs Found</p>
@@ -261,7 +273,7 @@ faq:
 
     {# Analysis in Progress #}
     <div x-show="inputMethod === 'sitemap' && parseResults && processedCount === 0" class="not-prose text-center py-8">
-      <button @click="analyzeFromSitemap()" class="btn btn--lg" :disabled="isLoading">
+      <button @click="analyzeFromSitemap()" class="btn btn--blue" :disabled="isLoading">
         {% phicon "sparkle", "duotone", { class: "size-6" } %}
         <span>Analyze Selected URLs</span>
       </button>
@@ -298,7 +310,7 @@ faq:
         <div x-show="analyzedPages[category].length > 0" class="mb-6">
           <h3 class="flex items-center gap-2 mb-3">
             <span x-text="category.charAt(0).toUpperCase() + category.slice(1) + ' Pages'"></span>
-            <span class="text-sm font-normal text-gray-500" x-text="`(${analyzedPages[category].length})`"></span>
+            <span class="text-sm font-normal font-mono opacity-70" x-text="`(${analyzedPages[category].length})`"></span>
           </h3>
 
           <div class="not-prose space-y-2">
@@ -322,9 +334,41 @@ faq:
         </div>
       </template>
 
+      {# Auto-Detected Site Metadata Notification #}
+      <div x-show="detectedSite.name || detectedSite.url || detectedSite.description" class="not-prose border-2 border-blue-200 rounded-2xl p-4 bg-blue-50 mt-6">
+        <div class="flex items-start gap-3">
+          {% phicon "sparkle", "duotone", { class: "size-6 text-blue-600 flex-shrink-0" } %}
+          <div class="flex-1">
+            <h3 class="text-base font-bold mt-0 mb-2 text-blue-900">Auto-Detected Site Metadata</h3>
+            <dl class="text-sm space-y-2">
+              <div x-show="detectedSite.name">
+                <dt class="text-blue-600 font-medium">Site Name:</dt>
+                <dd class="text-blue-900" x-text="detectedSite.name"></dd>
+              </div>
+              <div x-show="detectedSite.url">
+                <dt class="text-blue-600 font-medium">Root URL:</dt>
+                <dd class="text-blue-900" x-text="detectedSite.url"></dd>
+              </div>
+              <div x-show="detectedSite.suffix">
+                <dt class="text-blue-600 font-medium">Title Suffix:</dt>
+                <dd class="text-blue-900">
+                  <code class="text-xs bg-blue-100 px-2 py-1 rounded" x-text="detectedSite.suffix"></code>
+                  <span class="text-xs text-blue-600 ml-2">(will be removed from titles)</span>
+                </dd>
+              </div>
+              <div x-show="detectedSite.description">
+                <dt class="text-blue-600 font-medium">Description:</dt>
+                <dd class="text-blue-900 line-clamp-2" x-text="detectedSite.description"></dd>
+              </div>
+            </dl>
+            <p class="text-xs text-blue-600 mt-3">These values have been auto-populated below. You can edit them if needed.</p>
+          </div>
+        </div>
+      </div>
+
       {# Site Metadata (Optional) #}
       <div class="not-prose border-t-2 pt-6 mt-6">
-        <h3 class="text-base font-bold mb-4">Optional: Add Site Metadata</h3>
+        <h3 class="text-base font-bold mb-4">Site Metadata <span class="text-sm font-normal text-gray-500">(auto-populated from analysis)</span></h3>
         <div class="space-y-3">
           <div>
             <label for="site-name" class="block text-sm font-medium mb-1">Site Name</label>
@@ -405,8 +449,12 @@ faq:
 
   </div>
 
+  <div class="prose">
+    <hr class="my-12 md:my-16">
+  </div>
+
   {# About Section #}
-  <article class="prose max-w-3xl mx-auto mt-16 pt-8 border-t-2">
+  <article class="prose">
     <h2>About llms.txt</h2>
 
     <p>The llms.txt file is an emerging standard for providing LLM-friendly documentation of your website's content. Similar to how <code>robots.txt</code> tells search engine crawlers what to index, <code>llms.txt</code> helps AI language models understand your site structure and content priorities.</p>

@@ -9,5 +9,7 @@
 ./_content/blog/posts/README.md
 ./_content/authors/authors/README.md
 **/CONTEXT.md
+**/QWEN.md
+**/GEMINI.md
 **/CLAUDE.md
 **/.claude

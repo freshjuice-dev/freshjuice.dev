@@ -167,8 +167,16 @@ document.addEventListener("alpine:init", () => {
       // Navigate to step 2 if allowed
       if (step === 2) {
         if (!this.canNavigateToStep2) {
-          this.errorMessage =
-            "Please complete analysis before navigating to step 2";
+          if (this.inputMethod === "sitemap" && !this.parseResults) {
+            this.errorMessage =
+              "Please parse your sitemap first, then analyze the URLs.";
+          } else if (this.inputMethod === "sitemap" && this.parseResults) {
+            this.errorMessage =
+              'Click "Analyze Selected URLs" to continue to the review step.';
+          } else {
+            this.errorMessage =
+              'Click "Analyze URLs" to continue to the review step.';
+          }
           return;
         }
         this.currentStep = 2;
@@ -181,7 +189,7 @@ document.addEventListener("alpine:init", () => {
       if (step === 3) {
         if (!this.canNavigateToStep3) {
           this.errorMessage =
-            "Please generate llms.txt before navigating to step 3";
+            'Click "Generate llms.txt" to create your file first.';
           return;
         }
         this.currentStep = 3;

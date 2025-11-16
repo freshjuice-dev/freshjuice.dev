@@ -45,32 +45,37 @@ faq:
   </div>
 
   {# Step Indicator #}
-  <div class="not-prose flex items-center justify-center gap-4 my-8 select-none">
-    <button @click="navigateToStep(1)" class="flex items-center gap-2 cursor-pointer hover:opacity-75 transition-opacity">
-      <div class="size-8 rounded-full flex items-center justify-center font-bold transition-colors"
-           :class="currentStep >= 1 ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-500'">
-        1
-      </div>
-      <span class="text-sm font-medium" :class="currentStep === 1 ? 'text-orange-500' : 'text-gray-500'">Input</span>
-    </button>
-    <div class="h-0.5 w-12 transition-colors" :class="currentStep >= 2 ? 'bg-orange-500' : 'bg-gray-200'"></div>
-    <button @click="navigateToStep(2)" class="flex items-center gap-2 transition-opacity"
-            :class="canNavigateToStep2 ? 'cursor-pointer hover:opacity-75' : 'cursor-not-allowed opacity-50'">
-      <div class="size-8 rounded-full flex items-center justify-center font-bold transition-colors"
-           :class="currentStep >= 2 ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-500'">
-        2
-      </div>
-      <span class="text-sm font-medium" :class="currentStep === 2 ? 'text-orange-500' : 'text-gray-500'">Review</span>
-    </button>
-    <div class="h-0.5 w-12 transition-colors" :class="currentStep >= 3 ? 'bg-orange-500' : 'bg-gray-200'"></div>
-    <button @click="navigateToStep(3)" class="flex items-center gap-2 transition-opacity"
-            :class="canNavigateToStep3 ? 'cursor-pointer hover:opacity-75' : 'cursor-not-allowed opacity-50'">
-      <div class="size-8 rounded-full flex items-center justify-center font-bold transition-colors"
-           :class="currentStep >= 3 ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-500'">
-        3
-      </div>
-      <span class="text-sm font-medium" :class="currentStep === 3 ? 'text-orange-500' : 'text-gray-500'">Generate</span>
-    </button>
+  <div class="not-prose my-8 select-none">
+    {# Step circles with connectors #}
+    <div class="flex items-center justify-center gap-3">
+      <button @click="navigateToStep(1)" class="transition-opacity"
+              :class="currentStep === 1 ? '' : 'cursor-pointer hover:opacity-75'">
+        <div class="size-10 rounded-full flex items-center justify-center font-bold transition-colors"
+             :class="currentStep >= 1 ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-500'">
+          1
+        </div>
+      </button>
+      <div class="h-0.5 w-8 sm:w-12 transition-colors" :class="currentStep >= 2 ? 'bg-orange-500' : 'bg-gray-200'"></div>
+      <button @click="navigateToStep(2)" class="transition-opacity"
+              :class="canNavigateToStep2 ? 'cursor-pointer hover:opacity-75' : 'cursor-not-allowed opacity-50'">
+        <div class="size-10 rounded-full flex items-center justify-center font-bold transition-colors"
+             :class="currentStep >= 2 ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-500'">
+          2
+        </div>
+      </button>
+      <div class="h-0.5 w-8 sm:w-12 transition-colors" :class="currentStep >= 3 ? 'bg-orange-500' : 'bg-gray-200'"></div>
+      <button @click="navigateToStep(3)" class="transition-opacity"
+              :class="canNavigateToStep3 ? 'cursor-pointer hover:opacity-75' : 'cursor-not-allowed opacity-50'">
+        <div class="size-10 rounded-full flex items-center justify-center font-bold transition-colors"
+             :class="currentStep >= 3 ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-500'">
+          3
+        </div>
+      </button>
+    </div>
+    {# Current step name #}
+    <div class="text-center mt-3">
+      <span class="text-base font-semibold text-orange-500" x-text="currentStep === 1 ? 'Input' : currentStep === 2 ? 'Review' : 'Generate'"></span>
+    </div>
   </div>
 
   {# Loading Indicator #}

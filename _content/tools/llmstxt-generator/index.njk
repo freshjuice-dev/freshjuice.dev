@@ -37,7 +37,7 @@ faq:
       While `robots.txt` tells bots what *not* to crawl and `sitemap.xml` lists all URLs for search engines, `llms.txt` provides human-readable context about your content specifically for LLMs. It includes descriptions and categorization that help AI understand what each page is about, making it easier to provide accurate answers about your business.
 ---
 
-<main class="max-w-3xl mx-auto" x-data="llmstxtGenerator">
+<main class="max-w-3xl mx-auto w-full" x-data="llmstxtGenerator">
 
   <div class="prose max-w-full">
     <h1>{{ title }}</h1>
@@ -81,7 +81,7 @@ faq:
   {# Loading Indicator #}
   <div x-show="isLoading" x-cloak class="not-prose border-2 border-orange-200 rounded-2xl p-4 bg-orange-50 mb-6 select-none">
     <div class="flex items-center gap-3">
-      <div class="animate-spin size-6 border-2 border-orange-500 border-t-transparent rounded-full"></div>
+      <div class="animate-spin size-6 shrink-0 border-2 border-orange-500 border-t-transparent rounded-full"></div>
       <p class="text-base font-medium text-orange-900" x-text="loadingMessage"></p>
     </div>
   </div>

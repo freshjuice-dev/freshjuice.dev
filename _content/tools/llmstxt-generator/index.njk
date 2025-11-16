@@ -79,7 +79,7 @@ faq:
   </div>
 
   {# Loading Indicator #}
-  <div x-show="isLoading" x-cloak class="not-prose border-2 border-orange-200 rounded-2xl p-6 bg-orange-50 mb-6 select-none">
+  <div x-show="isLoading" x-cloak class="not-prose border-2 border-orange-200 rounded-2xl p-4 bg-orange-50 mb-6 select-none">
     <div class="flex items-center gap-3">
       <div class="animate-spin size-6 border-2 border-orange-500 border-t-transparent rounded-full"></div>
       <p class="text-base font-medium text-orange-900" x-text="loadingMessage"></p>
@@ -270,7 +270,7 @@ faq:
           <p class="text-2xl font-bold" x-text="sitemapsProcessed"></p>
         </div>
       </div>
-      <div x-show="limitApplied" class="mt-3 p-3 bg-yellow-100 rounded-lg border border-yellow-300">
+      <div x-show="limitApplied" class="mt-3 p-3 bg-yellow-100 rounded-xl border border-yellow-300">
         <p class="text-xs text-yellow-800">
           {% phicon "warning", "duotone", { class: "size-4 inline mr-1" } %}
           <strong>Automatic prioritization applied:</strong> Found more than 100 URLs. The tool automatically prioritized core pages, product pages, documentation, and blog posts.
@@ -322,7 +322,7 @@ faq:
 
           <div class="not-prose space-y-2">
             <template x-for="page in analyzedPages[category]" :key="page.url">
-              <label class="flex items-start gap-3 p-3 border-2 rounded-lg cursor-pointer transition-all hover:border-orange-300 select-none"
+              <label class="flex items-start gap-3 p-3 border-2 rounded-2xl cursor-pointer transition-all hover:border-orange-300 select-none"
                      :class="isPageSelected(page) ? 'border-orange-500 bg-orange-50' : 'border-gray-200'">
                 <input
                   type="checkbox"
@@ -449,7 +449,7 @@ faq:
           </button>
         </div>
       </div>
-      <pre class="text-xs p-4 bg-gray-900 text-green-400 rounded-lg overflow-x-auto max-h-96" x-text="generatedLlmsTxt"></pre>
+      <pre class="text-xs p-4 bg-gray-900 text-green-400 rounded-2xl overflow-x-auto max-h-96" x-text="generatedLlmsTxt"></pre>
     </div>
 
     {# Actions #}

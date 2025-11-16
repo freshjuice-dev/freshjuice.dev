@@ -85,8 +85,59 @@ document.addEventListener("alpine:init", () => {
     // UI state
     isLoading: false,
     loadingMessage: "",
+    loadingMessageIndex: 0,
+    loadingInterval: null,
     errorMessage: "",
     successMessage: "",
+
+    // Fun loading messages with FreshJuice theme
+    loadingMessages: [
+      "Squeezing fresh content from your pages...",
+      "Picking the ripest URLs from your sitemap...",
+      "Blending your page titles into something smooth...",
+      "Extracting the juiciest metadata...",
+      "Peeling away unnecessary data...",
+      "Mixing up your content categories...",
+      "Pouring over your page descriptions...",
+      "Garnishing with SEO goodness...",
+      "Tasting your site's flavor profile...",
+      "Selecting the finest organic URLs...",
+      "Zesting your page titles for freshness...",
+      "Pulping through your sitemap...",
+      "Filtering out the seeds and stems...",
+      "Crafting your perfect content blend...",
+      "Chilling your data for optimal results...",
+      "Washing your URLs for peak freshness...",
+      "Slicing through duplicate content...",
+      "Juicing every last bit of metadata...",
+      "Inspecting fruit quality control...",
+      "Measuring perfect vitamin SEO levels...",
+      "Adding a splash of analytics...",
+      "Muddling your content ingredients...",
+      "Straining out low-quality pages...",
+      "Checking ripeness indicators...",
+      "Bottling up your best content...",
+      "Pressing organic page juice...",
+      "Stirring in fresh insights...",
+      "Blending smooth user experiences...",
+      "Infusing natural keywords...",
+      "Macerating metadata morsels...",
+      "Sweetening your descriptions...",
+      "Handpicking premium URLs...",
+      "Cold-pressing page content...",
+      "Testing pH levels of your copy...",
+      "Aerating your content mix...",
+      "Layering flavor profiles...",
+      "Reducing to perfection...",
+      "Caramelizing your headlines...",
+      "Simmering site structure...",
+      "Marinating metadata overnight...",
+      "Whisking up fresh categories...",
+      "Folding in smooth transitions...",
+      "Tempering your title tags...",
+      "Deglazing the content pan...",
+      "Basting your best pages...",
+    ],
 
     // Validation
     get isValidSitemapUrl() {
@@ -136,6 +187,29 @@ document.addEventListener("alpine:init", () => {
     },
 
     // Methods
+    startLoadingMessages() {
+      // Pick a random starting message
+      this.loadingMessageIndex = Math.floor(
+        Math.random() * this.loadingMessages.length,
+      );
+      this.loadingMessage = this.loadingMessages[this.loadingMessageIndex];
+
+      // Rotate messages every 2.5 seconds
+      this.loadingInterval = setInterval(() => {
+        this.loadingMessageIndex =
+          (this.loadingMessageIndex + 1) % this.loadingMessages.length;
+        this.loadingMessage = this.loadingMessages[this.loadingMessageIndex];
+      }, 2500);
+    },
+
+    stopLoadingMessages() {
+      if (this.loadingInterval) {
+        clearInterval(this.loadingInterval);
+        this.loadingInterval = null;
+      }
+      this.loadingMessage = "";
+    },
+
     navigateToStep(step) {
       debugLog("Attempting to navigate to step:", step);
 
@@ -265,9 +339,9 @@ document.addEventListener("alpine:init", () => {
 
     async analyzeUrls(urls) {
       this.isLoading = true;
-      this.loadingMessage = `Analyzing ${urls.length} URLs...`;
       this.errorMessage = "";
       this.successMessage = "";
+      this.startLoadingMessages();
 
       debugLog("Analyzing URLs:", urls);
 
@@ -356,7 +430,7 @@ document.addEventListener("alpine:init", () => {
         this.errorMessage = error.message;
       } finally {
         this.isLoading = false;
-        this.loadingMessage = "";
+        this.stopLoadingMessages();
       }
     },
 

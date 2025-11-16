@@ -17,8 +17,10 @@
 
 - title: Tools
   children:
-    - title: Fresh Tools
+    - title: FREE Fresh Tools
       url: /tools/
+    - title: llms.txt Generator
+      url: /tools/llmstxt-generator/
     - title: Free SEO Analysis Tool
       url: /tools/seo-analyzer
     - title: Campaign URL Builder

@@ -29,6 +29,9 @@ faq:
   - question: "What if my sitemap has more than 100 URLs?"
     answer: |-
       The tool automatically prioritizes URLs when your sitemap exceeds 100 entries. Priority order: Core → Product → Documentation → Resources → Support → Blog → Company → Legal → Other. This ensures your most important pages are included. You can review and adjust the selection before generating.
+  - question: "How do I handle multiple title suffix variations?"
+    answer: |-
+      The Title Suffix field supports both plain text and regular expressions. If your site uses different suffixes (like " | FreshJuice DEV Docs", " | FreshJuice Tools", " | FreshJuice"), you can use a regex pattern like ` \\| FreshJuice( DEV Docs| Tools)?` to match all variations. The tool automatically detects if your pattern contains regex characters and applies it accordingly.
   - question: "Can I edit the generated file?"
     answer: |-
       Yes! The llms.txt file is just formatted markdown text. After downloading, you can edit it in any text editor to add custom sections, reorder pages, or update descriptions. The tool provides a starting point that you can customize to your needs.
@@ -379,9 +382,12 @@ faq:
           <div class="col-span-full">
             <label for="site-suffix" class="block text-sm font-medium mb-1">
               Title Suffix
-              <span class="text-xs font-normal text-gray-500">(will be removed from titles in preview and output)</span>
+              <span class="text-xs font-normal text-gray-500">(regex pattern or plain text - will be removed from titles in preview and output)</span>
             </label>
-            <input type="text" id="site-suffix" x-model="siteSuffix" placeholder=" | Example Company" class="input w-full">
+            <input type="text" id="site-suffix" x-model="siteSuffix" placeholder="| Example Company" class="input w-full font-mono text-sm">
+            <p class="text-xs mt-1">
+              Examples: <code class="font-medium text-[10px] border border-gray-200 bg-gray-100 px-1 py-0.5 rounded"> | Example Company </code> (plain text) or <code class="font-medium text-[10px] border border-gray-200 bg-gray-100 px-1 py-0.5 rounded"> \| Example Company( Blog| Solutions)?</code> (regex)
+            </p>
           </div>
           <div>
             <label for="site-name" class="block text-sm font-medium mb-1">Site Name</label>

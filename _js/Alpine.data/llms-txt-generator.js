@@ -479,16 +479,16 @@ document.addEventListener("alpine:init", () => {
       debugLog("Generating llms.txt with pages:", this.selectedPages.length);
 
       // Clean page titles by removing suffix before sending to API
+      const suffixRegex = this.getSuffixRegex();
       const cleanedPages = this.selectedPages.map((page) => {
-        if (
-          this.siteSuffix &&
-          page.title &&
-          page.title.endsWith(this.siteSuffix)
-        ) {
-          return {
-            ...page,
-            title: page.title.slice(0, -this.siteSuffix.length).trim(),
-          };
+        if (suffixRegex && page.title) {
+          const cleanedTitle = page.title.replace(suffixRegex, "").trim();
+          if (cleanedTitle !== page.title) {
+            return {
+              ...page,
+              title: cleanedTitle,
+            };
+          }
         }
         return page;
       });
@@ -596,14 +596,39 @@ document.addEventListener("alpine:init", () => {
       return this.selectedPages.some((p) => p.url === page.url);
     },
 
+    getSuffixRegex() {
+      if (!this.siteSuffix) return null;
+
+      try {
+        // Try to create a regex from the suffix
+        // If it contains regex special chars (not escaped), treat as regex
+        // Otherwise treat as plain text
+        const hasRegexChars = /[\\^$.*+?()[\]{}|]/.test(this.siteSuffix);
+
+        if (hasRegexChars) {
+          // Treat as regex pattern - append $ to match end of string
+          return new RegExp(this.siteSuffix + "$");
+        } else {
+          // Treat as plain text - escape and create regex
+          const escaped = this.siteSuffix.replace(
+            /[.*+?^${}()|[\]\\]/g,
+            "\\$&",
+          );
+          return new RegExp(escaped + "$");
+        }
+      } catch (e) {
+        debugLog("Invalid suffix regex:", e);
+        return null;
+      }
+    },
+
     cleanPageTitle(title) {
       if (!title || !this.siteSuffix) return title;
 
-      if (title.endsWith(this.siteSuffix)) {
-        return title.slice(0, -this.siteSuffix.length).trim();
-      }
+      const suffixRegex = this.getSuffixRegex();
+      if (!suffixRegex) return title;
 
-      return title;
+      return title.replace(suffixRegex, "").trim();
     },
 
     selectAllPages() {

@@ -1,4 +1,4 @@
-# CLAUDE.md
+# CONTEXT.md
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
@@ -101,11 +101,12 @@ Posts with `draft: true` frontmatter:
 Two-stage process:
 
 1. **Automatic Transform** - The eleventy-img transform plugin processes all `<img>` tags in HTML output:
-   - Generates responsive sizes: 320, 640, 960, 1200px
-   - Creates AVIF, WebP, and original formats
-   - Adds lazy loading and sizes attributes
-   - Caches in `.cache/@11ty/img/` for fast rebuilds
-   - Copies to `_site/img/` via `eleventy.after` event
+
+- Generates responsive sizes: 320, 640, 960, 1200px
+- Creates AVIF, WebP, and original formats
+- Adds lazy loading and sizes attributes
+- Caches in `.cache/@11ty/img/` for fast rebuilds
+- Copies to `_site/img/` via `eleventy.after` event
 
 2. **Manual Shortcode** - For explicit control in templates:
    ```liquid

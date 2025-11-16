@@ -8,5 +8,6 @@
 ./functions/**/*
 ./_content/blog/posts/README.md
 ./_content/authors/authors/README.md
+**/CONTEXT.md
 **/CLAUDE.md
 **/.claude

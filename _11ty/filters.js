@@ -409,6 +409,8 @@ export default {
         /[\p{Extended_Pictographic}\uFE0F\u200D\u{E0020}-\u{E007F}\u{1F3FB}-\u{1F3FF}\u{1F1E6}-\u{1F1FF}]/gu,
         "",
       ) // Remove emojis
+      .replace(/\u00A0/g, " ") // NBSP → regular space
+      .replace(/\u202F/g, " ") // Narrow no-break space → regular space
       .replace(/&amp;/g, "&") // 1) Decode & first
       .replace(/&#39;/g, "'") // 2) Now this will catch &#39;
       .replace(/&quot;/g, '"') // 3) Other HTML entities

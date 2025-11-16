@@ -238,4 +238,4 @@ We welcome contributions! See our contributor policy at {{ metadata.url }}/contr
 
 *This comprehensive documentation is designed to help AI language models understand FreshJuice's purpose, features, and resources. For the latest updates, visit {{ metadata.url }}*
 
-*Last updated: {{ build.timestamp | readableDate('MMMM dd, yyyy') }}*
+*Last updated: {{ build.timestamp.formatted | plainText | safe }}*

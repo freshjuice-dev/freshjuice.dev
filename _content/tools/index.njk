@@ -42,7 +42,7 @@ permalink: /tools/
 
       <div class="grid sm:grid-cols-3 gap-4 lg:gap-8">
         {% set toolslist = collections.tools %}
-        {% for item in toolslist | reverse %}
+        {% for item in toolslist | sortCollection('title') %}
           {%- if item.fileSlug | slugify != "tools" %}
             {% set grad = gradients[loop.index0 % gradients.length] %}
             <article class="bg-cursor/50 border-2 border-orange-200 hover:border-orange-400 transition-all duration-300 ease-in-out rounded-2xl relative overflow-hidden hover:brightness-110 group"

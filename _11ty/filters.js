@@ -88,10 +88,15 @@ export default {
   sortCollection: (collection, key, order = "ASC") => {
     // ASC or DESC
     return collection.sort((a, b) => {
-      a = a[key];
-      b = b[key];
-      if (a < b) return order === "ASC" ? -1 : 1;
-      if (a > b) return order === "ASC" ? 1 : -1;
+      let aVal = a.data?.[key] || a[key] || "";
+      let bVal = b.data?.[key] || b[key] || "";
+
+      // Convert to lowercase for case-insensitive comparison if values are strings
+      if (typeof aVal === "string") aVal = aVal.toLowerCase();
+      if (typeof bVal === "string") bVal = bVal.toLowerCase();
+
+      if (aVal < bVal) return order === "ASC" ? -1 : 1;
+      if (aVal > bVal) return order === "ASC" ? 1 : -1;
       return 0;
     });
   },

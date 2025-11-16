@@ -59,6 +59,7 @@ After build, two Pagefind indexes are generated for search: one for `/docs` and 
 
 `eleventy.config.js` imports configuration from `_11ty/`:
 
+- `dataExtensions.js` - Registers custom data file processors (e.g., YAML via js-yaml)
 - `plugins.js` - Image optimization, RSS, syntax highlighting, drafts support, etc.
 - `filters.js` - 30+ filters (date formatting, author data, breadcrumbs, etc.)
 - `shortcodes.js` - Image optimization, YouTube embeds, OG images, author signatures
@@ -66,6 +67,22 @@ After build, two Pagefind indexes are generated for search: one for `/docs` and 
 - `amendLibraries.js` - Markdown-it customizations and heading slugification
 - `passthrough.js` - Static file copying rules
 - `watchTargets.js` - Additional file watching patterns
+
+**Collections**: Automatically created via tag-based filtering:
+
+- `authors` (tag: "authors")
+- `docs` (tag: "docs")
+- `devDocs` (tag: "dev-docs")
+- `sections` (tag: "sections")
+- `templates` (tag: "templates")
+- `modules` (tag: "modules")
+- `globalModules` (tag: "global-modules")
+- `tools` (tag: "tools")
+- `categories` - Auto-generated from all tags, excluding system tags (all, nav, authors, tools, post, posts, doc, dev-doc, docs, dev-docs, sections, templates, modules, global-modules, featured)
+
+**Layout Aliases**: Shortcuts for commonly used layouts defined in `eleventy.config.js`:
+
+- `base`, `dev-docs`, `author`, `page`, `post`, `prose`, `tools`
 
 ### Git Submodules for Content
 

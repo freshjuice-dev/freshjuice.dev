@@ -71,6 +71,7 @@ document.addEventListener("alpine:init", () => {
     // Generation metadata (user can override detected values)
     siteName: "",
     siteUrl: "",
+    siteSuffix: "",
     siteDescription: "",
 
     // Generated output
@@ -247,6 +248,9 @@ document.addEventListener("alpine:init", () => {
           if (!this.siteUrl && data.site.url) {
             this.siteUrl = data.site.url;
           }
+          if (!this.siteSuffix && data.site.suffix) {
+            this.siteSuffix = data.site.suffix;
+          }
           if (!this.siteDescription && data.site.description) {
             this.siteDescription = data.site.description;
           }
@@ -322,6 +326,21 @@ document.addEventListener("alpine:init", () => {
 
       debugLog("Generating llms.txt with pages:", this.selectedPages.length);
 
+      // Clean page titles by removing suffix before sending to API
+      const cleanedPages = this.selectedPages.map((page) => {
+        if (
+          this.siteSuffix &&
+          page.title &&
+          page.title.endsWith(this.siteSuffix)
+        ) {
+          return {
+            ...page,
+            title: page.title.slice(0, -this.siteSuffix.length).trim(),
+          };
+        }
+        return page;
+      });
+
       try {
         const response = await fetch(
           "https://api.freshjuice.dev/llmstxt/generate",
@@ -329,7 +348,7 @@ document.addEventListener("alpine:init", () => {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-              pages: this.selectedPages,
+              pages: cleanedPages,
               siteName: this.siteName || undefined,
               siteUrl: this.siteUrl || undefined,
               siteDescription: this.siteDescription || undefined,
@@ -425,10 +444,10 @@ document.addEventListener("alpine:init", () => {
     },
 
     cleanPageTitle(title) {
-      if (!title || !this.detectedSite.suffix) return title;
+      if (!title || !this.siteSuffix) return title;
 
-      if (title.endsWith(this.detectedSite.suffix)) {
-        return title.slice(0, -this.detectedSite.suffix.length).trim();
+      if (title.endsWith(this.siteSuffix)) {
+        return title.slice(0, -this.siteSuffix.length).trim();
       }
 
       return title;
@@ -514,6 +533,7 @@ document.addEventListener("alpine:init", () => {
       this.selectedPages = [];
       this.siteName = "";
       this.siteUrl = "";
+      this.siteSuffix = "";
       this.siteDescription = "";
       this.generatedLlmsTxt = "";
       this.stats = null;

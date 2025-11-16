@@ -196,10 +196,10 @@ faq:
       <summary class="cursor-pointer px-4 py-3 flex items-center justify-between gap-4 text-sm font-medium hover:text-gray-700 select-none"
                @click="open=!open">
         <span>Advanced: Custom Category Patterns</span>
-        <span class="shrink-0 size-5 transition-transform duration-200"
+        <span class="shrink-0 size-4 transition-transform duration-200"
               aria-hidden="true"
               :class="open?`rotate-180`:`rotate-0`">
-          {% phicon "caret-down", "bold", { class: "size-5" } %}
+          {% phicon "caret-down", "bold", { class: "size-4" } %}
         </span>
       </summary>
       <div x-show="open" x-collapse>
@@ -272,7 +272,7 @@ faq:
     </div>
 
     {# Analysis in Progress #}
-    <div x-show="inputMethod === 'sitemap' && parseResults && processedCount === 0" class="not-prose text-center py-8">
+    <div x-show="inputMethod === 'sitemap' && parseResults && processedCount === 0" class="py-8">
       <button @click="analyzeFromSitemap()" class="btn btn--blue" :disabled="isLoading">
         {% phicon "sparkle", "duotone", { class: "size-6" } %}
         <span>Analyze Selected URLs</span>
@@ -294,7 +294,7 @@ faq:
           </div>
         </div>
         <div class="flex items-center gap-2">
-          <button @click="selectAllPages()" class="btn btn--xs btn--ghost">Select All</button>
+          <button @click="selectAllPages()" class="btn btn--xs text-green-600 btn--ghost">Select All</button>
           <button @click="deselectAllPages()" class="btn btn--xs btn--ghost">Deselect All</button>
         </div>
       </div>
@@ -315,7 +315,7 @@ faq:
 
           <div class="not-prose space-y-2">
             <template x-for="page in analyzedPages[category]" :key="page.url">
-              <label class="flex items-start gap-3 p-3 border-2 rounded-lg cursor-pointer transition-all hover:border-orange-300"
+              <label class="flex items-start gap-3 p-3 border-2 rounded-lg cursor-pointer transition-all hover:border-orange-300 select-none"
                      :class="isPageSelected(page) ? 'border-orange-500 bg-orange-50' : 'border-gray-200'">
                 <input
                   type="checkbox"
@@ -324,9 +324,9 @@ faq:
                   class="mt-1 size-4 rounded border-gray-300 text-orange-500 focus:ring-orange-500"
                 >
                 <div class="flex-1 min-w-0 clean-prose">
-                  <p class="font-bold text-sm mb-1 truncate" x-text="page.title"></p>
-                  <p class="text-xs text-gray-600 mt-1 mb-2 line-clamp-2" x-text="page.description"></p>
-                  <p class="text-xs text-gray-400 mt-2 truncate font-mono" x-text="page.url"></p>
+                  <p class="font-bold text-sm mb-1 truncate" x-text="cleanPageTitle(page.title)"></p>
+                  <p class="text-xs opacity-80 mt-1 mb-2 line-clamp-2" x-text="page.description"></p>
+                  <p class="text-xs opacity-65 mt-2 truncate font-mono" x-text="page.url"></p>
                 </div>
               </label>
             </template>
@@ -340,36 +340,42 @@ faq:
           {% phicon "sparkle", "duotone", { class: "size-6 text-blue-600 flex-shrink-0" } %}
           <div class="flex-1">
             <h3 class="text-base font-bold mt-0 mb-2 text-blue-900">Auto-Detected Site Metadata</h3>
-            <dl class="text-sm space-y-2">
-              <div x-show="detectedSite.name">
-                <dt class="text-blue-600 font-medium">Site Name:</dt>
-                <dd class="text-blue-900" x-text="detectedSite.name"></dd>
-              </div>
-              <div x-show="detectedSite.url">
-                <dt class="text-blue-600 font-medium">Root URL:</dt>
-                <dd class="text-blue-900" x-text="detectedSite.url"></dd>
-              </div>
-              <div x-show="detectedSite.suffix">
-                <dt class="text-blue-600 font-medium">Title Suffix:</dt>
-                <dd class="text-blue-900">
+            <dl class="text-sm grid gap-y-4 grid-x-6 sm:grid-cols-2 md:grid-cols-3">
+              <div x-show="detectedSite.suffix" class="col-span-full md:col-span-1">
+                <dt class="text-blue-600 text-xs font-medium">Title Suffix:</dt>
+                <dd class="font-mono text-blue-900">
                   <code class="text-xs bg-blue-100 px-2 py-1 rounded" x-text="detectedSite.suffix"></code>
-                  <span class="text-xs text-blue-600 ml-2">(will be removed from titles)</span>
                 </dd>
               </div>
-              <div x-show="detectedSite.description">
-                <dt class="text-blue-600 font-medium">Description:</dt>
-                <dd class="text-blue-900 line-clamp-2" x-text="detectedSite.description"></dd>
+              <div x-show="detectedSite.name">
+                <dt class="text-blue-600 text-xs font-medium">Site Name:</dt>
+                <dd class="font-mono text-blue-900" x-text="detectedSite.name"></dd>
+              </div>
+              <div x-show="detectedSite.url">
+                <dt class="text-blue-600 text-xs font-medium">Root URL:</dt>
+                <dd class="font-mono text-blue-900" x-text="detectedSite.url"></dd>
+              </div>
+              <div x-show="detectedSite.description" class="col-span-full">
+                <dt class="text-blue-600 text-xs font-medium">Description:</dt>
+                <dd class="font-mono text-blue-900 line-clamp-2" x-text="detectedSite.description"></dd>
               </div>
             </dl>
-            <p class="text-xs text-blue-600 mt-3">These values have been auto-populated below. You can edit them if needed.</p>
+            <p class="text-xs text-blue-600 mt-3 text-right italic">These values have been auto-populated below. You can edit them if needed.</p>
           </div>
         </div>
       </div>
 
-      {# Site Metadata (Optional) #}
-      <div class="not-prose border-t-2 pt-6 mt-6">
-        <h3 class="text-base font-bold mb-4">Site Metadata <span class="text-sm font-normal text-gray-500">(auto-populated from analysis)</span></h3>
-        <div class="space-y-3">
+      {# Site Metadata (Always Visible) #}
+      <div class="not-prose">
+        <h3 class="text-base font-bold mb-4">Site Metadata</h3>
+        <div class="grid sm:grid-cols-2 gap-y-3 gap-x-6">
+          <div class="col-span-full">
+            <label for="site-suffix" class="block text-sm font-medium mb-1">
+              Title Suffix
+              <span class="text-xs font-normal text-gray-500">(will be removed from titles in preview and output)</span>
+            </label>
+            <input type="text" id="site-suffix" x-model="siteSuffix" placeholder=" | Example Company" class="input w-full">
+          </div>
           <div>
             <label for="site-name" class="block text-sm font-medium mb-1">Site Name</label>
             <input type="text" id="site-name" x-model="siteName" placeholder="Example Company" class="input w-full">
@@ -378,7 +384,7 @@ faq:
             <label for="site-url" class="block text-sm font-medium mb-1">Site URL</label>
             <input type="url" id="site-url" x-model="siteUrl" placeholder="https://example.com" class="input w-full">
           </div>
-          <div>
+          <div class="col-span-full">
             <label for="site-description" class="block text-sm font-medium mb-1">Site Description</label>
             <textarea id="site-description" x-model="siteDescription" placeholder="A brief description of your website" rows="3" class="input w-full"></textarea>
           </div>
@@ -387,7 +393,7 @@ faq:
 
       {# Generate Button #}
       <div class="not-prose mt-6">
-        <button @click="generateLlmsTxt()" class="btn btn--lg" :disabled="!canGenerate || isLoading">
+        <button @click="generateLlmsTxt()" class="btn btn--blue" :disabled="!canGenerate || isLoading">
           {% phicon "file-text", "duotone", { class: "size-6" } %}
           <span>Generate llms.txt</span>
         </button>
@@ -422,7 +428,7 @@ faq:
       <div class="flex items-center justify-between mb-2 select-none">
         <label class="text-sm font-medium">Preview</label>
         <div class="flex gap-2">
-          <button @click="copyToClipboard()" class="btn btn--xs">
+          <button @click="copyToClipboard()" class="btn btn--secondary btn--xs">
             {% phicon "copy", "duotone", { class: "size-4" } %}
             <span>Copy</span>
           </button>
@@ -437,11 +443,11 @@ faq:
 
     {# Actions #}
     <div class="not-prose flex flex-wrap gap-3">
-      <button @click="generateLlmsTxt()" class="btn btn--secondary">
+      <button @click="generateLlmsTxt()" class="btn btn--secondary text-blue-600">
         {% phicon "arrow-counter-clockwise", "duotone", { class: "size-5" } %}
         <span>Regenerate</span>
       </button>
-      <button @click="reset()" class="btn btn--ghost">
+      <button @click="reset()" class="btn btn--ghost text-blue-600">
         {% phicon "arrow-left", "duotone", { class: "size-5" } %}
         <span>Start Over</span>
       </button>

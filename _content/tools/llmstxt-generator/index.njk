@@ -46,29 +46,31 @@ faq:
 
   {# Step Indicator #}
   <div class="not-prose flex items-center justify-center gap-4 my-8 select-none">
-    <div class="flex items-center gap-2">
+    <button @click="navigateToStep(1)" class="flex items-center gap-2 cursor-pointer hover:opacity-75 transition-opacity">
       <div class="size-8 rounded-full flex items-center justify-center font-bold transition-colors"
            :class="currentStep >= 1 ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-500'">
         1
       </div>
       <span class="text-sm font-medium" :class="currentStep === 1 ? 'text-orange-500' : 'text-gray-500'">Input</span>
-    </div>
+    </button>
     <div class="h-0.5 w-12 transition-colors" :class="currentStep >= 2 ? 'bg-orange-500' : 'bg-gray-200'"></div>
-    <div class="flex items-center gap-2">
+    <button @click="navigateToStep(2)" class="flex items-center gap-2 transition-opacity"
+            :class="canNavigateToStep2 ? 'cursor-pointer hover:opacity-75' : 'cursor-not-allowed opacity-50'">
       <div class="size-8 rounded-full flex items-center justify-center font-bold transition-colors"
            :class="currentStep >= 2 ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-500'">
         2
       </div>
       <span class="text-sm font-medium" :class="currentStep === 2 ? 'text-orange-500' : 'text-gray-500'">Review</span>
-    </div>
+    </button>
     <div class="h-0.5 w-12 transition-colors" :class="currentStep >= 3 ? 'bg-orange-500' : 'bg-gray-200'"></div>
-    <div class="flex items-center gap-2">
+    <button @click="navigateToStep(3)" class="flex items-center gap-2 transition-opacity"
+            :class="canNavigateToStep3 ? 'cursor-pointer hover:opacity-75' : 'cursor-not-allowed opacity-50'">
       <div class="size-8 rounded-full flex items-center justify-center font-bold transition-colors"
            :class="currentStep >= 3 ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-500'">
         3
       </div>
       <span class="text-sm font-medium" :class="currentStep === 3 ? 'text-orange-500' : 'text-gray-500'">Generate</span>
-    </div>
+    </button>
   </div>
 
   {# Loading Indicator #}
@@ -392,10 +394,14 @@ faq:
       </div>
 
       {# Generate Button #}
-      <div class="not-prose mt-6">
+      <div class="not-prose mt-6 flex flex-wrap gap-3">
         <button @click="generateLlmsTxt()" class="btn btn--blue" :disabled="!canGenerate || isLoading">
           {% phicon "file-text", "duotone", { class: "size-6" } %}
           <span>Generate llms.txt</span>
+        </button>
+        <button @click="reset()" class="btn btn--ghost text-blue-600">
+          {% phicon "arrow-left", "duotone", { class: "size-5" } %}
+          <span>Start Over</span>
         </button>
       </div>
 

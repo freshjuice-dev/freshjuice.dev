@@ -6,9 +6,12 @@ document.addEventListener("alpine:init", () => {
     // Step management
     currentStep: 1, // 1: Input, 2: Review, 3: Generate
     inputMethod: "sitemap", // 'sitemap' or 'manual'
+    step1DataChanged: false, // Track if step 1 data changed after parsing/analysis
+    step2DataChanged: false, // Track if step 2 data changed after generation
 
     // Sitemap input
     sitemapUrl: "",
+    initialSitemapUrl: "", // Track initial value to detect changes
     customHints: {
       corePattern: "",
       productPattern: "",
@@ -22,6 +25,7 @@ document.addEventListener("alpine:init", () => {
 
     // Manual URL input
     manualUrls: "",
+    initialManualUrls: "", // Track initial value to detect changes
 
     // Parse results
     parseResults: null,
@@ -123,7 +127,69 @@ document.addEventListener("alpine:init", () => {
       return this.selectedPages.length;
     },
 
+    get canNavigateToStep2() {
+      return this.processedCount > 0;
+    },
+
+    get canNavigateToStep3() {
+      return this.generatedLlmsTxt !== "";
+    },
+
     // Methods
+    navigateToStep(step) {
+      debugLog("Attempting to navigate to step:", step);
+
+      // Can always go back to step 1
+      if (step === 1) {
+        this.currentStep = 1;
+        this.errorMessage = "";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
+
+      // Check if step 1 data has changed
+      if (step >= 2 && this.currentStep >= 2) {
+        const sitemapChanged =
+          this.inputMethod === "sitemap" &&
+          this.sitemapUrl !== this.initialSitemapUrl;
+        const manualUrlsChanged =
+          this.inputMethod === "manual" &&
+          this.manualUrls !== this.initialManualUrls;
+
+        if (sitemapChanged || manualUrlsChanged) {
+          this.errorMessage =
+            "Input data has changed. Please re-analyze before proceeding.";
+          this.step1DataChanged = true;
+          return;
+        }
+      }
+
+      // Navigate to step 2 if allowed
+      if (step === 2) {
+        if (!this.canNavigateToStep2) {
+          this.errorMessage =
+            "Please complete analysis before navigating to step 2";
+          return;
+        }
+        this.currentStep = 2;
+        this.errorMessage = "";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
+
+      // Navigate to step 3 if allowed
+      if (step === 3) {
+        if (!this.canNavigateToStep3) {
+          this.errorMessage =
+            "Please generate llms.txt before navigating to step 3";
+          return;
+        }
+        this.currentStep = 3;
+        this.errorMessage = "";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
+    },
     async parseSitemap() {
       if (!this.isValidSitemapUrl) {
         this.errorMessage = "Please enter a valid sitemap URL";
@@ -178,6 +244,8 @@ document.addEventListener("alpine:init", () => {
 
         this.successMessage = `Found ${this.totalUrls} URLs${this.limitApplied ? " (limited to 100)" : ""}`;
         this.currentStep = 2;
+        this.initialSitemapUrl = this.sitemapUrl; // Save for change detection
+        this.step1DataChanged = false;
       } catch (error) {
         debugLog("Parse error:", error);
         this.errorMessage = error.message;
@@ -311,6 +379,8 @@ document.addEventListener("alpine:init", () => {
       debugLog("URLs to analyze (manual):", urls.length);
       await this.analyzeUrls(urls);
       this.currentStep = 2;
+      this.initialManualUrls = this.manualUrls; // Save for change detection
+      this.step1DataChanged = false;
     },
 
     async generateLlmsTxt() {
@@ -369,6 +439,7 @@ document.addEventListener("alpine:init", () => {
 
         this.successMessage = "llms.txt generated successfully!";
         this.currentStep = 3;
+        this.step2DataChanged = false;
 
         // Scroll to top to show the result
         window.scrollTo({ top: 0, behavior: "smooth" });
@@ -498,7 +569,11 @@ document.addEventListener("alpine:init", () => {
       debugLog("Resetting generator");
       this.currentStep = 1;
       this.sitemapUrl = "";
+      this.initialSitemapUrl = "";
       this.manualUrls = "";
+      this.initialManualUrls = "";
+      this.step1DataChanged = false;
+      this.step2DataChanged = false;
       this.parseResults = null;
       this.totalUrls = 0;
       this.includedUrls = 0;

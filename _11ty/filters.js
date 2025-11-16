@@ -405,14 +405,20 @@ export default {
   plainText: (text) => {
     if (!text) return "";
     return String(text)
-      .replace(/[""]/g, '"') // Smart double quotes
-      .replace(/['']/g, "'") // Smart single quotes
+      .replace(
+        /[\p{Extended_Pictographic}\uFE0F\u200D\u{E0020}-\u{E007F}\u{1F3FB}-\u{1F3FF}\u{1F1E6}-\u{1F1FF}]/gu,
+        "",
+      ) // Remove emojis
+      .replace(/&amp;/g, "&") // 1) Decode & first
+      .replace(/&#39;/g, "'") // 2) Now this will catch &#39;
+      .replace(/&quot;/g, '"') // 3) Other HTML entities
+      .replace(/[\u2018\u2019]/g, "'") // Unicode single quotes
+      .replace(/[\u201C\u201D]/g, '"') // Unicode double quotes
       .replace(/[—–]/g, "-") // Em dash and en dash
       .replace(/…/g, "...") // Ellipsis
       .replace(/[«»]/g, '"') // Angle quotes
-      .replace(/[\u2018\u2019]/g, "'") // Unicode single quotes
-      .replace(/[\u201C\u201D]/g, '"') // Unicode double quotes
-      .replace(/[\u2013\u2014]/g, "-") // Unicode dashes
-      .replace(/\u2026/g, "..."); // Unicode ellipsis
+      .replace(/[\u2013\u2014]/g, "-") // Extra Unicode dashes
+      .replace(/\u2026/g, "...") // Unicode ellipsis
+      .trim();
   },
 };

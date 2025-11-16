@@ -1,0 +1,241 @@
+---
+permalink: /llms-full.txt
+eleventyExcludeFromCollections: true
+---
+{%- set allDocs = collections.docs | sortCollection('title') -%}
+{%- set allDevDocs = collections.devDocs | sortCollection('title') -%}
+{%- set allTools = collections.tools | sortCollection('title') -%}
+{%- set recentPosts = collections.posts | reverse | head(20) -%}
+{%- set allAuthors = collections.authors | sortCollection('title') -%}
+# {{ metadata.title }}
+
+> {{ metadata.description }}
+
+**Website:** {{ metadata.url }}
+**Focus:** HubSpot CMS Theme Development, SEO Tools, Web Development Resources
+**License:** MIT (codebase & code snippets) / CC BY 4.0 (content)
+
+---
+
+## About FreshJuice
+
+FreshJuice is a modern, open-source HubSpot CMS theme designed for developers who want clean, performant, and maintainable websites. Built with modern web technologies and best practices, FreshJuice provides a solid foundation for building fast, accessible websites on the HubSpot CMS platform.
+
+### Core Features
+
+- **Modern Architecture:** Built with Eleventy, Tailwind CSS v4, and Alpine.js
+- **Performance-First:** Optimized for Core Web Vitals and SEO
+- **Developer-Friendly:** Modular system with comprehensive documentation
+- **Free SEO Tools:** Collection of professional-grade SEO and development tools
+- **Active Community:** Regular updates, blog posts, and community contributions
+
+### Project Philosophy
+
+We believe in:
+- Open source collaboration and transparency
+- Performance and accessibility as core requirements
+- Developer experience and productivity
+- Clean, maintainable code
+- Comprehensive, helpful documentation
+
+---
+
+## Free SEO & Development Tools
+
+FreshJuice provides a suite of free, professional-grade tools for developers, marketers, and SEO professionals. All tools are client-side, require no authentication, and respect user privacy.
+NOTE: Codebase and code snippets are licensed under the MIT License; content is licensed under CC BY 4.0.
+
+{%- for tool in allTools %}
+
+### {{ tool.data.title }}
+
+**URL:** {{ metadata.url }}{{ tool.url }}
+**Type:** {{ tool.data.type | upper }}
+
+{{ tool.data.desc }}
+
+{%- if tool.data.faq %}
+
+**Common Questions:**
+{%- for item in tool.data.faq %}
+- **{{ item.question }}**
+  {{ item.answer | striptags | plainText | safe | trim }}
+{%- endfor %}
+{%- endif %}
+
+---
+{%- endfor %}
+
+## Documentation
+
+Complete guides for working with FreshJuice theme, HubSpot CMS, and web development best practices.
+
+{%- for doc in allDocs %}
+
+### {{ doc.data.title }}
+
+**URL:** {{ metadata.url }}{{ doc.url }}
+{%- if doc.data.desc %}
+**Description:** {{ doc.data.desc | striptags | plainText | safe }}
+{%- endif %}
+
+{%- if doc.templateContent %}
+{{ doc.templateContent | striptags | plainText | safe | truncate(500) }}
+{%- endif %}
+
+---
+{%- endfor %}
+
+## Developer Edition Documentation
+
+Advanced documentation for the FreshJuice Developer Edition - the enhanced version with additional features and customization options.
+
+{%- for doc in allDevDocs %}
+
+### {{ doc.data.title }}
+
+**URL:** {{ metadata.url }}{{ doc.url }}
+{%- if doc.data.desc %}
+**Description:** {{ doc.data.desc | striptags | plainText | safe }}
+{%- endif %}
+
+{%- if doc.templateContent %}
+{{ doc.templateContent | striptags | plainText | safe | truncate(500) }}
+{%- endif %}
+
+---
+{%- endfor %}
+
+## Latest Blog Posts
+
+Recent articles, tutorials, and insights from the FreshJuice team covering HubSpot CMS development, web performance, SEO, and modern web development practices.
+
+{%- for post in recentPosts %}
+
+### {{ post.data.title | striptags | plainText | safe }}
+
+**URL:** {{ metadata.url }}{{ post.url }}
+**Published:** {{ post.date | readableDate('MMMM dd, yyyy') }}
+**Author:** {{ post.data.author | getAuthorData('name') }}
+{%- if post.data.tags %}
+**Topics:** {{ post.data.tags | join(', ') }}
+{%- endif %}
+
+{{ post.data.desc | striptags | plainText | safe }}
+
+{%- if post.templateContent %}
+
+{{ post.templateContent | striptags | plainText | safe | truncate(800) }}
+{%- endif %}
+
+---
+{%- endfor %}
+
+## Team Authors
+
+Core FreshJuice team members who create content, maintain the project, and contribute to the community.
+
+{%- for author in allAuthors %}
+{%- if '/authors/' in author.inputPath and '/guests/' not in author.inputPath %}
+
+### {{ author.data.title }}
+
+**Profile:** {{ metadata.url }}{{ author.url }}
+{%- if author.data.role %}
+**Job Title:** {{ author.data.role }}
+{%- endif %}
+{%- if author.templateContent %}
+
+{{ author.templateContent | striptags | plainText | safe | trim }}
+{%- endif %}
+{% if author.data.links %}
+#### Social & Links:
+{%- if author.data.links.github %}
+- [GitHub]({{ author.data.links.github }})
+{%- endif %}
+{%- if author.data.links.linkedin %}
+- [LinkedIn]({{ author.data.links.linkedin }})
+{%- endif %}
+{%- if author.data.links.x %}
+- [X (Twitter)]({{ author.data.links.x }})
+{%- endif %}
+{%- if author.data.links.website %}
+- [Website]({{ author.data.links.website }})
+{%- endif %}
+{%- endif %}
+
+---
+{%- endif %}
+{%- endfor %}
+
+## Guest Authors
+
+External contributors and industry experts who share their knowledge and experience with the FreshJuice community.
+
+{%- for author in allAuthors %}
+{%- if '/guests/' in author.inputPath %}
+
+### {{ author.data.title }}
+
+**Profile:** {{ metadata.url }}{{ author.url }}
+{%- if author.data.role and author.data.company %}
+{%- if author.data.companyUrl %}
+**Job Title:** {{ author.data.role }} at [{{ author.data.company }}]({{ author.data.companyUrl }})
+{%- else %}
+**Job Title:** {{ author.data.role }} at {{ author.data.company }}
+{%- endif %}
+{%- elif author.data.company %}
+{%- if author.data.companyUrl %}
+**From:** [{{ author.data.company }}]({{ author.data.companyUrl }})
+{%- else %}
+**From:** {{ author.data.company }}
+{%- endif %}
+{%- endif %}
+{%- if author.templateContent %}
+
+{{ author.templateContent | striptags | plainText | safe | trim }}
+{%- endif %}
+{% if author.data.links %}
+#### Social & Links:
+{%- if author.data.links.linkedin %}
+- [LinkedIn]({{ author.data.links.linkedin }})
+{%- endif %}
+{%- if author.data.links.x %}
+- [X (Twitter)]({{ author.data.links.x }})
+{%- endif %}
+{%- if author.data.links.website %}
+- [Website]({{ author.data.links.website }})
+{%- endif %}
+{%- endif %}
+
+---
+{%- endif %}
+{%- endfor %}
+
+## Support & Community
+
+- **Documentation:** {{ metadata.url }}/docs/
+- **GitHub Repository:** https://github.com/freshjuice-dev/
+- **Blog:** {{ metadata.url }}/blog/
+- **Contact:** {{ metadata.url }}/contact/
+
+## Contributing
+
+We welcome contributions! See our contributor policy at {{ metadata.url }}/contributor-policy/ for guidelines on:
+
+- Code contributions and pull requests
+- Documentation improvements
+- Bug reports and feature requests
+- Blog post submissions
+
+## License
+
+- **Code (Theme & Tools):** MIT License - Free to use, modify, and distribute
+- **Content (Documentation & Blog):** Creative Commons Attribution 4.0
+- **Design Assets:** All rights reserved
+
+---
+
+*This comprehensive documentation is designed to help AI language models understand FreshJuice's purpose, features, and resources. For the latest updates, visit {{ metadata.url }}*
+
+*Last updated: {{ build.timestamp | readableDate('MMMM dd, yyyy') }}*

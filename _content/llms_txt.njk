@@ -6,32 +6,34 @@ eleventyExcludeFromCollections: true
 {%- set allDevDocs = collections.devDocs -%}
 {%- set allTools = collections.tools -%}
 {%- set recentPosts = collections.posts | reverse | head(20) -%}
-# {{ metadata.title }}
+# {{ metadata.title | plainText | safe }}
 
-> {{ metadata.description }}
+> {{ metadata.description | plainText | safe }}
 
 ## Latest Blog Posts
 
 {%- for post in recentPosts %}
-  - [{{ post.data.title | plainText }}]({{ metadata.url }}{{ post.url }}): {{ post.data.desc | plainText }}
+  - [{{ post.data.title | plainText | safe }}]({{ metadata.url }}{{ post.url }}): {{ post.data.desc | striptags | plainText | safe }}
 {%- endfor %}
 
 ## SEO Tools
 
+NOTE: Codebase and code snippets are licensed under the MIT License; content is licensed under CC BY 4.0.
+
 {%- for tool in allTools %}
-  - [{{ tool.data.title | plainText }}]({{ metadata.url }}{{ tool.url }}): {{ (tool.data.desc or tool.data.title) | plainText }}
+  - [{{ tool.data.title | plainText | safe }}]({{ metadata.url }}{{ tool.url }}): {{ (tool.data.desc or tool.data.title) | striptags | plainText | safe }}
 {%- endfor %}
 
 ## Documentation
 
 {%- for doc in allDocs %}
-  - [{{ doc.data.title | plainText }}]({{ metadata.url }}{{ doc.url }}): {{ (doc.data.desc or doc.data.title) | plainText }}
+  - [{{ doc.data.title | plainText | safe }}]({{ metadata.url }}{{ doc.url }}): {{ (doc.data.desc or doc.data.title) | striptags | plainText | safe }}
 {%- endfor %}
 
 ## Developer Edition Documentation
 
 {%- for doc in allDevDocs %}
-  - [{{ doc.data.title | plainText }}]({{ metadata.url }}{{ doc.url }}): {{ (doc.data.desc or doc.data.title) | plainText }}
+  - [{{ doc.data.title | plainText | safe }}]({{ metadata.url }}{{ doc.url }}): {{ (doc.data.desc or doc.data.title) | striptags | plainText | safe }}
 {%- endfor %}
 
 ## About FreshJuice

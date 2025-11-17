@@ -133,13 +133,16 @@ export default {
   getAuthorData: async function (author, property = null) {
     try {
       const authorsCollection = this.ctx?.collections?.authors;
-      const authorData = authorsCollection.find((item) => {
+      const authorItem = authorsCollection.find((item) => {
         return item.fileSlug === author;
-      }).data;
+      });
+      const authorData = authorItem.data;
+
+      // Determine if author is a guest by checking if their file is in /guests/ directory
+      const isGuest = authorItem.page.inputPath.includes("/guests/");
+
       const returnData = {
-        guest: !["reatlat", "zapalblizh", "atenlotrad", "loraider259"].includes(
-          author,
-        ),
+        guest: isGuest,
         name: authorData.title || authorData.name || author,
         email: authorData.email || "",
         role: authorData.role || authorData.position || "Guest Contributor",
@@ -164,14 +167,62 @@ export default {
     }
   },
 
-  sortAuthors: (collection) => {
+  sortAuthors: (
+    collection,
+    postsCollection = null,
+    sortByContribution = false,
+  ) => {
+    const priorityAuthors = [
+      "reatlat", // Founder
+      "zapalblizh", // Co-founder
+    ];
+
+    // Count posts per author if sorting by contribution
+    const postCounts = {};
+    if (sortByContribution && postsCollection) {
+      postsCollection.forEach((post) => {
+        const author = post.data.author;
+        if (author) {
+          postCounts[author] = (postCounts[author] || 0) + 1;
+        }
+      });
+    }
+
     return collection.sort((a, b) => {
       const aSlug = a.data.page.fileSlug;
       const bSlug = b.data.page.fileSlug;
-      if (aSlug === "reatlat") return -1;
-      if (bSlug === "reatlat") return 1;
-      if (aSlug === "zapalblizh") return -1;
-      if (bSlug === "zapalblizh") return 1;
+
+      // 1. Priority authors first (in specified order)
+      const aPriority = priorityAuthors.indexOf(aSlug);
+      const bPriority = priorityAuthors.indexOf(bSlug);
+
+      // Both in priority list - sort by position in array
+      if (aPriority !== -1 && bPriority !== -1) {
+        return aPriority - bPriority;
+      }
+
+      // Only one in priority list - prioritized author comes first
+      if (aPriority !== -1) return -1;
+      if (bPriority !== -1) return 1;
+
+      // 2. Neither in priority list - core authors before guests
+      const aIsGuest = a.page.inputPath.includes("/guests/");
+      const bIsGuest = b.page.inputPath.includes("/guests/");
+
+      if (!aIsGuest && bIsGuest) return -1; // Core author before guest
+      if (aIsGuest && !bIsGuest) return 1; // Guest after core author
+
+      // 3. Within same group (core or guest), sort by contribution if enabled
+      if (sortByContribution && postsCollection) {
+        const aCount = postCounts[aSlug] || 0;
+        const bCount = postCounts[bSlug] || 0;
+
+        if (aCount !== bCount) {
+          return bCount - aCount; // Higher contribution first
+        }
+      }
+
+      // 4. Maintain stable sort when no other criteria apply
       return 0;
     });
   },

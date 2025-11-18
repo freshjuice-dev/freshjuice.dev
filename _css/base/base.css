@@ -5,7 +5,7 @@
   }
 
   figcaption {
-    @apply text-sm text-center italic !mt-1;
+    @apply text-sm text-center italic !mt-2 font-mono;
   }
 
   .img {

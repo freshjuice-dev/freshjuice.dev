@@ -10,10 +10,20 @@ eleventyExcludeFromCollections: true
 
 > {{ metadata.description | plainText | safe }}
 
+## Core Pages
+- [Free SEO Tools]({{ metadata.url }}/tools/): Explore our collection of free SEO tools for marketers and developers
+- [Demos & Examples](https://demo.freshjuice.dev): Explore live demos and examples of FreshJuice themes and modules in action
+- [Documentation]({{ metadata.url }}/docs/): Comprehensive guides and references for using FreshJuice themes and modules
+- [Juicy Blog]({{ metadata.url }}/blog/): Insights, tutorials, and updates on web development, SEO, and digital marketing
+- [Authors & Contributors]({{ metadata.url }}/authors/): Meet the voices behind FreshJuice, including founder Alex Zappa and guest writers
+- [About FreshJuice]({{ metadata.url }}/about/): Information about FreshJuice, its creator Alex Zappa, the vision, philosophy, and how to contribute
+- [Contact Us]({{ metadata.url }}/contact/): Get in touch with our team regarding support, project inquiries, or partnership opportunities
+- [Write for Us]({{ metadata.url }}/write-for-us/): Share your marketing, SEO, and growth insights as a guest contributor
+
 ## Latest Blog Posts
 
 {%- for post in recentPosts %}
-  - [{{ post.data.title | plainText | safe }}]({{ metadata.url }}{{ post.url }}): {{ post.data.desc | striptags | plainText | safe }}
+- [{{ post.data.title | plainText | safe }}]({{ metadata.url }}{{ post.url }}): {{ post.data.desc | striptags | plainText | safe }}
 {%- endfor %}
 
 ## SEO Tools
@@ -21,20 +31,27 @@ eleventyExcludeFromCollections: true
 NOTE: Codebase and code snippets are licensed under the MIT License; content is licensed under CC BY 4.0.
 
 {%- for tool in allTools %}
-  - [{{ tool.data.title | plainText | safe }}]({{ metadata.url }}{{ tool.url }}): {{ (tool.data.desc or tool.data.title) | striptags | plainText | safe }}
+- [{{ tool.data.title | plainText | safe }}]({{ metadata.url }}{{ tool.url }}): {{ (tool.data.desc or tool.data.title) | striptags | plainText | safe }}
 {%- endfor %}
 
 ## Documentation
 
 {%- for doc in allDocs %}
-  - [{{ doc.data.title | plainText | safe }}]({{ metadata.url }}{{ doc.url }}): {{ (doc.data.desc or doc.data.title) | striptags | plainText | safe }}
+- [{{ doc.data.title | plainText | safe }}]({{ metadata.url }}{{ doc.url }}): {{ (doc.data.desc or doc.data.title) | striptags | plainText | safe }}
 {%- endfor %}
 
 ## Developer Edition Documentation
 
 {%- for doc in allDevDocs %}
-  - [{{ doc.data.title | plainText | safe }}]({{ metadata.url }}{{ doc.url }}): {{ (doc.data.desc or doc.data.title) | striptags | plainText | safe }}
+- [{{ doc.data.title | plainText | safe }}]({{ metadata.url }}{{ doc.url }}): {{ (doc.data.desc or doc.data.title) | striptags | plainText | safe }}
 {%- endfor %}
+
+## Legal & Compliance
+
+- [Contributor Policy]({{ metadata.url }}/contributor-policy/): Guest contribution and editorial policy, including submission guidelines and backlink policies
+- [Privacy Policy]({{ metadata.url }}/privacy/): Our privacy policy covering data collection, cookies, and GDPR compliance
+- [Terms of Service]({{ metadata.url }}/terms/): Terms covering eligibility, intellectual property, open-source projects, and prohibited use
+- [License]({{ metadata.url }}/license/): Copyright and licensing information (CC BY 4.0 for content, MIT License for code)
 
 ## About FreshJuice
 

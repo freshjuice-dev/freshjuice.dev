@@ -25,15 +25,21 @@ partialScripts:
       <div class="mt-6">
         <label for="uuidOutput" class="block">Your <span x-text="version==='Nil/Empty'?`Nil/Empty`:`Version ${version}`">Version 4</span> UUID:</label>
         <div class="relative">
-          <input id="uuidOutput" type="text" class="input pr-24 font-mono" :value="result" readonly placeholder="Click a button to generate a UUID">
-          <div class="cursor-pointer font-mono text-sm absolute right-1 top-1 px-3 py-1.5 rounded-full transition-all bg-gray-100 hover:bg-gray-200 border-2 border-gray-300 inline-flex gap-2 items-center text-terminal"
+          <input id="uuidOutput" type="text" class="relative z-10 input pr-24 font-mono" :value="result" readonly placeholder="Click a button to generate a UUID">
+          <div class="z-11 cursor-pointer font-mono text-sm absolute right-1 top-1 px-3 py-1.5 rounded-full transition-all bg-gray-100 hover:bg-gray-200 border-2 border-gray-300 inline-flex gap-2 items-center text-terminal"
                x-show="result"
                @click="copy">
             {% phicon "copy", "duotone", { class: "size-5" } %}
             <span>Copy</span>
           </div>
-          <div class="text-base absolute inset-x-0 -bottom-6 text-center"
+          <div class="text-base absolute z-1 inset-x-0 -bottom-6 text-center"
                aria-hidden="true" style="display: none"
+               x-transition:enter="transition ease-out duration-300"
+               x-transition:enter-start="opacity-0 transform -translate-y-4"
+               x-transition:enter-end="opacity-100 transform translate-y-0"
+               x-transition:leave="transition ease-in duration-200"
+               x-transition:leave-start="opacity-100 transform translate-y-0"
+               x-transition:leave-end="opacity-0 transform -translate-y-4"
                x-show="copySuccess">Copied!</div>
         </div>
       </div>

@@ -172,15 +172,23 @@ faq:
           {% phicon "code", "duotone", { class: "size-5 text-orange-500" } %}
           <span>Generated CSS</span>
         </h3>
-        <button @click="copyToClipboard()" class="btn btn--xs btn--secondary">
-          {% phicon "copy", "duotone", { class: "size-4" } %}
-          <span>Copy CSS</span>
-        </button>
+        <div class="flex gap-4 items-center">
+          <div class="" x-show="successMessage"
+               aria-hidden="true"
+               x-transition:enter="transition ease-out duration-300"
+               x-transition:enter-start="opacity-0 transform translate-y-4"
+               x-transition:enter-end="opacity-100 transform translate-y-0"
+               x-transition:leave="transition ease-in duration-200"
+               x-transition:leave-start="opacity-100 transform translate-y-0"
+               x-transition:leave-end="opacity-0 transform translate-y-4"
+               x-cloak style="display:none">Copied!</div>
+          <button @click="copyToClipboard()" class="btn btn--xs btn--secondary">
+            {% phicon "copy", "duotone", { class: "size-4" } %}
+            <span>Copy CSS</span>
+          </button>
+        </div>
       </div>
       <pre class="prose"><code class="language-css" x-text="cssOutput">font-size: clamp(1rem, -1.5rem + 8vw, 3rem);</code></pre>
-      <div x-show="successMessage" x-cloak class="mt-2 text-xs text-green-600 font-medium">
-        <span x-text="successMessage"></span>
-      </div>
     </div>
 
     {# Calculation Breakdown #}

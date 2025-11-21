@@ -1,0 +1,274 @@
+---
+title: "CSS Clamp() Font Size Generator"
+desc: "Generate fluid, responsive font sizes using CSS clamp() function. Create perfectly scaling typography that adapts smoothly between viewport sizes without media queries."
+icon: "text-aa"
+type: dev
+partialScripts:
+  - //cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js
+  - //cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-css.min.js
+  - alpine-data/font-size-clamp-generator
+faq:
+  - question: "What is CSS clamp() function?"
+    answer: |-
+      The CSS `clamp()` function is a powerful tool for creating fluid typography that scales smoothly between a minimum and maximum size based on viewport width. It takes three parameters: `clamp(minimum, preferred, maximum)`. The browser automatically calculates the font size based on the viewport width, eliminating the need for multiple media queries.
+  - question: "Why use clamp() for font sizes?"
+    answer: |-
+      Using `clamp()` for font sizes provides several benefits:
+
+      - **Fluid Typography** - Text scales smoothly across all viewport sizes without jarring jumps.
+      - **Better UX** - Users get optimal reading experiences on any device.
+      - **Less CSS** - Replace multiple media queries with a single line of code.
+      - **Accessibility** - Maintains minimum and maximum sizes for readability.
+      - **Performance** - Reduces CSS file size and eliminates layout shifts.
+
+  - question: "What are the recommended viewport ranges?"
+    answer: |-
+      The **golden pattern** we recommend is **500px to 900px**, which provides smooth scaling across most common device sizes without extreme variations. This range:
+
+      - Covers the majority of mobile, tablet, and desktop devices
+      - Provides balanced, natural-looking font size transitions
+      - Avoids overly aggressive scaling that can look awkward
+
+      Other common ranges you might consider:
+      - **Mobile-first**: 320px to 768px (for targeting smaller devices specifically)
+      - **Wide range**: 320px to 1440px (creates more dramatic scaling)
+  - question: "What font sizes should I use?"
+    answer: |-
+      The tool defaults to **16px to 48px**, which works well as a starting point for most typography needs. Recommended ranges by element:
+
+      - **Body text**: 16px-20px
+      - **Headings (H1)**: 32px-64px
+      - **Headings (H2)**: 24px-48px
+      - **Headings (H3)**: 20px-32px
+      - **Small text**: 12px-16px
+
+      Always start with at least 16px for minimum font size (web accessibility standard), and adjust based on your design needs.
+  - question: "What units should I use with clamp()?"
+    answer: |-
+      You can input values in either **px (pixels)** or **rem** units, and the tool will automatically convert between them when you switch (assuming 1rem = 16px). The output is always in `rem` for best accessibility.
+
+      - **px (pixels)**: Easier to visualize and work with if you think in absolute sizes
+      - **rem**: Relative to root font size, respects user browser preferences
+
+      The tool handles the conversion for you, so use whichever unit feels more natural for your workflow.
+  - question: "Can I use this for other CSS properties?"
+    answer: |-
+      Yes! While this tool is optimized for font sizes, the `clamp()` function works with any CSS property that accepts length values: `padding`, `margin`, `width`, `height`, `gap`, `border-radius`, etc. The same calculation principles apply - just adjust your min/max values for the property you're targeting.
+---
+
+<main class="max-w-3xl mx-auto w-full" x-data="fontSizeClampGenerator">
+
+  <div class="prose max-w-full">
+    <h1>Font-size Clamp Generator</h1>
+    <p class="lead">Create fluid, responsive typography with CSS clamp(). Generate perfectly scaling font sizes that adapt smoothly between any viewport range without media queries.</p>
+  </div>
+
+  {# Generator #}
+  <div class="my-8">
+
+    {# Quick Presets #}
+    <div class="not-prose mb-8">
+      <p class="text-sm font-medium mb-2">Quick Presets:</p>
+      <div class="flex flex-wrap gap-2">
+        <button @click="applyPreset('body')" class="btn btn--xs btn--ghost text-terminal">Body Text</button>
+        <button @click="applyPreset('h1')" class="btn btn--xs btn--ghost text-terminal">Heading 1</button>
+        <button @click="applyPreset('h2')" class="btn btn--xs btn--ghost text-terminal">Heading 2</button>
+        <button @click="applyPreset('h3')" class="btn btn--xs btn--ghost text-terminal">Heading 3</button>
+        <button @click="applyPreset('small')" class="btn btn--xs btn--ghost text-terminal">Small Text</button>
+      </div>
+    </div>
+
+    {# Input Controls #}
+    <div class="not-prose mb-8">
+      <h2 class="text-xl font-bold mt-0 mb-4">Configure Your Font Size</h2>
+
+      <div class="grid sm:grid-cols-2 gap-6">
+        {# Minimum Font Size #}
+        <div>
+          <label for="min-font-size" class="block text-sm font-medium mb-2">Minimum Font Size</label>
+          <div class="relative flex items-center font-mono">
+            <input
+              type="number"
+              id="min-font-size"
+              x-model.number="minFontSize"
+              min="8"
+              max="200"
+              step="0.5"
+              class="input flex-1"
+            >
+            <select x-model="unit" class="absolute right-3 w-12 p-0 min-h-6 text-center appearance-none font-medium text-xs">
+              <option value="px">px</option>
+              <option value="rem">rem</option>
+            </select>
+          </div>
+        </div>
+
+        {# Maximum Font Size #}
+        <div>
+          <label for="max-font-size" class="block text-sm font-medium mb-2">Maximum Font Size</label>
+          <div class="relative flex items-center font-mono">
+            <input
+              type="number"
+              id="max-font-size"
+              x-model.number="maxFontSize"
+              min="8"
+              max="200"
+              step="0.5"
+              class="input flex-1"
+            >
+            <select x-model="unit" class="absolute right-3 w-12 p-0 min-h-6 text-center appearance-none font-medium text-xs">
+              <option value="px">px</option>
+              <option value="rem">rem</option>
+            </select>
+          </div>
+        </div>
+
+        {# Minimum Viewport Width #}
+        <div>
+          <label for="min-viewport" class="block text-sm font-medium mb-2">Minimum Viewport Width</label>
+          <div class="relative flex items-center font-mono">
+            <input
+              type="number"
+              id="min-viewport"
+              x-model.number="minViewport"
+              min="1"
+              max="4000"
+              step="1"
+              class="input flex-1"
+            >
+            <select x-model="unit" class="absolute right-3 w-12 p-0 min-h-6 text-center appearance-none font-medium text-xs">
+              <option value="px">px</option>
+              <option value="rem">rem</option>
+            </select>
+          </div>
+        </div>
+
+        {# Maximum Viewport Width #}
+        <div>
+          <label for="max-viewport" class="block text-sm font-medium mb-2">Maximum Viewport Width</label>
+          <div class="relative flex items-center font-mono">
+            <input
+              type="number"
+              id="max-viewport"
+              x-model.number="maxViewport"
+              min="1"
+              max="4000"
+              step="1"
+              class="input flex-1"
+            >
+            <select x-model="unit" class="absolute right-3 w-12 p-0 min-h-6 text-center appearance-none font-medium text-xs">
+              <option value="px">px</option>
+              <option value="rem">rem</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {# Generated CSS Code #}
+    <div class="not-prose mb-8">
+      <div class="flex items-center justify-between mb-2">
+        <h3 class="text-sm font-bold flex items-center gap-2 my-0">
+          {% phicon "code", "duotone", { class: "size-5 text-orange-500" } %}
+          <span>Generated CSS</span>
+        </h3>
+        <button @click="copyToClipboard()" class="btn btn--xs btn--secondary">
+          {% phicon "copy", "duotone", { class: "size-4" } %}
+          <span>Copy CSS</span>
+        </button>
+      </div>
+      <pre class="prose"><code class="language-css" x-text="cssOutput">font-size: clamp(1rem, -1.5rem + 8vw, 3rem);</code></pre>
+      <div x-show="successMessage" x-cloak class="mt-2 text-xs text-green-600 font-medium">
+        <span x-text="successMessage"></span>
+      </div>
+    </div>
+
+    {# Calculation Breakdown #}
+    <details x-data="{ open: false }" class="not-prose mb-8 border-2 border-orange-200 rounded-2xl overflow-hidden bg-gradient-to-br from-orange-50 to-yellow-50">
+      <summary class="cursor-pointer px-4 py-3 flex items-center justify-between gap-4 text-sm font-medium hover:text-orange-700 select-none"
+               @click="open=!open">
+        <span class="flex items-center gap-2">
+          {% phicon "calculator", "duotone", { class: "size-5 text-orange-500" } %}
+          <span>How It's Calculated</span>
+        </span>
+        <span class="shrink-0 size-4 transition-transform duration-200 text-orange-500"
+              aria-hidden="true"
+              :class="open?`rotate-180`:`rotate-0`">
+          {% phicon "caret-down", "bold", { class: "size-4" } %}
+        </span>
+      </summary>
+      <div x-show="open" x-collapse>
+        <div class="px-4 pb-4 text-sm space-y-3">
+          <div class="bg-white rounded-lg p-4 font-mono text-xs">
+            <p class="text-gray-600 mb-2">Formula:</p>
+            <p class="text-gray-900 whitespace-pre-wrap" x-text="calculationFormula"></p>
+          </div>
+          <div class="text-xs text-gray-700">
+            <p class="mb-2"><strong>Breakdown:</strong></p>
+            <ul class="list-disc list-inside space-y-1">
+              <li><strong>Minimum value:</strong> Ensures text never gets smaller than <span class="font-mono" x-text="minFontSize + unit"></span></li>
+              <li><strong>Preferred value:</strong> Scales linearly between <span class="font-mono" x-text="minViewport + unit"></span> and <span class="font-mono" x-text="maxViewport + unit"></span> viewports</li>
+              <li><strong>Maximum value:</strong> Caps text size at <span class="font-mono" x-text="maxFontSize + unit"></span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </details>
+
+  </div>
+
+  <div class="prose">
+    <hr class="my-12 md:my-16">
+  </div>
+
+  {# About Section #}
+  <article class="prose">
+    <h2>About CSS clamp() for Responsive Typography</h2>
+
+    <p>The CSS <code>clamp()</code> function revolutionizes responsive typography by enabling fluid font sizes that scale smoothly across all viewport sizes. Unlike traditional approaches using media queries, <code>clamp()</code> provides continuous, linear scaling for a more polished user experience.</p>
+
+    <h3>How clamp() Works</h3>
+
+    <p>The <code>clamp()</code> function takes three arguments:</p>
+
+    <pre><code>font-size: clamp(minimum, preferred, maximum);</code></pre>
+
+    <ul>
+      <li><strong>Minimum:</strong> The smallest allowed size (e.g., 16px for body text)</li>
+      <li><strong>Preferred:</strong> A flexible value using viewport units (vw) that scales with screen width</li>
+      <li><strong>Maximum:</strong> The largest allowed size to prevent text from becoming too large</li>
+    </ul>
+
+    <h3>Benefits Over Media Queries</h3>
+
+    <ul>
+      <li><strong>Smoother Scaling:</strong> No jarring jumps between breakpoints</li>
+      <li><strong>Less Code:</strong> One line replaces multiple media query rules</li>
+      <li><strong>Better Maintenance:</strong> Easier to adjust and update typography scales</li>
+      <li><strong>Future-Proof:</strong> Automatically adapts to any screen size, including foldables and new devices</li>
+      <li><strong>Performance:</strong> Reduces CSS file size and complexity</li>
+    </ul>
+
+    <h3>Best Practices</h3>
+
+    <ul>
+      <li>Always set a minimum size of at least 16px for body text (accessibility standard)</li>
+      <li>Test your typography across the full viewport range, not just common breakpoints</li>
+      <li>Use <code>rem</code> units to respect user font size preferences</li>
+      <li>Consider line-height and line-length alongside font size</li>
+      <li>Create a consistent scale for headings (H1-H6) using related clamp values</li>
+      <li>Combine with <code>max-width</code> on text containers for optimal line lengths</li>
+    </ul>
+
+    <h3>Browser Support</h3>
+
+    <p>CSS <code>clamp()</code> is supported in all modern browsers (Chrome 79+, Firefox 75+, Safari 13.1+, Edge 79+). For older browsers, consider providing a fallback:</p>
+
+    <pre><code class="language-css">font-size: 18px; /* Fallback */
+font-size: clamp(16px, 1rem + 0.5vw, 24px); /* Modern browsers */</code></pre>
+  </article>
+
+  {# FAQ Section #}
+  {% include "partials/faq-section.njk" %}
+
+</main>

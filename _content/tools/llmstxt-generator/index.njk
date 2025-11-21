@@ -28,7 +28,10 @@ faq:
       You can provide custom regex patterns for your specific URL structure.
   - question: "What if my sitemap has more than 100 URLs?"
     answer: |-
-      The tool automatically prioritizes URLs when your sitemap exceeds 100 entries. Priority order: Core → Product → Documentation → Resources → Support → Blog → Company → Legal → Other. This ensures your most important pages are included. You can review and adjust the selection before generating.
+      The llms.txt standard recommends keeping your file under 100 entries for optimal performance. When your sitemap exceeds this limit, our tool automatically prioritizes URLs in this order: Core → Product → Documentation → Resources → Support → Blog → Company → Legal → Other. Use the URL exclusion filters in "Advanced Recipe for Professional Juicemakers" to remove test pages, staging environments, or legacy content before parsing. This gives you more control over which pages make the final cut.
+  - question: "How do URL exclusion filters work?"
+    answer: |-
+      URL exclusion filters help you remove unwanted pages before analysis. Since llms.txt files work best with under 100 entries, filtering out test pages, staging sites, or outdated content ensures your most valuable pages are included. You can use default filters (removes test, demo, sample, draft, staging, dev, wip, tmp, placeholder pages) or add custom regex patterns to match your site's structure. Filters are applied during sitemap parsing, before the 100-page limit kicks in.
   - question: "How do I handle multiple title suffix variations?"
     answer: |-
       The Title Suffix field supports both plain text and regular expressions. If your site uses different suffixes (like " | FreshJuice DEV Docs", " | FreshJuice Tools", " | FreshJuice"), you can use a regex pattern like ` \\| FreshJuice( DEV Docs| Tools)?` to match all variations. The tool automatically detects if your pattern contains regex characters and applies it accordingly.
@@ -226,7 +229,7 @@ faq:
               <span>Filter Out Unwanted URLs</span>
             </h4>
             <div class="space-y-3">
-              <p class="text-xs text-gray-600">Remove test, sample, or legacy pages from your sitemap before analysis.</p>
+              <p class="text-xs text-gray-600">Since llms.txt files work best with under 100 entries, removing test pages, staging sites, or outdated content ensures your most valuable pages are prioritized. Our tool automatically selects the top 100 pages based on category importance (Core → Product → Docs → Resources → Support → Blog → Company → Legal). Filtering unwanted URLs <em>before</em> this limit is applied gives you better control over the final selection.</p>
 
               <div class="flex items-start gap-2">
                 <input

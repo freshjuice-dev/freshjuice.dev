@@ -24,7 +24,7 @@ document.addEventListener("alpine:init", () => {
     },
 
     // URL Exclusion filters
-    useDefaultExclusions: false,
+    useDefaultExclusions: true, // Enable by default to filter out test/sample/draft pages
     excludePatterns: "", // Multi-line textarea, will be parsed into array
 
     // Manual URL input
@@ -706,7 +706,7 @@ document.addEventListener("alpine:init", () => {
       this.initialSitemapUrl = "";
       this.manualUrls = "";
       this.initialManualUrls = "";
-      this.useDefaultExclusions = false;
+      this.useDefaultExclusions = true; // Keep default exclusions enabled
       this.excludePatterns = "";
       this.step1DataChanged = false;
       this.step2DataChanged = false;

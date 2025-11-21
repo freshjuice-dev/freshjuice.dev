@@ -168,51 +168,6 @@ faq:
           <p class="text-xs text-gray-500 mt-1">Enter the URL to your sitemap.xml or sitemap index file</p>
         </div>
 
-        {# URL Exclusion Filters #}
-        <details x-data="{ open: false }" class="mb-4 border-2 border-gray-200 rounded-2xl overflow-hidden">
-          <summary class="cursor-pointer px-4 py-3 flex items-center justify-between gap-4 text-sm font-medium hover:text-gray-700 select-none"
-                   @click="open=!open">
-            <span>URL Exclusion Filters (Optional)</span>
-            <span class="shrink-0 size-4 transition-transform duration-200"
-                  aria-hidden="true"
-                  :class="open?`rotate-180`:`rotate-0`">
-              {% phicon "caret-down", "bold", { class: "size-4" } %}
-            </span>
-          </summary>
-          <div x-show="open" x-collapse>
-            <div class="px-4 pb-4 space-y-3">
-              <p class="text-xs text-gray-600 mb-3">Filter out test, sample, or unwanted URLs from your sitemap before analysis.</p>
-
-              <div class="flex items-start gap-2">
-                <input
-                  type="checkbox"
-                  id="use-default-exclusions"
-                  x-model="useDefaultExclusions"
-                  class="mt-0.5 size-4 rounded border-gray-300 text-orange-500 focus:ring-orange-500"
-                  :disabled="isLoading"
-                >
-                <label for="use-default-exclusions" class="flex-1 cursor-pointer select-none">
-                  <span class="block text-sm font-medium">Exclude common test/sample/draft pages</span>
-                  <span class="block text-xs text-gray-500 mt-0.5">Filters URLs containing: test, demo, sample, draft, staging, dev, wip, tmp, placeholder</span>
-                </label>
-              </div>
-
-              <div>
-                <label for="exclude-patterns" class="block text-xs font-medium mb-1">Custom Exclusion Patterns (one per line)</label>
-                <textarea
-                  id="exclude-patterns"
-                  x-model="excludePatterns"
-                  rows="4"
-                  placeholder="preview&#10;_sample&#10;^/old/&#10;/archive/"
-                  class="input w-full font-mono text-xs"
-                  :disabled="isLoading"
-                ></textarea>
-                <p class="text-xs text-gray-500 mt-1">Use regex patterns to exclude URLs. Examples: <code class="font-medium">test</code>, <code class="font-medium">_sample</code>, <code class="font-medium">^/old/</code>, <code class="font-medium">/archive/</code></p>
-              </div>
-            </div>
-          </div>
-        </details>
-
         <button type="submit" :disabled="!isValidSitemapUrl || isLoading">
           {% phicon "magnifying-glass", "duotone", { class: "size-5" } %}
           <span>Parse Sitemap</span>
@@ -246,51 +201,103 @@ faq:
       </form>
     </div>
 
-    {# Advanced Custom Category Patterns - Shared for both input methods #}
-    <details x-data="{ open: false }" class="mt-6 border-2 border-gray-200 rounded-2xl overflow-hidden">
-      <summary class="cursor-pointer px-4 py-3 flex items-center justify-between gap-4 text-sm font-medium hover:text-gray-700 select-none"
+    {# Advanced Recipe for Professional Juicemakers - Shared for both input methods #}
+    <details x-data="{ open: false }" class="mt-6 border-2 border-orange-200 rounded-2xl overflow-hidden bg-gradient-to-br from-orange-50 to-yellow-50">
+      <summary class="cursor-pointer px-4 py-3 flex items-center justify-between gap-4 text-sm font-medium hover:text-orange-700 select-none"
                @click="open=!open">
-        <span>Advanced: Custom Category Patterns</span>
-        <span class="shrink-0 size-4 transition-transform duration-200"
+        <span class="flex items-center gap-2">
+          {% phicon "chef-hat", "duotone", { class: "size-5 text-orange-500" } %}
+          <span>Advanced Recipe for Professional Juicemakers</span>
+        </span>
+        <span class="shrink-0 size-4 transition-transform duration-200 text-orange-500"
               aria-hidden="true"
               :class="open?`rotate-180`:`rotate-0`">
           {% phicon "caret-down", "bold", { class: "size-4" } %}
         </span>
       </summary>
       <div x-show="open" x-collapse>
-        <div class="px-4 pb-4 space-y-3">
-          <p class="text-xs text-gray-600 mb-3">Customize how URLs are categorized using regex patterns. These patterns apply to both sitemap parsing and manual URL analysis.</p>
-          <div>
-            <label for="core-pattern" class="block text-xs font-medium mb-1">Core Pattern (regex)</label>
-            <input type="text" id="core-pattern" x-model="customHints.corePattern" placeholder="/about|/contact|/pricing" class="input w-full text-sm">
+        <div class="px-4 pb-4 space-y-6">
+          <p class="text-xs text-orange-800 italic">Fine-tune your content extraction process with custom filters and categorization patterns.</p>
+
+          {# URL Exclusion Filters #}
+          <div class="border-t border-orange-200 pt-4">
+            <h4 class="text-sm font-bold text-orange-900 mt-0 mb-3 flex items-center gap-2">
+              {% phicon "funnel", "duotone", { class: "size-4 text-orange-600" } %}
+              <span>Filter Out Unwanted URLs</span>
+            </h4>
+            <div class="space-y-3">
+              <p class="text-xs text-gray-600">Remove test, sample, or legacy pages from your sitemap before analysis.</p>
+
+              <div class="flex items-start gap-2">
+                <input
+                  type="checkbox"
+                  id="use-default-exclusions"
+                  x-model="useDefaultExclusions"
+                  class="mt-0.5 size-4 rounded border-gray-300 text-orange-500 focus:ring-orange-500"
+                  :disabled="isLoading"
+                >
+                <label for="use-default-exclusions" class="flex-1 cursor-pointer select-none">
+                  <span class="block text-sm font-medium">Strain out common test/sample/draft pages</span>
+                  <span class="block text-xs text-gray-500 mt-0.5">Filters URLs containing: test, demo, sample, draft, staging, dev, wip, tmp, placeholder</span>
+                </label>
+              </div>
+
+              <div>
+                <label for="exclude-patterns" class="block text-xs font-medium mb-1">Custom Exclusion Patterns (one per line)</label>
+                <textarea
+                  id="exclude-patterns"
+                  x-model="excludePatterns"
+                  rows="4"
+                  placeholder="preview&#10;_sample&#10;^/old/&#10;/archive/"
+                  class="input w-full font-mono text-xs"
+                  :disabled="isLoading"
+                ></textarea>
+                <p class="text-xs text-gray-500 mt-1">Use regex patterns to filter URLs. Examples: <code class="font-medium">test</code>, <code class="font-medium">_sample</code>, <code class="font-medium">^/old/</code>, <code class="font-medium">/archive/</code></p>
+              </div>
+            </div>
           </div>
-          <div>
-            <label for="product-pattern" class="block text-xs font-medium mb-1">Product Pattern (regex)</label>
-            <input type="text" id="product-pattern" x-model="customHints.productPattern" placeholder="/product/" class="input w-full text-sm">
-          </div>
-          <div>
-            <label for="docs-pattern" class="block text-xs font-medium mb-1">Documentation Pattern (regex)</label>
-            <input type="text" id="docs-pattern" x-model="customHints.docsPattern" placeholder="/docs/" class="input w-full text-sm">
-          </div>
-          <div>
-            <label for="resources-pattern" class="block text-xs font-medium mb-1">Resources Pattern (regex)</label>
-            <input type="text" id="resources-pattern" x-model="customHints.resourcesPattern" placeholder="/resources/|/case-studies/" class="input w-full text-sm">
-          </div>
-          <div>
-            <label for="support-pattern" class="block text-xs font-medium mb-1">Support Pattern (regex)</label>
-            <input type="text" id="support-pattern" x-model="customHints.supportPattern" placeholder="/help/|/support/" class="input w-full text-sm">
-          </div>
-          <div>
-            <label for="blog-pattern" class="block text-xs font-medium mb-1">Blog Pattern (regex)</label>
-            <input type="text" id="blog-pattern" x-model="customHints.blogPattern" placeholder="/blog/" class="input w-full text-sm">
-          </div>
-          <div>
-            <label for="company-pattern" class="block text-xs font-medium mb-1">Company Pattern (regex)</label>
-            <input type="text" id="company-pattern" x-model="customHints.companyPattern" placeholder="/company/|/careers/" class="input w-full text-sm">
-          </div>
-          <div>
-            <label for="legal-pattern" class="block text-xs font-medium mb-1">Legal Pattern (regex)</label>
-            <input type="text" id="legal-pattern" x-model="customHints.legalPattern" placeholder="/privacy/|/terms/" class="input w-full text-sm">
+
+          {# Custom Category Patterns #}
+          <div class="border-t border-orange-200 pt-4">
+            <h4 class="text-sm font-bold text-orange-900 mt-0 mb-3 flex items-center gap-2">
+              {% phicon "tag", "duotone", { class: "size-4 text-orange-600" } %}
+              <span>Custom Category Recipes</span>
+            </h4>
+            <p class="text-xs text-gray-600 mb-3">Customize how URLs are categorized using regex patterns. These patterns apply to both sitemap parsing and manual URL analysis.</p>
+            <div class="grid sm:grid-cols-2 gap-3">
+              <div>
+                <label for="core-pattern" class="block text-xs font-medium mb-1">Core Pattern (regex)</label>
+                <input type="text" id="core-pattern" x-model="customHints.corePattern" placeholder="/about|/contact|/pricing" class="input w-full text-xs font-mono">
+              </div>
+              <div>
+                <label for="product-pattern" class="block text-xs font-medium mb-1">Product Pattern (regex)</label>
+                <input type="text" id="product-pattern" x-model="customHints.productPattern" placeholder="/product/" class="input w-full text-xs font-mono">
+              </div>
+              <div>
+                <label for="docs-pattern" class="block text-xs font-medium mb-1">Documentation Pattern (regex)</label>
+                <input type="text" id="docs-pattern" x-model="customHints.docsPattern" placeholder="/docs/" class="input w-full text-xs font-mono">
+              </div>
+              <div>
+                <label for="resources-pattern" class="block text-xs font-medium mb-1">Resources Pattern (regex)</label>
+                <input type="text" id="resources-pattern" x-model="customHints.resourcesPattern" placeholder="/resources/|/case-studies/" class="input w-full text-xs font-mono">
+              </div>
+              <div>
+                <label for="support-pattern" class="block text-xs font-medium mb-1">Support Pattern (regex)</label>
+                <input type="text" id="support-pattern" x-model="customHints.supportPattern" placeholder="/help/|/support/" class="input w-full text-xs font-mono">
+              </div>
+              <div>
+                <label for="blog-pattern" class="block text-xs font-medium mb-1">Blog Pattern (regex)</label>
+                <input type="text" id="blog-pattern" x-model="customHints.blogPattern" placeholder="/blog/" class="input w-full text-xs font-mono">
+              </div>
+              <div>
+                <label for="company-pattern" class="block text-xs font-medium mb-1">Company Pattern (regex)</label>
+                <input type="text" id="company-pattern" x-model="customHints.companyPattern" placeholder="/company/|/careers/" class="input w-full text-xs font-mono">
+              </div>
+              <div>
+                <label for="legal-pattern" class="block text-xs font-medium mb-1">Legal Pattern (regex)</label>
+                <input type="text" id="legal-pattern" x-model="customHints.legalPattern" placeholder="/privacy/|/terms/" class="input w-full text-xs font-mono">
+              </div>
+            </div>
           </div>
         </div>
       </div>

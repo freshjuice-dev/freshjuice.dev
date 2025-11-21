@@ -168,6 +168,51 @@ faq:
           <p class="text-xs text-gray-500 mt-1">Enter the URL to your sitemap.xml or sitemap index file</p>
         </div>
 
+        {# URL Exclusion Filters #}
+        <details x-data="{ open: false }" class="mb-4 border-2 border-gray-200 rounded-2xl overflow-hidden">
+          <summary class="cursor-pointer px-4 py-3 flex items-center justify-between gap-4 text-sm font-medium hover:text-gray-700 select-none"
+                   @click="open=!open">
+            <span>URL Exclusion Filters (Optional)</span>
+            <span class="shrink-0 size-4 transition-transform duration-200"
+                  aria-hidden="true"
+                  :class="open?`rotate-180`:`rotate-0`">
+              {% phicon "caret-down", "bold", { class: "size-4" } %}
+            </span>
+          </summary>
+          <div x-show="open" x-collapse>
+            <div class="px-4 pb-4 space-y-3">
+              <p class="text-xs text-gray-600 mb-3">Filter out test, sample, or unwanted URLs from your sitemap before analysis.</p>
+
+              <div class="flex items-start gap-2">
+                <input
+                  type="checkbox"
+                  id="use-default-exclusions"
+                  x-model="useDefaultExclusions"
+                  class="mt-0.5 size-4 rounded border-gray-300 text-orange-500 focus:ring-orange-500"
+                  :disabled="isLoading"
+                >
+                <label for="use-default-exclusions" class="flex-1 cursor-pointer select-none">
+                  <span class="block text-sm font-medium">Exclude common test/sample/draft pages</span>
+                  <span class="block text-xs text-gray-500 mt-0.5">Filters URLs containing: test, demo, sample, draft, staging, dev, wip, tmp, placeholder</span>
+                </label>
+              </div>
+
+              <div>
+                <label for="exclude-patterns" class="block text-xs font-medium mb-1">Custom Exclusion Patterns (one per line)</label>
+                <textarea
+                  id="exclude-patterns"
+                  x-model="excludePatterns"
+                  rows="4"
+                  placeholder="preview&#10;_sample&#10;^/old/&#10;/archive/"
+                  class="input w-full font-mono text-xs"
+                  :disabled="isLoading"
+                ></textarea>
+                <p class="text-xs text-gray-500 mt-1">Use regex patterns to exclude URLs. Examples: <code class="font-medium">test</code>, <code class="font-medium">_sample</code>, <code class="font-medium">^/old/</code>, <code class="font-medium">/archive/</code></p>
+              </div>
+            </div>
+          </div>
+        </details>
+
         <button type="submit" :disabled="!isValidSitemapUrl || isLoading">
           {% phicon "magnifying-glass", "duotone", { class: "size-5" } %}
           <span>Parse Sitemap</span>
@@ -264,7 +309,16 @@ faq:
           <p class="text-blue-600 font-medium">Total URLs Found</p>
           <p class="text-2xl font-bold" x-text="totalUrls"></p>
         </div>
-        <div>
+        <div x-show="excludedUrls > 0">
+          <p class="text-purple-600 font-medium">Excluded by Filters</p>
+          <p class="text-2xl font-bold" x-text="excludedUrls"></p>
+          <p class="text-xs text-purple-500 mt-1" x-text="`${((excludedUrls / totalUrls) * 100).toFixed(1)}% filtered out`"></p>
+        </div>
+        <div x-show="excludedUrls > 0">
+          <p class="text-green-600 font-medium">After Filtering</p>
+          <p class="text-2xl font-bold" x-text="filteredUrls"></p>
+        </div>
+        <div x-show="!excludedUrls || excludedUrls === 0">
           <p class="text-blue-600 font-medium">URLs Included</p>
           <p class="text-2xl font-bold" x-text="includedUrls"></p>
         </div>
@@ -272,6 +326,12 @@ faq:
           <p class="text-blue-600 font-medium">Sitemaps Processed</p>
           <p class="text-2xl font-bold" x-text="sitemapsProcessed"></p>
         </div>
+      </div>
+      <div x-show="excludedUrls > 0 && ((excludedUrls / totalUrls) * 100) > 50" class="mt-3 p-3 bg-red-100 rounded-xl border border-red-300">
+        <p class="text-xs text-red-800">
+          {% phicon "warning-circle", "duotone", { class: "size-4 inline mr-1" } %}
+          <strong>High exclusion rate detected:</strong> More than 50% of URLs were filtered out. You may want to review your exclusion patterns to ensure you're not over-filtering.
+        </p>
       </div>
       <div x-show="limitApplied" class="mt-3 p-3 bg-yellow-100 rounded-xl border border-yellow-300">
         <p class="text-xs text-yellow-800">

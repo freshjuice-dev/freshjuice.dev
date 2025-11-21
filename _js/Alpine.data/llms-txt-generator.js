@@ -23,6 +23,10 @@ document.addEventListener("alpine:init", () => {
       legalPattern: "",
     },
 
+    // URL Exclusion filters
+    useDefaultExclusions: false,
+    excludePatterns: "", // Multi-line textarea, will be parsed into array
+
     // Manual URL input
     manualUrls: "",
     initialManualUrls: "", // Track initial value to detect changes
@@ -30,9 +34,12 @@ document.addEventListener("alpine:init", () => {
     // Parse results
     parseResults: null,
     totalUrls: 0,
+    excludedUrls: 0,
+    filteredUrls: 0,
     includedUrls: 0,
     limitApplied: false,
     sitemapsProcessed: 0,
+    exclusionStats: null,
     categorizedUrls: {
       core: [],
       product: [],
@@ -286,15 +293,24 @@ document.addEventListener("alpine:init", () => {
       debugLog("Parsing sitemap:", this.sitemapUrl);
 
       try {
+        const excludePatternsArray = this.getExcludePatternsArray();
+        const requestBody = {
+          sitemapUrl: this.sitemapUrl,
+          hints: this.getActiveHints(),
+          ...(this.useDefaultExclusions && { useDefaultExclusions: true }),
+          ...(excludePatternsArray.length > 0 && {
+            excludePatterns: excludePatternsArray,
+          }),
+        };
+
+        debugLog("Request body:", requestBody);
+
         const response = await fetch(
           "https://api.freshjuice.dev/llmstxt/parse-sitemap",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              sitemapUrl: this.sitemapUrl,
-              hints: this.getActiveHints(),
-            }),
+            body: JSON.stringify(requestBody),
           },
         );
 
@@ -307,10 +323,13 @@ document.addEventListener("alpine:init", () => {
         debugLog("Parse result:", data);
 
         this.parseResults = data;
-        this.totalUrls = data.totalUrls;
-        this.includedUrls = data.includedUrls;
-        this.limitApplied = data.limitApplied;
-        this.sitemapsProcessed = data.sitemapsProcessed;
+        this.totalUrls = data.totalUrls || 0;
+        this.excludedUrls = data.excludedUrls || 0;
+        this.filteredUrls = data.filteredUrls || 0;
+        this.includedUrls = data.includedUrls || 0;
+        this.limitApplied = data.limitApplied || false;
+        this.sitemapsProcessed = data.sitemapsProcessed || 0;
+        this.exclusionStats = data.exclusionStats || null;
         // Merge API response with default structure to ensure all categories exist
         this.categorizedUrls = {
           core: data.categories?.core || [],
@@ -672,6 +691,14 @@ document.addEventListener("alpine:init", () => {
       return hints;
     },
 
+    getExcludePatternsArray() {
+      if (!this.excludePatterns) return [];
+      return this.excludePatterns
+        .split("\n")
+        .map((pattern) => pattern.trim())
+        .filter((pattern) => pattern.length > 0);
+    },
+
     reset() {
       debugLog("Resetting generator");
       this.currentStep = 1;
@@ -679,13 +706,18 @@ document.addEventListener("alpine:init", () => {
       this.initialSitemapUrl = "";
       this.manualUrls = "";
       this.initialManualUrls = "";
+      this.useDefaultExclusions = false;
+      this.excludePatterns = "";
       this.step1DataChanged = false;
       this.step2DataChanged = false;
       this.parseResults = null;
       this.totalUrls = 0;
+      this.excludedUrls = 0;
+      this.filteredUrls = 0;
       this.includedUrls = 0;
       this.limitApplied = false;
       this.sitemapsProcessed = 0;
+      this.exclusionStats = null;
       this.categorizedUrls = {
         core: [],
         product: [],

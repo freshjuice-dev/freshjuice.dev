@@ -6,6 +6,7 @@
     @apply border-orange-600 border-2 hover:brightness-125;
     @apply transition-all duration-300 ease-in-out;
     @apply hover:-translate-y-0.5 hover:shadow-lg;
+    @apply whitespace-nowrap;
 
     &--primary {
     }

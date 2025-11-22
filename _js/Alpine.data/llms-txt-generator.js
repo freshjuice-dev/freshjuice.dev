@@ -670,6 +670,46 @@ document.addEventListener("alpine:init", () => {
       debugLog("All pages deselected");
     },
 
+    selectCategoryPages(category) {
+      const categoryPages = this.analyzedPages[category] || [];
+      categoryPages.forEach((page) => {
+        if (!this.isPageSelected(page)) {
+          this.selectedPages.push(page);
+        }
+      });
+      debugLog(`Selected all ${category} pages:`, categoryPages.length);
+    },
+
+    deselectCategoryPages(category) {
+      const categoryPages = this.analyzedPages[category] || [];
+      categoryPages.forEach((page) => {
+        const index = this.selectedPages.findIndex((p) => p.url === page.url);
+        if (index !== -1) {
+          this.selectedPages.splice(index, 1);
+        }
+      });
+      debugLog(`Deselected all ${category} pages`);
+    },
+
+    toggleCategoryPages(category) {
+      if (this.isCategoryFullySelected(category)) {
+        this.deselectCategoryPages(category);
+      } else {
+        this.selectCategoryPages(category);
+      }
+    },
+
+    isCategoryFullySelected(category) {
+      const categoryPages = this.analyzedPages[category] || [];
+      if (categoryPages.length === 0) return false;
+      return categoryPages.every((page) => this.isPageSelected(page));
+    },
+
+    getCategorySelectedCount(category) {
+      const categoryPages = this.analyzedPages[category] || [];
+      return categoryPages.filter((page) => this.isPageSelected(page)).length;
+    },
+
     getActiveHints() {
       const hints = {};
       if (this.customHints.corePattern)

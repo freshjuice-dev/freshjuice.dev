@@ -274,6 +274,126 @@ faq:
 
     <pre><code class="language-css">font-size: 18px; /* Fallback */
 font-size: clamp(16px, 1rem + 0.5vw, 24px); /* Modern browsers */</code></pre>
+
+    <h3>Fresh-Squeezed Typography Recipe</h3>
+
+    <p>Here's our chef's recommended recipe for a perfectly balanced typographic scale using <code>clamp()</code>. This creates smooth, harmonious text sizing across all devices - no artificial sweeteners or media query preservatives needed!</p>
+
+    <div class="relative" x-data="{
+      typographyCode: `/* Body Text - The foundation of your fresh content */
+body {
+  font-size: clamp(1rem, 0.875rem + 0.625vw, 1.25rem);
+  /* Scales from 16px to 20px */
+}
+
+/* Heading 1 - Your headline hero */
+h1 {
+  font-size: clamp(2rem, 1rem + 5vw, 4rem);
+  /* Scales from 32px to 64px */
+}
+
+/* Heading 2 - The supporting character */
+h2 {
+  font-size: clamp(1.5rem, 0.875rem + 3.125vw, 3rem);
+  /* Scales from 24px to 48px */
+}
+
+/* Heading 3 - Keeps things organized */
+h3 {
+  font-size: clamp(1.25rem, 0.875rem + 1.875vw, 2rem);
+  /* Scales from 20px to 32px */
+}
+
+/* Heading 4 - A subtle distinction */
+h4 {
+  font-size: clamp(1.125rem, 0.9375rem + 0.9375vw, 1.5rem);
+  /* Scales from 18px to 24px */
+}
+
+/* Heading 5 - Small but mighty */
+h5 {
+  font-size: clamp(1rem, 0.9375rem + 0.3125vw, 1.125rem);
+  /* Scales from 16px to 18px */
+}
+
+/* Heading 6 - The fine print with style */
+h6 {
+  font-size: clamp(0.875rem, 0.8125rem + 0.3125vw, 1rem);
+  /* Scales from 14px to 16px */
+}
+
+/* Small Text - Perfect for those tiny details */
+small {
+  font-size: clamp(0.75rem, 0.6875rem + 0.3125vw, 0.875rem);
+  /* Scales from 12px to 14px */
+}`,
+      copySuccess: false,
+      async copyCode() {
+        try {
+          await navigator.clipboard.writeText(this.typographyCode);
+          this.copySuccess = true;
+          setTimeout(() => { this.copySuccess = false; }, 2500);
+        } catch (err) {
+          console.error('Copy failed:', err);
+        }
+      }
+    }">
+      <button class="flex items-center gap-1 text-xs font-mono text-cursor hover:text-yellow-400 bg-terminal border border-current rounded-full px-2 py-1 absolute z-10 top-2.5 right-2"
+              @click="copyCode()">
+        {% phicon "copy", "duotone", { class: "size-3" } %}
+        <span x-show="!copySuccess">Copy<span class="sr-only"> code example</span></span>
+        <span x-show="copySuccess" x-cloak>Copied!</span>
+      </button>
+      <pre><code class="language-css">/* Body Text - The foundation of your fresh content */
+body {
+  font-size: clamp(1rem, 0.875rem + 0.625vw, 1.25rem);
+  /* Scales from 16px to 20px */
+}
+
+/* Heading 1 - Your headline hero */
+h1 {
+  font-size: clamp(2rem, 1rem + 5vw, 4rem);
+  /* Scales from 32px to 64px */
+}
+
+/* Heading 2 - The supporting character */
+h2 {
+  font-size: clamp(1.5rem, 0.875rem + 3.125vw, 3rem);
+  /* Scales from 24px to 48px */
+}
+
+/* Heading 3 - Keeps things organized */
+h3 {
+  font-size: clamp(1.25rem, 0.875rem + 1.875vw, 2rem);
+  /* Scales from 20px to 32px */
+}
+
+/* Heading 4 - A subtle distinction */
+h4 {
+  font-size: clamp(1.125rem, 0.9375rem + 0.9375vw, 1.5rem);
+  /* Scales from 18px to 24px */
+}
+
+/* Heading 5 - Small but mighty */
+h5 {
+  font-size: clamp(1rem, 0.9375rem + 0.3125vw, 1.125rem);
+  /* Scales from 16px to 18px */
+}
+
+/* Heading 6 - The fine print with style */
+h6 {
+  font-size: clamp(0.875rem, 0.8125rem + 0.3125vw, 1rem);
+  /* Scales from 14px to 16px */
+}
+
+/* Small Text - Perfect for those tiny details */
+small {
+  font-size: clamp(0.75rem, 0.6875rem + 0.3125vw, 0.875rem);
+  /* Scales from 12px to 14px */
+}</code></pre>
+    </div>
+
+    <p><strong>Pro tip:</strong> These values assume a 500px to 900px viewport range (our golden ratio). Adjust the middle value (the one with <code>vw</code>) based on your specific viewport range for the perfect squeeze!</p>
   </article>
 
   {# FAQ Section #}

@@ -272,7 +272,7 @@ faq:
 
     <p>CSS <code>clamp()</code> is supported in all modern browsers (Chrome 79+, Firefox 75+, Safari 13.1+, Edge 79+). For older browsers, consider providing a fallback:</p>
 
-    <pre><code class="language-css">font-size: 18px; /* Fallback */
+    <pre data-prismjs class="language-css"><code>font-size: 18px; /* Fallback */
 font-size: clamp(16px, 1rem + 0.5vw, 24px); /* Modern browsers */</code></pre>
 
     <h3>Fresh-Squeezed Typography Recipe</h3>
@@ -344,7 +344,7 @@ small {
         <span x-show="!copySuccess">Copy<span class="sr-only"> code example</span></span>
         <span x-show="copySuccess" x-cloak>Copied!</span>
       </button>
-      <pre><code class="language-css">/* Body Text - The foundation of your fresh content */
+      <pre data-prismjs class="language-css"><code>/* Body Text - The foundation of your fresh content */
 body {
   font-size: clamp(1rem, 0.875rem + 0.625vw, 1.25rem);
   /* Scales from 16px to 20px */
@@ -392,11 +392,8 @@ small {
   /* Scales from 12px to 14px */
 }</code></pre>
     </div>
-
     <p><strong>Pro tip:</strong> These values assume a 500px to 900px viewport range (our golden ratio). Adjust the middle value (the one with <code>vw</code>) based on your specific viewport range for the perfect squeeze!</p>
+    {% include "partials/faq-section.njk" %}
   </article>
-
-  {# FAQ Section #}
-  {% include "partials/faq-section.njk" %}
 
 </main>

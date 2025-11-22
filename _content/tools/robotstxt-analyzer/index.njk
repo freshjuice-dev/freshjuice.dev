@@ -271,7 +271,64 @@ faq:
 
   </div>
 
-  {# FAQ Section #}
-  {% include "partials/faq-section.njk" %}
+  <article class="prose max-w-3xl mx-auto mt-12">
+    <h2>About this tool</h2>
+    <p>
+      The Robots.txt Analyzer checks your robots.txt file for common problems and optimization opportunities. Here's what it looks for:
+    </p>
+    <ul>
+      <li><strong>Syntax validation</strong>: Makes sure your file is properly formatted with valid directives</li>
+      <li><strong>Critical SEO issues</strong>: Catches rules that accidentally block your entire site or homepage from search engines</li>
+      <li><strong>Resource blocking</strong>: Warns you if CSS, JavaScript, or images are blocked (this hurts your SEO)</li>
+      <li><strong>User-agent configuration</strong>: Checks that you have proper user-agent directives set up correctly</li>
+      <li><strong>Sitemap presence</strong>: Looks for sitemap declarations and makes sure the URLs are valid</li>
+      <li><strong>Crawl-delay optimization</strong>: Flags crawl-delay values that are too high and slow down indexing</li>
+      <li><strong>Best practice recommendations</strong>: Gives you actionable suggestions with specific line numbers</li>
+    </ul>
+    <p>
+      You'll get a health score from 0 to 100 based on how well your file is configured, along with categorized issues, detailed rule breakdowns, and tips for improvement. This helps you avoid accidentally blocking search engines while still keeping sensitive areas of your site protected.
+    </p>
+
+    <h2>Perfect robots.txt Example</h2>
+    <p>
+      A well-configured robots.txt file should be clear, purposeful, and avoid common pitfalls. Here's an example of a properly structured robots.txt that follows best practices:
+    </p>
+    <pre data-prismjs class="language-markdown"><code># Allow all search engines to crawl the entire site
+User-agent: *
+Disallow:
+
+# Block sensitive areas from all crawlers
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+
+# Allow access to CSS and JavaScript (important for SEO)
+Allow: /css/
+Allow: /js/
+Allow: /assets/
+
+# Specific rules for GPTBot (OpenAI's crawler)
+User-agent: GPTBot
+Disallow: /api/
+Allow: /
+
+# Sitemap location (helps search engines discover your content)
+Sitemap: https://example.com/sitemap.xml
+
+# Optional: Crawl delay for aggressive bots (use sparingly)
+User-agent: *
+Crawl-delay: 1</code></pre>
+    <p><strong>Key principles demonstrated:</strong></p>
+    <ul>
+      <li><strong>Default allow</strong>: Start with an empty <code>Disallow:</code> to let all crawlers access your site by default</li>
+      <li><strong>Explicit blocking</strong>: Only block specific sensitive directories like /admin/, /api/, /private/</li>
+      <li><strong>Allow CSS/JS</strong>: Never block /css/, /js/, or /assets/ because search engines need these to properly render your pages</li>
+      <li><strong>Include sitemap</strong>: Always tell search engines where your sitemap is so they can discover your content</li>
+      <li><strong>Specific user-agents</strong>: Set up targeted rules for certain bots (like GPTBot) when you need to</li>
+      <li><strong>Minimal crawl-delay</strong>: Keep crawl-delay under 5 seconds or skip it entirely since most modern crawlers handle this on their own</li>
+      <li><strong>Comments for clarity</strong>: Use # to add helpful comments that explain what each rule does</li>
+    </ul>
+    {% include "partials/faq-section.njk" %}
+  </article>
 
 </main>

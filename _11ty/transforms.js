@@ -1,6 +1,19 @@
 // import { generate as criticalGenerate } from 'critical';
 import { minify as minifyHTML } from "html-minifier-terser";
 import { parseHTML } from "linkedom";
+import Prism from "prismjs";
+import loadLanguages from "prismjs/components/index.js";
+
+// Load additional Prism languages for syntax highlighting
+loadLanguages([
+  "css",
+  "javascript",
+  "markup",
+  "json",
+  "bash",
+  "yaml",
+  "markdown",
+]);
 
 export default {
   //
@@ -56,6 +69,62 @@ export default {
           }
         } catch (err) {}
       });
+      content = document.toString();
+    }
+    return content;
+  },
+
+  prismHighlight: function (content, outputPath) {
+    if (outputPath && outputPath.endsWith(".html")) {
+      const { document } = parseHTML(content);
+      const preBlocks = document.querySelectorAll("pre[data-prismjs]");
+
+      preBlocks.forEach((preElement) => {
+        // Find the <code> element inside <pre>
+        const codeElement = preElement.querySelector("code");
+        if (!codeElement) return;
+
+        // Get the code content from the <code> element
+        const code = codeElement.textContent || "";
+
+        // Extract language from class on <pre> or <code>
+        const preClass = preElement.getAttribute("class") || "";
+        const codeClass = codeElement.getAttribute("class") || "";
+        const className = preClass + " " + codeClass;
+        const languageMatch = className.match(/language-(\w+)/);
+        const language = languageMatch ? languageMatch[1] : "txt";
+
+        // Map some common language aliases
+        const languageMap = {
+          txt: "plaintext",
+          html: "markup",
+          xml: "markup",
+          svg: "markup",
+        };
+
+        const prismLanguage = languageMap[language] || language;
+
+        // Highlight if language is available
+        if (Prism.languages[prismLanguage]) {
+          try {
+            const highlighted = Prism.highlight(
+              code,
+              Prism.languages[prismLanguage],
+              prismLanguage,
+            );
+            // Replace innerHTML of <code>, keeping the <code> element itself
+            codeElement.innerHTML = highlighted;
+            // Remove the data-prismjs attribute from <pre> after processing
+            preElement.removeAttribute("data-prismjs");
+          } catch (err) {
+            console.error(
+              `Prism highlighting error for language ${prismLanguage}:`,
+              err.message,
+            );
+          }
+        }
+      });
+
       content = document.toString();
     }
     return content;

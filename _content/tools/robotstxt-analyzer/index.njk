@@ -1,0 +1,277 @@
+---
+title: "Robots.txt Analyzer"
+desc: "Analyze and validate your robots.txt file for SEO issues. Get instant feedback on syntax errors, blocking rules, and optimization recommendations."
+icon: "robot"
+type: seo
+partialScripts:
+  - alpine-data/robotstxt-analyzer
+faq:
+  - question: "What is robots.txt?"
+    answer: |-
+      robots.txt is a text file that tells search engine crawlers which pages they can and cannot access on your website. It's placed in your website's root directory (e.g., `https://example.com/robots.txt`) and follows the Robots Exclusion Protocol. This file helps you control how search engines interact with your content.
+  - question: "Why should I analyze my robots.txt file?"
+    answer: |-
+      A misconfigured robots.txt can accidentally block search engines from indexing your entire site, preventing it from appearing in search results. Common issues include blocking CSS/JavaScript files (which affects SEO), overly restrictive rules, syntax errors, and missing sitemap declarations. Regular analysis helps catch these problems before they impact your visibility.
+  - question: "What does the health score mean?"
+    answer: |-
+      The health score (0-100) reflects your robots.txt configuration quality:
+
+      - **90-100 (Excellent)**: Well-configured with no critical issues
+      - **70-89 (Good)**: Minor improvements possible but generally healthy
+      - **50-69 (Needs Improvement)**: Several issues that should be addressed
+      - **0-49 (Critical Issues)**: Serious problems blocking search engines
+  - question: "What are critical issues?"
+    answer: |-
+      Critical issues prevent search engines from indexing your site properly. Examples include:
+
+      - **Disallow: /** - Blocks your entire website from all search engines
+      - **Blocking homepage** - Prevents indexing of your main page
+      - **No User-agent directives** - Invalid robots.txt structure
+
+      These should be fixed immediately to maintain search visibility.
+  - question: "Should I block CSS and JavaScript files?"
+    answer: |-
+      No. Google and other modern search engines need to render your pages to understand content and usability. Blocking CSS/JavaScript files can hurt your SEO by preventing proper page rendering. Remove rules like `Disallow: /css/` or `Disallow: /js/` from your robots.txt.
+  - question: "What is crawl-delay and should I use it?"
+    answer: |-
+      Crawl-delay tells bots to wait a specified number of seconds between requests. While it can reduce server load, values above 10 seconds may significantly slow down indexing. Most modern search engines ignore this directive in favor of automatic rate limiting. Use with caution and keep values low (≤5 seconds) if needed.
+---
+
+<main class="max-w-3xl mx-auto w-full" x-data="robotstxtAnalyzer">
+
+  <div class="prose max-w-full">
+    <h1>{{ title }}</h1>
+    <p class="lead">Validate and optimize your robots.txt file for search engines. Get instant feedback on blocking rules, syntax errors, and SEO recommendations.</p>
+  </div>
+
+  {# Loading Indicator #}
+  <div x-show="isLoading" x-cloak class="not-prose border-2 border-orange-200 rounded-2xl p-4 bg-orange-50 my-6 select-none">
+    <div class="flex items-center gap-3">
+      <div class="animate-spin size-6 shrink-0 border-2 border-orange-500 border-t-transparent rounded-full"></div>
+      <p class="text-base font-medium text-orange-900">Analyzing your robots.txt file...</p>
+    </div>
+  </div>
+
+  {# Error Message #}
+  <div x-show="error" x-cloak class="not-prose border-2 border-red-200 rounded-2xl p-4 bg-red-50 my-6 select-none">
+    <div class="flex items-start gap-3">
+      {% phicon "warning-circle", "duotone", { class: "size-6 text-red-600 flex-shrink-0" } %}
+      <div class="flex-1 min-h-6 flex items-center">
+        <p class="text-sm font-medium text-red-900" x-text="error"></p>
+      </div>
+      <button @click="error = null" class="text-red-600 hover:text-red-800 p-0.5">
+        {% phicon "x", "bold", { class: "size-5" } %}
+      </button>
+    </div>
+  </div>
+
+  {# Input Section #}
+  <div x-show="!results" x-cloak>
+    <h2 class="h3 mt-0">Choose Your Input Method</h2>
+
+    <div class="not-prose grid sm:grid-cols-2 gap-4 mb-6">
+      <label class="border-2 rounded-2xl p-4 cursor-pointer transition-all hover:border-orange-300 select-none"
+             :class="inputMode === 'url' ? 'border-orange-500 bg-orange-50' : 'border-gray-200'">
+        <input type="radio" x-model="inputMode" value="url" class="sr-only">
+        <div class="flex items-start gap-3">
+          <span class="size-8 shrink-0" :class="inputMode==='url'?'text-orange-500':''">
+            {% phicon "robot", "duotone", { class: "size-8" } %}
+          </span>
+          <div>
+            <p class="font-bold text-base mb-1">Fetch from URL <sup class="text-xs font-normal">(recommended)</sup></p>
+            <p class="text-sm text-gray-600">Automatically fetch and analyze from any website</p>
+          </div>
+        </div>
+      </label>
+
+      <label class="border-2 rounded-2xl p-4 cursor-pointer transition-all hover:border-orange-300 select-none"
+             :class="inputMode === 'text' ? 'border-orange-500 bg-orange-50' : 'border-gray-200'">
+        <input type="radio" x-model="inputMode" value="text" class="sr-only">
+        <div class="flex items-start gap-3">
+          <span class="size-8 shrink-0" :class="inputMode==='text'?'text-orange-500':''">
+            {% phicon "file-text", "duotone", { class: "size-8" } %}
+          </span>
+          <div>
+            <p class="font-bold text-base mb-1">Paste Content</p>
+            <p class="text-sm text-gray-600">Paste your robots.txt content directly</p>
+          </div>
+        </div>
+      </label>
+    </div>
+
+    {# URL Input #}
+    <div x-show="inputMode === 'url'" x-cloak>
+      <h3>Enter Website URL</h3>
+      <form @submit.prevent="analyzeRobotsTxt()" class="not-prose">
+        <div class="mb-4">
+          <label for="robots-url" class="block text-sm font-medium mb-2">Website URL</label>
+          <input
+            type="text"
+            id="robots-url"
+            x-model="robotsUrl"
+            placeholder="example.com"
+            class="input w-full"
+            required
+            :disabled="isLoading">
+          <p class="text-xs text-gray-500 mt-1">Just enter the domain (e.g., example.com) - we'll automatically fetch /robots.txt</p>
+        </div>
+
+        <button type="submit" :disabled="!robotsUrl || isLoading">
+          {% phicon "magnifying-glass", "duotone", { class: "size-5" } %}
+          <span>Analyze</span>
+        </button>
+      </form>
+    </div>
+
+    {# Text Input #}
+    <div x-show="inputMode === 'text'" x-cloak>
+      <h3>Paste robots.txt Content</h3>
+      <form @submit.prevent="analyzeRobotsTxt()" class="not-prose">
+        <div class="mb-4">
+          <label for="robots-text" class="block text-sm font-medium mb-2">robots.txt content</label>
+          <textarea
+            id="robots-text"
+            x-model="robotsText"
+            rows="12"
+            placeholder="User-agent: *&#10;Disallow: /admin/&#10;Sitemap: https://example.com/sitemap.xml"
+            class="input w-full font-mono text-sm"
+            :disabled="isLoading"></textarea>
+          <p class="text-xs text-gray-500 mt-1">Paste your robots.txt file content</p>
+        </div>
+
+        <button type="submit" :disabled="!robotsText || isLoading">
+          {% phicon "magnifying-glass", "duotone", { class: "size-5" } %}
+          <span>Analyze</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  {# Results Section #}
+  <div x-show="results"
+       x-transition
+       x-cloak
+       class="space-y-6">
+
+    {# Analyze Another Button #}
+    <div class="not-prose">
+      <div class="btn btn--secondary text-blue-600"
+           @click="reset()">
+        {% phicon "rewind", "duotone", { class: "size-5" } %}
+        <span class="hidden xs:inline">Analyze Another</span>
+      </div>
+    </div>
+
+    {# Health Score #}
+    <div>
+      <h2 class="h3 mt-0">Health Score</h2>
+      <div class="not-prose border rounded-xl p-4 flex items-center justify-between gap-4"
+           :class="scoreCardClass">
+        <div class="min-w-0">
+          <div class="text-sm opacity-70">robots.txt health score</div>
+          <div class="text-2xl font-semibold" x-text="(results?.summary.score || 0) + '/100'"></div>
+          <div class="text-xs opacity-70 mt-2 space-y-0.5">
+            <div class="flex items-center gap-2">
+              <span x-text="results?.summary.valid ? '✓' : '✗'"></span>
+              <span x-text="results?.summary.valid ? 'Valid robots.txt' : 'Issues found'"></span>
+            </div>
+            <div><span x-text="results?.summary.totalRules"></span> rules · <span x-text="results?.summary.sitemapCount"></span> sitemap(s) · <span x-text="results?.summary.criticalIssues"></span> critical issue(s)</div>
+          </div>
+        </div>
+        <div class="shrink-0">
+          <div class="size-14 rounded-full grid place-items-center font-mono text-lg border" :class="scoreBadgeClass">
+            <span x-text="results?.summary.score || 0"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="not-prose border-2 border-gray-200 rounded-2xl p-4 bg-gray-50 mt-4">
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+          <div>
+            <div class="text-gray-600">Total Lines</div>
+            <div class="font-bold text-lg" x-text="results?.summary.totalLines"></div>
+          </div>
+          <div>
+            <div class="text-gray-600">Total Rules</div>
+            <div class="font-bold text-lg" x-text="results?.summary.totalRules"></div>
+          </div>
+          <div>
+            <div class="text-gray-600">User Agents</div>
+            <div class="font-bold text-lg" x-text="results?.summary.userAgents.length"></div>
+          </div>
+          <div>
+            <div class="text-gray-600">Allow Rules</div>
+            <div class="font-bold text-lg text-green-600" x-text="results?.summary.allowRules"></div>
+          </div>
+          <div>
+            <div class="text-gray-600">Disallow Rules</div>
+            <div class="font-bold text-lg text-red-600" x-text="results?.summary.disallowRules"></div>
+          </div>
+          <div>
+            <div class="text-gray-600">Sitemaps</div>
+            <div class="font-bold text-lg text-blue-600" x-text="results?.summary.sitemapCount"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {# Issues Section #}
+    <template x-if="results?.issues && results.issues.length > 0">
+      <div>
+        <h2 class="h3 mt-0">Issues & Recommendations</h2>
+        <div class="not-prose space-y-4" x-html="renderIssues()"></div>
+      </div>
+    </template>
+
+    {# Rules Breakdown #}
+    <template x-if="results?.rules && results.rules.length > 0">
+      <div>
+        <h2 class="h3 mt-0">Rules Breakdown</h2>
+        <div class="not-prose space-y-4" x-html="renderRules()"></div>
+      </div>
+    </template>
+
+    {# Sitemaps #}
+    <template x-if="results?.sitemaps && results.sitemaps.length > 0">
+      <div>
+        <h2 class="h3 mt-0">Sitemaps</h2>
+        <div class="not-prose border-2 border-blue-200 rounded-2xl p-4 bg-blue-50">
+          <h3 class="text-lg font-bold flex items-center gap-2 mt-0 mb-3">
+            {% phicon "file-text", "duotone", { class: "size-5 text-blue-500" } %}
+            <span>Found <span x-text="results.sitemaps.length"></span> sitemap(s)</span>
+          </h3>
+          <ul class="space-y-2 m-0 p-0 list-none">
+            <template x-for="sitemap in results.sitemaps" :key="sitemap.url">
+              <li class="flex items-center gap-2 text-sm">
+                <span class="text-gray-500" x-text="`Line ${sitemap.line}:`"></span>
+                <a :href="sitemap.url" target="_blank" rel="noopener" class="text-blue-600 hover:underline" x-text="sitemap.url"></a>
+              </li>
+            </template>
+          </ul>
+        </div>
+      </div>
+    </template>
+
+    {# Recommendations #}
+    <template x-if="results?.recommendations && results.recommendations.length > 0">
+      <div>
+        <h2 class="h3 mt-0">Recommendations</h2>
+        <div class="not-prose border-2 border-yellow-200 rounded-2xl p-4 bg-yellow-50">
+          <h3 class="text-lg font-bold mt-0 mb-3">
+            Helpful Tips
+          </h3>
+          <ul class="space-y-2 m-0 pl-5 list-disc">
+            <template x-for="rec in results.recommendations" :key="rec">
+              <li class="text-sm" x-text="rec"></li>
+            </template>
+          </ul>
+        </div>
+      </div>
+    </template>
+
+  </div>
+
+  {# FAQ Section #}
+  {% include "partials/faq-section.njk" %}
+
+</main>

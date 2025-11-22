@@ -619,20 +619,28 @@ document.addEventListener("alpine:init", () => {
       if (!this.siteSuffix) return null;
 
       try {
+        let suffix = this.siteSuffix;
+
+        // Auto-escape leading pipe character for user convenience
+        // If suffix starts with |, escape it as \|
+        // This allows "| Iru" to work without manual escaping
+        // Only applies to leading pipe, preserving | for OR operations elsewhere
+        if (suffix.match(/^\s*\|/)) {
+          suffix = suffix.replace(/^(\s*)\|/, "$1\\|");
+          debugLog("Auto-escaped leading pipe in suffix:", suffix);
+        }
+
         // Try to create a regex from the suffix
         // If it contains regex special chars (not escaped), treat as regex
         // Otherwise treat as plain text
-        const hasRegexChars = /[\\^$.*+?()[\]{}|]/.test(this.siteSuffix);
+        const hasRegexChars = /[\\^$.*+?()[\]{}|]/.test(suffix);
 
         if (hasRegexChars) {
           // Treat as regex pattern - append $ to match end of string
-          return new RegExp(this.siteSuffix + "$");
+          return new RegExp(suffix + "$");
         } else {
           // Treat as plain text - escape and create regex
-          const escaped = this.siteSuffix.replace(
-            /[.*+?^${}()|[\]\\]/g,
-            "\\$&",
-          );
+          const escaped = suffix.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
           return new RegExp(escaped + "$");
         }
       } catch (e) {

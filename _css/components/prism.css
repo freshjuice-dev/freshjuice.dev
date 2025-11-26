@@ -5,9 +5,9 @@
   }
 
   pre[class*="language-"] {
-    padding: 1em;
-    margin-top: 1.25em;
-    margin-bottom: 1.25em;
+    padding: 1rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
     overflow: auto;
   }
 
@@ -17,8 +17,8 @@
   }
 
   :not(pre) > code[class*="language-"] {
-    padding: 0.1em;
-    border-radius: 0.3em;
+    padding: 0.1rem;
+    border-radius: 0.3rem;
   }
 
   /* Removes ` for code elements at start and end */
@@ -55,10 +55,10 @@
 
   /* Code blocks */
   pre[class*="language-"] {
-    padding: 1em;
-    margin: 0.5em 0;
+    padding: 1rem;
+    margin: 0.5rem 0;
     overflow: auto;
-    border-radius: 0.3em;
+    border-radius: 0.3rem;
   }
 
   :not(pre) > code[class*="language-"],
@@ -68,8 +68,8 @@
 
   /* Inline code */
   :not(pre) > code[class*="language-"] {
-    padding: 0.1em;
-    border-radius: 0.3em;
+    padding: 0.1rem;
+    border-radius: 0.3rem;
   }
 
   .token.comment,

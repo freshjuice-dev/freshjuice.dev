@@ -1,7 +1,7 @@
 @layer base {
   .prose {
     @apply md:text-base;
-    line-height: 1.75em;
+    line-height: 1.75rem;
   }
 
   .prose picture + em {
@@ -10,17 +10,17 @@
 
   .prose :is(p, ul, ol, blockquote, pre) {
     /*@apply text-base md:text-xl;*/
-    @apply text-[1em] md:text-[1.125em] text-pretty;
-    /*font-size: 1.125em;*/
-    margin: 1.5em 0;
+    @apply text-[1rem] md:text-[1.125rem] text-pretty;
+    /*font-size: 1.125rem;*/
+    margin: 1.5rem 0;
   }
 
   .prose :is(ul, ol) {
-    padding-left: 1.5em;
+    padding-left: 1.5rem;
   }
 
   .prose :is(ul, ol, p, blockquote, pre) > :is(p, * > li) {
-    font-size: 1em;
+    font-size: inherit;
   }
 
   .prose ul {
@@ -36,7 +36,7 @@
   }
 
   .prose li {
-    padding-left: 0.25em;
+    padding-left: 0.25rem;
   }
 
   .prose strong {

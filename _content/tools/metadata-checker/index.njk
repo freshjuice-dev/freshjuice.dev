@@ -25,7 +25,7 @@ partialScripts:
                  x-model="targetUrl"
                  placeholder="https://example.com">
           <div class="cursor-pointer font-mono text-sm absolute right-1 top-1 px-1.5 md:px-3 py-1.5 rounded-full transition-all bg-gray-100 hover:bg-gray-200 border-2 border-gray-300 inline-flex gap-2 items-center text-terminal"
-               x-show="showResults && metaTags.length > 0" x-cloak
+               x-show="(showResults && metaTags.length > 0) || (status === 'error' && errorMessage)" x-cloak
                x-transition:enter="transition ease-out duration-700"
                x-transition:enter-start="opacity-0"
                x-transition:enter-end="opacity-100"
@@ -42,6 +42,16 @@ partialScripts:
         </button>
       </div>
     </form>
+
+    <!-- Error message display -->
+    <div x-show="status === 'error' && errorMessage"
+         x-cloak
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0 transform -translate-y-2"
+         x-transition:enter-end="opacity-100 transform translate-y-0"
+         class="mt-4 p-4 bg-red-50 border-2 border-red-200 rounded-xl text-red-700">
+      <p class="m-0 text-sm" x-text="errorMessage"></p>
+    </div>
   </div>
 
   <div class="prose max-w-4xl mx-auto mt-8"

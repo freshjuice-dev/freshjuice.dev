@@ -1,6 +1,11 @@
 /* global Alpine */
 import debugLog from "../modules/_debugLog";
 import { stripTags, allowHttpUrl } from "../modules/_sanitize";
+import {
+  isAIPlatformUrl,
+  AI_PLATFORM_ERROR_MESSAGE,
+} from "../modules/_blockedDomains";
+import { getFriendlyErrorMessage } from "../modules/_errorMessages";
 
 document.addEventListener("alpine:init", () => {
   Alpine.data("HeadingExtractor", () => ({
@@ -62,6 +67,14 @@ document.addEventListener("alpine:init", () => {
         return;
       }
 
+      // Check for blocked AI platform URLs
+      if (isAIPlatformUrl(this.targetUrl)) {
+        this.state = "error";
+        this.setButtonLabel();
+        this.errorMessage = AI_PLATFORM_ERROR_MESSAGE;
+        return;
+      }
+
       this.state = "loading";
       this.setButtonLabel();
       this.showResults = false;
@@ -85,7 +98,11 @@ document.addEventListener("alpine:init", () => {
         debugLog(`Heading extractor → ${response.status}`);
 
         if (!response.ok) {
-          throw new Error(`Request failed with status ${response.status}`);
+          const error = new Error(
+            `Request failed with status ${response.status}`,
+          );
+          error.status = response.status;
+          throw error;
         }
 
         const data = await response.json();
@@ -99,8 +116,7 @@ document.addEventListener("alpine:init", () => {
         console.error(err);
         this.state = "error";
         this.setButtonLabel();
-        this.errorMessage =
-          err?.message || "Something went wrong. Please try again.";
+        this.errorMessage = getFriendlyErrorMessage(err?.status, err?.message);
         this.showResults = false;
       }
     },

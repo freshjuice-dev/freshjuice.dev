@@ -72,6 +72,16 @@ partialScripts:
                placeholder="https://example.com">
       </fieldset>
     </form>
+
+    <!-- Error message display -->
+    <div x-show="errorMessage"
+         x-cloak
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0 transform -translate-y-2"
+         x-transition:enter-end="opacity-100 transform translate-y-0"
+         class="mt-4 p-4 bg-red-50 border-2 border-red-200 rounded-xl text-red-700">
+      <p class="m-0 text-sm" x-text="errorMessage"></p>
+    </div>
   </div>
 
 

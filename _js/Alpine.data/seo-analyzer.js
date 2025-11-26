@@ -1,6 +1,11 @@
 /* global Alpine */
 import debugLog from "../modules/_debugLog";
 import { stripTags } from "../modules/_sanitize";
+import {
+  isAIPlatformUrl,
+  AI_PLATFORM_ERROR_MESSAGE,
+} from "../modules/_blockedDomains";
+import { getFriendlyErrorMessage } from "../modules/_errorMessages";
 
 document.addEventListener("alpine:init", () => {
   Alpine.data("SeoAnalyzer", () => ({
@@ -392,6 +397,13 @@ document.addEventListener("alpine:init", () => {
         return;
       }
 
+      // Check for blocked AI platform URLs
+      if (isAIPlatformUrl(cleaned)) {
+        this.errorMessage = AI_PLATFORM_ERROR_MESSAGE;
+        this.state = "error";
+        return;
+      }
+
       this.url = cleaned;
       this.state = "loading";
       this.buttonLabel = "Analyzing…";
@@ -456,27 +468,10 @@ document.addEventListener("alpine:init", () => {
         }
       } catch (e) {
         debugLog(e);
-        const msg = String(e && e.message ? e.message : e);
-        this.errorMessage = this.mapError(msg);
+        this.errorMessage = getFriendlyErrorMessage(e?.status, e?.message);
         this.state = "error";
         this.buttonLabel = "Try again";
       }
-    },
-
-    mapError(msg) {
-      if (/Invalid URL/i.test(msg))
-        return "Invalid URL format (must be absolute HTTPS starting with https://).";
-      if (/not html/i.test(msg))
-        return "Target is not HTML (unsupported content type).";
-      if (/reachable/i.test(msg))
-        return "URL not reachable. Check the address and try again.";
-      if (/Blocked host/i.test(msg)) return "The host is blocked.";
-      if (/Invalid JSON body/i.test(msg))
-        return "Internal error: invalid JSON body sent.";
-      if (/timeout|abort/i.test(msg))
-        return "Fetch timeout. The request took too long.";
-      if (/Upstream error/i.test(msg)) return msg; // already formatted
-      return msg || "Something went wrong. Please try again.";
     },
 
     init() {

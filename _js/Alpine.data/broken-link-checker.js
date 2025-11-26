@@ -1,6 +1,11 @@
 /* global Alpine */
 import debugLog from "../modules/_debugLog";
 import { stripTags, allowHttpUrl } from "../modules/_sanitize";
+import {
+  isAIPlatformUrl,
+  AI_PLATFORM_ERROR_MESSAGE,
+} from "../modules/_blockedDomains";
+import { getFriendlyErrorMessage } from "../modules/_errorMessages";
 
 document.addEventListener("alpine:init", () => {
   Alpine.data("BrokenLinkChecker", () => ({
@@ -39,13 +44,27 @@ document.addEventListener("alpine:init", () => {
       this.result = [];
       this.errorMessage = "";
 
+      const blockedUrls = [];
       const checkList = this.urls.split("\n").reduce((list, link) => {
         const cleanedLink = this.checkUrl(link);
-        if (cleanedLink.trim() !== "") {
-          list.push(cleanedLink);
+        if (cleanedLink && cleanedLink.trim() !== "") {
+          // Check for blocked AI platform URLs
+          if (isAIPlatformUrl(cleanedLink)) {
+            blockedUrls.push(cleanedLink);
+          } else {
+            list.push(cleanedLink);
+          }
         }
         return list;
       }, []);
+
+      // Show error if any AI platform URLs were blocked
+      if (blockedUrls.length > 0) {
+        this.errorMessage = AI_PLATFORM_ERROR_MESSAGE;
+        if (checkList.length === 0) {
+          return;
+        }
+      }
 
       if (checkList.length === 0) {
         this.errorMessage = "Please enter at least one URL.";
@@ -85,6 +104,7 @@ document.addEventListener("alpine:init", () => {
             this.result[i] = {
               url: link,
               status: "error",
+              errorMessage: getFriendlyErrorMessage(response.status),
               data: {},
               totalBroken: 0,
             };
@@ -99,10 +119,11 @@ document.addEventListener("alpine:init", () => {
           }
         } catch (error) {
           this.state = "error";
-          this.errorMessage = error;
+          this.errorMessage = getFriendlyErrorMessage(null, error?.message);
           this.result[i] = {
             url: link,
             status: "error",
+            errorMessage: getFriendlyErrorMessage(null, error?.message),
             data: {},
             totalBroken: -1,
           };

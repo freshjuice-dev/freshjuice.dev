@@ -1,5 +1,10 @@
 /* global Alpine Prism */
 import debugLog from "../modules/_debugLog";
+import {
+  isAIPlatformUrl,
+  AI_PLATFORM_ERROR_MESSAGE,
+} from "../modules/_blockedDomains";
+import { getFriendlyErrorMessage } from "../modules/_errorMessages";
 
 document.addEventListener("alpine:init", () => {
   Alpine.data("MetadataChecker", () => ({
@@ -10,6 +15,7 @@ document.addEventListener("alpine:init", () => {
     buttonLabel: "Check Website Metadata",
     previewData: {},
     metaTags: "",
+    errorMessage: "",
     setButtonLabel() {
       switch (this.status) {
         case "loading":
@@ -155,7 +161,14 @@ document.addEventListener("alpine:init", () => {
     },
     fetchPageData() {
       if (!this.isValidUrl(this.targetUrl)) {
-        this.initError("Invalid URL provided");
+        this.errorMessage = "Invalid URL provided";
+        this.initError(this.errorMessage);
+        return;
+      }
+      // Check for blocked AI platform URLs
+      if (isAIPlatformUrl(this.targetUrl)) {
+        this.errorMessage = AI_PLATFORM_ERROR_MESSAGE;
+        this.initError(this.errorMessage);
         return;
       }
       fetch("https://api.freshjuice.dev/metadata-checker", {
@@ -167,9 +180,22 @@ document.addEventListener("alpine:init", () => {
           targetUrl: this.targetUrl,
         }),
       })
-        .then((response) => {
+        .then(async (response) => {
           if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            // Try to get error details from response body
+            let errorDetail = "";
+            try {
+              const errorData = await response.json();
+              errorDetail =
+                errorData.detail || errorData.message || errorData.error || "";
+            } catch {
+              // Response body is not JSON, ignore
+            }
+            const error = new Error(
+              errorDetail || `HTTP error! status: ${response.status}`,
+            );
+            error.status = response.status;
+            throw error;
           }
           return response.json();
         })
@@ -180,6 +206,10 @@ document.addEventListener("alpine:init", () => {
           this.initSuccess();
         })
         .catch((error) => {
+          this.errorMessage = getFriendlyErrorMessage(
+            error.status,
+            error.message,
+          );
           this.initError(error);
         });
     },
@@ -195,6 +225,9 @@ document.addEventListener("alpine:init", () => {
       this.targetUrl = "";
       this.previewData = {};
       this.metaTags = "";
+      this.errorMessage = "";
+      this.status = "idle";
+      this.setButtonLabel();
       this.$refs.targetUrl.focus();
     },
     init() {

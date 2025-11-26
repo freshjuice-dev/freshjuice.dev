@@ -1,6 +1,11 @@
 /* global Alpine */
 import debugLog from "../modules/_debugLog";
 import { stripTags, allowHttpUrl } from "../modules/_sanitize";
+import {
+  isAIPlatformUrl,
+  AI_PLATFORM_ERROR_MESSAGE,
+} from "../modules/_blockedDomains";
+import { getFriendlyErrorMessage } from "../modules/_errorMessages";
 
 // Link Checker – scans pages and categorizes found links
 // API: https://api.freshjuice.dev/link-checker
@@ -88,6 +93,7 @@ document.addEventListener("alpine:init", () => {
       this.errorMessage = "";
 
       const seen = new Set();
+      const blockedUrls = [];
       const checkList = this.urls.split("\n").reduce((list, raw) => {
         const cleanedLink = this.checkUrl(raw);
         if (
@@ -96,10 +102,23 @@ document.addEventListener("alpine:init", () => {
           !seen.has(cleanedLink)
         ) {
           seen.add(cleanedLink);
-          list.push(cleanedLink);
+          // Check for blocked AI platform URLs
+          if (isAIPlatformUrl(cleanedLink)) {
+            blockedUrls.push(cleanedLink);
+          } else {
+            list.push(cleanedLink);
+          }
         }
         return list;
       }, []);
+
+      // Show error if any AI platform URLs were blocked
+      if (blockedUrls.length > 0) {
+        this.errorMessage = AI_PLATFORM_ERROR_MESSAGE;
+        if (checkList.length === 0) {
+          return;
+        }
+      }
 
       if (checkList.length === 0) {
         this.errorMessage = "Please enter at least one URL.";
@@ -139,6 +158,7 @@ document.addEventListener("alpine:init", () => {
             this.result[i] = {
               url: link,
               status: "error",
+              errorMessage: getFriendlyErrorMessage(response.status),
               data: {
                 internal_links: [],
                 external_links: [],
@@ -158,6 +178,7 @@ document.addEventListener("alpine:init", () => {
           this.result[i] = {
             url: link,
             status: "error",
+            errorMessage: getFriendlyErrorMessage(null, err?.message),
             data: {
               internal_links: [],
               external_links: [],

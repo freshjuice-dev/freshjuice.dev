@@ -1,5 +1,10 @@
 /* global Alpine */
 import debugLog from "../modules/_debugLog";
+import {
+  isAIPlatformUrl,
+  AI_PLATFORM_ERROR_MESSAGE,
+} from "../modules/_blockedDomains";
+import { getFriendlyErrorMessage } from "../modules/_errorMessages";
 
 document.addEventListener("alpine:init", () => {
   Alpine.data("robotstxtAnalyzer", () => ({
@@ -61,6 +66,16 @@ document.addEventListener("alpine:init", () => {
       this.isLoading = true;
 
       try {
+        // Check for blocked AI platform URLs (only in URL mode)
+        if (this.inputMode === "url") {
+          const normalizedUrl = this.normalizeUrl(this.robotsUrl);
+          if (isAIPlatformUrl(normalizedUrl)) {
+            this.error = AI_PLATFORM_ERROR_MESSAGE;
+            this.isLoading = false;
+            return;
+          }
+        }
+
         const requestBody =
           this.inputMode === "text"
             ? { text: this.robotsText }
@@ -80,7 +95,7 @@ document.addEventListener("alpine:init", () => {
 
         if (!response.ok) {
           // Handle error responses
-          this.error = data.detail || "An error occurred while analyzing";
+          this.error = getFriendlyErrorMessage(response.status, data.detail);
           debugLog("API error:", data);
           return;
         }
@@ -89,8 +104,7 @@ document.addEventListener("alpine:init", () => {
         debugLog("Analysis results:", data);
       } catch (err) {
         debugLog("Fetch error:", err);
-        this.error =
-          "Failed to connect to the analyzer. Please check your connection and try again.";
+        this.error = getFriendlyErrorMessage(null, err?.message);
       } finally {
         this.isLoading = false;
       }

@@ -1,60 +1,123 @@
 ---
 layout: page
-title: "HubSpot DevTools Extension"
-desc: "A browser extension for HubSpot CMS developers with quick access to debug parameters and HubL documentation."
+title: HubSpot DevTools for Chrome and Firefox
+desc: A browser extension for HubSpot CMS developers with quick access to debug parameters and HubL documentation.
 permalink: /hubspot-devtools/
-noindex: true
 ---
-
-{# Coming Soon Notice #}
-<div class="bg-yellow-50 border-2 border-yellow-200 rounded-2xl p-4 mb-12 text-center">
-  <p class="m-0 text-sm text-yellow-800">
-    {% phicon "info", "duotone", { class: "size-5 inline-block align-text-bottom mr-1" } %}
-    <strong>Coming Soon:</strong> This page will be updated when we publish the extension to Chrome Web Store and Firefox Add-ons.
-  </p>
-</div>
 
 {# Hero Section #}
 <section class="text-center">
-  <p class="m-0 text-lg md:text-xl font-semibold text-balance tracking-wide leading-6 uppercase">
-    Browser Extension for
-  </p>
-  <h1 class="m-0 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase max-w-4xl mx-auto text-balance
-  text-transparent bg-linear-to-r bg-gradient-60 bg-clip-text from-orange-600 via-amber-500 to-orange-600">
-    HubSpot Developers
+  <h1 class="m-0 max-w-4xl mx-auto text-balance">
+    HubSpot DevTools for Chrome and Firefox
   </h1>
-  <p class="max-w-2xl mx-auto mt-8 text-balance text-lg">
-    Quick access to debug parameters, cache busting, and HubL documentation — all from your browser toolbar. Available for Chrome and Firefox.
+  <p class="max-w-2xl mx-auto mt-6 text-balance text-lg text-neutral-600">
+    A browser extension for HubSpot CMS developers. Quick access to debug parameters, cache busting, and HubL documentation — all from your browser toolbar.
   </p>
 
   {# Download Buttons #}
   <div class="flex gap-4 flex-col sm:flex-row justify-center items-center mt-8 md:mt-12">
-    <a href="#" class="btn btn--primary w-full sm:w-auto" title="Coming soon to Chrome Web Store">
-      {% phicon "browser", "duotone", { class: "size-6" } %}
+    <a href="https://chromewebstore.google.com/detail/jmlcckldioeofjchfaomgaimhpnlfgok" class="btn btn--primary w-full sm:w-auto"
+       @click.prevent="document.getElementById('install-notice').scrollIntoView({ behavior: 'smooth', block: 'start' })">
+      {% phicon "google-chrome-logo", "duotone", { class: "size-6" } %}
       <span>Add to Chrome</span>
     </a>
-    <a href="#" class="btn btn--secondary w-full sm:w-auto" title="Coming soon to Firefox Add-ons">
-      {% phicon "browser", "duotone", { class: "size-6" } %}
+    <a href="https://addons.mozilla.org/en-US/firefox/addon/freshjuice-hubspot-devtools/" class="btn btn--secondary w-full sm:w-auto"
+       @click.prevent="document.getElementById('install-notice').scrollIntoView({ behavior: 'smooth', block: 'start' })">
+      {% phicon "puzzle-piece", "duotone", { class: "size-6" } %}
       <span>Add to Firefox</span>
     </a>
   </div>
 
-  <p class="mt-6 text-sm text-zinc-600">
-    Free &amp; Open Source
-    <span class="mx-2">•</span>
-    <a href="https://github.com/freshjuice-dev/hubspot-devtools-extension" class="hover:text-red-600">
-      {% phicon "github-logo", "regular", { class: "size-4 inline-block align-text-bottom" } %}
-      View on GitHub
-    </a>
+  <p class="my-4">— or —</p>
+  <p class="mt-4">
+    <small>
+      <em>
+        <a href="https://github.com/freshjuice-dev/hubspot-devtools-extension" class="inline-flex items-center justify-center gap-1.5 hover:text-red-600">
+          Squeeze your own juice from the source code
+          {% phicon "github-logo", "regular", { class: "size-4" } %}
+        </a>
+      </em>
+    </small>
   </p>
 </section>
 
-{# Screenshot Placeholder #}
+{# Screenshot Comparison Slider #}
 <section class="mt-16 md:mt-24">
-  <div class="max-w-2xl mx-auto bg-zinc-200 rounded-2xl aspect-video flex items-center justify-center text-zinc-500">
-    {% phicon "image", "duotone", { class: "size-16" } %}
-    <span class="sr-only">Extension screenshot placeholder</span>
+  <div
+    class="max-w-2xl mx-auto rounded-2xl overflow-hidden shadow-lg border-2 border-zinc-200 select-none"
+    x-data="{
+      position: 71,
+      container: null,
+      init() {
+        this.container = this.$el;
+      },
+      startDrag() {
+        window.addEventListener('mousemove', this.onDrag);
+        window.addEventListener('mouseup', this.stopDrag);
+        window.addEventListener('touchmove', this.onDrag);
+        window.addEventListener('touchend', this.stopDrag);
+      },
+      stopDrag() {
+        window.removeEventListener('mousemove', this.onDrag);
+        window.removeEventListener('mouseup', this.stopDrag);
+        window.removeEventListener('touchmove', this.onDrag);
+        window.removeEventListener('touchend', this.stopDrag);
+      },
+      onDrag(e) {
+        const rect = this.container.getBoundingClientRect();
+        const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+        this.position = Math.max(0, Math.min(100, (x / rect.width) * 100));
+      }
+    }"
+    x-init="init(); onDrag = onDrag.bind($data); stopDrag = stopDrag.bind($data)"
+    @mousedown="startDrag()"
+    @touchstart="startDrag()"
+  >
+    <div class="relative aspect-video cursor-ew-resize">
+      {# Light mode image (background/right side) #}
+      <img
+        src="./light-mode.png"
+        alt="HubSpot DevTools - Light Mode"
+        class="absolute inset-0 w-full h-full object-cover object-left-top pointer-events-none"
+        draggable="false"
+      >
+
+      {# Dark mode image (foreground/left side with clip) #}
+      <div
+        class="absolute inset-0 overflow-hidden pointer-events-none"
+        :style="'clip-path: inset(0 ' + (100 - position) + '% 0 0)'"
+      >
+        <img
+          src="./dark-mode.png"
+          alt="HubSpot DevTools - Dark Mode"
+          class="absolute inset-0 w-full h-full object-cover object-left-top"
+          draggable="false"
+        >
+      </div>
+
+      {# Slider handle #}
+      <div
+        class="absolute top-0 bottom-0 w-1 bg-orange-500 shadow-lg -translate-x-1/2"
+        :style="'left: ' + position + '%'"
+      >
+        {# Handle knob #}
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-10 rounded-full bg-orange-500 border-4 border-white shadow-lg flex items-center justify-center">
+          {% phicon "arrows-out-line-horizontal", "bold", { class: "size-5 text-white" } %}
+        </div>
+      </div>
+
+      {# Labels #}
+      <div class="absolute top-3 left-3 px-2 py-1 bg-zinc-900/80 text-white text-xs font-medium rounded">
+        Dark
+      </div>
+      <div class="absolute top-3 right-3 px-2 py-1 bg-white/90 text-zinc-900 text-xs font-medium rounded shadow">
+        Light
+      </div>
+    </div>
   </div>
+  <p class="text-center text-sm text-zinc-500 mt-4">
+    Drag to compare dark and light themes
+  </p>
 </section>
 
 {# Features Section #}
@@ -132,17 +195,25 @@ noindex: true
   </div>
 </section>
 
+{# Under Review Notice #}
+<div id="install-notice" class="mt-16 md:mt-24 bg-yellow-50 border-2 border-yellow-200 rounded-2xl p-6 text-center max-w-2xl mx-auto">
+  <p class="m-0 text-sm text-yellow-800">
+    {% phicon "hourglass-medium", "duotone", { class: "size-5 inline-block align-text-bottom mr-1" } %}
+    <strong>Under Review:</strong> The extension for Chrome and Firefox is currently under review on their respective marketplaces. We'll update the download links as soon as they're approved. In the meantime, you can install the extension manually by following the instructions below.
+  </p>
+</div>
+
 {# Installation Section #}
-<section class="mt-16 md:mt-24 bg-zinc-100 border-2 border-zinc-200 rounded-2xl p-8 md:p-12">
+<section class="mt-8 bg-zinc-100 border-2 border-zinc-200 rounded-2xl p-8 md:p-12">
   <h2 class="text-center text-2xl md:text-3xl font-bold mb-8 mt-0">
-    Installation
+    Manual Installation
   </h2>
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
     {# Chrome #}
     <div>
       <h3 class="flex items-center gap-3 text-xl font-semibold m-0 mb-4">
-        {% phicon "browser", "duotone", { class: "size-8 text-orange-500" } %}
+        {% phicon "google-chrome-logo", "duotone", { class: "size-8 text-orange-500" } %}
         Chrome
       </h3>
       <ol class="list-decimal list-inside space-y-2 text-sm text-neutral-600 m-0 p-0">
@@ -157,7 +228,7 @@ noindex: true
     {# Firefox #}
     <div>
       <h3 class="flex items-center gap-3 text-xl font-semibold m-0 mb-4">
-        {% phicon "browser", "duotone", { class: "size-8 text-orange-500" } %}
+        {% phicon "puzzle-piece", "duotone", { class: "size-8 text-orange-500" } %}
         Firefox
       </h3>
       <ol class="list-decimal list-inside space-y-2 text-sm text-neutral-600 m-0 p-0">
@@ -196,7 +267,7 @@ noindex: true
       {% phicon "lightbulb", "regular", { class: "size-5" } %}
       Request Feature
     </a>
-    <a href="https://github.com/freshjuice-dev/hubspot-devtools-extension" class="btn btn--secondary btn--sm">
+    <a href="https://github.com/freshjuice-dev/hubspot-devtools-extension?tab=readme-ov-file#contributing" class="btn btn--secondary btn--sm">
       {% phicon "git-pull-request", "regular", { class: "size-5" } %}
       Contribute
     </a>
@@ -205,8 +276,17 @@ noindex: true
 
 {# Privacy Section #}
 <section class="mt-16 md:mt-24 text-center pb-8">
-  <div class="inline-flex items-center gap-2 text-sm text-zinc-600 bg-zinc-100 px-4 py-2 rounded-full">
-    {% phicon "shield-check", "duotone", { class: "size-5 text-green-600" } %}
-    <span>This extension does not collect any personal data</span>
+  <div class="max-w-xl mx-auto bg-green-50 border-2 border-green-200 rounded-2xl p-6 md:p-8">
+    <div class="size-14 mx-auto rounded-full bg-green-100 flex items-center justify-center mb-4">
+      {% phicon "shield-check", "duotone", { class: "size-8 text-green-600" } %}
+    </div>
+    <h3 class="text-xl font-bold m-0 mb-2">Privacy First</h3>
+    <p class="text-neutral-600 m-0 mb-4">
+      This extension does not collect, store, or transmit any personal data. Zero tracking, zero analytics, zero telemetry.
+    </p>
+    <a href="https://github.com/freshjuice-dev/hubspot-devtools-extension/blob/main/PRIVACY.md" class="group inline-flex items-center gap-1.5 text-sm font-medium text-green-700 hover:text-green-900">
+      Read our Privacy Policy
+      {% phicon "arrow-right", "bold", { class: "size-4 transition-transform group-hover:translate-x-1" } %}
+    </a>
   </div>
 </section>

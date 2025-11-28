@@ -31,6 +31,8 @@
       url: /tools/metadata-checker/
     - title: Broken Link Checker
       url: /tools/broken-link-checker/
+    - title: HubSpot DevTools Extension
+      url: /hubspot-devtools/
 
 - title: Discover
   children:

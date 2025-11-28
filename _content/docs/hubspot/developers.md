@@ -21,6 +21,12 @@ Authoritative references for HubSpot’s templating language (HubL) and HubDB. U
 - [HubL supported filters](https://designers.hubspot.com/docs/hubl/hubl-supported-filters)
 - [HubDB guide](https://designers.hubspot.com/docs/tools/hubdb)
 
+## Developer Tools
+
+Browser extensions and utilities to streamline your HubSpot development workflow.
+
+- [HubSpot DevTools Extension](/hubspot-devtools/) — Quick access to debug parameters, cache busting, and HubL documentation from your browser toolbar. Available for Chrome and Firefox.
+
 ## Community & resources
 
 Join HubSpot developer communities, share ideas, and explore integrations. These links connect you with official forums, Slack, and partner resources.

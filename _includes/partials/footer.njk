@@ -21,7 +21,7 @@
                   {% if child.icon %}
                     {% phicon child.icon, "regular", { class: "size-7" } %}
                   {% endif %}
-                  <span class="{{ 'sr-only' if section.type == 'social' }}">{{ child.title }}</span>
+                  <span class="{{ 'sr-only' if section.type == 'social' }}">{{ child.title | safe }}</span>
                 </a>
               </li>
             {% endfor %}

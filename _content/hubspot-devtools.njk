@@ -1,0 +1,212 @@
+---
+layout: page
+title: "HubSpot DevTools Extension"
+desc: "A browser extension for HubSpot CMS developers with quick access to debug parameters and HubL documentation."
+permalink: /hubspot-devtools/
+noindex: true
+---
+
+{# Coming Soon Notice #}
+<div class="bg-yellow-50 border-2 border-yellow-200 rounded-2xl p-4 mb-12 text-center">
+  <p class="m-0 text-sm text-yellow-800">
+    {% phicon "info", "duotone", { class: "size-5 inline-block align-text-bottom mr-1" } %}
+    <strong>Coming Soon:</strong> This page will be updated when we publish the extension to Chrome Web Store and Firefox Add-ons.
+  </p>
+</div>
+
+{# Hero Section #}
+<section class="text-center">
+  <p class="m-0 text-lg md:text-xl font-semibold text-balance tracking-wide leading-6 uppercase">
+    Browser Extension for
+  </p>
+  <h1 class="m-0 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase max-w-4xl mx-auto text-balance
+  text-transparent bg-linear-to-r bg-gradient-60 bg-clip-text from-orange-600 via-amber-500 to-orange-600">
+    HubSpot Developers
+  </h1>
+  <p class="max-w-2xl mx-auto mt-8 text-balance text-lg">
+    Quick access to debug parameters, cache busting, and HubL documentation — all from your browser toolbar. Available for Chrome and Firefox.
+  </p>
+
+  {# Download Buttons #}
+  <div class="flex gap-4 flex-col sm:flex-row justify-center items-center mt-8 md:mt-12">
+    <a href="#" class="btn btn--primary w-full sm:w-auto" title="Coming soon to Chrome Web Store">
+      {% phicon "browser", "duotone", { class: "size-6" } %}
+      <span>Add to Chrome</span>
+    </a>
+    <a href="#" class="btn btn--secondary w-full sm:w-auto" title="Coming soon to Firefox Add-ons">
+      {% phicon "browser", "duotone", { class: "size-6" } %}
+      <span>Add to Firefox</span>
+    </a>
+  </div>
+
+  <p class="mt-6 text-sm text-zinc-600">
+    Free &amp; Open Source
+    <span class="mx-2">•</span>
+    <a href="https://github.com/freshjuice-dev/hubspot-devtools-extension" class="hover:text-red-600">
+      {% phicon "github-logo", "regular", { class: "size-4 inline-block align-text-bottom" } %}
+      View on GitHub
+    </a>
+  </p>
+</section>
+
+{# Screenshot Placeholder #}
+<section class="mt-16 md:mt-24">
+  <div class="max-w-2xl mx-auto bg-zinc-200 rounded-2xl aspect-video flex items-center justify-center text-zinc-500">
+    {% phicon "image", "duotone", { class: "size-16" } %}
+    <span class="sr-only">Extension screenshot placeholder</span>
+  </div>
+</section>
+
+{# Features Section #}
+<section class="mt-16 md:mt-24">
+  <h2 class="text-center text-2xl md:text-3xl font-bold mb-12">
+    Built for HubSpot Developers
+  </h2>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {# Feature 1 #}
+    <div class="p-6 bg-zinc-100 border-2 border-zinc-200 rounded-2xl">
+      <div class="size-12 rounded-full bg-orange-100 flex items-center justify-center mb-4">
+        {% phicon "bug", "duotone", { class: "size-6 text-orange-600" } %}
+      </div>
+      <h3 class="text-lg font-semibold m-0 mb-2">Debug Mode Toggle</h3>
+      <p class="text-neutral-600 m-0 text-sm">
+        Quickly add <code class="text-xs bg-zinc-200 px-1.5 py-0.5 rounded">hsDebug=true</code> to your current page with one click.
+      </p>
+    </div>
+
+    {# Feature 2 #}
+    <div class="p-6 bg-zinc-100 border-2 border-zinc-200 rounded-2xl">
+      <div class="size-12 rounded-full bg-orange-100 flex items-center justify-center mb-4">
+        {% phicon "arrows-clockwise", "duotone", { class: "size-6 text-orange-600" } %}
+      </div>
+      <h3 class="text-lg font-semibold m-0 mb-2">Cache Buster</h3>
+      <p class="text-neutral-600 m-0 text-sm">
+        Add <code class="text-xs bg-zinc-200 px-1.5 py-0.5 rounded">hsCacheBuster</code> timestamp to bypass HubSpot caching instantly.
+      </p>
+    </div>
+
+    {# Feature 3 #}
+    <div class="p-6 bg-zinc-100 border-2 border-zinc-200 rounded-2xl">
+      <div class="size-12 rounded-full bg-orange-100 flex items-center justify-center mb-4">
+        {% phicon "gear", "duotone", { class: "size-6 text-orange-600" } %}
+      </div>
+      <h3 class="text-lg font-semibold m-0 mb-2">BackOffice Dev Mode</h3>
+      <p class="text-neutral-600 m-0 text-sm">
+        Enable <code class="text-xs bg-zinc-200 px-1.5 py-0.5 rounded">developerMode=true</code> for HubSpot backend debugging.
+      </p>
+    </div>
+
+    {# Feature 4 #}
+    <div class="p-6 bg-zinc-100 border-2 border-zinc-200 rounded-2xl">
+      <div class="size-12 rounded-full bg-orange-100 flex items-center justify-center mb-4">
+        {% phicon "link", "duotone", { class: "size-6 text-orange-600" } %}
+      </div>
+      <h3 class="text-lg font-semibold m-0 mb-2">Auto-apply to Links</h3>
+      <p class="text-neutral-600 m-0 text-sm">
+        Automatically propagate debug parameters to all internal links on the page.
+      </p>
+    </div>
+
+    {# Feature 5 #}
+    <div class="p-6 bg-zinc-100 border-2 border-zinc-200 rounded-2xl">
+      <div class="size-12 rounded-full bg-orange-100 flex items-center justify-center mb-4">
+        {% phicon "book-open-text", "duotone", { class: "size-6 text-orange-600" } %}
+      </div>
+      <h3 class="text-lg font-semibold m-0 mb-2">HubL Quick Links</h3>
+      <p class="text-neutral-600 m-0 text-sm">
+        Fast access to HubL documentation — Functions, Variables, Filters, Loops, If Statements, and HubDB.
+      </p>
+    </div>
+
+    {# Feature 6 #}
+    <div class="p-6 bg-zinc-100 border-2 border-zinc-200 rounded-2xl">
+      <div class="size-12 rounded-full bg-orange-100 flex items-center justify-center mb-4">
+        {% phicon "layout", "duotone", { class: "size-6 text-orange-600" } %}
+      </div>
+      <h3 class="text-lg font-semibold m-0 mb-2">Design Manager</h3>
+      <p class="text-neutral-600 m-0 text-sm">
+        One-click access to HubSpot Design Manager from any page on your portal.
+      </p>
+    </div>
+  </div>
+</section>
+
+{# Installation Section #}
+<section class="mt-16 md:mt-24 bg-zinc-100 border-2 border-zinc-200 rounded-2xl p-8 md:p-12">
+  <h2 class="text-center text-2xl md:text-3xl font-bold mb-8 mt-0">
+    Installation
+  </h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+    {# Chrome #}
+    <div>
+      <h3 class="flex items-center gap-3 text-xl font-semibold m-0 mb-4">
+        {% phicon "browser", "duotone", { class: "size-8 text-orange-500" } %}
+        Chrome
+      </h3>
+      <ol class="list-decimal list-inside space-y-2 text-sm text-neutral-600 m-0 p-0">
+        <li>Download the latest release from <a href="https://github.com/freshjuice-dev/hubspot-devtools-extension/releases" class="text-red-600 hover:underline">GitHub Releases</a></li>
+        <li>Unzip <code class="text-xs bg-zinc-200 px-1.5 py-0.5 rounded">hubspot-devtools-chrome-*.zip</code></li>
+        <li>Open <code class="text-xs bg-zinc-200 px-1.5 py-0.5 rounded">chrome://extensions/</code></li>
+        <li>Enable "Developer mode"</li>
+        <li>Click "Load unpacked" and select the folder</li>
+      </ol>
+    </div>
+
+    {# Firefox #}
+    <div>
+      <h3 class="flex items-center gap-3 text-xl font-semibold m-0 mb-4">
+        {% phicon "browser", "duotone", { class: "size-8 text-orange-500" } %}
+        Firefox
+      </h3>
+      <ol class="list-decimal list-inside space-y-2 text-sm text-neutral-600 m-0 p-0">
+        <li>Download the latest release from <a href="https://github.com/freshjuice-dev/hubspot-devtools-extension/releases" class="text-red-600 hover:underline">GitHub Releases</a></li>
+        <li>Open <code class="text-xs bg-zinc-200 px-1.5 py-0.5 rounded">about:addons</code></li>
+        <li>Click the gear icon</li>
+        <li>Select "Install Add-on From File..."</li>
+        <li>Select <code class="text-xs bg-zinc-200 px-1.5 py-0.5 rounded">hubspot-devtools-firefox-*.zip</code></li>
+      </ol>
+    </div>
+  </div>
+
+  <p class="text-center mt-8 mb-0">
+    <a href="https://github.com/freshjuice-dev/hubspot-devtools-extension/releases" class="btn btn--ghost">
+      {% phicon "download", "duotone", { class: "size-5" } %}
+      Download from GitHub
+    </a>
+  </p>
+</section>
+
+{# Contributing Section #}
+<section class="mt-16 md:mt-24 text-center">
+  <h2 class="text-2xl md:text-3xl font-bold mb-4">
+    Open Source & Community Driven
+  </h2>
+  <p class="max-w-2xl mx-auto text-neutral-600 mb-8">
+    HubSpot DevTools is free, open-source, and built with love. We welcome contributions, bug reports, and feature suggestions from the community.
+  </p>
+
+  <div class="flex flex-wrap gap-4 justify-center">
+    <a href="https://github.com/freshjuice-dev/hubspot-devtools-extension/issues/new?template=bug_report.md" class="btn btn--secondary btn--sm">
+      {% phicon "bug-beetle", "regular", { class: "size-5" } %}
+      Report a Bug
+    </a>
+    <a href="https://github.com/freshjuice-dev/hubspot-devtools-extension/issues/new?template=feature_request.md" class="btn btn--secondary btn--sm">
+      {% phicon "lightbulb", "regular", { class: "size-5" } %}
+      Request Feature
+    </a>
+    <a href="https://github.com/freshjuice-dev/hubspot-devtools-extension" class="btn btn--secondary btn--sm">
+      {% phicon "git-pull-request", "regular", { class: "size-5" } %}
+      Contribute
+    </a>
+  </div>
+</section>
+
+{# Privacy Section #}
+<section class="mt-16 md:mt-24 text-center pb-8">
+  <div class="inline-flex items-center gap-2 text-sm text-zinc-600 bg-zinc-100 px-4 py-2 rounded-full">
+    {% phicon "shield-check", "duotone", { class: "size-5 text-green-600" } %}
+    <span>This extension does not collect any personal data</span>
+  </div>
+</section>

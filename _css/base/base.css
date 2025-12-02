@@ -1,4 +1,10 @@
 @layer base {
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
   html {
     @apply antialiased font-sans;
     line-height: 1.5;

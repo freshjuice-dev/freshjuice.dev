@@ -88,8 +88,8 @@
     "eleventy-plugin-phosphoricons": "^1.3.0",
     "eleventy-plugin-speculation-rules": "^1.1.0",
     "eleventy-plugin-svg-contents": "^0.7.0",
-    "esbuild": "^0.27.0",
-    "googleapis": "^166.0.0",
+    "esbuild": "^0.27.1",
+    "googleapis": "^167.0.0",
     "gravatar-gen": "^1.0.2",
     "html-minifier-terser": "^7.2.0",
     "husky": "^9.1.7",
@@ -106,11 +106,11 @@
     "postcss-cli": "^11.0.1",
     "postcss-nested": "^7.0.2",
     "prismjs": "^1.30.0",
-    "rimraf": "^6.1.0",
+    "rimraf": "^6.1.2",
     "sharp": "^0.34.5",
     "slugify": "^1.6.6",
     "tailwindcss": "^4.1.17",
-    "tailwindcss-safe-area": "^1.1.0",
+    "tailwindcss-safe-area": "^1.2.0",
     "xml2js": "^0.6.2"
   }
 }

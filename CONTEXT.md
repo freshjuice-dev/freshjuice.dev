@@ -278,7 +278,6 @@ author: String (author slug, required)
 date: ISO 8601 datetime (required)
 permalink: String (custom URL, optional)
 draft: Boolean (optional, excludes from production)
-uuid: String (unique identifier for canonical tracking)
 ---
 ```
 

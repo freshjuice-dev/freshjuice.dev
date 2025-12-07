@@ -22,4 +22,10 @@
       @apply transition-all duration-300 ease-in-out;
     }
   }
+
+  html.high-contrast {
+    #hs-banner-parent {
+      --hs-banner-accentColor: var(--color-orange-700);
+    }
+  }
 }

@@ -30,7 +30,10 @@ Alpine.data("xDOM", () => {
     },
     drawerOpen: false,
     showOverlay: false,
-    highContrast: localStorage.getItem("highContrast") === "true",
+    highContrast:
+      localStorage.getItem("highContrast") !== null
+        ? localStorage.getItem("highContrast") === "true"
+        : window.matchMedia("(prefers-contrast: more)").matches,
     initHighContrast() {
       if (this.highContrast) {
         document.documentElement.classList.add("high-contrast");

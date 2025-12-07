@@ -49,34 +49,34 @@
  */
 html.high-contrast {
   /* Override orange-600 to orange-800 for better contrast */
-  --color-orange-200: var(--color-orange-400);
-  --color-orange-500: var(--color-orange-700);
-  --color-orange-600: var(--color-orange-800);
-  --color-red-200: var(--color-red-400);
-  --color-red-500: var(--color-red-700);
-  --color-red-600: var(--color-red-800);
+  --color-orange-200: var(--color-orange-300);
+  --color-orange-500: var(--color-orange-600);
+  --color-orange-600: var(--color-orange-700);
+  --color-red-200: var(--color-red-300);
+  --color-red-500: var(--color-red-600);
+  --color-red-600: var(--color-red-700);
 
   /* Button specific overrides */
   & .btn {
-    @apply bg-orange-800 border-orange-800;
+    @apply bg-orange-700 border-orange-700;
 
     &:hover {
       @apply brightness-110;
     }
 
     &--secondary {
-      @apply text-orange-800 bg-zinc-50 border-current;
+      @apply text-orange-700 bg-zinc-50 border-current;
     }
 
     &--ghost {
-      @apply text-orange-800 bg-zinc-50 border-zinc-50;
+      @apply text-orange-700 bg-zinc-50 border-zinc-50;
     }
   }
 
   /* Links and interactive elements */
   & a:not(.btn) {
     &:hover {
-      @apply text-orange-800;
+      @apply text-orange-700;
     }
   }
 
@@ -89,6 +89,6 @@ html.high-contrast {
 
   /* Mobile drawer border */
   & .border-orange-300 {
-    @apply border-orange-800;
+    @apply border-orange-400;
   }
 }

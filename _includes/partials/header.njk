@@ -6,12 +6,12 @@
 
       {# Latest Posts Carousel - Desktop Only #}
       {% set labels = ['🍊 Fresh Squeeze:', '🧃 Just Juiced:', '🍋 Fresh Pick:'] %}
-      <div class="hidden lg:flex text-xs text-zinc-600 relative"
+      <div class="hidden md:flex text-xs text-zinc-600 relative"
            x-data="{
              current: 0,
              total: 3,
              init() {
-               setInterval(() => { this.current = (this.current + 1) % this.total; }, 3000);
+               setInterval(() => { this.current = (this.current + 1) % this.total; }, 5000);
              }
            }">
         {% for post in collections.posts | reverse | head(3) %}

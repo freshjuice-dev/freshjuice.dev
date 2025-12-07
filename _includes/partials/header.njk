@@ -6,15 +6,22 @@
 
       {# Latest Posts Carousel - Desktop Only #}
       {% set labels = ['🍊 Fresh Squeeze:', '🧃 Just Juiced:', '🍋 Fresh Pick:'] %}
+      {# Get 4 posts, filter out current page, take 3 #}
+      {% set latestPosts = [] %}
+      {% for post in collections.posts | reverse | head(4) %}
+        {% if post.url !== page.url and latestPosts.length < 3 %}
+          {% set latestPosts = (latestPosts.push(post), latestPosts) %}
+        {% endif %}
+      {% endfor %}
       <div class="hidden md:flex text-xs text-zinc-600 relative"
            x-data="{
              current: 0,
-             total: 3,
+             total: {{ latestPosts.length }},
              init() {
                setInterval(() => { this.current = (this.current + 1) % this.total; }, 5000);
              }
            }">
-        {% for post in collections.posts | reverse | head(3) %}
+        {% for post in latestPosts %}
         <a href="{{ post.url }}" x-cloak
            class="group inline-flex items-center gap-2 hover:text-zinc-900 whitespace-nowrap transition-all duration-300 ease-out {% if not loop.first %}absolute left-0 top-0{% endif %}"
            :class="current === {{ loop.index0 }} ? 'translate-y-0 opacity-100' : (current === {{ (loop.index0 - 1) if loop.index0 > 0 else 2 }} ? '-translate-y-full opacity-0' : 'translate-y-full opacity-0')">

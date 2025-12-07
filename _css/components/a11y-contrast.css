@@ -1,0 +1,94 @@
+/**
+ * High Contrast Accessibility Toggle
+ * Provides a switch to enable high contrast mode for better accessibility
+ */
+
+/* Toggle button styles */
+.a11y-contrast-toggle {
+  @apply inline-flex items-center gap-1.5 px-2 py-0.5 text-xs font-medium;
+  @apply text-zinc-600 bg-transparent border-none rounded;
+  @apply cursor-pointer transition-all duration-200;
+  @apply hover:text-zinc-900 hover:underline;
+  @apply focus:outline-none;
+}
+
+.a11y-contrast-toggle__switch {
+  @apply relative inline-block;
+  @apply w-6 h-3.5 rounded-full;
+  @apply bg-zinc-300 transition-colors duration-200;
+
+  &::after {
+    content: "";
+    @apply absolute top-0.5 left-0.5;
+    @apply w-2.5 h-2.5 rounded-full;
+    @apply bg-white shadow-sm;
+    @apply transition-transform duration-200;
+  }
+}
+
+.a11y-contrast-toggle__label {
+  @apply whitespace-nowrap;
+}
+
+/* Active state when high contrast is enabled */
+.a11y-contrast-toggle[aria-checked="true"] {
+  @apply text-zinc-900;
+}
+
+.a11y-contrast-toggle[aria-checked="true"] .a11y-contrast-toggle__switch {
+  @apply bg-zinc-700;
+
+  &::after {
+    @apply translate-x-2.5;
+  }
+}
+
+/**
+ * High Contrast Mode Styles
+ * Applied when html.high-contrast is present
+ */
+html.high-contrast {
+  /* Override orange-600 to orange-800 for better contrast */
+  --color-orange-200: var(--color-orange-400);
+  --color-orange-500: var(--color-orange-700);
+  --color-orange-600: var(--color-orange-800);
+  --color-red-200: var(--color-red-400);
+  --color-red-500: var(--color-red-700);
+  --color-red-600: var(--color-red-800);
+
+  /* Button specific overrides */
+  & .btn {
+    @apply bg-orange-800 border-orange-800;
+
+    &:hover {
+      @apply brightness-110;
+    }
+
+    &--secondary {
+      @apply text-orange-800 bg-zinc-50 border-current;
+    }
+
+    &--ghost {
+      @apply text-orange-800 bg-zinc-50 border-zinc-50;
+    }
+  }
+
+  /* Links and interactive elements */
+  & a:not(.btn) {
+    &:hover {
+      @apply text-orange-800;
+    }
+  }
+
+  .prose a:not(.btn) {
+    @apply text-blue-600;
+    &:hover {
+      @apply text-blue-800;
+    }
+  }
+
+  /* Mobile drawer border */
+  & .border-orange-300 {
+    @apply border-orange-800;
+  }
+}

@@ -30,6 +30,20 @@ Alpine.data("xDOM", () => {
     },
     drawerOpen: false,
     showOverlay: false,
+    highContrast: localStorage.getItem("highContrast") === "true",
+    initHighContrast() {
+      if (this.highContrast) {
+        document.documentElement.classList.add("high-contrast");
+      }
+    },
+    toggleHighContrast() {
+      this.highContrast = !this.highContrast;
+      document.documentElement.classList.toggle(
+        "high-contrast",
+        this.highContrast,
+      );
+      localStorage.setItem("highContrast", this.highContrast);
+    },
     toggleDrawer() {
       this.drawerOpen = !this.drawerOpen;
       this.showOverlay = !this.showOverlay;
@@ -154,6 +168,7 @@ Alpine.data("xDOM", () => {
     },
     init() {
       debugLog("AlpineJS DOM init");
+      this.initHighContrast();
       // location path starts with /docs
       if (
         location.pathname.startsWith("/docs/") ||

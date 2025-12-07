@@ -1,6 +1,7 @@
 @layer components {
   #hs-banner-parent {
     --hs-banner-font-family: var(--font-sans);
+    --hs-banner-accentColor: var(--color-orange-600);
     @apply font-sans;
 
     .hs-category-label {

@@ -1,7 +1,24 @@
 <header class="select-none">
 
+  {# Accessibility Top Bar #}
+  <div class="border-b-2 border-current/5">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8 py-2.5 flex justify-end">
+      <button
+        type="button"
+        role="switch"
+        :aria-checked="highContrast"
+        @click="toggleHighContrast()"
+        class="a11y-contrast-toggle"
+        title="Toggle high contrast mode"
+      >
+        <span class="a11y-contrast-toggle__switch" aria-hidden="true"></span>
+        <span class="a11y-contrast-toggle__label">High Contrast</span>
+      </button>
+    </div>
+  </div>
+
   {# Desktop Menu #}
-  <nav class="mx-auto flex gap-x-4 max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+  <nav class="mx-auto flex gap-x-4 max-w-7xl items-center justify-between py-6 px-6 lg:px-8" aria-label="Global">
 
     <div class="flex items-center gap-x-12">
       <a href="/" class="inline-flex items-center gap-x-3 hover:text-red-600 shrink-0 -mt-3 w-40 sm:w-48">

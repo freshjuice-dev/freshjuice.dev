@@ -6,10 +6,15 @@ import passthrough from "./_11ty/passthrough.js";
 import watchTargets from "./_11ty/watchTargets.js";
 import amendLibraries from "./_11ty/amendLibraries.js";
 import transforms from "./_11ty/transforms.js";
+import videoFingerprint from "./_11ty/videoFingerprint.js";
 
 export default async function (eleventyConfig) {
   Object.keys(plugins).forEach((pluginName) => {
     plugins[pluginName](eleventyConfig);
+  });
+
+  Object.keys(videoFingerprint).forEach((name) => {
+    videoFingerprint[name](eleventyConfig);
   });
 
   Object.keys(dataExtensions).forEach((dataExtensionName) => {

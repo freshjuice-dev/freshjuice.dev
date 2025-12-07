@@ -6,6 +6,7 @@ import slugify from "slugify";
 import eleventyImage from "@11ty/eleventy-img";
 import path from "path";
 import { existsSync } from "fs";
+import { getHashedVideoPath } from "./videoFingerprint.js";
 
 const slugifyOptions = {
   lower: true, // convert to lower case
@@ -187,6 +188,8 @@ export default {
       if (!args.src) {
         return `<strong class="text-red-500">Error: No video source provided</strong>`;
       }
+      // Get hashed video path for cache busting
+      const hashedSrc = getHashedVideoPath(args.src);
       return `
         <div>
           <video
@@ -198,7 +201,7 @@ export default {
             ${args.loop ? "loop" : ""}
           >
             <template x-if="shown">
-              <source src="${args.src}" type="video/mp4" />
+              <source src="${hashedSrc}" type="video/mp4" />
             </template>
             Your browser does not support the video tag.
           </video>

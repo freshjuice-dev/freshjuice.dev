@@ -1,7 +1,7 @@
 @layer components {
   #hs-banner-parent {
-    --hs-banner-font-family: var(--font-sans);
-    --hs-banner-accentColor: var(--color-orange-600);
+    --hs-banner-font-family: var(--font-sans) !important;
+    --hs-banner-accentColor: var(--color-orange-600) !important;
     @apply font-sans;
 
     .hs-category-label {
@@ -25,7 +25,7 @@
 
   html.high-contrast {
     #hs-banner-parent {
-      --hs-banner-accentColor: var(--color-orange-700);
+      --hs-banner-accentColor: var(--color-orange-700) !important;
     }
   }
 }

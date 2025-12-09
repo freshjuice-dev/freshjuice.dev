@@ -59,6 +59,8 @@
     margin: 0.5rem 0;
     overflow: auto;
     border-radius: 0.3rem;
+    max-width: 100%;
+    min-width: 0; /* Allow shrinking below content width */
   }
 
   :not(pre) > code[class*="language-"],

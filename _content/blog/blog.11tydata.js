@@ -4,7 +4,8 @@ export default {
   suffix: " | FreshJuice Blog",
   tags: ["posts"],
   layout: "post",
-  permalink: function({page}) {
-    return `/blog/${ slugify(page.fileSlug, { lower: true }) }/`
-  }
+  partialScripts: ["alpine-data/share-button"],
+  permalink: function ({ page }) {
+    return `/blog/${slugify(page.fileSlug, { lower: true })}/`;
+  },
 };

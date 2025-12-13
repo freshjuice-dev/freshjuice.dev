@@ -1,4 +1,4 @@
-/* global Alpine */
+/* global Alpine plausible */
 import debugLog from "../modules/_debugLog";
 
 document.addEventListener("alpine:init", () => {
@@ -6,6 +6,21 @@ document.addEventListener("alpine:init", () => {
     message: "",
     isApple:
       /Mac|iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream,
+
+    trackShare(method) {
+      try {
+        if (typeof plausible === "function") {
+          plausible("Share", {
+            props: {
+              method: method,
+              path: window.location.pathname,
+            },
+          });
+        }
+      } catch (err) {
+        debugLog("shareButton: Plausible tracking failed", err);
+      }
+    },
 
     async share() {
       const shareData = {
@@ -20,6 +35,7 @@ document.addEventListener("alpine:init", () => {
           debugLog("shareButton: Using Web Share API");
           await navigator.share(shareData);
           debugLog("shareButton: Share successful");
+          this.trackShare("native");
         } catch (err) {
           if (err.name === "AbortError") {
             debugLog("shareButton: Share cancelled by user");
@@ -40,6 +56,7 @@ document.addEventListener("alpine:init", () => {
       try {
         await navigator.clipboard.writeText(window.location.href);
         debugLog("shareButton: Link copied to clipboard");
+        this.trackShare("clipboard");
         this.message = "Link copied!";
         setTimeout(() => {
           this.message = "";

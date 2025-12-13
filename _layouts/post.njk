@@ -37,7 +37,7 @@ layout: base.njk
       {%- endif %}
 
       {# Share button - aside for semantic correctness #}
-      <aside x-data="shareButton" aria-label="Share this post">
+      <aside x-data="shareButton" x-cloak aria-label="Share this post">
         <div class="fixed md:absolute left-6 bottom-6 md:-left-16 xl:-left-20 md:top-0 md:h-full">
           <div class="md:sticky md:top-24">
             <button

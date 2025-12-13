@@ -42,11 +42,11 @@ layout: base.njk
           <div class="md:sticky md:top-24">
             <button
               @click="share"
-              class="group flex items-center p-3 rounded-full bg-white/70 backdrop-blur-xs backdrop-contrast-200 border border-orange-200 shadow-md hover:shadow-lg hover:border-orange-300 cursor-pointer transition-all"
+              class="group flex items-center p-3.5 rounded-full bg-white/70 backdrop-blur-xs backdrop-contrast-200 border border-orange-200 shadow-md hover:shadow-lg hover:border-orange-300 cursor-pointer transition-all"
               :class="message ? 'text-green-600' : 'hover:text-red-600'"
               :title="message || 'Share this post'">
-              <template x-if="isApple">{% phicon "export", "regular", { class: "size-5 shrink-0" } %}</template>
-              <template x-if="!isApple">{% phicon "share-network", "regular", { class: "size-5 shrink-0" } %}</template>
+              <template x-if="isApple">{% phicon "export", "regular", { class: "size-6 shrink-0" } %}</template>
+              <template x-if="!isApple">{% phicon "share-network", "regular", { class: "size-6 shrink-0" } %}</template>
               <span
                 class="text-sm whitespace-nowrap overflow-hidden transition-all duration-300 ease-out max-w-0 group-hover:max-w-32 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100"
                 :class="message ? 'max-w-32 opacity-100' : ''">
